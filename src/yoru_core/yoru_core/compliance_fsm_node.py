@@ -12,6 +12,10 @@ Five-stage graduated escalation:
 Safety overrides: obstacle stop (< obstacle_stop_distance during APPROACH),
 target loss (track gone > target_lost_timeout), per-person cooldown,
 compliance reset at any stage after compliance_clear_duration.
+
+Instrumentation (evaluation): /compliance/fsm_state (std_msgs/String JSON)
+carries every transition with stamp, previous/new state, reason, track and
+room, plus a 'cooldown_end' event when a track's cooldown expires.
 """
 
 import json
@@ -34,6 +38,12 @@ class ComplianceFsmNode(Node):
 
     def __init__(self):
         super().__init__('compliance_fsm_node')
+
+        # false: every duration uses the wall clock (time.monotonic), as
+        # deployed. true: use the node clock, i.e. sim time when
+        # use_sim_time is set - evaluation runs, so windows match bag stamps.
+        self.declare_parameter('use_ros_clock', False)
+        self.use_ros_clock = bool(self.get_parameter('use_ros_clock').value)
 
         self.declare_parameter('monitor_confirm_duration', 3.0)
         self.declare_parameter('pa_warning_duration', 15.0)
@@ -72,7 +82,7 @@ class ComplianceFsmNode(Node):
         self.declare_parameter('direct_message', DIRECT_MESSAGE)
 
         self.state = 'MONITORING'
-        self.state_since = time.monotonic()
+        self.state_since = self.now_s()
         self.target_track = None
         self.target_class = None
         self.track_first_seen = {}
@@ -100,6 +110,11 @@ class ComplianceFsmNode(Node):
         # cmd_vel_tracker has higher twist_mux priority than Nav2's cmd_vel,
         # so publishing zeros here overrides navigation for an emergency stop.
         self.estop_pub = self.create_publisher(Twist, 'cmd_vel_tracker', 10)
+        # Evaluation instrumentation: one message per transition (plus
+        # cooldown expiries), stamped with the node clock (sim time in Gazebo)
+        self.fsm_state_pub = self.create_publisher(
+            String, '/compliance/fsm_state', 50)
+        self.cooldown_reported = {}  # track -> cooldown start already reported
 
         for topic in self.get_parameter('events_topics').value:
             self.create_subscription(Detection2DArray, topic,
@@ -119,7 +134,7 @@ class ComplianceFsmNode(Node):
     # ------------------------------------------------------------------ inputs
 
     def events_callback(self, msg):
-        now = time.monotonic()
+        now = self.now_s()
         for det in msg.detections:
             track = det.id or 'untracked'
             if track not in self.track_first_seen:
@@ -135,7 +150,7 @@ class ComplianceFsmNode(Node):
             self.track_metadata[meta.get('track_id')] = meta
             room = meta.get('room')
             if room:
-                now = time.monotonic()
+                now = self.now_s()
                 quiet = self.param('compliance_clear_duration')
                 if room not in self.room_last_seen or \
                         now - self.room_last_seen[room] > quiet:
@@ -183,16 +198,56 @@ class ComplianceFsmNode(Node):
     def param(self, name):
         return self.get_parameter(name).value
 
-    def elapsed(self):
-        return time.monotonic() - self.state_since
+    def now_s(self):
+        if self.use_ros_clock:
+            return self.get_clock().now().nanoseconds * 1e-9
+        return time.monotonic()
 
-    def transition(self, new_state):
+    def elapsed(self):
+        return self.now_s() - self.state_since
+
+    def transition(self, new_state, reason, track=None, room=None, **extra):
         self.get_logger().info(
             f'FSM: {self.state} -> {new_state} '
             f'(track={self.target_track}, after {self.elapsed():.1f}s)')
+        if track is None:
+            track = self.target_track
+            room = self.track_metadata.get(track, {}).get('room', '')
+        self.publish_fsm_state(self.state, new_state, reason, track, room,
+                               time_in_state=round(self.elapsed(), 3), **extra)
         self.state = new_state
-        self.state_since = time.monotonic()
+        self.state_since = self.now_s()
         self.publish_status()
+
+    def publish_fsm_state(self, previous, new, reason, track, room, **extra):
+        stamp = self.get_clock().now()
+        event = {
+            'stamp': stamp.nanoseconds * 1e-9,
+            'previous_state': previous,
+            'new_state': new,
+            'reason': reason,
+            'track_id': track,
+            'room': room or '',
+            'stage_reached': self.stage_reached,
+            'direct_count': self.direct_count,
+            'clock': 'ros' if self.use_ros_clock else 'wall',
+        }
+        event.update(extra)
+        msg = String()
+        msg.data = json.dumps(event)
+        self.fsm_state_pub.publish(msg)
+
+    def report_cooldown_ends(self):
+        """Instrumentation only: announce each per-track cooldown expiry
+        once. Reads self.cooldowns, never changes it."""
+        cooldown = self.param('cooldown_duration')
+        now = self.now_s()
+        for track, started in self.cooldowns.items():
+            if now - started >= cooldown and \
+                    self.cooldown_reported.get(track) != started:
+                self.cooldown_reported[track] = started
+                self.publish_fsm_state(self.state, self.state, 'cooldown_end',
+                                       track, '', cooldown_started=started)
 
     def publish_status(self):
         meta = self.track_metadata.get(self.target_track, {})
@@ -222,14 +277,14 @@ class ComplianceFsmNode(Node):
             return False
         last = self._target_last_seen()
         return last is not None and \
-            time.monotonic() - last < self.param('compliance_clear_duration')
+            self.now_s() - last < self.param('compliance_clear_duration')
 
     def target_lost(self):
         if self.target_track is None:
             return True
         last = self._target_last_seen()
         return last is None or \
-            time.monotonic() - last > self.param('target_lost_timeout')
+            self.now_s() - last > self.param('target_lost_timeout')
 
     def log_incident(self, outcome):
         meta = self.track_metadata.get(self.target_track, {})
@@ -247,15 +302,19 @@ class ComplianceFsmNode(Node):
         self.incident_pub.publish(msg)
 
     def finish_escalation(self, outcome):
+        track = self.target_track
+        room = self.track_metadata.get(track, {}).get('room', '')
+        stage = self.stage_reached  # reset to S0 below; the event reports it
         self.log_incident(outcome)
         if self.target_track is not None:
-            self.cooldowns[self.target_track] = time.monotonic()
+            self.cooldowns[self.target_track] = self.now_s()
         self.target_track = None
         self.target_class = None
         self.nav_result = None
         self.stage_reached = 'S0'
         self.direct_count = 0
-        self.transition('MONITORING')
+        self.transition('MONITORING', outcome, track=track, room=room,
+                        outcome=outcome, stage_reached=stage)
 
     def send_direct_warning(self):
         meta = self.track_metadata.get(self.target_track, {})
@@ -266,7 +325,7 @@ class ComplianceFsmNode(Node):
                                   'event_class': self.target_class})
         self.direct_pub.publish(direct)
         self.direct_count += 1
-        self.last_direct_time = time.monotonic()
+        self.last_direct_time = self.now_s()
         self.get_logger().info(
             f'Direct warning {self.direct_count}/'
             f'{int(self.param("direct_warning_repeats"))}')
@@ -274,7 +333,8 @@ class ComplianceFsmNode(Node):
     # -------------------------------------------------------------------- tick
 
     def tick(self):
-        now = time.monotonic()
+        now = self.now_s()
+        self.report_cooldown_ends()
 
         # Admin override: abort any active escalation and stay in MONITORING
         if self.autonomy_paused:
@@ -297,24 +357,24 @@ class ComplianceFsmNode(Node):
             if self.elapsed() >= self.param('pa_warning_duration'):
                 self.stage_reached = 'S2'
                 self.obstacle_since = None
-                self.transition('APPROACH')
+                self.transition('APPROACH', 'pa_expired')
         elif self.state == 'APPROACH':
             self.approach_tick()
         elif self.state == 'DIRECT_WARNING':
             # Repeat the warning N times, then log + email the evidence.
             # direct_warning_duration remains as an overall safety cap.
-            interval_over = (time.monotonic() - self.last_direct_time
+            interval_over = (self.now_s() - self.last_direct_time
                              >= self.param('direct_warning_interval'))
             if interval_over:
                 if self.direct_count < int(self.param('direct_warning_repeats')):
                     self.send_direct_warning()
                 else:
                     self.stage_reached = 'S4'
-                    self.transition('LOGGING')
+                    self.transition('LOGGING', 'warnings_complete')
             if self.state == 'DIRECT_WARNING' and \
                     self.elapsed() >= self.param('direct_warning_duration'):
                 self.stage_reached = 'S4'
-                self.transition('LOGGING')
+                self.transition('LOGGING', 'direct_warning_cap')
         elif self.state == 'LOGGING':
             if self.elapsed() >= self.param('logging_duration'):
                 self.finish_escalation('logged_no_compliance')
@@ -363,12 +423,12 @@ class ComplianceFsmNode(Node):
                                       'room': room,
                                       'event_class': self.target_class})
                 self.pa_pub.publish(pa)
-                self.transition('PA_WARNING')
+                self.transition('PA_WARNING', 'confirmed')
                 return
 
     def approach_tick(self):
         if self.close_beam_count >= int(self.param('min_obstacle_beams')):
-            now = time.monotonic()
+            now = self.now_s()
             if self.obstacle_since is None:
                 self.obstacle_since = now
             elif now - self.obstacle_since >= \
@@ -378,7 +438,9 @@ class ComplianceFsmNode(Node):
                     f'{self.close_beam_count} beams '
                     f'(persisted {now - self.obstacle_since:.1f}s): SAFE_STOP')
                 self.estop_pub.publish(Twist())
-                self.transition('SAFE_STOP')
+                self.transition('SAFE_STOP', 'safe_stop',
+                                min_scan_range=self.min_scan_range,
+                                close_beams=self.close_beam_count)
                 return
         else:
             self.obstacle_since = None
@@ -391,17 +453,18 @@ class ComplianceFsmNode(Node):
             self.stage_reached = 'S3'
             self.direct_count = 0
             self.send_direct_warning()   # warning 1 of N; the rest follow
-            self.transition('DIRECT_WARNING')
+            self.transition('DIRECT_WARNING', 'goal_reached')
             return
         if self.nav_result in ('aborted', 'timeout', 'rejected', 'nav2_unavailable'):
             self.get_logger().warn(f'Approach failed ({self.nav_result}); logging')
+            nav_result = self.nav_result
             self.nav_result = None
             self.stage_reached = 'S4'
-            self.transition('LOGGING')
+            self.transition('LOGGING', 'approach_failed', nav_result=nav_result)
             return
         if self.elapsed() >= self.param('approach_timeout'):
             self.stage_reached = 'S4'
-            self.transition('LOGGING')
+            self.transition('LOGGING', 'approach_timeout')
 
 
 def main(args=None):

@@ -33,6 +33,16 @@ class IncidentLoggerNode(Node):
         self.cleanup_old_logs()
 
         self.latest_target = {'x': None, 'y': None}
+        # Evaluation instrumentation: latched path of the incident log so a
+        # recorded bag can always be matched to its JSONL file
+        from rclpy.qos import DurabilityPolicy, QoSProfile
+        path_pub = self.create_publisher(
+            String, '/compliance/incident_log_path',
+            QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL))
+        path_msg = String()
+        path_msg.data = os.path.abspath(self.log_path)
+        path_pub.publish(path_msg)
+        self.path_pub = path_pub
         self.create_subscription(String, '/compliance/incident_log',
                                  self.incident_callback, 10)
         from geometry_msgs.msg import PoseStamped

@@ -12,7 +12,7 @@ yolo_cctv1:
   ros__parameters:
     source_type: ros_topic
     ros_topic: /cctv1/image_raw
-    model_path: /home/desh/Yoru_bot_V2/yolov8n.pt
+    model_path: /home/desh/Yoru_bot_publication/yolov8n.pt
     use_coco_class_map: true
     confidence_threshold: 0.4
     input_size: 640
@@ -64,7 +64,7 @@ confirm_cctv1:
 camera_target_cctv1:
   ros__parameters:
     camera_id: cctv1
-    cameras_file: /home/desh/Yoru_bot_V2/maps/sim/cameras.json
+    cameras_file: /home/desh/Yoru_bot_publication/maps/sim/cameras.json
     input_topic: /compliance/cctv1/confirmed
 
 # ---------------- Room B pipeline (cctv2) ----------------
@@ -72,7 +72,7 @@ yolo_cctv2:
   ros__parameters:
     source_type: ros_topic
     ros_topic: /cctv2/image_raw
-    model_path: /home/desh/Yoru_bot_V2/yolov8n.pt
+    model_path: /home/desh/Yoru_bot_publication/yolov8n.pt
     use_coco_class_map: true
     confidence_threshold: 0.4
     input_size: 640
@@ -105,7 +105,7 @@ confirm_cctv2:
 camera_target_cctv2:
   ros__parameters:
     camera_id: cctv2
-    cameras_file: /home/desh/Yoru_bot_V2/maps/sim/cameras.json
+    cameras_file: /home/desh/Yoru_bot_publication/maps/sim/cameras.json
     input_topic: /compliance/cctv2/confirmed
 
 # ---------------- Shared nodes ----------------
@@ -185,8 +185,8 @@ dashboard_node:
     # (stored as a salted hash in data/admin.json).
     drive_speed: 0.2
     turn_speed: 0.8
-    data_dir: /home/desh/Yoru_bot_V2/data
-    maps_dir: /home/desh/Yoru_bot_V2/maps/sim
+    data_dir: /home/desh/Yoru_bot_publication/data
+    maps_dir: /home/desh/Yoru_bot_publication/maps/sim
     map_name: main_map
     cctv_image_topics: ['/compliance/cctv1/debug_image/compressed',
                         '/compliance/cctv2/debug_image/compressed']

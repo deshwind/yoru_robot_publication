@@ -19,6 +19,7 @@
   <exec_depend>vision_msgs</exec_depend>
   <exec_depend>visualization_msgs</exec_depend>
   <exec_depend>nav2_msgs</exec_depend>
+  <exec_depend>gazebo_msgs</exec_depend>
   <exec_depend>tf2_ros</exec_depend>
   <exec_depend>cv_bridge</exec_depend>
   <exec_depend>python3-numpy</exec_depend>

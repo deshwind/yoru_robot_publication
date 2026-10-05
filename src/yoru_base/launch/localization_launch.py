@@ -46,7 +46,11 @@ def generate_launch_description():
     # Create our own temporary YAML files that include substitutions
     param_substitutions = {
         'use_sim_time': use_sim_time,
-        'yaml_filename': map_yaml_file}
+        'yaml_filename': map_yaml_file,
+        # AMCL start pose (defaults equal nav2_params.yaml: the map origin)
+        'amcl.ros__parameters.initial_pose.x': LaunchConfiguration('initial_x'),
+        'amcl.ros__parameters.initial_pose.y': LaunchConfiguration('initial_y'),
+        'amcl.ros__parameters.initial_pose.yaw': LaunchConfiguration('initial_yaw')}
 
     configured_params = RewrittenYaml(
         source_file=params_file,
@@ -57,6 +61,10 @@ def generate_launch_description():
     return LaunchDescription([
         # Set env var to print messages to stdout immediately
         SetEnvironmentVariable('RCUTILS_LOGGING_BUFFERED_STREAM', '1'),
+
+        DeclareLaunchArgument('initial_x', default_value='0.0'),
+        DeclareLaunchArgument('initial_y', default_value='0.0'),
+        DeclareLaunchArgument('initial_yaw', default_value='0.0'),
 
         DeclareLaunchArgument(
             'namespace', default_value='',

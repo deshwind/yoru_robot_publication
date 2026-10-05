@@ -32,6 +32,9 @@ class Nav2GoalSenderNode(Node):
         self.declare_parameter('goal_timeout', 60.0)
         self.declare_parameter('target_max_age', 5.0)
         self.declare_parameter('robot_base_frame', 'base_link')
+        # false: wall clock (as deployed); true: node clock (sim time)
+        self.declare_parameter('use_ros_clock', False)
+        self.use_ros_clock = bool(self.get_parameter('use_ros_clock').value)
 
         self.nav_client = ActionClient(self, NavigateToPose, 'navigate_to_pose')
         self.tf_buffer = Buffer()
@@ -54,6 +57,11 @@ class Nav2GoalSenderNode(Node):
 
         self.get_logger().info('Nav2 goal sender ready (waits for FSM APPROACH)')
 
+    def now_s(self):
+        if self.use_ros_clock:
+            return self.get_clock().now().nanoseconds * 1e-9
+        return time.monotonic()
+
     def publish_status(self, state, **extra):
         msg = String()
         payload = {'state': state}
@@ -63,7 +71,7 @@ class Nav2GoalSenderNode(Node):
 
     def target_callback(self, msg):
         self.latest_target = msg
-        self.latest_target_time = time.monotonic()
+        self.latest_target_time = self.now_s()
 
     def fsm_callback(self, msg):
         try:
@@ -80,7 +88,7 @@ class Nav2GoalSenderNode(Node):
             return None
 
     def tick(self):
-        now = time.monotonic()
+        now = self.now_s()
 
         if self.navigating:
             if self.fsm_state != 'APPROACH':

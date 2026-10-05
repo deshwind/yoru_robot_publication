@@ -24,9 +24,9 @@ maps/*.posegraph
 # logs / evidence
 compliance_robot_logs/
 
-# training artifacts
-datasets/
-runs/
+# training artifacts (at the repository root only: evidence/**/runs/ is kept)
+/datasets/
+/runs/
 
 # TTS voice models (downloaded by setup, ~60MB)
 voices/
@@ -36,8 +36,16 @@ maps/cameras.json
 
 # demo recordings (large video files)
 recordings/
-# simulation deployment data (separate from the real robot)
-maps/sim/
+# The simulation map + camera spots (maps/sim/) ARE committed in this
+# repository: the evaluation depends on them.
 maps/real_room_backup/
 # base/dock spots are deployment data too (dashboard writes them)
 maps/bases.json
+
+# --- simulation evaluation (publication) ---
+# Run recordings: several GB, published separately (see evaluation/README.md)
+evaluation/data/
+**/bag/
+*.db3
+# Phase 7 patch staging copy (the reviewable diff is evaluation/pending_phase7.diff)
+evaluation/pending_phase7_patch/

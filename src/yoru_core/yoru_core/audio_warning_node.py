@@ -60,6 +60,9 @@ class AudioWarningNode(Node):
                 and os.path.isfile(piper_model + '.json'):
             self.piper = (piper_exe, piper_model)
         self.proc = None  # current playback process; new warning preempts
+        # Evaluation instrumentation: one record per warning delivered
+        self.event_pub = self.create_publisher(
+            String, '/compliance/audio_event', 50)
 
         if self.get_parameter('speak_pa').value:
             self.create_subscription(String, '/compliance/pa_warning',
@@ -82,10 +85,12 @@ class AudioWarningNode(Node):
 
     def play(self, kind, msg):
         try:
-            text = json.loads(msg.data).get('message', msg.data)
+            payload = json.loads(msg.data)
+            text = payload.get('message', msg.data)
         except ValueError:
-            text = msg.data
+            payload, text = {}, msg.data
         self.get_logger().warn(f'[{kind.upper()}] {text}')
+        self.publish_event(kind, text, payload)
 
         if not self.get_parameter('use_audio').value:
             return
@@ -127,6 +132,32 @@ class AudioWarningNode(Node):
         else:
             self.get_logger().warn(
                 f'No TTS engine and no audio file for "{kind}" in {audio_dir}')
+
+    def backend(self, kind):
+        if not self.get_parameter('use_audio').value:
+            return 'log_only'
+        if self.piper:
+            return 'piper'
+        if self.espeak:
+            return 'espeak'
+        audio_dir = self.get_parameter('audio_dir').value
+        if (self.gst_play and os.path.isfile(os.path.join(audio_dir, f'{kind}.mp3'))) \
+                or os.path.isfile(os.path.join(audio_dir, f'{kind}.wav')):
+            return 'audio_file'
+        return 'none'
+
+    def publish_event(self, kind, text, payload):
+        event = String()
+        event.data = json.dumps({
+            'stamp': self.get_clock().now().nanoseconds * 1e-9,
+            'kind': kind,                      # pa_warning | direct_warning
+            'backend': self.backend(kind),
+            'track_id': payload.get('track_id') if isinstance(payload, dict) else None,
+            'room': payload.get('room') if isinstance(payload, dict) else None,
+            'event_class': payload.get('event_class') if isinstance(payload, dict) else None,
+            'message': text,
+        })
+        self.event_pub.publish(event)
 
     def _run(self, cmd):
         try:

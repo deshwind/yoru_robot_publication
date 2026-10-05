@@ -17,7 +17,7 @@ and goes straight on duty.
 Arguments:
   mode        : auto (default) | mapping | localization
                 auto = mapping if maps/main_map.yaml is missing, else localization
-  map         : saved map yaml (default: ~/Yoru_bot_V2/maps/main_map.yaml)
+  map         : saved map yaml (default: ~/Yoru_bot_publication/maps/main_map.yaml)
   world       : Gazebo world file (default: two_room_world.world)
   rviz        : start RViz (default: true)
   gui         : start the Gazebo GUI client (default: true)
@@ -34,7 +34,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
-DEFAULT_MAP = os.path.expanduser('~/Yoru_bot_V2/maps/sim/main_map.yaml')
+DEFAULT_MAP = os.path.expanduser('~/Yoru_bot_publication/maps/sim/main_map.yaml')
 
 
 def resolve_mode(context):
@@ -67,6 +67,10 @@ def resolve_mode(context):
                 'use_sim_time': 'true',
                 'params_file': os.path.join(yoru_base_dir, 'config',
                                             'nav2_params.yaml'),
+                # AMCL starts where the robot was spawned
+                'initial_x': LaunchConfiguration('spawn_x'),
+                'initial_y': LaunchConfiguration('spawn_y'),
+                'initial_yaw': LaunchConfiguration('spawn_yaw'),
             }.items()))
     return [TimerAction(period=5.0, actions=actions)]
 
@@ -89,6 +93,10 @@ def generate_launch_description():
                                        'two_room_world.world')),
         DeclareLaunchArgument('rviz', default_value='true'),
         DeclareLaunchArgument('gui', default_value='true'),
+        # Robot start / base pose (evaluation: room B); 0 = doorway, as before
+        DeclareLaunchArgument('spawn_x', default_value='0.0'),
+        DeclareLaunchArgument('spawn_y', default_value='0.0'),
+        DeclareLaunchArgument('spawn_yaw', default_value='0.0'),
     ]
 
     # --- Robot description (URDF via xacro, with ros2_control for sim) ---
@@ -113,7 +121,9 @@ def generate_launch_description():
     spawn_entity = Node(
         package='gazebo_ros', executable='spawn_entity.py',
         arguments=['-topic', 'robot_description', '-entity', 'yoru_robot',
-                   '-x', '0.0', '-y', '0.0', '-z', '0.05'],
+                   '-x', LaunchConfiguration('spawn_x'),
+                   '-y', LaunchConfiguration('spawn_y'), '-z', '0.05',
+                   '-Y', LaunchConfiguration('spawn_yaw')],
         output='screen')
 
     diff_drive_spawner = Node(package='controller_manager', executable='spawner',

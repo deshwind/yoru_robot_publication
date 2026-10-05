@@ -11,9 +11,11 @@ only when the multi-criteria framework is satisfied:
   C6 tracking consistency: same SORT track ID
   C7 false-positive risk: pen / mobile_phone / straw near mouth -> high risk
 
-Confidence = 0.4*device + 0.3*proximity + 0.2*persistence + 0.1*support
-Confirmed when Confidence >= 0.6 AND C1 AND C2 AND risk != high.
-0.4-0.6 logged as 'uncertain'; below 0.4 discarded silently.
+Confidence = w_D*device + w_P*proximity + w_T*persistence + w_S*support
+(defaults 0.4 / 0.3 / 0.2 / 0.1, ROS parameters w_D, w_P, w_T, w_S)
+Confirmed when Confidence >= confirm_confidence (0.6) AND C1 AND C2 AND C4
+AND risk != high. uncertain_confidence (0.4) to 0.6 logged as 'uncertain';
+below that discarded silently. The rule itself lives in confirmation_rule.py.
 """
 
 import json
@@ -22,6 +24,8 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 from vision_msgs.msg import Detection2DArray
+
+from yoru_core import confirmation_rule as rule
 
 DEVICE_CLASSES = ('cigarette', 'vape_device')
 SUPPORT_WEIGHTS = {'smoke_vapour': 0.3, 'hand_mouth_gesture': 0.2, 'hand_face': 0.1}
@@ -64,8 +68,14 @@ class EventConfirmationNode(Node):
         self.declare_parameter('device_confidence', 0.6)
         self.declare_parameter('proximity_iou', 0.05)
         self.declare_parameter('persistence_frames', 5)
-        self.declare_parameter('confirm_confidence', 0.6)
-        self.declare_parameter('uncertain_confidence', 0.4)
+        self.declare_parameter('confirm_confidence',
+                               rule.DEFAULT_CONFIRM_CONFIDENCE)
+        self.declare_parameter('uncertain_confidence',
+                               rule.DEFAULT_UNCERTAIN_CONFIDENCE)
+        # Composite confidence weights (device, proximity, persistence,
+        # support) - exposed for the sensitivity analysis
+        for name, value in rule.DEFAULT_WEIGHTS.items():
+            self.declare_parameter(name, value)
         self.declare_parameter('input_topic', '/compliance/tracked_detections')
         self.declare_parameter('output_topic', '/compliance/confirmed_events')
         # Which room/zone this camera observes; carried into metadata and incidents
@@ -78,6 +88,10 @@ class EventConfirmationNode(Node):
         # dashboard only - it never escalates (PA/robot/email) until the
         # trained vape_device model can actually confirm it.
         self.declare_parameter('vape_hint', True)
+        # Evaluation instrumentation: one JSON record per tracked person per
+        # frame (confirmed, uncertain AND rejected) for offline analysis
+        self.declare_parameter('publish_debug', True)
+        self.declare_parameter('debug_topic', '/compliance/confirmation_debug')
 
         self.persistence_required = int(self.get_parameter('persistence_frames').value)
         self.persistence = {}  # track_id -> consecutive satisfied frames
@@ -87,11 +101,39 @@ class EventConfirmationNode(Node):
             Detection2DArray, self.get_parameter('output_topic').value, 10)
         self.metadata_pub = self.create_publisher(
             String, '/compliance/event_metadata', 10)
+        self.debug_pub = None
+        if self.get_parameter('publish_debug').value:
+            self.debug_pub = self.create_publisher(
+                String, self.get_parameter('debug_topic').value, 100)
         self.create_subscription(
             Detection2DArray, self.get_parameter('input_topic').value,
             self.tracked_callback, 10)
 
-        self.get_logger().info('Event confirmation node ready (criteria C1-C7)')
+        weights = self.weights()
+        self.get_logger().info(
+            'Event confirmation node ready (criteria C1-C7, weights '
+            + ', '.join(f'{k}={v:g}' for k, v in weights.items())
+            + f', confirm>={self.get_parameter("confirm_confidence").value:g})')
+        if abs(sum(weights.values()) - 1.0) > 1e-6:
+            self.get_logger().warn(
+                f'Confidence weights sum to {sum(weights.values()):g}, not 1')
+
+    def publish_debug(self, header_stamp, track_id, record):
+        """Full-precision record (no rounding) so offline analysis can
+        recompute every decision exactly."""
+        record = dict(record)
+        record['stamp'] = header_stamp.sec + header_stamp.nanosec * 1e-9
+        record['recv_stamp'] = self.get_clock().now().nanoseconds * 1e-9
+        record['node'] = self.get_name()
+        record['room'] = self.get_parameter('room_id').value
+        record['track_id'] = track_id
+        msg = String()
+        msg.data = json.dumps(record)
+        self.debug_pub.publish(msg)
+
+    def weights(self):
+        return {name: float(self.get_parameter(name).value)
+                for name in rule.DEFAULT_WEIGHTS}
 
     def tracked_callback(self, msg):
         person_conf_min = self.get_parameter('person_confidence').value
@@ -99,6 +141,7 @@ class EventConfirmationNode(Node):
         proximity_iou_min = self.get_parameter('proximity_iou').value
         confirm_at = self.get_parameter('confirm_confidence').value
         uncertain_at = self.get_parameter('uncertain_confidence').value
+        weights = self.weights()
 
         persons, devices, supports, confounders = [], [], [], []
         for det in msg.detections:
@@ -159,28 +202,32 @@ class EventConfirmationNode(Node):
 
             # C7: confounder near the mouth -> high false-positive risk
             fp_risk = 'low'
+            confounder_class = None
             phone_at_mouth = False
             for con in confounders:
                 if in_mouth_region(person.bbox, con.bbox):
                     fp_risk = 'high'
+                    confounder_class = con.results[0].hypothesis.class_id
                     if con.results[0].hypothesis.class_id == 'mobile_phone':
                         phone_at_mouth = True
                     break
 
             device_score = best_device.results[0].hypothesis.score if c2 else 0.0
-            confidence = (0.4 * device_score + 0.3 * best_prox
-                          + 0.2 * persistence_score + 0.1 * support_score)
+            confidence = rule.composite_confidence(
+                device_score, best_prox, persistence_score, support_score,
+                weights)
 
             # A high-confidence specialist detection outranks the confounder
             # guard: the cigarette model is far more trustworthy than COCO's
             # guess that something near the face is a phone/pen.
             override_at = self.get_parameter(
                 'confounder_override_confidence').value
+            fp_risk_raw = fp_risk
             if fp_risk == 'high' and c2 and device_score >= override_at:
                 fp_risk = 'overridden'
 
-            is_confirmed = (confidence >= confirm_at and c1 and c2 and c4
-                            and fp_risk != 'high')
+            is_confirmed = rule.is_confirmed(confidence, c1, c2, c4, fp_risk,
+                                             confirm_at)
 
             # Soft vape hint (dashboard only, never escalates): a phone-like
             # object held at the mouth for the persistence window
@@ -201,9 +248,27 @@ class EventConfirmationNode(Node):
                     'event_class': 'possible_vape',
                 })
                 self.metadata_pub.publish(hint)
-            status = ('confirmed' if is_confirmed
-                      else 'uncertain' if confidence >= uncertain_at
-                      else 'rejected')
+            status = rule.decision_status(is_confirmed, confidence,
+                                          uncertain_at)
+
+            if self.debug_pub is not None:
+                self.publish_debug(msg.header.stamp, track_id, {
+                    'D': device_score, 'P': best_prox,
+                    'T': persistence_score, 'S': support_score,
+                    'persistence_count': frames,
+                    'persistence_required': self.persistence_required,
+                    'C1': c1, 'C2': c2, 'C3': c3, 'C4': c4,
+                    'C5': support_score > 0.0, 'C6': track_id != 'untracked',
+                    'C7_fp_risk': fp_risk, 'fp_risk_raw': fp_risk_raw,
+                    'confounder_class': confounder_class,
+                    'person_score': person.results[0].hypothesis.score,
+                    'device_class': (best_device.results[0].hypothesis.class_id
+                                     if c2 else None),
+                    'C': confidence, 'decision': status,
+                    'weights': weights, 'confirm_confidence': confirm_at,
+                    'uncertain_confidence': uncertain_at,
+                    'override_confidence': override_at,
+                })
 
             if is_confirmed:
                 event = person  # person detection carries the track ID and bbox

@@ -24,6 +24,9 @@ Arguments:
   use_cctv2    : second CCTV pipeline (default: sim value)
   use_joystick : PS4 admin joystick on this laptop (default true)
   open_browser : open the dashboard automatically (default true)
+  w_D, w_P, w_T, w_S, confirm_confidence, uncertain_confidence,
+  use_ros_clock : evaluation overrides forwarded to full_system.launch.py
+                  (empty = keep the YAML value)
 """
 
 import os
@@ -36,6 +39,10 @@ from launch.actions import (DeclareLaunchArgument, ExecuteProcess,
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
+
+EVAL_OVERRIDE_ARGS = ('w_D', 'w_P', 'w_T', 'w_S', 'confirm_confidence',
+                      'uncertain_confidence', 'use_ros_clock',
+                      'overlay_params', 'use_actors')
 
 
 def launch_compliance(context):
@@ -66,6 +73,8 @@ def launch_compliance(context):
             # (real_robot.launch.py) delivers the close-range direct warning.
             'audio_node_name': ('audio_warning_node' if sim
                                 else 'pa_audio_node'),
+            **{name: LaunchConfiguration(name)
+               for name in EVAL_OVERRIDE_ARGS},
         }.items())]
 
 
@@ -77,6 +86,8 @@ def generate_launch_description():
         DeclareLaunchArgument('use_cctv2', default_value='auto'),
         DeclareLaunchArgument('open_browser', default_value='true'),
         DeclareLaunchArgument('use_joystick', default_value='true'),
+        *[DeclareLaunchArgument(name, default_value='')
+          for name in EVAL_OVERRIDE_ARGS],
     ]
 
     compliance = OpaqueFunction(function=launch_compliance)
