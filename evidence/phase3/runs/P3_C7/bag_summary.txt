@@ -1,0 +1,52 @@
+bag: /home/desh/Yoru_bot_publication/evidence/phase3/runs/P3_C7/bag
+
+== topics (messages, type)
+        1  /amcl_pose  [geometry_msgs/msg/PoseWithCovarianceStamped]
+      995  /clock  [rosgraph_msgs/msg/Clock]
+        1  /compliance/actor_events  [std_msgs/msg/String]
+       99  /compliance/autonomy_paused  [std_msgs/msg/Bool]
+     1316  /compliance/confirmation_debug  [std_msgs/msg/String]
+      690  /compliance/event_metadata  [std_msgs/msg/String]
+       99  /compliance/fsm_status  [std_msgs/msg/String]
+        1  /compliance/incident_log_path  [std_msgs/msg/String]
+      101  /compliance/scenario_ground_truth  [std_msgs/msg/String]
+      978  /compliance/tracking_info  [std_msgs/msg/String]
+     2907  /diff_cont/odom  [nav_msgs/msg/Odometry]
+     1990  /gazebo/model_states  [gazebo_msgs/msg/ModelStates]
+      993  /scan  [sensor_msgs/msg/LaserScan]
+     5785  /tf  [tf2_msgs/msg/TFMessage]
+        3  /tf_static  [tf2_msgs/msg/TFMessage]
+
+== real-time factor: 95.0 s sim / 102.1 s wall = 0.931
+
+== gazebo models: ['cctv_camera_1', 'cctv_camera_2', 'ground_plane', 'internal_wall', 'intruder_1', 'intruder_1_body', 'obstacle_room_a', 'obstacle_room_b', 'outer_walls', 'person_1', 'person_1_body', 'person_2', 'person_2_body', 'person_3', 'person_3_body', 'person_walking', 'yoru_robot']
+
+== actor events (/compliance/actor_events)
+  t=    0.10  layout             {"persons": [{"actor": "person_1", "x": 2.3, "y": -1.5, "yaw": 0.405, "role": "violator"}]}
+
+== positions in the building (every ~10 s sim)
+  person_1    0s(8.00,6.00) 10s(2.30,-1.50) 20s(2.30,-1.50) 30s(2.30,-1.50) 40s(2.30,-1.50) 50s(2.30,-1.50) 60s(2.30,-1.50) 70s(2.30,-1.50) 80s(2.30,-1.50) 90s(2.30,-1.50)
+  yoru_robot  0s(-0.00,0.00) 10s(-0.01,0.00) 20s(-0.01,0.00) 30s(-0.02,0.00) 40s(-0.02,0.00) 50s(-0.03,0.00) 60s(-0.04,0.00) 70s(-0.04,0.00) 80s(-0.05,0.00) 90s(-0.05,0.00)
+  min robot-person_1 centre distance: 2.75 m at t=0.1
+  min lidar range: 0.801 m at t=5.4
+
+== FSM transitions (/compliance/fsm_state)
+
+== audio events (/compliance/audio_event)
+
+== ground truth (/compliance/scenario_ground_truth, non-heartbeat)
+  t=    0.20  scenario_start       scenario=c7_conflict seed=5 violator=person_1 actors=[{'id': 'person_1', 'role': 'violator', 'x': 2.3, 'y': -1.5}]
+  t=   30.20  violation_onset      scenario=c7_conflict seed=5 violator=person_1 actors=[{'id': 'person_1', 'role': 'violator', 'x': 2.3, 'y': -1.5}]
+  last frame_stats: {'frames': 487, 'violator_matched': 345, 'injected': 345, 'dropped': 0}
+  (99 heartbeat messages)
+
+== confirmation debug records: 1316
+     474  ('confirm_cctv1', 'rejected')
+     347  ('confirm_cctv1', 'uncertain')
+     495  ('confirm_cctv2', 'rejected')
+
+== nav status
+
+== incident log
+
+== incident log path: [{'raw': '/home/desh/Yoru_bot_publication/evidence/phase3/runs/P3_C7/incident_logs/incidents.jsonl'}]

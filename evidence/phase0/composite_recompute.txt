@@ -1,0 +1,19 @@
+scenario      frame  D      P      T      S      C      C-0.3P  status
+A smoking         1  0.780  0.800  0.200  0.500  0.642  0.402   uncertain
+A smoking         2  0.780  0.800  0.400  0.500  0.682  0.442   uncertain
+A smoking         3  0.780  0.800  0.600  0.500  0.722  0.482   uncertain
+A smoking         4  0.780  0.800  0.800  0.500  0.762  0.522   uncertain
+A smoking         5  0.780  0.800  1.000  0.500  0.802  0.562   confirmed
+A smoking         6  0.780  0.800  1.000  0.500  0.802  0.562   confirmed
+A-V vaping        1  0.780  0.800  0.200  0.200  0.612  0.372   uncertain
+A-V vaping        2  0.780  0.800  0.400  0.200  0.652  0.412   uncertain
+A-V vaping        3  0.780  0.800  0.600  0.200  0.692  0.452   uncertain
+A-V vaping        4  0.780  0.800  0.800  0.200  0.732  0.492   uncertain
+A-V vaping        5  0.780  0.800  1.000  0.200  0.772  0.532   confirmed
+A-V vaping        6  0.780  0.800  1.000  0.200  0.772  0.532   confirmed
+C target_loss     1  0.780  0.800  0.200  0.000  0.592  0.352   uncertain
+C target_loss     2  0.780  0.800  0.400  0.000  0.632  0.392   uncertain
+C target_loss     3  0.780  0.800  0.600  0.000  0.672  0.432   uncertain
+C target_loss     4  0.780  0.800  0.800  0.000  0.712  0.472   uncertain
+C target_loss     5  0.780  0.800  1.000  0.000  0.752  0.512   confirmed
+C target_loss     6  0.780  0.800  1.000  0.000  0.752  0.512   confirmed

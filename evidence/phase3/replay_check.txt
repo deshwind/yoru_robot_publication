@@ -1,0 +1,5 @@
+P3_A   exact matches (C bit-identical and same decision): 1956 mismatches: 0 
+P3_JK  exact matches (C bit-identical and same decision): 3594 mismatches: 0 
+P3_C   exact matches (C bit-identical and same decision): 1695 mismatches: 0 
+P3_E   exact matches (C bit-identical and same decision): 2392 mismatches: 0 
+P3_C7  exact matches (C bit-identical and same decision): 1316 mismatches: 0 

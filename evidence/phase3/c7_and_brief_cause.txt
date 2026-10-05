@@ -1,0 +1,10 @@
+== P3_C7: non-rejected cctv1 frames by (decision, threshold, C1, C2, C4, fp_risk)
+    343  ('uncertain', 'C>=0.6', 'C1', 'C2', 'C4', 'high')
+      3  ('uncertain', 'C>=0.6', 'C1', 'C2', 'notC4', 'high')
+      1  ('uncertain', 'C<0.6', 'C1', 'C2', 'notC4', 'high')
+  max persistence count 347, max C 0.720
+== P3_E: non-rejected cctv1 frames by (decision, threshold, C1, C2, C4, fp_risk)
+     14  ('uncertain', 'C<0.6', 'C1', 'C2', 'notC4', 'low')
+     12  ('uncertain', 'C>=0.6', 'C1', 'C2', 'notC4', 'low')
+      1  ('uncertain', 'C<0.6', 'notC1', 'C2', 'notC4', 'low')
+  max persistence count 2, max C 0.632

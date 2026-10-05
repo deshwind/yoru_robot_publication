@@ -1,0 +1,836 @@
+[INFO] [launch]: All log files can be found below /home/desh/.ros/log/2026-10-05-13-13-07-115919-desh-Nitro-AN515-58-155054
+[INFO] [launch]: Default logging verbosity is set to INFO
+[yoru] mode:=auto resolved to "localization" (map found: /home/desh/Yoru_bot_publication/maps/sim/main_map.yaml)
+[yoru] server profile: SIMULATION (yoru_sim.yaml)
+[INFO] [ros2-1]: process started with pid [155057]
+[INFO] [robot_state_publisher-2]: process started with pid [155059]
+[INFO] [twist_mux-3]: process started with pid [155061]
+[INFO] [gzserver-4]: process started with pid [155063]
+[INFO] [spawn_entity.py-5]: process started with pid [155065]
+[INFO] [spawner-6]: process started with pid [155067]
+[INFO] [spawner-7]: process started with pid [155069]
+[INFO] [static_transform_publisher-8]: process started with pid [155071]
+[INFO] [static_transform_publisher-9]: process started with pid [155073]
+[INFO] [yolo_detector_node-10]: process started with pid [155075]
+[INFO] [scenario_publisher_node-11]: process started with pid [155077]
+[INFO] [tracking_node-12]: process started with pid [155079]
+[INFO] [event_confirmation_node-13]: process started with pid [155081]
+[INFO] [camera_target_node-14]: process started with pid [155083]
+[INFO] [yolo_detector_node-15]: process started with pid [155085]
+[INFO] [tracking_node-16]: process started with pid [155087]
+[INFO] [event_confirmation_node-17]: process started with pid [155104]
+[INFO] [camera_target_node-18]: process started with pid [155115]
+[INFO] [nav2_goal_sender_node-19]: process started with pid [155126]
+[INFO] [compliance_fsm_node-20]: process started with pid [155130]
+[INFO] [audio_warning_node-21]: process started with pid [155135]
+[INFO] [incident_logger_node-22]: process started with pid [155137]
+[INFO] [incident_emailer_node-23]: process started with pid [155139]
+[INFO] [patrol_node-24]: process started with pid [155141]
+[INFO] [return_to_base_node-25]: process started with pid [155143]
+[INFO] [admin_joy_node-26]: process started with pid [155145]
+[INFO] [dashboard_node-27]: process started with pid [155147]
+[robot_state_publisher-2] [INFO] [1791202387.462901900] [robot_state_publisher]: got segment base_footprint
+[robot_state_publisher-2] [INFO] [1791202387.463044813] [robot_state_publisher]: got segment base_link
+[robot_state_publisher-2] [INFO] [1791202387.463053042] [robot_state_publisher]: got segment camera_link
+[robot_state_publisher-2] [INFO] [1791202387.463057791] [robot_state_publisher]: got segment camera_link_optical
+[robot_state_publisher-2] [INFO] [1791202387.463062140] [robot_state_publisher]: got segment caster_wheel
+[robot_state_publisher-2] [INFO] [1791202387.463066137] [robot_state_publisher]: got segment chassis
+[robot_state_publisher-2] [INFO] [1791202387.463069733] [robot_state_publisher]: got segment laser_frame
+[robot_state_publisher-2] [INFO] [1791202387.463073451] [robot_state_publisher]: got segment left_wheel
+[robot_state_publisher-2] [INFO] [1791202387.463077127] [robot_state_publisher]: got segment right_wheel
+[twist_mux-3] [INFO] [1791202387.451179973] [twist_mux]: Topic handler 'topics.joystick' subscribed to topic 'cmd_vel_joy': timeout = 0.500000s , priority = 100.
+[twist_mux-3] [INFO] [1791202387.452167041] [twist_mux]: Topic handler 'topics.navigation' subscribed to topic 'cmd_vel': timeout = 0.500000s , priority = 10.
+[twist_mux-3] [INFO] [1791202387.452378485] [twist_mux]: Topic handler 'topics.tracker' subscribed to topic 'cmd_vel_tracker': timeout = 0.500000s , priority = 20.
+[static_transform_publisher-8] [INFO] [1791202387.464947718] [cctv1_tf]: Spinning until stopped - publishing transform
+[static_transform_publisher-8] translation: ('5.800000', '0.000000', '2.500000')
+[static_transform_publisher-8] rotation: ('-0.271547', '0.000000', '0.962425', '0.000001')
+[static_transform_publisher-8] from 'map' to 'cctv1_link'
+[static_transform_publisher-9] [INFO] [1791202387.466414435] [cctv2_tf]: Spinning until stopped - publishing transform
+[static_transform_publisher-9] translation: ('-5.800000', '0.000000', '2.500000')
+[static_transform_publisher-9] rotation: ('0.000000', '0.271547', '0.000000', '0.962425')
+[static_transform_publisher-9] from 'map' to 'cctv2_link'
+[ros2-1] stdin is not a terminal device. Keyboard handling disabled.[INFO] [1791202387.930814754] [rosbag2_recorder]: Press SPACE for pausing/resuming
+[ros2-1] [INFO] [1791202387.940450472] [rosbag2_storage]: Opened database '/home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/bag/bag_0.db3' for READ_WRITE.
+[ros2-1] [INFO] [1791202387.944294076] [rosbag2_recorder]: Listening for topics...
+[ros2-1] [INFO] [1791202387.948087402] [rosbag2_recorder]: Event publisher thread: Starting
+[ros2-1] [INFO] [1791202387.973001988] [rosbag2_recorder]: Subscribed to topic '/tf_static'
+[ros2-1] [INFO] [1791202387.982953165] [rosbag2_recorder]: Subscribed to topic '/tf'
+[ros2-1] [INFO] [1791202387.988006620] [rosbag2_recorder]: Subscribed to topic '/diff_cont/cmd_vel_unstamped'
+[ros2-1] [INFO] [1791202387.996560032] [rosbag2_recorder]: Subscribed to topic '/compliance/incident_log_path'
+[ros2-1] [INFO] [1791202387.996694106] [rosbag2_recorder]: Recording...
+[ros2-1] [INFO] [1791202388.006058754] [rosbag2_recorder]: Subscribed to topic '/cmd_vel_tracker'
+[spawner-6] [INFO] [1791202388.011946327] [spawner_diff_cont]: waiting for service /controller_manager/list_controllers to become available...
+[event_confirmation_node-17] [INFO] [1791202388.014439428] [confirm_cctv2]: Event confirmation node ready (criteria C1-C7, weights w_D=0.4, w_P=0.3, w_T=0.2, w_S=0.1, confirm>=0.6)
+[ros2-1] [INFO] [1791202388.017960685] [rosbag2_recorder]: Subscribed to topic '/compliance/cctv2/confirmed'
+[ros2-1] [INFO] [1791202388.024399863] [rosbag2_recorder]: Subscribed to topic '/compliance/incident_log'
+[ros2-1] [INFO] [1791202388.029013393] [rosbag2_recorder]: Subscribed to topic '/compliance/confirmation_debug'
+[ros2-1] [INFO] [1791202388.031477662] [rosbag2_recorder]: Subscribed to topic '/compliance/direct_warning'
+[ros2-1] [INFO] [1791202388.034197364] [rosbag2_recorder]: Subscribed to topic '/compliance/event_metadata'
+[compliance_fsm_node-20] [INFO] [1791202388.037967537] [compliance_fsm_node]: Compliance FSM ready (state: MONITORING)
+[ros2-1] [INFO] [1791202388.044175828] [rosbag2_recorder]: Subscribed to topic '/compliance/fsm_state'
+[tracking_node-12] [INFO] [1791202388.045967600] [tracking_cctv1]: SORT tracking node ready
+[ros2-1] [INFO] [1791202388.046791947] [rosbag2_recorder]: Subscribed to topic '/compliance/pa_warning'
+[ros2-1] [INFO] [1791202388.052453044] [rosbag2_recorder]: Subscribed to topic '/compliance/fsm_status'
+[incident_logger_node-22] [INFO] [1791202388.148548278] [incident_logger_node]: Incident logger ready -> /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/incident_logs/incidents.jsonl
+[admin_joy_node-26] [INFO] [1791202388.155777720] [admin_joy_node]: Admin joystick ready: OPTIONS = pause/resume autonomy, TRIANGLE = return to base, L2 + left stick = drive
+[event_confirmation_node-13] [INFO] [1791202388.169534716] [confirm_cctv1]: Event confirmation node ready (criteria C1-C7, weights w_D=0.4, w_P=0.3, w_T=0.2, w_S=0.1, confirm>=0.6)
+[ros2-1] [INFO] [1791202388.171602570] [rosbag2_recorder]: Subscribed to topic '/clock'
+[ros2-1] [INFO] [1791202388.174555731] [rosbag2_recorder]: Subscribed to topic '/compliance/tracking_info'
+[incident_emailer_node-23] [INFO] [1791202388.183407160] [incident_emailer_node]: Incident emailer ready (deshwind02@gmail.com -> deshwind02@gmail.com, rooms: ['room_a', 'room_b'], keyframes: /home/desh/compliance_robot_logs/keyframes)
+[ros2-1] [INFO] [1791202388.184032783] [rosbag2_recorder]: Subscribed to topic '/compliance/cctv1/confirmed'
+[ros2-1] [INFO] [1791202388.190720834] [rosbag2_recorder]: Subscribed to topic '/compliance/audio_event'
+[audio_warning_node-21] [INFO] [1791202388.194055568] [audio_warning_node]: Audio warning node ready - backend: log-only (use_audio: false)
+[patrol_node-24] [INFO] [1791202388.196399929] [patrol_node]: Patrol node ready (1 waypoints, enabled=False)
+[scenario_publisher_node-11] [INFO] [1791202388.208799626] [scenario_publisher_node]: Scenario publisher: mode=auto, scenario=smoking, device appears after 30s -> /compliance/cctv1/detections
+[spawn_entity.py-5] [INFO] [1791202388.213270916] [spawn_entity]: Spawn Entity started
+[spawn_entity.py-5] [INFO] [1791202388.213547379] [spawn_entity]: Loading entity published on topic robot_description
+[spawn_entity.py-5] [INFO] [1791202388.215711926] [spawn_entity]: Waiting for entity xml on robot_description
+[spawn_entity.py-5] [INFO] [1791202388.228571285] [spawn_entity]: Waiting for service /spawn_entity, timeout = 30
+[spawn_entity.py-5] [INFO] [1791202388.229090948] [spawn_entity]: Waiting for service /spawn_entity
+[spawner-7] [INFO] [1791202388.231198607] [spawner_joint_broad]: waiting for service /controller_manager/list_controllers to become available...
+[nav2_goal_sender_node-19] [INFO] [1791202388.243166575] [nav2_goal_sender_node]: Nav2 goal sender ready (waits for FSM APPROACH)
+[ros2-1] [INFO] [1791202388.297561057] [rosbag2_recorder]: Subscribed to topic '/compliance/nav_status'
+[tracking_node-16] [INFO] [1791202388.298048847] [tracking_cctv2]: SORT tracking node ready
+[ros2-1] [INFO] [1791202388.300674067] [rosbag2_recorder]: Subscribed to topic '/compliance/navigation_targets'
+[ros2-1] [INFO] [1791202388.316805125] [rosbag2_recorder]: Subscribed to topic '/compliance/autonomy_paused'
+[ros2-1] [INFO] [1791202388.329670598] [rosbag2_recorder]: Subscribed to topic '/compliance/scenario_ground_truth'
+[camera_target_node-14] [INFO] [1791202388.393100100] [camera_target_cctv1]: Loaded 1 camera spot(s) from /home/desh/Yoru_bot_publication/maps/sim/cameras.json
+[camera_target_node-14] [INFO] [1791202388.393490783] [camera_target_cctv1]: Camera target node ready (camera_id=cctv1, registry=/home/desh/Yoru_bot_publication/maps/sim/cameras.json)
+[camera_target_node-18] [INFO] [1791202388.403554377] [camera_target_cctv2]: Loaded 1 camera spot(s) from /home/desh/Yoru_bot_publication/maps/sim/cameras.json
+[camera_target_node-18] [INFO] [1791202388.404089440] [camera_target_cctv2]: Camera target node ready (camera_id=cctv2, registry=/home/desh/Yoru_bot_publication/maps/sim/cameras.json)
+[return_to_base_node-25] [INFO] [1791202388.414144759] [return_to_base_node]: Return-to-base ready (1 base pose(s))
+[dashboard_node-27] [INFO] [1791202388.417936542] [dashboard_node]: Admin dashboard at http://localhost:8080  |  from your phone: http://192.168.1.28:8080 (same Wi-Fi; first run: you will be asked to CREATE the admin password)
+[spawn_entity.py-5] [INFO] [1791202388.985376734] [spawn_entity]: Calling service /spawn_entity
+[yolo_detector_node-10] /home/desh/.local/lib/python3.10/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+[yolo_detector_node-10]   warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+[yolo_detector_node-15] /home/desh/.local/lib/python3.10/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+[yolo_detector_node-15]   warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+[gzserver-4] [INFO] [1791202389.479192669] [cctv1_controller]: Publishing camera info to [/cctv1/camera_info]
+[gzserver-4] [INFO] [1791202389.489071397] [cctv2_controller]: Publishing camera info to [/cctv2/camera_info]
+[gzserver-4] [INFO] [1791202389.510548958] [gazebo.gazebo_ros_state]: Publishing states of gazebo models at [/gazebo/model_states]
+[gzserver-4] [INFO] [1791202389.511363569] [gazebo.gazebo_ros_state]: Publishing states of gazebo links at [/gazebo/link_states]
+[ros2-1] [INFO] [1791202389.548414646] [rosbag2_recorder]: Subscribed to topic '/gazebo/model_states'
+[spawn_entity.py-5] [INFO] [1791202389.623131626] [spawn_entity]: Spawn status: SpawnEntity: Successfully spawned entity [yoru_robot]
+[INFO] [spawn_entity.py-5]: process has finished cleanly [pid 155065]
+[gzserver-4] [INFO] [1791202389.824327556] [camera_controller]: Publishing camera info to [/camera/camera_info]
+[ros2-1] [INFO] [1791202389.856993558] [rosbag2_recorder]: Subscribed to topic '/scan'
+[gzserver-4] [INFO] [1791202389.933286930] [gazebo_ros2_control]: Loading gazebo_ros2_control plugin
+[gzserver-4] [INFO] [1791202389.944076928] [gazebo_ros2_control]: Starting gazebo_ros2_control plugin in namespace: /
+[gzserver-4] [INFO] [1791202389.944116615] [gazebo_ros2_control]: Starting gazebo_ros2_control plugin in ros 2 node: gazebo_ros2_control
+[gzserver-4] [INFO] [1791202389.951042511] [gazebo_ros2_control]: connected to service!! robot_state_publisher
+[gzserver-4] [INFO] [1791202389.951562328] [gazebo_ros2_control]: Received urdf from param server, parsing...
+[gzserver-4] [INFO] [1791202389.952796849] [gazebo_ros2_control]: Loading parameter files /home/desh/Yoru_bot_publication/install/yoru_base/share/yoru_base/config/my_controllers.yaml
+[gzserver-4] [INFO] [1791202389.952823585] [gazebo_ros2_control]: Loading parameter files /home/desh/Yoru_bot_publication/install/yoru_base/share/yoru_base/config/gaz_ros2_ctl_use_sim.yaml
+[gzserver-4] [INFO] [1791202389.958596307] [gazebo_ros2_control]: Loading joint: left_wheel_joint
+[gzserver-4] [INFO] [1791202389.958654621] [gazebo_ros2_control]: 	State:
+[gzserver-4] [INFO] [1791202389.958664232] [gazebo_ros2_control]: 		 velocity
+[gzserver-4] [INFO] [1791202389.958671793] [gazebo_ros2_control]: 		 position
+[gzserver-4] [INFO] [1791202389.958677451] [gazebo_ros2_control]: 	Command:
+[gzserver-4] [INFO] [1791202389.958706808] [gazebo_ros2_control]: 		 velocity
+[gzserver-4] [INFO] [1791202389.959085731] [gazebo_ros2_control]: Loading joint: right_wheel_joint
+[gzserver-4] [INFO] [1791202389.959135688] [gazebo_ros2_control]: 	State:
+[gzserver-4] [INFO] [1791202389.959155158] [gazebo_ros2_control]: 		 velocity
+[gzserver-4] [INFO] [1791202389.959168447] [gazebo_ros2_control]: 		 position
+[gzserver-4] [INFO] [1791202389.959178823] [gazebo_ros2_control]: 	Command:
+[gzserver-4] [INFO] [1791202389.959208147] [gazebo_ros2_control]: 		 velocity
+[gzserver-4] [INFO] [1791202389.959487224] [resource_manager]: Initialize hardware 'GazeboSystem' 
+[gzserver-4] [INFO] [1791202389.959668875] [resource_manager]: Successful initialization of hardware 'GazeboSystem'
+[gzserver-4] [INFO] [1791202389.959786854] [resource_manager]: 'configure' hardware 'GazeboSystem' 
+[gzserver-4] [INFO] [1791202389.959802058] [resource_manager]: Successful 'configure' of hardware 'GazeboSystem'
+[gzserver-4] [INFO] [1791202389.959810000] [resource_manager]: 'activate' hardware 'GazeboSystem' 
+[gzserver-4] [INFO] [1791202389.959817744] [resource_manager]: Successful 'activate' of hardware 'GazeboSystem'
+[gzserver-4] [INFO] [1791202389.959917703] [gazebo_ros2_control]: Loading controller_manager
+[gzserver-4] [WARN] [1791202389.981902420] [gazebo_ros2_control]:  Desired controller update period (0.0333333 s) is slower than the gazebo simulation period (0.001 s).
+[gzserver-4] [INFO] [1791202389.982116634] [gazebo_ros2_control]: Loaded gazebo_ros2_control.
+[gzserver-4] [INFO] [1791202389.986454917] [controller_manager]: Loading controller 'joint_broad'
+[spawner-7] [INFO] [1791202389.999989126] [spawner_joint_broad]: [94mLoaded [1mjoint_broad[0m
+[gzserver-4] [INFO] [1791202390.021400574] [controller_manager]: Loading controller 'diff_cont'
+[spawner-6] [INFO] [1791202390.052631086] [spawner_diff_cont]: [94mLoaded [1mdiff_cont[0m
+[gzserver-4] [INFO] [1791202390.054342313] [controller_manager]: Configuring controller 'diff_cont'
+[ros2-1] [INFO] [1791202390.062474874] [rosbag2_recorder]: Subscribed to topic '/diff_cont/odom'
+[yolo_detector_node-10] [INFO] [1791202390.081502218] [yolo_cctv1]: Camera source: ROS topic /cctv1/image_raw
+[yolo_detector_node-10] [INFO] [1791202390.081795054] [yolo_cctv1]: YOLO detector ready (model=/home/desh/Yoru_bot_publication/yolov8n.pt, source=ros_topic, publishing /compliance/cctv1/detections_yolo)
+[gzserver-4] [INFO] [1791202390.086494105] [controller_manager]: Configuring controller 'joint_broad'
+[gzserver-4] [INFO] [1791202390.086600808] [joint_broad]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[spawner-6] [INFO] [1791202390.190876334] [spawner_diff_cont]: [92mConfigured and activated [1mdiff_cont[0m
+[yolo_detector_node-15] [INFO] [1791202390.230246057] [yolo_cctv2]: Camera source: ROS topic /cctv2/image_raw
+[yolo_detector_node-15] [INFO] [1791202390.230541013] [yolo_cctv2]: YOLO detector ready (model=/home/desh/Yoru_bot_publication/yolov8n.pt, source=ros_topic, publishing /compliance/cctv2/detections)
+[spawner-7] [INFO] [1791202390.260062713] [spawner_joint_broad]: [92mConfigured and activated [1mjoint_broad[0m
+[INFO] [spawner-6]: process has finished cleanly [pid 155067]
+[INFO] [spawner-7]: process has finished cleanly [pid 155069]
+[yolo_detector_node-10] /home/desh/.local/lib/python3.10/site-packages/torch/cuda/__init__.py:187: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+[yolo_detector_node-10]   return torch._C._cuda_getDeviceCount() > 0
+[yolo_detector_node-15] /home/desh/.local/lib/python3.10/site-packages/torch/cuda/__init__.py:187: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+[yolo_detector_node-15]   return torch._C._cuda_getDeviceCount() > 0
+[INFO] [map_server-28]: process started with pid [155840]
+[INFO] [amcl-29]: process started with pid [155842]
+[INFO] [lifecycle_manager-30]: process started with pid [155844]
+[lifecycle_manager-30] [INFO] [1791202392.591284188] [lifecycle_manager_localization]: Creating
+[amcl-29] [INFO] [1791202392.603547201] [amcl]: 
+[amcl-29] 	amcl lifecycle node launched. 
+[amcl-29] 	Waiting on external lifecycle transitions to activate
+[amcl-29] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[amcl-29] [INFO] [1791202392.603935648] [amcl]: Creating
+[map_server-28] [INFO] [1791202392.610452411] [map_server]: 
+[map_server-28] 	map_server lifecycle node launched. 
+[map_server-28] 	Waiting on external lifecycle transitions to activate
+[map_server-28] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-28] [INFO] [1791202392.611659342] [map_server]: Creating
+[lifecycle_manager-30] [INFO] [1791202392.612124122] [lifecycle_manager_localization]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[lifecycle_manager-30] [INFO] [1791202393.646153960] [lifecycle_manager_localization]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-30] [INFO] [1791202393.646787682] [lifecycle_manager_localization]: [34m[1mConfiguring map_server[0m[0m
+[map_server-28] [INFO] [1791202393.647783164] [map_server]: Configuring
+[map_server-28] [INFO] [1791202393.648974472] [map_io]: Loading yaml file: /home/desh/Yoru_bot_publication/maps/sim/main_map.yaml
+[map_server-28] [INFO] [1791202393.649227606] [map_io]: resolution: 0.05
+[map_server-28] [INFO] [1791202393.649237871] [map_io]: origin[0]: -5.93
+[map_server-28] [INFO] [1791202393.649244120] [map_io]: origin[1]: -3.95
+[map_server-28] [INFO] [1791202393.649249821] [map_io]: origin[2]: 0
+[map_server-28] [INFO] [1791202393.649255757] [map_io]: free_thresh: 0.25
+[map_server-28] [INFO] [1791202393.649261572] [map_io]: occupied_thresh: 0.65
+[map_server-28] [INFO] [1791202393.649267433] [map_io]: mode: trinary
+[map_server-28] [INFO] [1791202393.649273772] [map_io]: negate: 0
+[map_server-28] [INFO] [1791202393.649443366] [map_io]: Loading image_file: /home/desh/Yoru_bot_publication/maps/sim/main_map.pgm
+[map_server-28] [INFO] [1791202393.658190204] [map_io]: Read map /home/desh/Yoru_bot_publication/maps/sim/main_map.pgm: 238 X 158 map @ 0.05 m/cell
+[lifecycle_manager-30] [INFO] [1791202393.670912382] [lifecycle_manager_localization]: [34m[1mConfiguring amcl[0m[0m
+[amcl-29] [INFO] [1791202393.671193978] [amcl]: Configuring
+[amcl-29] [INFO] [1791202393.671270669] [amcl]: initTransforms
+[amcl-29] [INFO] [1791202393.685004790] [amcl]: initPubSub
+[amcl-29] [INFO] [1791202393.692320734] [amcl]: Subscribed to map topic.
+[lifecycle_manager-30] [INFO] [1791202393.696686751] [lifecycle_manager_localization]: [34m[1mActivating map_server[0m[0m
+[map_server-28] [INFO] [1791202393.697352222] [map_server]: Activating
+[map_server-28] [INFO] [1791202393.697485055] [map_server]: Creating bond (map_server) to lifecycle manager.
+[amcl-29] [INFO] [1791202393.699746625] [amcl]: Received a 238 X 158 map @ 0.050 m/pix
+[lifecycle_manager-30] [INFO] [1791202393.807016293] [lifecycle_manager_localization]: Server map_server connected with bond.
+[lifecycle_manager-30] [INFO] [1791202393.807112814] [lifecycle_manager_localization]: [34m[1mActivating amcl[0m[0m
+[amcl-29] [INFO] [1791202393.807495726] [amcl]: Activating
+[amcl-29] [INFO] [1791202393.807545666] [amcl]: initialPoseReceived
+[amcl-29] [INFO] [1791202393.807628093] [amcl]: Setting pose (0.000000): 0.000 0.000 0.000
+[amcl-29] [INFO] [1791202393.808342919] [amcl]: Creating bond (amcl) to lifecycle manager.
+[lifecycle_manager-30] [INFO] [1791202393.918064125] [lifecycle_manager_localization]: Server amcl connected with bond.
+[lifecycle_manager-30] [INFO] [1791202393.918128847] [lifecycle_manager_localization]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-30] [INFO] [1791202393.918143562] [lifecycle_manager_localization]: [34m[1mCreating bond timer...[0m[0m
+[ros2-1] [INFO] [1791202394.415036917] [rosbag2_recorder]: Subscribed to topic '/amcl_pose'
+[amcl-29] [INFO] [1791202394.660321307] [amcl]: createLaserObject
+[INFO] [controller_server-31]: process started with pid [155880]
+[INFO] [smoother_server-32]: process started with pid [155882]
+[INFO] [planner_server-33]: process started with pid [155884]
+[INFO] [behavior_server-34]: process started with pid [155886]
+[INFO] [bt_navigator-35]: process started with pid [155888]
+[INFO] [waypoint_follower-36]: process started with pid [155890]
+[INFO] [velocity_smoother-37]: process started with pid [155894]
+[smoother_server-32] [INFO] [1791202395.840572892] [smoother_server]: 
+[smoother_server-32] 	smoother_server lifecycle node launched. 
+[smoother_server-32] 	Waiting on external lifecycle transitions to activate
+[smoother_server-32] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-32] [INFO] [1791202395.841652954] [smoother_server]: Creating smoother server
+[controller_server-31] [INFO] [1791202395.905874006] [controller_server]: 
+[controller_server-31] 	controller_server lifecycle node launched. 
+[controller_server-31] 	Waiting on external lifecycle transitions to activate
+[controller_server-31] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-31] [INFO] [1791202395.914234886] [controller_server]: Creating controller server
+[bt_navigator-35] [INFO] [1791202396.021606815] [bt_navigator]: 
+[bt_navigator-35] 	bt_navigator lifecycle node launched. 
+[bt_navigator-35] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-35] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-35] [INFO] [1791202396.024107825] [bt_navigator]: Creating
+[planner_server-33] [INFO] [1791202396.027132996] [planner_server]: 
+[planner_server-33] 	planner_server lifecycle node launched. 
+[planner_server-33] 	Waiting on external lifecycle transitions to activate
+[planner_server-33] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-36] [INFO] [1791202396.029661494] [waypoint_follower]: 
+[waypoint_follower-36] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-36] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-36] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-36] [INFO] [1791202396.031322732] [waypoint_follower]: Creating
+[planner_server-33] [INFO] [1791202396.031962215] [planner_server]: Creating
+[velocity_smoother-37] [INFO] [1791202396.310247283] [velocity_smoother]: 
+[velocity_smoother-37] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-37] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-37] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-31] [INFO] [1791202396.328797076] [local_costmap.local_costmap]: 
+[controller_server-31] 	local_costmap lifecycle node launched. 
+[controller_server-31] 	Waiting on external lifecycle transitions to activate
+[controller_server-31] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-31] [INFO] [1791202396.329298601] [local_costmap.local_costmap]: Creating Costmap
+[behavior_server-34] [INFO] [1791202396.349082151] [behavior_server]: 
+[behavior_server-34] 	behavior_server lifecycle node launched. 
+[behavior_server-34] 	Waiting on external lifecycle transitions to activate
+[behavior_server-34] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-33] [INFO] [1791202396.689130091] [global_costmap.global_costmap]: 
+[planner_server-33] 	global_costmap lifecycle node launched. 
+[planner_server-33] 	Waiting on external lifecycle transitions to activate
+[planner_server-33] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-33] [INFO] [1791202396.689516315] [global_costmap.global_costmap]: Creating Costmap
+[INFO] [lifecycle_manager-38]: process started with pid [155967]
+[lifecycle_manager-38] [INFO] [1791202404.216858695] [lifecycle_manager_navigation]: Creating
+[lifecycle_manager-38] [INFO] [1791202404.218261546] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[lifecycle_manager-38] [INFO] [1791202406.027421779] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-38] [INFO] [1791202406.027500615] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-31] [INFO] [1791202406.027694398] [controller_server]: Configuring controller interface
+[controller_server-31] [INFO] [1791202406.027826398] [controller_server]: getting goal checker plugins..
+[controller_server-31] [INFO] [1791202406.027869174] [controller_server]: Controller frequency set to 20.0000Hz
+[controller_server-31] [INFO] [1791202406.027899965] [local_costmap.local_costmap]: Configuring
+[controller_server-31] [INFO] [1791202406.040678458] [local_costmap.local_costmap]: Using plugin "voxel_layer"
+[controller_server-31] [INFO] [1791202406.048825398] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-31] [INFO] [1791202406.064530762] [local_costmap.local_costmap]: Initialized plugin "voxel_layer"
+[controller_server-31] [INFO] [1791202406.064572465] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-31] [INFO] [1791202406.065063040] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-31] [INFO] [1791202406.095035635] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-31] [INFO] [1791202406.095649391] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-31] [INFO] [1791202406.099360574] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[controller_server-31] [INFO] [1791202406.100565703] [controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[controller_server-31] [INFO] [1791202406.104279378] [controller_server]: Setting transform_tolerance to 0.200000
+[controller_server-31] [INFO] [1791202406.135445193] [controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[controller_server-31] [INFO] [1791202406.136332092] [controller_server]: Critic plugin initialized
+[controller_server-31] [INFO] [1791202406.136422096] [controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[controller_server-31] [INFO] [1791202406.136619844] [controller_server]: Critic plugin initialized
+[controller_server-31] [INFO] [1791202406.136680385] [controller_server]: Using critic "BaseObstacle" (dwb_critics::BaseObstacleCritic)
+[controller_server-31] [INFO] [1791202406.136769699] [controller_server]: Critic plugin initialized
+[controller_server-31] [INFO] [1791202406.136821513] [controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[controller_server-31] [INFO] [1791202406.136988257] [controller_server]: Critic plugin initialized
+[controller_server-31] [INFO] [1791202406.137050170] [controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[controller_server-31] [INFO] [1791202406.137193267] [controller_server]: Critic plugin initialized
+[controller_server-31] [INFO] [1791202406.137253809] [controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[controller_server-31] [INFO] [1791202406.137353977] [controller_server]: Critic plugin initialized
+[controller_server-31] [INFO] [1791202406.137405633] [controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[controller_server-31] [INFO] [1791202406.137506012] [controller_server]: Critic plugin initialized
+[controller_server-31] [INFO] [1791202406.137520883] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-38] [INFO] [1791202406.169434762] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-32] [INFO] [1791202406.169804259] [smoother_server]: Configuring smoother server
+[smoother_server-32] [INFO] [1791202406.204546535] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-32] [INFO] [1791202406.211296295] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-38] [INFO] [1791202406.242113839] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-33] [INFO] [1791202406.242408484] [planner_server]: Configuring
+[planner_server-33] [INFO] [1791202406.242439466] [global_costmap.global_costmap]: Configuring
+[planner_server-33] [INFO] [1791202406.270629826] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-33] [INFO] [1791202406.276618304] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[planner_server-33] [INFO] [1791202406.290660083] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-33] [INFO] [1791202406.291409595] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-33] [INFO] [1791202406.309127347] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-33] [INFO] [1791202406.332919483] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-33] [INFO] [1791202406.333011857] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-33] [INFO] [1791202406.336159137] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-33] [INFO] [1791202406.357061872] [planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[planner_server-33] [INFO] [1791202406.357161276] [planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[planner_server-33] [INFO] [1791202406.358992387] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 238 X 158 at 0.050000 m/pix
+[planner_server-33] [INFO] [1791202406.359141610] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-38] [INFO] [1791202406.396393205] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-34] [INFO] [1791202406.396918168] [behavior_server]: Configuring
+[behavior_server-34] [INFO] [1791202406.443165643] [behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[behavior_server-34] [INFO] [1791202406.445182009] [behavior_server]: Configuring spin
+[ros2-1] [INFO] [1791202406.460995098] [rosbag2_recorder]: Subscribed to topic '/plan'
+[behavior_server-34] [INFO] [1791202406.532635663] [behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[behavior_server-34] [INFO] [1791202406.536442433] [behavior_server]: Configuring backup
+[behavior_server-34] [INFO] [1791202406.575402491] [behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors/DriveOnHeading
+[behavior_server-34] [INFO] [1791202406.575999306] [behavior_server]: Configuring drive_on_heading
+[behavior_server-34] [INFO] [1791202406.619648152] [behavior_server]: Creating behavior plugin assisted_teleop of type nav2_behaviors/AssistedTeleop
+[behavior_server-34] [INFO] [1791202406.621848150] [behavior_server]: Configuring assisted_teleop
+[behavior_server-34] [INFO] [1791202406.692351262] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[behavior_server-34] [INFO] [1791202406.692957516] [behavior_server]: Configuring wait
+[lifecycle_manager-38] [INFO] [1791202406.716302106] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-35] [INFO] [1791202406.716787003] [bt_navigator]: Configuring
+[ros2-1] [INFO] [1791202406.917784110] [rosbag2_recorder]: Subscribed to topic '/navigate_to_pose/_action/feedback'
+[lifecycle_manager-38] [INFO] [1791202406.922314869] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[ros2-1] [INFO] [1791202406.922920965] [rosbag2_recorder]: Subscribed to topic '/navigate_to_pose/_action/status'
+[waypoint_follower-36] [INFO] [1791202406.923906026] [waypoint_follower]: Configuring
+[waypoint_follower-36] [INFO] [1791202406.965873005] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-38] [INFO] [1791202406.969050839] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-37] [INFO] [1791202406.969488526] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-38] [INFO] [1791202406.973168007] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-31] [INFO] [1791202406.973376091] [controller_server]: Activating
+[controller_server-31] [INFO] [1791202406.973410766] [local_costmap.local_costmap]: Activating
+[controller_server-31] [INFO] [1791202406.973419714] [local_costmap.local_costmap]: Checking transform
+[controller_server-31] [INFO] [1791202406.973525208] [local_costmap.local_costmap]: start
+[controller_server-31] [INFO] [1791202407.226585512] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-38] [INFO] [1791202408.054009894] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-38] [INFO] [1791202408.054075849] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-32] [INFO] [1791202408.054433383] [smoother_server]: Activating
+[smoother_server-32] [INFO] [1791202408.054473521] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-38] [INFO] [1791202408.175072841] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-38] [INFO] [1791202408.175132104] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-33] [INFO] [1791202408.175964915] [planner_server]: Activating
+[planner_server-33] [INFO] [1791202408.175995669] [global_costmap.global_costmap]: Activating
+[planner_server-33] [INFO] [1791202408.176003711] [global_costmap.global_costmap]: Checking transform
+[planner_server-33] [INFO] [1791202408.176095927] [global_costmap.global_costmap]: start
+[planner_server-33] [INFO] [1791202409.181585353] [planner_server]: Activating plugin GridBased of type NavfnPlanner
+[planner_server-33] [INFO] [1791202409.185225367] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-38] [INFO] [1791202409.297370179] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-38] [INFO] [1791202409.297424970] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-34] [INFO] [1791202409.297756698] [behavior_server]: Activating
+[behavior_server-34] [INFO] [1791202409.297782842] [behavior_server]: Activating spin
+[behavior_server-34] [INFO] [1791202409.297791337] [behavior_server]: Activating backup
+[behavior_server-34] [INFO] [1791202409.297798158] [behavior_server]: Activating drive_on_heading
+[behavior_server-34] [INFO] [1791202409.297804680] [behavior_server]: Activating assisted_teleop
+[behavior_server-34] [INFO] [1791202409.297811362] [behavior_server]: Activating wait
+[behavior_server-34] [INFO] [1791202409.297820288] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-38] [INFO] [1791202409.410885475] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-38] [INFO] [1791202409.411049252] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-35] [INFO] [1791202409.411347882] [bt_navigator]: Activating
+[bt_navigator-35] [INFO] [1791202409.571252306] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-38] [INFO] [1791202409.684244227] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-38] [INFO] [1791202409.684307933] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-36] [INFO] [1791202409.684915739] [waypoint_follower]: Activating
+[waypoint_follower-36] [INFO] [1791202409.684960831] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-38] [INFO] [1791202409.801418215] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-38] [INFO] [1791202409.801460040] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-37] [INFO] [1791202409.801940384] [velocity_smoother]: Activating
+[velocity_smoother-37] [INFO] [1791202409.801991206] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-38] [INFO] [1791202409.915513752] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-38] [INFO] [1791202409.915557313] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-38] [INFO] [1791202409.915572208] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[compliance_fsm_node-20] [INFO] [1791202425.878491243] [compliance_fsm_node]: FSM: MONITORING -> PA_WARNING (track=c1_1001, after 33.6s)
+[audio_warning_node-21] [WARN] [1791202425.881959481] [audio_warning_node]: [PA_WARNING] Attention. Smoking detected in room a. Smoking is not allowed here. Please stop immediately.
+[incident_emailer_node-23] [INFO] [1791202425.883131283] [incident_emailer_node]: Keyframe saved: /home/desh/compliance_robot_logs/keyframes/20261005_121345_cctv_room_a.jpg
+[compliance_fsm_node-20] [INFO] [1791202436.535628607] [compliance_fsm_node]: FSM: PA_WARNING -> APPROACH (track=c1_1001, after 10.0s)
+[nav2_goal_sender_node-19] [INFO] [1791202436.961743527] [nav2_goal_sender_node]: Approach goal (1.80,0.00), standoff 0.0 m from target (1.80,0.00)
+[bt_navigator-35] [INFO] [1791202436.964066094] [bt_navigator]: Begin navigating from current location (0.00, 0.00) to (1.80, 0.00)
+[controller_server-31] [INFO] [1791202436.987423433] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-31] [WARN] [1791202436.988223428] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded general_goal_checker . This warning will appear once.
+[controller_server-31] [INFO] [1791202438.038410065] [controller_server]: Passing new path to controller.
+[controller_server-31] [INFO] [1791202439.042000781] [controller_server]: Passing new path to controller.
+[controller_server-31] [INFO] [1791202440.092901599] [controller_server]: Passing new path to controller.
+[controller_server-31] [INFO] [1791202441.139001371] [controller_server]: Passing new path to controller.
+[controller_server-31] [INFO] [1791202442.140918209] [controller_server]: Passing new path to controller.
+[controller_server-31] [INFO] [1791202443.190901899] [controller_server]: Passing new path to controller.
+[controller_server-31] [INFO] [1791202444.094534313] [controller_server]: Reached the goal!
+[bt_navigator-35] [INFO] [1791202444.124924213] [bt_navigator]: Goal succeeded
+[compliance_fsm_node-20] [INFO] [1791202444.210867328] [compliance_fsm_node]: Direct warning 1/3
+[compliance_fsm_node-20] [INFO] [1791202444.211409297] [compliance_fsm_node]: FSM: APPROACH -> DIRECT_WARNING (track=c1_1001, after 7.1s)
+[scenario_publisher_node-11] [INFO] [1791202444.212351557] [scenario_publisher_node]: FSM reached DIRECT_WARNING; simulated person will comply in 6s
+[audio_warning_node-21] [WARN] [1791202444.213066499] [audio_warning_node]: [DIRECT_WARNING] This is a final warning. Smoking is not allowed here. This incident has been recorded and will be reported.
+[incident_emailer_node-23] [INFO] [1791202445.804225312] [incident_emailer_node]: Keyframe saved: /home/desh/compliance_robot_logs/keyframes/20261005_121405_robot_closeup.jpg
+[compliance_fsm_node-20] [INFO] [1791202448.451227505] [compliance_fsm_node]: Direct warning 2/3
+[audio_warning_node-21] [WARN] [1791202448.453476098] [audio_warning_node]: [DIRECT_WARNING] This is a final warning. Smoking is not allowed here. This incident has been recorded and will be reported.
+[scenario_publisher_node-11] [INFO] [1791202450.607868010] [scenario_publisher_node]: Simulated person complied (device removed)
+[compliance_fsm_node-20] [INFO] [1791202452.731511123] [compliance_fsm_node]: Direct warning 3/3
+[audio_warning_node-21] [WARN] [1791202452.733157024] [audio_warning_node]: [DIRECT_WARNING] This is a final warning. Smoking is not allowed here. This incident has been recorded and will be reported.
+[compliance_fsm_node-20] [INFO] [1791202457.020965000] [compliance_fsm_node]: FSM: DIRECT_WARNING -> LOGGING (track=c1_1001, after 12.0s)
+[compliance_fsm_node-20] [INFO] [1791202459.187373495] [compliance_fsm_node]: FSM: LOGGING -> MONITORING (track=None, after 2.0s)
+[incident_logger_node-22] [INFO] [1791202459.188768162] [incident_logger_node]: Incident logged: stage=S4 outcome=logged_no_compliance track=c1_1001
+[waypoint_follower-36] [INFO] [1791202556.967097432] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[waypoint_follower-36] [INFO] [1791202556.967245457] [waypoint_follower]: Running Nav2 LifecycleNode rcl preshutdown (waypoint_follower)
+[bt_navigator-35] [INFO] [1791202556.967098795] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[bt_navigator-35] [INFO] [1791202556.967188720] [bt_navigator]: Running Nav2 LifecycleNode rcl preshutdown (bt_navigator)
+[bt_navigator-35] [INFO] [1791202556.967301948] [bt_navigator]: Deactivating
+[bt_navigator-35] [INFO] [1791202556.967333858] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[behavior_server-34] [INFO] [1791202556.967115314] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[behavior_server-34] [INFO] [1791202556.967218581] [behavior_server]: Running Nav2 LifecycleNode rcl preshutdown (behavior_server)
+[behavior_server-34] [INFO] [1791202556.967301273] [behavior_server]: Deactivating
+[behavior_server-34] [INFO] [1791202556.967339535] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[planner_server-33] [INFO] [1791202556.967127714] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[planner_server-33] [INFO] [1791202556.967188679] [planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[planner_server-33] [INFO] [1791202556.967300875] [planner_server]: Deactivating
+[planner_server-33] [INFO] [1791202556.967343958] [global_costmap.global_costmap]: Deactivating
+[waypoint_follower-36] [INFO] [1791202556.967324309] [waypoint_follower]: Deactivating
+[waypoint_follower-36] [INFO] [1791202556.967350116] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[static_transform_publisher-8] [INFO] [1791202556.967220485] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[controller_server-31] [INFO] [1791202556.967230760] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[controller_server-31] [INFO] [1791202556.967337139] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[controller_server-31] [INFO] [1791202556.967419528] [controller_server]: Deactivating
+[controller_server-31] [INFO] [1791202556.967479831] [local_costmap.local_costmap]: Deactivating
+[static_transform_publisher-9] [INFO] [1791202556.967579878] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[amcl-29] [INFO] [1791202556.967618949] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[amcl-29] [INFO] [1791202556.967713844] [amcl]: Running Nav2 LifecycleNode rcl preshutdown (amcl)
+[amcl-29] [INFO] [1791202556.967793796] [amcl]: Deactivating
+[amcl-29] [INFO] [1791202556.967819288] [amcl]: Destroying bond (amcl) to lifecycle manager.
+[twist_mux-3] [INFO] [1791202556.968064124] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[map_server-28] [INFO] [1791202556.968237824] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[map_server-28] [INFO] [1791202556.968380033] [map_server]: Running Nav2 LifecycleNode rcl preshutdown (map_server)
+[map_server-28] [INFO] [1791202556.968550331] [map_server]: Deactivating
+[map_server-28] [INFO] [1791202556.968570669] [map_server]: Destroying bond (map_server) to lifecycle manager.
+[lifecycle_manager-30] [INFO] [1791202556.968508873] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[lifecycle_manager-30] [INFO] [1791202556.968672755] [lifecycle_manager_localization]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_localization)
+[lifecycle_manager-30] [INFO] [1791202556.968730467] [lifecycle_manager_localization]: [34m[1mTerminating bond timer...[0m[0m
+[robot_state_publisher-2] [INFO] [1791202556.968871595] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[velocity_smoother-37] [INFO] [1791202556.969108448] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[velocity_smoother-37] [INFO] [1791202556.971253109] [velocity_smoother]: Running Nav2 LifecycleNode rcl preshutdown (velocity_smoother)
+[velocity_smoother-37] [INFO] [1791202556.971312853] [velocity_smoother]: Deactivating
+[velocity_smoother-37] [INFO] [1791202556.971331470] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[smoother_server-32] [INFO] [1791202556.970896251] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[smoother_server-32] [INFO] [1791202556.970983366] [smoother_server]: Running Nav2 LifecycleNode rcl preshutdown (smoother_server)
+[smoother_server-32] [INFO] [1791202556.971049138] [smoother_server]: Deactivating
+[smoother_server-32] [INFO] [1791202556.971066481] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-38] [INFO] [1791202556.971273087] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[lifecycle_manager-38] [INFO] [1791202556.971333923] [lifecycle_manager_navigation]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_navigation)
+[lifecycle_manager-38] [INFO] [1791202556.971355537] [lifecycle_manager_navigation]: [34m[1mTerminating bond timer...[0m[0m
+[controller_server-31] [INFO] [1791202556.975092555] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[waypoint_follower-36] [INFO] [1791202556.977724835] [waypoint_follower]: Cleaning up
+[bt_navigator-35] [INFO] [1791202556.977725369] [bt_navigator]: Cleaning up
+[behavior_server-34] [INFO] [1791202556.978120463] [behavior_server]: Cleaning up
+[amcl-29] [INFO] [1791202556.979682092] [amcl]: Cleaning up
+[map_server-28] [INFO] [1791202556.985009273] [map_server]: Cleaning up
+[map_server-28] [INFO] [1791202556.985058644] [map_server]: Destroying bond (map_server) to lifecycle manager.
+[smoother_server-32] [INFO] [1791202556.994480555] [smoother_server]: Cleaning up
+[map_server-28] [INFO] [1791202556.995087092] [map_server]: Destroying
+[controller_server-31] [INFO] [1791202556.995328873] [controller_server]: Cleaning up
+[controller_server-31] [INFO] [1791202556.995497987] [local_costmap.local_costmap]: Cleaning up
+[velocity_smoother-37] [INFO] [1791202557.012281319] [velocity_smoother]: Cleaning up
+[velocity_smoother-37] [INFO] [1791202557.012337101] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[amcl-29] [INFO] [1791202557.026356408] [amcl]: Destroying bond (amcl) to lifecycle manager.
+[velocity_smoother-37] [INFO] [1791202557.040374427] [velocity_smoother]: Destroying
+[lifecycle_manager-30] [INFO] [1791202557.042082815] [lifecycle_manager_localization]: Destroying lifecycle_manager_localization
+[waypoint_follower-36] [INFO] [1791202557.045868210] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[ros2-1] [INFO] [1791202557.047024417] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[smoother_server-32] [INFO] [1791202557.054256853] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[waypoint_follower-36] [INFO] [1791202557.059894225] [waypoint_follower]: Destroying
+[incident_logger_node-22] Traceback (most recent call last):
+[incident_logger_node-22]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/incident_logger_node", line 33, in <module>
+[incident_logger_node-22]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'incident_logger_node')())
+[incident_logger_node-22]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/incident_logger_node.py", line 101, in main
+[incident_logger_node-22]     rclpy.spin(node)
+[incident_logger_node-22]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[incident_logger_node-22]     executor.spin_once()
+[incident_logger_node-22]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[incident_logger_node-22]     self._spin_once_impl(timeout_sec)
+[incident_logger_node-22]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[incident_logger_node-22]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[incident_logger_node-22]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[incident_logger_node-22]     return next(self._cb_iter)
+[incident_logger_node-22]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[incident_logger_node-22]     raise ExternalShutdownException()
+[incident_logger_node-22] rclpy.executors.ExternalShutdownException
+[ros2-1] [INFO] [1791202557.063075873] [rosbag2_recorder]: Event publisher thread: Exiting
+[scenario_publisher_node-11] Traceback (most recent call last):
+[scenario_publisher_node-11]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/scenario_publisher_node", line 33, in <module>
+[scenario_publisher_node-11]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'scenario_publisher_node')())
+[scenario_publisher_node-11]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/scenario_publisher_node.py", line 542, in main
+[scenario_publisher_node-11]     rclpy.spin(node)
+[scenario_publisher_node-11]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[scenario_publisher_node-11]     executor.spin_once()
+[scenario_publisher_node-11]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[scenario_publisher_node-11]     self._spin_once_impl(timeout_sec)
+[scenario_publisher_node-11]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[scenario_publisher_node-11]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[scenario_publisher_node-11]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[scenario_publisher_node-11]     return next(self._cb_iter)
+[scenario_publisher_node-11]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[scenario_publisher_node-11]     raise ExternalShutdownException()
+[scenario_publisher_node-11] rclpy.executors.ExternalShutdownException
+[ros2-1] [INFO] [1791202557.069920576] [rosbag2_recorder]: Recording stopped
+[amcl-29] [INFO] [1791202557.073131201] [amcl]: Destroying
+[controller_server-31] [INFO] [1791202557.098556422] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[return_to_base_node-25] Traceback (most recent call last):
+[return_to_base_node-25]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/return_to_base_node", line 33, in <module>
+[return_to_base_node-25]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'return_to_base_node')())
+[return_to_base_node-25]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/return_to_base_node.py", line 198, in main
+[return_to_base_node-25]     rclpy.spin(node)
+[return_to_base_node-25]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[return_to_base_node-25]     executor.spin_once()
+[return_to_base_node-25]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[return_to_base_node-25]     self._spin_once_impl(timeout_sec)
+[return_to_base_node-25]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[return_to_base_node-25]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[return_to_base_node-25]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[return_to_base_node-25]     return next(self._cb_iter)
+[return_to_base_node-25]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[return_to_base_node-25]     raise ExternalShutdownException()
+[return_to_base_node-25] rclpy.executors.ExternalShutdownException
+[behavior_server-34] [INFO] [1791202557.124650630] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[smoother_server-32] [INFO] [1791202557.126976254] [smoother_server]: Destroying
+[compliance_fsm_node-20] Traceback (most recent call last):
+[compliance_fsm_node-20]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/compliance_fsm_node", line 33, in <module>
+[compliance_fsm_node-20]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'compliance_fsm_node')())
+[compliance_fsm_node-20]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/compliance_fsm_node.py", line 473, in main
+[compliance_fsm_node-20]     rclpy.spin(node)
+[compliance_fsm_node-20]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[compliance_fsm_node-20]     executor.spin_once()
+[compliance_fsm_node-20]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[compliance_fsm_node-20]     self._spin_once_impl(timeout_sec)
+[compliance_fsm_node-20]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[compliance_fsm_node-20]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[compliance_fsm_node-20]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[compliance_fsm_node-20]     return next(self._cb_iter)
+[compliance_fsm_node-20]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[compliance_fsm_node-20]     raise ExternalShutdownException()
+[compliance_fsm_node-20] rclpy.executors.ExternalShutdownException
+[controller_server-31] [INFO] [1791202557.146283001] [local_costmap.local_costmap]: Destroying
+[patrol_node-24] Traceback (most recent call last):
+[patrol_node-24]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/patrol_node", line 33, in <module>
+[patrol_node-24]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'patrol_node')())
+[patrol_node-24]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/patrol_node.py", line 142, in main
+[patrol_node-24]     rclpy.spin(node)
+[patrol_node-24]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[patrol_node-24]     executor.spin_once()
+[patrol_node-24]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[patrol_node-24]     self._spin_once_impl(timeout_sec)
+[patrol_node-24]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[patrol_node-24]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[patrol_node-24]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[patrol_node-24]     return next(self._cb_iter)
+[patrol_node-24]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[patrol_node-24]     raise ExternalShutdownException()
+[patrol_node-24] rclpy.executors.ExternalShutdownException
+[admin_joy_node-26] Traceback (most recent call last):
+[admin_joy_node-26]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/admin_joy_node", line 33, in <module>
+[admin_joy_node-26]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'admin_joy_node')())
+[admin_joy_node-26]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/admin_joy_node.py", line 84, in main
+[admin_joy_node-26]     rclpy.spin(node)
+[admin_joy_node-26]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[admin_joy_node-26]     executor.spin_once()
+[admin_joy_node-26]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[admin_joy_node-26]     self._spin_once_impl(timeout_sec)
+[admin_joy_node-26]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[admin_joy_node-26]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[admin_joy_node-26]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[admin_joy_node-26]     return next(self._cb_iter)
+[admin_joy_node-26]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[admin_joy_node-26]     raise ExternalShutdownException()
+[admin_joy_node-26] rclpy.executors.ExternalShutdownException
+[tracking_node-16] Traceback (most recent call last):
+[tracking_node-16]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/tracking_node", line 33, in <module>
+[tracking_node-16]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'tracking_node')())
+[tracking_node-16]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/tracking_node.py", line 104, in main
+[tracking_node-16]     rclpy.spin(node)
+[tracking_node-16]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[tracking_node-16]     executor.spin_once()
+[tracking_node-16]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[tracking_node-16]     self._spin_once_impl(timeout_sec)
+[tracking_node-16]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[audio_warning_node-21] Traceback (most recent call last):
+[audio_warning_node-21]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/audio_warning_node", line 33, in <module>
+[audio_warning_node-21]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'audio_warning_node')())
+[audio_warning_node-21]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/audio_warning_node.py", line 174, in main
+[audio_warning_node-21]     rclpy.spin(node)
+[audio_warning_node-21]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[audio_warning_node-21]     executor.spin_once()
+[audio_warning_node-21]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[audio_warning_node-21]     self._spin_once_impl(timeout_sec)
+[audio_warning_node-21]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[audio_warning_node-21]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[audio_warning_node-21]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[audio_warning_node-21]     return next(self._cb_iter)
+[audio_warning_node-21]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[audio_warning_node-21]     raise ExternalShutdownException()
+[audio_warning_node-21] rclpy.executors.ExternalShutdownException
+[tracking_node-16]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[tracking_node-16]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[tracking_node-16]     return next(self._cb_iter)
+[tracking_node-16]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[tracking_node-16]     raise ExternalShutdownException()
+[tracking_node-16] rclpy.executors.ExternalShutdownException
+[incident_emailer_node-23] Traceback (most recent call last):
+[incident_emailer_node-23]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/incident_emailer_node", line 33, in <module>
+[incident_emailer_node-23]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'incident_emailer_node')())
+[incident_emailer_node-23]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/incident_emailer_node.py", line 273, in main
+[incident_emailer_node-23]     rclpy.spin(node)
+[incident_emailer_node-23]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[incident_emailer_node-23]     executor.spin_once()
+[incident_emailer_node-23]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[incident_emailer_node-23]     self._spin_once_impl(timeout_sec)
+[incident_emailer_node-23]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[incident_emailer_node-23]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[incident_emailer_node-23]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[incident_emailer_node-23]     return next(self._cb_iter)
+[incident_emailer_node-23]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[incident_emailer_node-23]     raise ExternalShutdownException()
+[incident_emailer_node-23] rclpy.executors.ExternalShutdownException
+[lifecycle_manager-38] [INFO] [1791202557.174810114] [lifecycle_manager_navigation]: Destroying lifecycle_manager_navigation
+[behavior_server-34] [INFO] [1791202557.175461027] [behavior_server]: Destroying
+[planner_server-33] [INFO] [1791202557.179014795] [planner_server]: Deactivating plugin GridBased of type NavfnPlanner
+[planner_server-33] [INFO] [1791202557.179096592] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[INFO] [static_transform_publisher-8]: process has finished cleanly [pid 155071]
+[tracking_node-12] Traceback (most recent call last):
+[tracking_node-12]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/tracking_node", line 33, in <module>
+[tracking_node-12]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'tracking_node')())
+[tracking_node-12]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/tracking_node.py", line 104, in main
+[tracking_node-12]     rclpy.spin(node)
+[tracking_node-12]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[controller_server-31] [INFO] [1791202557.184208326] [controller_server]: Destroying
+[tracking_node-12]     executor.spin_once()
+[tracking_node-12]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[tracking_node-12]     self._spin_once_impl(timeout_sec)
+[tracking_node-12]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[tracking_node-12]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[tracking_node-12]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[tracking_node-12]     return next(self._cb_iter)
+[tracking_node-12]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[tracking_node-12]     raise ExternalShutdownException()
+[tracking_node-12] rclpy.executors.ExternalShutdownException
+[planner_server-33] [INFO] [1791202557.190185648] [planner_server]: Cleaning up
+[event_confirmation_node-13] Traceback (most recent call last):
+[event_confirmation_node-13]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/event_confirmation_node", line 33, in <module>
+[event_confirmation_node-13]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'event_confirmation_node')())
+[event_confirmation_node-13]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/event_confirmation_node.py", line 316, in main
+[event_confirmation_node-13]     rclpy.spin(node)
+[event_confirmation_node-13]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[event_confirmation_node-13]     executor.spin_once()
+[event_confirmation_node-13]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[INFO] [static_transform_publisher-9]: process has finished cleanly [pid 155073]
+[event_confirmation_node-13]     self._spin_once_impl(timeout_sec)
+[event_confirmation_node-13]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[event_confirmation_node-13]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[event_confirmation_node-13]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[event_confirmation_node-13]     return next(self._cb_iter)
+[event_confirmation_node-13]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[event_confirmation_node-13]     raise ExternalShutdownException()
+[event_confirmation_node-13] rclpy.executors.ExternalShutdownException
+[camera_target_node-14] Traceback (most recent call last):
+[camera_target_node-14]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/camera_target_node", line 33, in <module>
+[camera_target_node-14]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'camera_target_node')())
+[camera_target_node-14]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/camera_target_node.py", line 122, in main
+[camera_target_node-14]     rclpy.spin(node)
+[camera_target_node-14]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[camera_target_node-14]     executor.spin_once()
+[camera_target_node-14]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[camera_target_node-14]     self._spin_once_impl(timeout_sec)
+[camera_target_node-14]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[camera_target_node-14]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[camera_target_node-14]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[camera_target_node-14]     return next(self._cb_iter)
+[camera_target_node-14]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[camera_target_node-14]     raise ExternalShutdownException()
+[camera_target_node-14] rclpy.executors.ExternalShutdownException
+[INFO] [map_server-28]: process has finished cleanly [pid 155840]
+[camera_target_node-18] Traceback (most recent call last):
+[camera_target_node-18]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/camera_target_node", line 33, in <module>
+[camera_target_node-18]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'camera_target_node')())
+[camera_target_node-18]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/camera_target_node.py", line 122, in main
+[camera_target_node-18]     rclpy.spin(node)
+[camera_target_node-18]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[camera_target_node-18]     executor.spin_once()
+[camera_target_node-18]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[camera_target_node-18]     self._spin_once_impl(timeout_sec)
+[camera_target_node-18]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[camera_target_node-18]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[camera_target_node-18]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[camera_target_node-18]     return next(self._cb_iter)
+[camera_target_node-18]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[camera_target_node-18]     raise ExternalShutdownException()
+[camera_target_node-18] rclpy.executors.ExternalShutdownException
+[INFO] [robot_state_publisher-2]: process has finished cleanly [pid 155059]
+[planner_server-33] [INFO] [1791202557.226413592] [global_costmap.global_costmap]: Cleaning up
+[INFO] [lifecycle_manager-30]: process has finished cleanly [pid 155844]
+[nav2_goal_sender_node-19] Traceback (most recent call last):
+[nav2_goal_sender_node-19]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/nav2_goal_sender_node", line 33, in <module>
+[nav2_goal_sender_node-19]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'nav2_goal_sender_node')())
+[nav2_goal_sender_node-19]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/nav2_goal_sender_node.py", line 195, in main
+[nav2_goal_sender_node-19]     rclpy.spin(node)
+[nav2_goal_sender_node-19]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[nav2_goal_sender_node-19]     executor.spin_once()
+[nav2_goal_sender_node-19]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[nav2_goal_sender_node-19]     self._spin_once_impl(timeout_sec)
+[nav2_goal_sender_node-19]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[nav2_goal_sender_node-19]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[nav2_goal_sender_node-19]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[nav2_goal_sender_node-19]     return next(self._cb_iter)
+[nav2_goal_sender_node-19]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[nav2_goal_sender_node-19]     raise ExternalShutdownException()
+[nav2_goal_sender_node-19] rclpy.executors.ExternalShutdownException
+[INFO] [twist_mux-3]: process has finished cleanly [pid 155061]
+[planner_server-33] [INFO] [1791202557.241817130] [planner_server]: Cleaning up plugin GridBased of type NavfnPlanner
+[planner_server-33] [INFO] [1791202557.241899558] [planner_server]: Destroying plugin GridBased of type NavfnPlanner
+[ERROR] [incident_logger_node-22]: process has died [pid 155137, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/incident_logger_node --ros-args --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_kp998u7z --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml'].
+[planner_server-33] [INFO] [1791202557.251995096] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[INFO] [amcl-29]: process has finished cleanly [pid 155842]
+[INFO] [waypoint_follower-36]: process has finished cleanly [pid 155890]
+[event_confirmation_node-17] Traceback (most recent call last):
+[event_confirmation_node-17]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/event_confirmation_node", line 33, in <module>
+[event_confirmation_node-17]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'event_confirmation_node')())
+[event_confirmation_node-17]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/event_confirmation_node.py", line 316, in main
+[event_confirmation_node-17]     rclpy.spin(node)
+[event_confirmation_node-17]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[event_confirmation_node-17]     executor.spin_once()
+[event_confirmation_node-17]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[event_confirmation_node-17]     self._spin_once_impl(timeout_sec)
+[event_confirmation_node-17]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[event_confirmation_node-17]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[event_confirmation_node-17]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[event_confirmation_node-17]     return next(self._cb_iter)
+[event_confirmation_node-17]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[event_confirmation_node-17]     raise ExternalShutdownException()
+[event_confirmation_node-17] rclpy.executors.ExternalShutdownException
+[INFO] [velocity_smoother-37]: process has finished cleanly [pid 155894]
+[ERROR] [scenario_publisher_node-11]: process has died [pid 155077, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/scenario_publisher_node --ros-args --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_o2b4wsng --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml --params-file /tmp/launch_params_jnmq7kqk'].
+[planner_server-33] [INFO] [1791202557.262127309] [global_costmap.global_costmap]: Destroying
+[INFO] [smoother_server-32]: process has finished cleanly [pid 155882]
+[planner_server-33] [INFO] [1791202557.296537052] [planner_server]: Destroying
+[INFO] [lifecycle_manager-38]: process has finished cleanly [pid 155967]
+[bt_navigator-35] [INFO] [1791202557.335987137] [bt_navigator]: Completed Cleaning up
+[bt_navigator-35] [INFO] [1791202557.336071140] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[ERROR] [admin_joy_node-26]: process has died [pid 155145, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/admin_joy_node --ros-args --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_47utvozz --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml'].
+[INFO] [ros2-1]: process has finished cleanly [pid 155057]
+[INFO] [behavior_server-34]: process has finished cleanly [pid 155886]
+[INFO] [controller_server-31]: process has finished cleanly [pid 155880]
+[dashboard_node-27] Traceback (most recent call last):
+[dashboard_node-27]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/dashboard_node", line 33, in <module>
+[dashboard_node-27]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'dashboard_node')())
+[dashboard_node-27]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/dashboard_node.py", line 852, in main
+[dashboard_node-27]     rclpy.spin(node)
+[dashboard_node-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[dashboard_node-27]     executor.spin_once()
+[dashboard_node-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[dashboard_node-27]     self._spin_once_impl(timeout_sec)
+[dashboard_node-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 762, in _spin_once_impl
+[dashboard_node-27]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[dashboard_node-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 745, in wait_for_ready_callbacks
+[dashboard_node-27]     return next(self._cb_iter)
+[dashboard_node-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 646, in _wait_for_ready_callbacks
+[dashboard_node-27]     raise ExternalShutdownException()
+[dashboard_node-27] rclpy.executors.ExternalShutdownException
+[ERROR] [audio_warning_node-21]: process has died [pid 155135, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/audio_warning_node --ros-args -r __node:=audio_warning_node --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_ig2spe87 --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml'].
+[bt_navigator-35] [INFO] [1791202557.363190417] [bt_navigator]: Destroying
+[ERROR] [return_to_base_node-25]: process has died [pid 155143, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/return_to_base_node --ros-args --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_5xkbw6fm --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml'].
+[yolo_detector_node-15] Traceback (most recent call last):
+[yolo_detector_node-15]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/yolo_detector_node", line 33, in <module>
+[yolo_detector_node-15]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'yolo_detector_node')())
+[yolo_detector_node-15]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/yolo_detector_node.py", line 289, in main
+[yolo_detector_node-15]     rclpy.spin(node)
+[yolo_detector_node-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[yolo_detector_node-15]     executor.spin_once()
+[yolo_detector_node-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[yolo_detector_node-15]     self._spin_once_impl(timeout_sec)
+[yolo_detector_node-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 770, in _spin_once_impl
+[yolo_detector_node-15]     raise handler.exception()
+[yolo_detector_node-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 254, in __call__
+[yolo_detector_node-15]     self._handler.send(None)
+[yolo_detector_node-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 463, in handler
+[yolo_detector_node-15]     await call_coroutine(entity, arg)
+[yolo_detector_node-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 371, in _execute_timer
+[yolo_detector_node-15]     await await_or_execute(tmr.callback)
+[yolo_detector_node-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 107, in await_or_execute
+[yolo_detector_node-15]     return callback(*args)
+[yolo_detector_node-15]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/yolo_detector_node.py", line 239, in process_frame
+[yolo_detector_node-15]     self.det_pub.publish(array)
+[yolo_detector_node-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 70, in publish
+[yolo_detector_node-15]     self.__publisher.publish(msg)
+[yolo_detector_node-15] rclpy._rclpy_pybind11.RCLError: Failed to publish: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[ERROR] [incident_emailer_node-23]: process has died [pid 155139, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/incident_emailer_node --ros-args --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_b_fpfupt --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml'].
+[INFO] [planner_server-33]: process has finished cleanly [pid 155884]
+[ERROR] [compliance_fsm_node-20]: process has died [pid 155130, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/compliance_fsm_node --ros-args --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_p2jj4tt1 --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml --params-file /tmp/launch_params_xh2uyhx9'].
+[ERROR] [tracking_node-16]: process has died [pid 155087, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/tracking_node --ros-args -r __node:=tracking_cctv2 --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_v80ubgos --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml'].
+[ERROR] [event_confirmation_node-13]: process has died [pid 155081, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/event_confirmation_node --ros-args -r __node:=confirm_cctv1 --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_nskpoddn --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml'].
+[ERROR] [tracking_node-12]: process has died [pid 155079, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/tracking_node --ros-args -r __node:=tracking_cctv1 --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_d5obonro --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml'].
+[yolo_detector_node-10] Traceback (most recent call last):
+[yolo_detector_node-10]   File "/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/yolo_detector_node", line 33, in <module>
+[yolo_detector_node-10]     sys.exit(load_entry_point('yoru-core', 'console_scripts', 'yolo_detector_node')())
+[yolo_detector_node-10]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/yolo_detector_node.py", line 289, in main
+[yolo_detector_node-10]     rclpy.spin(node)
+[yolo_detector_node-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[ERROR] [event_confirmation_node-17]: process has died [pid 155104, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/event_confirmation_node --ros-args -r __node:=confirm_cctv2 --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_rhski6md --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml'].
+[yolo_detector_node-10]     executor.spin_once()
+[yolo_detector_node-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in spin_once
+[yolo_detector_node-10]     self._spin_once_impl(timeout_sec)
+[yolo_detector_node-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 770, in _spin_once_impl
+[yolo_detector_node-10]     raise handler.exception()
+[yolo_detector_node-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 254, in __call__
+[yolo_detector_node-10]     self._handler.send(None)
+[yolo_detector_node-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 463, in handler
+[yolo_detector_node-10]     await call_coroutine(entity, arg)
+[yolo_detector_node-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 371, in _execute_timer
+[yolo_detector_node-10]     await await_or_execute(tmr.callback)
+[yolo_detector_node-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 107, in await_or_execute
+[yolo_detector_node-10]     return callback(*args)
+[yolo_detector_node-10]   File "/home/desh/Yoru_bot_publication/build/yoru_core/yoru_core/yolo_detector_node.py", line 239, in process_frame
+[yolo_detector_node-10]     self.det_pub.publish(array)
+[yolo_detector_node-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 70, in publish
+[yolo_detector_node-10]     self.__publisher.publish(msg)
+[yolo_detector_node-10] rclpy._rclpy_pybind11.RCLError: Failed to publish: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[ERROR] [nav2_goal_sender_node-19]: process has died [pid 155126, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/nav2_goal_sender_node --ros-args --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_4b3g13l6 --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml --params-file /tmp/launch_params_6vv9d7c9'].
+[INFO] [bt_navigator-35]: process has finished cleanly [pid 155888]
+[ERROR] [patrol_node-24]: process has died [pid 155141, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/patrol_node --ros-args --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_lpn6yx_t --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml'].
+[ERROR] [camera_target_node-14]: process has died [pid 155083, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/camera_target_node --ros-args -r __node:=camera_target_cctv1 --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_k0x2mqzl --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml'].
+[ERROR] [dashboard_node-27]: process has died [pid 155147, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/dashboard_node --ros-args --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_jttw4ozu --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml'].
+[ERROR] [camera_target_node-18]: process has died [pid 155115, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/camera_target_node --ros-args -r __node:=camera_target_cctv2 --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_rask0f8z --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml'].
+[INFO] [gzserver-4]: process has finished cleanly [pid 155063]
+[ERROR] [yolo_detector_node-15]: process has died [pid 155085, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/yolo_detector_node --ros-args -r __node:=yolo_cctv2 --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_qs6_62cw --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml'].
+[ERROR] [yolo_detector_node-10]: process has died [pid 155075, exit code 1, cmd '/home/desh/Yoru_bot_publication/install/yoru_core/lib/yoru_core/yolo_detector_node --ros-args -r __node:=yolo_cctv1 --params-file /home/desh/Yoru_bot_publication/install/yoru_bringup/share/yoru_bringup/config/yoru_sim.yaml --params-file /tmp/launch_params_huwfixi1 --params-file /home/desh/Yoru_bot_publication/evidence/phase3/runs/legacy_regression/overlay.yaml'].

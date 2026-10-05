@@ -1,0 +1,24 @@
+incident records: 337 total, 228 simulation (rooms room_a, sim_room_1)
+minimum logged confidence (all records): 0.600
+records with confidence < 0.600: 0
+
+simulation records by (event_class, confidence, C5_support, fp_risk):
+   228  ('cigarette', 0.802, 0.5, 'low')
+
+simulation records by (stage_reached, outcome):
+   164  ('S1', 'complied')
+    28  ('S4', 'logged_no_compliance')
+    21  ('S3', 'complied')
+    12  ('S2', 'target_lost')
+     1  ('S1', 'admin_override')
+     1  ('S2', 'safety_stop')
+     1  ('S2', 'admin_override')
+
+all records by (stage_reached, outcome):
+   192  ('S1', 'complied')
+    49  ('S2', 'target_lost')
+    42  ('S4', 'logged_no_compliance')
+    30  ('S2', 'safety_stop')
+    22  ('S3', 'complied')
+     1  ('S1', 'admin_override')
+     1  ('S2', 'admin_override')

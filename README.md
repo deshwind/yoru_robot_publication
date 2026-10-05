@@ -1,3 +1,30 @@
+# Yoru Bot: simulation evaluation for publication
+
+This repository extends [Yoru_bot_V2](https://github.com/deshwind/Yoru_bot_V2) (its history is
+included, up to `a7a7715`) with a reproducible, instrumented simulation evaluation of the
+CCTV-triggered smoking/vaping compliance robot, prepared for the *International Journal of Social
+Robotics*.
+
+| Where | What |
+|---|---|
+| [`evidence/README.md`](evidence/README.md) | **all results and evidence**, phase by phase, each traced to the file and script that produced it |
+| [`docs/sim_audit.md`](docs/sim_audit.md) | audit of the system as implemented (exact C1–C7 rule, FSM behaviour, discrepancies with the dissertation) |
+| [`evaluation/README.md`](evaluation/README.md) | how to reproduce every run, metric and table |
+| `evaluation/scenarios/` | scenario definitions A–L (+ B-C7, F-pen, F-straw) |
+| `src/yoru_sim_plugins/` | Gazebo plugin: ROS-driven human actors visible to the lidar |
+
+Changes to the system under test are additive and default-off: with no new launch arguments,
+every node receives exactly the parameters it had in V2 (verified; see evidence E1.3/E2.3).
+
+**Not in this repository:** run recordings (rosbag2, several GB) and model weights
+(`yolov8n.pt` is downloaded by `ultralytics`). Some configuration files contain absolute paths
+under `/home/desh/Yoru_bot_publication/`; clone to that path or edit them
+(`src/yoru_bringup/config/yoru_sim.yaml`, `sim*.launch.py`) until they are made relative.
+
+The original V2 README follows.
+
+---
+
 # Yoru Bot V2 — CCTV-Triggered Smoking-Compliance Robot
 
 ROS 2 Humble. A laptop acts as the **CCTV cameras + server**: it watches for

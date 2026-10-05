@@ -1,0 +1,9 @@
+debug records replayed: 4238
+exact matches (C bit-identical and same decision): 4238
+mismatches: 0
+     258  confirm_cctv1  confirmed
+    2379  confirm_cctv1  rejected
+       6  confirm_cctv1  uncertain
+    1595  confirm_cctv2  rejected
+
+header stamp -> node receive lag (s): median 0.198, min 0.000, max 3.200

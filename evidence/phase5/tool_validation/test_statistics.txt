@@ -1,0 +1,16 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-6.2.5, py-1.10.0, pluggy-0.13.0 -- /usr/bin/python3
+rootdir: /home/desh/Yoru_bot_publication
+plugins: ament-lint-0.12.14, ament-flake8-0.12.14, ament-pep257-0.12.14, launch-testing-1.0.13, ament-copyright-0.12.14, ament-xmllint-0.12.14, launch-testing-ros-0.19.13, colcon-core-0.20.1, cov-3.0.0
+collecting ... collected 8 items
+
+evaluation/tests/test_statistics.py::test_wilson_reference_values[81-263-0.2553-0.3662] PASSED [ 12%]
+evaluation/tests/test_statistics.py::test_wilson_reference_values[15-148-0.0624-0.1605] PASSED [ 25%]
+evaluation/tests/test_statistics.py::test_wilson_reference_values[0-20-0.0-0.1611] PASSED [ 37%]
+evaluation/tests/test_statistics.py::test_wilson_reference_values[20-20-0.8389-1.0] PASSED [ 50%]
+evaluation/tests/test_statistics.py::test_wilson_reference_values[10-20-0.2993-0.7007] PASSED [ 62%]
+evaluation/tests/test_statistics.py::test_wilson_empty PASSED            [ 75%]
+evaluation/tests/test_statistics.py::test_bootstrap_ci_is_reproducible_and_covers_the_mean PASSED [ 87%]
+evaluation/tests/test_statistics.py::test_describe_ignores_nan_and_matches_numpy PASSED [100%]
+
+============================== 8 passed in 0.33s ===============================

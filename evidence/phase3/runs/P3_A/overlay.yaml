@@ -1,0 +1,29 @@
+# P3-A: smoking, complies 3 s after the FIRST direct warning, steps back 1 m;
+# detection noise on (sigma 0.05, dropout 10 %, bbox 3 px). yoru_sim.yaml timings.
+scenario_publisher_node:
+  ros__parameters:
+    mode: world
+    scenario_type: smoking
+    scenario_id: P3_A
+    seed: 1
+    comply_stage: S3_first
+    comply_delay_s: 3.0
+    conf_jitter_sigma: 0.05
+    dropout_prob: 0.1
+    bbox_jitter_px: 3.0
+human_actor_node:
+  ros__parameters:
+    seed: 1
+    scenario_type: smoking
+    n_persons: 1
+    step_back_m: 1.0
+incident_emailer_node:
+  ros__parameters:
+    enabled: false
+audio_warning_node:
+  ros__parameters:
+    use_audio: false
+
+incident_logger_node:
+  ros__parameters:
+    log_dir: /home/desh/Yoru_bot_publication/evidence/phase3/runs/P3_A/incident_logs

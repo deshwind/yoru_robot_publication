@@ -1,0 +1,10 @@
+Projection check (Phase 3): CameraModel vs YOLOv8n on rendered cctv1 frames
+of the plugin-driven actor (actor_render_1_standing.png, actor_render_3_arrived.png).
+Boxes are (cx, cy, w, h) in pixels.
+
+actor at (3.00,  0.30): YOLO person conf 0.90 box [358, 243, 78, 225]   projected [360, 216, 65, 201]
+actor at (2.21, -1.18): YOLO person conf 0.89 box [191, 187, 67, 171]   projected [191, 177, 54, 175]
+
+Horizontal centres agree within 2 px; vertical offset 10-27 px. Used to
+identify which YOLO person is the violator (IoU match, threshold 0.3), and
+encoded as the regression test test_projection_matches_rendered_yolo_boxes.

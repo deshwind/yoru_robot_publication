@@ -1,0 +1,38 @@
+--- no arguments
+  yolo_cctv1                 parameter entries=2  extra={}
+  scenario_publisher_node    parameter entries=2  extra={}
+  tracking_cctv1             parameter entries=2  extra={}
+  confirm_cctv1              parameter entries=2  extra={}
+  camera_target_cctv1        parameter entries=2  extra={}
+  yolo_cctv2                 parameter entries=2  extra={}
+  tracking_cctv2             parameter entries=2  extra={}
+  confirm_cctv2              parameter entries=2  extra={}
+  camera_target_cctv2        parameter entries=2  extra={}
+  nav2_goal_sender_node      parameter entries=2  extra={}
+  compliance_fsm_node        parameter entries=2  extra={}
+  audio_warning_node         parameter entries=2  extra={}
+  incident_logger_node       parameter entries=2  extra={}
+  incident_emailer_node      parameter entries=2  extra={}
+  patrol_node                parameter entries=2  extra={}
+  return_to_base_node        parameter entries=2  extra={}
+  admin_joy_node             parameter entries=2  extra={}
+  dashboard_node             parameter entries=2  extra={}
+--- w_D=0.5 w_S=0.1 confirm_confidence=0.7 use_ros_clock=true
+  yolo_cctv1                 parameter entries=2  extra={}
+  scenario_publisher_node    parameter entries=3  extra={'use_ros_clock': True}
+  tracking_cctv1             parameter entries=2  extra={}
+  confirm_cctv1              parameter entries=3  extra={'w_D': 0.5, 'w_S': 0.1, 'confirm_confidence': 0.7}
+  camera_target_cctv1        parameter entries=2  extra={}
+  yolo_cctv2                 parameter entries=2  extra={}
+  tracking_cctv2             parameter entries=2  extra={}
+  confirm_cctv2              parameter entries=3  extra={'w_D': 0.5, 'w_S': 0.1, 'confirm_confidence': 0.7}
+  camera_target_cctv2        parameter entries=2  extra={}
+  nav2_goal_sender_node      parameter entries=3  extra={'use_ros_clock': True}
+  compliance_fsm_node        parameter entries=3  extra={'use_ros_clock': True}
+  audio_warning_node         parameter entries=2  extra={}
+  incident_logger_node       parameter entries=2  extra={}
+  incident_emailer_node      parameter entries=2  extra={}
+  patrol_node                parameter entries=2  extra={}
+  return_to_base_node        parameter entries=2  extra={}
+  admin_joy_node             parameter entries=2  extra={}
+  dashboard_node             parameter entries=2  extra={}

@@ -1,0 +1,20 @@
+# P3-C7: real cigarette at D=0.70 (below the 0.75 C7 override) with a phone
+# also at the mouth: C7 (fp_risk high) should block confirmation.
+scenario_publisher_node:
+  ros__parameters:
+    mode: world
+    scenario_type: c7_conflict
+    scenario_id: P3_C7
+    seed: 5
+    comply_stage: none
+human_actor_node:
+  ros__parameters:
+    seed: 5
+    scenario_type: c7_conflict
+    n_persons: 1
+incident_emailer_node:
+  ros__parameters:
+    enabled: false
+audio_warning_node:
+  ros__parameters:
+    use_audio: false

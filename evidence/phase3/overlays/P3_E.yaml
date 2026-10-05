@@ -1,0 +1,21 @@
+# P3-E: brief device-to-mouth (0.3 s every 6 s, shorter than the 5-frame
+# persistence window) + one wandering bystander. Must never escalate.
+scenario_publisher_node:
+  ros__parameters:
+    mode: world
+    scenario_type: brief_device
+    scenario_id: P3_E
+    seed: 4
+    comply_stage: none
+human_actor_node:
+  ros__parameters:
+    seed: 4
+    scenario_type: brief_device
+    n_persons: 2
+    bystander_motion: wander
+incident_emailer_node:
+  ros__parameters:
+    enabled: false
+audio_warning_node:
+  ros__parameters:
+    use_audio: false

@@ -1,0 +1,84 @@
+bag: /home/desh/Yoru_bot_publication/evidence/phase3/runs/P3_JK/bag
+
+== topics (messages, type)
+        4  /amcl_pose  [geometry_msgs/msg/PoseWithCovarianceStamped]
+     1074  /clock  [rosgraph_msgs/msg/Clock]
+       31  /cmd_vel_tracker  [geometry_msgs/msg/Twist]
+        4  /compliance/actor_events  [std_msgs/msg/String]
+        1  /compliance/audio_event  [std_msgs/msg/String]
+      107  /compliance/autonomy_paused  [std_msgs/msg/Bool]
+      382  /compliance/cctv1/confirmed  [vision_msgs/msg/Detection2DArray]
+     3594  /compliance/confirmation_debug  [std_msgs/msg/String]
+      386  /compliance/event_metadata  [std_msgs/msg/String]
+        4  /compliance/fsm_state  [std_msgs/msg/String]
+      161  /compliance/fsm_status  [std_msgs/msg/String]
+        1  /compliance/incident_log  [std_msgs/msg/String]
+        1  /compliance/incident_log_path  [std_msgs/msg/String]
+        2  /compliance/nav_status  [std_msgs/msg/String]
+      382  /compliance/navigation_targets  [geometry_msgs/msg/PoseStamped]
+        1  /compliance/pa_warning  [std_msgs/msg/String]
+      109  /compliance/scenario_ground_truth  [std_msgs/msg/String]
+     1057  /compliance/tracking_info  [std_msgs/msg/String]
+      129  /diff_cont/cmd_vel_unstamped  [geometry_msgs/msg/Twist]
+     3133  /diff_cont/odom  [nav_msgs/msg/Odometry]
+     2147  /gazebo/model_states  [gazebo_msgs/msg/ModelStates]
+        1  /intruder_1/cmd_pose  [geometry_msgs/msg/PoseStamped]
+      501  /navigate_to_pose/_action/feedback  [nav2_msgs/action/NavigateToPose_FeedbackMessage]
+        3  /navigate_to_pose/_action/status  [action_msgs/msg/GoalStatusArray]
+        5  /plan  [nav_msgs/msg/Path]
+     1072  /scan  [sensor_msgs/msg/LaserScan]
+     6246  /tf  [tf2_msgs/msg/TFMessage]
+        3  /tf_static  [tf2_msgs/msg/TFMessage]
+
+== real-time factor: 105.0 s sim / 114.0 s wall = 0.921
+
+== gazebo models: ['cctv_camera_1', 'cctv_camera_2', 'ground_plane', 'internal_wall', 'intruder_1', 'intruder_1_body', 'obstacle_room_a', 'obstacle_room_b', 'outer_walls', 'person_1', 'person_1_body', 'person_2', 'person_2_body', 'person_3', 'person_3_body', 'person_walking', 'yoru_robot']
+
+== actor events (/compliance/actor_events)
+  t=    0.10  layout             {"persons": [{"actor": "person_1", "x": 3.0, "y": 0.3, "yaw": -0.107, "role": "bystander"}, {"actor": "person_2", "x": 3.9, "y": -0.4, "yaw": 0.207, "role": "violator"}, {"actor": "person_3", "x": 2.3, "y": -1.5, "yaw": 0.405, "role": "bystander"}]}
+  t=   46.10  intruder_start     {"actor": "intruder_1", "start": {"x": 1.3420818255070384, "y": -1.9998142461661041}, "target": {"x": 1.342893842464798, "y": 0.00018558899100401104}, "robot": {"x": 0.34289392488624404, "y": 0.0005915974698838997, "yaw": 0.001537851898528132}, "goal": {"x": 1.8, "y": 0.0}}
+  t=   48.40  intruder_in_path   {"actor": "intruder_1", "position": {"x": 1.3428613617864806, "y": -0.07981440441521576}}
+  t=   52.40  intruder_leave     {"actor": "intruder_1"}
+
+== positions in the building (every ~10 s sim)
+  intruder_1  0s(11.00,6.00) 10s(11.00,6.00) 20s(11.00,6.00) 30s(11.00,6.00) 40s(11.00,6.00) 50s(1.34,-0.02) 60s(1.34,-1.98) 70s(1.34,-1.98) 80s(1.34,-1.98) 90s(1.34,-1.98) 100s(1.34,-1.98)
+  person_1    0s(8.00,6.00) 10s(3.00,0.30) 20s(3.00,0.30) 30s(3.00,0.30) 40s(3.00,0.30) 50s(3.00,0.30) 60s(3.00,0.30) 70s(3.00,0.30) 80s(3.00,0.30) 90s(3.00,0.30) 100s(3.00,0.30)
+  person_2    0s(9.00,6.00) 10s(3.90,-0.40) 20s(3.90,-0.40) 30s(3.90,-0.40) 40s(3.90,-0.40) 50s(3.90,-0.40) 60s(3.90,-0.40) 70s(3.90,-0.40) 80s(3.90,-0.40) 90s(3.90,-0.40) 100s(3.90,-0.40)
+  person_3    0s(10.00,6.00) 10s(2.30,-1.50) 20s(2.30,-1.50) 30s(2.30,-1.50) 40s(2.30,-1.50) 50s(2.30,-1.50) 60s(2.30,-1.50) 70s(2.30,-1.50) 80s(2.30,-1.50) 90s(2.30,-1.50) 100s(2.30,-1.50)
+  yoru_robot  0s(-0.00,0.00) 10s(-0.01,0.00) 20s(-0.01,0.00) 30s(-0.02,0.00) 40s(-0.02,0.00) 50s(0.94,0.00) 60s(0.94,0.00) 70s(0.93,0.00) 80s(0.93,0.00) 90s(0.92,0.00) 100s(0.91,0.00)
+  min robot-intruder_1 centre distance: 0.40 m at t=48.6
+  min robot-person_1 centre distance: 2.08 m at t=48.6
+  min robot-person_2 centre distance: 2.98 m at t=48.6
+  min robot-person_3 centre distance: 2.02 m at t=48.6
+  min lidar range: 0.303 m at t=48.7
+
+== FSM transitions (/compliance/fsm_state)
+  t=   34.10      MONITORING -> PA_WARNING     reason=confirmed            track=c1_1000 room=room_a stage=S1 in_state=34.1
+  t=   44.10      PA_WARNING -> APPROACH       reason=pa_expired           track=c1_1000 room=room_a stage=S2 in_state=10.0
+  t=   48.90        APPROACH -> SAFE_STOP      reason=safe_stop            track=c1_1000 room=room_a stage=S2 in_state=4.8
+  t=   51.90       SAFE_STOP -> MONITORING     reason=safety_stop          track=c1_1000 room=room_a stage=S0 in_state=3.0
+
+== audio events (/compliance/audio_event)
+  t=   34.10  pa_warning      backend=log_only track=c1_1000 room=room_a
+
+== ground truth (/compliance/scenario_ground_truth, non-heartbeat)
+  t=    0.20  scenario_start       scenario=smoking seed=2 violator=person_2 actors=[{'id': 'person_1', 'role': 'bystander', 'x': 3.0, 'y': 0.3}, {'id': 'person_2', 'role': 'violator', 'x': 3.9, 'y': -0.4}, {'id': 'person_3', 'role': 'bystander', 'x': 2.3, 'y': -1.5}]
+  t=   30.20  violation_onset      scenario=smoking seed=2 violator=person_2 actors=[{'id': 'person_1', 'role': 'bystander', 'x': 3.0, 'y': 0.3}, {'id': 'person_2', 'role': 'violator', 'x': 3.9, 'y': -0.4}, {'id': 'person_3', 'role': 'bystander', 'x': 2.3, 'y': -1.5}]
+  last frame_stats: {'frames': 526, 'violator_matched': 384, 'injected': 384, 'dropped': 0}
+  (107 heartbeat messages)
+
+== confirmation debug records: 3594
+     382  ('confirm_cctv1', 'confirmed')
+    1604  ('confirm_cctv1', 'rejected')
+       4  ('confirm_cctv1', 'uncertain')
+    1604  ('confirm_cctv2', 'rejected')
+  first confirmed record: {"stamp": 30.9, "node": "confirm_cctv1", "track_id": "c1_1000", "D": 0.78, "P": 0.8, "T": 1.0, "S": 0.5, "C": 0.802, "persistence_count": 5, "C1": true, "C2": true, "C4": true, "C7_fp_risk": "low"}
+
+== nav status
+  {'state': 'navigating', 'goal': {'x': 1.8, 'y': 0.0}}
+  {'state': 'cancelled'}
+
+== incident log
+  {'track_id': 'c1_1000', 'room': 'room_a', 'event_class': 'cigarette', 'stage_reached': 'S2', 'outcome': 'safety_stop', 'confidence': 0.802, 'criteria': {'C1_person': True, 'C2_device': True, 'C3_proximity': True, 'C4_persistence': True, 'C5_support': 0.5, 'C6_track': True, 'C7_fp_risk': 'low'}}
+
+== incident log path: [{'raw': '/home/desh/Yoru_bot_publication/evidence/phase3/runs/P3_JK/incident_logs/incidents.jsonl'}]

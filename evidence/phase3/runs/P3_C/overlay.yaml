@@ -1,0 +1,26 @@
+# P3-C: cigarette; 2 s into APPROACH the violator walks out of the CCTV view
+# (exit corner 5.5, -3.6) - realistic target loss during S2.
+scenario_publisher_node:
+  ros__parameters:
+    mode: world
+    scenario_type: target_loss
+    scenario_id: P3_C
+    seed: 3
+    comply_stage: none
+    target_loss_stage: APPROACH
+    target_loss_delay: 2.0
+human_actor_node:
+  ros__parameters:
+    seed: 3
+    scenario_type: target_loss
+    n_persons: 1
+incident_emailer_node:
+  ros__parameters:
+    enabled: false
+audio_warning_node:
+  ros__parameters:
+    use_audio: false
+
+incident_logger_node:
+  ros__parameters:
+    log_dir: /home/desh/Yoru_bot_publication/evidence/phase3/runs/P3_C/incident_logs

@@ -1,0 +1,26 @@
+# P3-JK: three people (one violator, seeded), never complies; an intruder
+# crosses 1 m ahead of the robot 2 s into APPROACH (Scenario K mechanism).
+scenario_publisher_node:
+  ros__parameters:
+    mode: world
+    scenario_type: smoking
+    scenario_id: P3_JK
+    seed: 2
+    comply_stage: none
+human_actor_node:
+  ros__parameters:
+    seed: 2
+    scenario_type: smoking
+    n_persons: 3
+    intruder_enabled: true
+    intruder_trigger_delay: 2.0
+incident_emailer_node:
+  ros__parameters:
+    enabled: false
+audio_warning_node:
+  ros__parameters:
+    use_audio: false
+
+incident_logger_node:
+  ros__parameters:
+    log_dir: /home/desh/Yoru_bot_publication/evidence/phase3/runs/P3_JK/incident_logs

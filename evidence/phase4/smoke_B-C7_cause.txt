@@ -1,0 +1,16 @@
+B-C7 smoke (seed 100), cctv1 frames by (decision, fp_risk before override, fp_risk after override):
+    498  ('rejected', 'low', 'low')
+    266  ('uncertain', 'high', 'high')
+     55  ('confirmed', 'high', 'overridden')
+     10  ('rejected', 'high', 'high')
+      1  ('uncertain', 'high', 'overridden')
+confirmed frames: 55
+  t=33.90 D=0.754 confounder=mobile_phone fp_raw=high fp=overridden C=0.742
+  t=35.40 D=0.782 confounder=mobile_phone fp_raw=high fp=overridden C=0.753
+  t=40.30 D=0.775 confounder=mobile_phone fp_raw=high fp=overridden C=0.750
+  t=41.00 D=0.795 confounder=mobile_phone fp_raw=high fp=overridden C=0.758
+  t=43.20 D=0.793 confounder=mobile_phone fp_raw=high fp=overridden C=0.757
+  t=43.40 D=0.799 confounder=mobile_phone fp_raw=high fp=overridden C=0.759
+  t=44.60 D=0.757 confounder=mobile_phone fp_raw=high fp=overridden C=0.743
+  t=45.70 D=0.795 confounder=mobile_phone fp_raw=high fp=overridden C=0.758
+  D range of confirmed frames: 0.750-0.836; span 33.9-100.8 s

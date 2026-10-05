@@ -1,0 +1,71 @@
+[INFO] [1791199917.884901367] [rosbag2_storage]: Opened database '/home/desh/Yoru_bot_publication/evidence/phase2/check_run/bag/bag_0.db3' for READ_ONLY.
+bag: /home/desh/Yoru_bot_publication/evidence/phase2/check_run/bag
+
+== topics (messages, type)
+        7  /amcl_pose  [geometry_msgs/msg/PoseWithCovarianceStamped]
+     1630  /clock  [rosgraph_msgs/msg/Clock]
+        4  /compliance/audio_event  [std_msgs/msg/String]
+      163  /compliance/autonomy_paused  [std_msgs/msg/Bool]
+      258  /compliance/cctv1/confirmed  [vision_msgs/msg/Detection2DArray]
+     4238  /compliance/confirmation_debug  [std_msgs/msg/String]
+        3  /compliance/direct_warning  [std_msgs/msg/String]
+      264  /compliance/event_metadata  [std_msgs/msg/String]
+        6  /compliance/fsm_state  [std_msgs/msg/String]
+      213  /compliance/fsm_status  [std_msgs/msg/String]
+        1  /compliance/incident_log  [std_msgs/msg/String]
+        1  /compliance/incident_log_path  [std_msgs/msg/String]
+        2  /compliance/nav_status  [std_msgs/msg/String]
+      258  /compliance/navigation_targets  [geometry_msgs/msg/PoseStamped]
+        1  /compliance/pa_warning  [std_msgs/msg/String]
+      166  /compliance/scenario_ground_truth  [std_msgs/msg/String]
+     2421  /compliance/tracking_info  [std_msgs/msg/String]
+      151  /diff_cont/cmd_vel_unstamped  [geometry_msgs/msg/Twist]
+     4778  /diff_cont/odom  [nav_msgs/msg/Odometry]
+     3260  /gazebo/model_states  [gazebo_msgs/msg/ModelStates]
+      651  /navigate_to_pose/_action/feedback  [nav2_msgs/action/NavigateToPose_FeedbackMessage]
+        2  /navigate_to_pose/_action/status  [action_msgs/msg/GoalStatusArray]
+        7  /plan  [nav_msgs/msg/Path]
+     1630  /scan  [sensor_msgs/msg/LaserScan]
+     9555  /tf  [tf2_msgs/msg/TFMessage]
+        3  /tf_static  [tf2_msgs/msg/TFMessage]
+
+== real-time factor: 160.0 s sim / 161.1 s wall = 0.993
+
+== gazebo models: ['cctv_camera_1', 'cctv_camera_2', 'ground_plane', 'internal_wall', 'obstacle_room_a', 'obstacle_room_b', 'outer_walls', 'person_smoking', 'person_walking', 'yoru_robot']
+
+== FSM transitions (/compliance/fsm_state)
+  t=   33.60      MONITORING -> PA_WARNING     reason=confirmed            track=c1_1001 room=room_a stage=S1 in_state=33.6
+  t=   43.60      PA_WARNING -> APPROACH       reason=pa_expired           track=c1_1001 room=room_a stage=S2 in_state=10.0
+  t=   50.50        APPROACH -> DIRECT_WARNING reason=goal_reached         track=c1_1001 room=room_a stage=S3 in_state=6.9
+  t=   62.50  DIRECT_WARNING -> LOGGING        reason=warnings_complete    track=c1_1001 room=room_a stage=S4 in_state=12.0
+  t=   64.60         LOGGING -> MONITORING     reason=logged_no_compliance track=c1_1001 room=room_a stage=S0 in_state=2.1
+  t=  124.60      MONITORING -> MONITORING     reason=cooldown_end         track=c1_1001 room= stage=S0 in_state=None
+
+== audio events (/compliance/audio_event)
+  t=   33.60  pa_warning      backend=log_only track=c1_1001 room=room_a
+  t=   50.50  direct_warning  backend=log_only track=c1_1001 room=room_a
+  t=   54.50  direct_warning  backend=log_only track=c1_1001 room=room_a
+  t=   58.50  direct_warning  backend=log_only track=c1_1001 room=room_a
+
+== ground truth (/compliance/scenario_ground_truth, non-heartbeat)
+  t=    0.10  scenario_start       scenario=smoking seed=0 actors=[{'id': 'person_smoking', 'x': 3.0, 'y': 0.3}]
+  t=   30.10  violation_onset      scenario=smoking seed=0 actors=[{'id': 'person_smoking', 'x': 3.0, 'y': 0.3}]
+  t=   50.50  comply_trigger       scenario=smoking seed=0 actors=[{'id': 'person_smoking', 'x': 3.0, 'y': 0.3}]
+  t=   56.50  violation_cessation  scenario=smoking seed=0 actors=[{'id': 'person_smoking', 'x': 3.0, 'y': 0.3}]
+  (162 heartbeat messages)
+
+== confirmation debug records: 4238
+     258  ('confirm_cctv1', 'confirmed')
+    2379  ('confirm_cctv1', 'rejected')
+       6  ('confirm_cctv1', 'uncertain')
+    1595  ('confirm_cctv2', 'rejected')
+  first confirmed record: {"stamp": 30.301, "node": "confirm_cctv1", "track_id": "c1_1001", "D": 0.78, "P": 0.8, "T": 1.0, "S": 0.5, "C": 0.802, "persistence_count": 5, "C1": true, "C2": true, "C4": true, "C7_fp_risk": "low"}
+
+== nav status
+  {'state': 'navigating', 'goal': {'x': 1.8, 'y': 0.0}}
+  {'state': 'succeeded'}
+
+== incident log
+  {'track_id': 'c1_1001', 'room': 'room_a', 'event_class': 'cigarette', 'stage_reached': 'S4', 'outcome': 'logged_no_compliance', 'confidence': 0.802, 'criteria': {'C1_person': True, 'C2_device': True, 'C3_proximity': True, 'C4_persistence': True, 'C5_support': 0.5, 'C6_track': True, 'C7_fp_risk': 'low'}}
+
+== incident log path: [{'raw': '/home/desh/Yoru_bot_publication/evidence/phase2/check_run/incident_logs/incidents.jsonl'}]

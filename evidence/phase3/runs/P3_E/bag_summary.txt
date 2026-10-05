@@ -1,0 +1,67 @@
+bag: /home/desh/Yoru_bot_publication/evidence/phase3/runs/P3_E/bag
+
+== topics (messages, type)
+        1  /amcl_pose  [geometry_msgs/msg/PoseWithCovarianceStamped]
+      986  /clock  [rosgraph_msgs/msg/Clock]
+       13  /compliance/actor_events  [std_msgs/msg/String]
+       98  /compliance/autonomy_paused  [std_msgs/msg/Bool]
+     2392  /compliance/confirmation_debug  [std_msgs/msg/String]
+       27  /compliance/event_metadata  [std_msgs/msg/String]
+       98  /compliance/fsm_status  [std_msgs/msg/String]
+        1  /compliance/incident_log_path  [std_msgs/msg/String]
+      100  /compliance/scenario_ground_truth  [std_msgs/msg/String]
+      967  /compliance/tracking_info  [std_msgs/msg/String]
+     2887  /diff_cont/odom  [nav_msgs/msg/Odometry]
+     1973  /gazebo/model_states  [gazebo_msgs/msg/ModelStates]
+       12  /person_2/cmd_pose  [geometry_msgs/msg/PoseStamped]
+      985  /scan  [sensor_msgs/msg/LaserScan]
+     5752  /tf  [tf2_msgs/msg/TFMessage]
+        3  /tf_static  [tf2_msgs/msg/TFMessage]
+
+== real-time factor: 95.0 s sim / 102.3 s wall = 0.928
+
+== gazebo models: ['cctv_camera_1', 'cctv_camera_2', 'ground_plane', 'internal_wall', 'intruder_1', 'intruder_1_body', 'obstacle_room_a', 'obstacle_room_b', 'outer_walls', 'person_1', 'person_1_body', 'person_2', 'person_2_body', 'person_3', 'person_3_body', 'person_walking', 'yoru_robot']
+
+== actor events (/compliance/actor_events)
+  t=    0.10  layout             {"persons": [{"actor": "person_1", "x": 3.4, "y": -1.2, "yaw": 0.464, "role": "violator"}, {"actor": "person_2", "x": 2.6, "y": 1.4, "yaw": -0.412, "role": "bystander"}]}
+  t=    4.10  wander             {"actor": "person_2", "target": {"x": 1.9786724804756362, "y": 0.8128388909068986}}
+  t=   12.20  wander             {"actor": "person_2", "target": {"x": 1.8180813415701393, "y": -0.8954194536355988}}
+  t=   21.10  wander             {"actor": "person_2", "target": {"x": 3.070665771995807, "y": 1.0106652561033633}}
+  t=   27.40  wander             {"actor": "person_2", "target": {"x": 1.9468667174000416, "y": 0.6150893746004664}}
+  t=   34.40  wander             {"actor": "person_2", "target": {"x": 2.242462397549769, "y": -0.4197063889430632}}
+  t=   41.50  wander             {"actor": "person_2", "target": {"x": 1.8181259425254503, "y": -1.4156025576906819}}
+  t=   49.90  wander             {"actor": "person_2", "target": {"x": 3.9899489640337613, "y": 0.508525985112104}}
+  t=   57.40  wander             {"actor": "person_2", "target": {"x": 2.5625419669903007, "y": -1.361336873965464}}
+  t=   66.90  wander             {"actor": "person_2", "target": {"x": 4.086892924076305, "y": -1.640895178757103}}
+  t=   76.80  wander             {"actor": "person_2", "target": {"x": 3.7377070177171667, "y": -1.4473209189425056}}
+  t=   86.10  wander             {"actor": "person_2", "target": {"x": 2.6280090324828884, "y": -1.3160672597563545}}
+  t=   94.50  wander             {"actor": "person_2", "target": {"x": 1.9618306487002215, "y": 0.5339257215162032}}
+
+== positions in the building (every ~10 s sim)
+  person_1    0s(8.00,6.00) 10s(3.40,-1.20) 20s(3.40,-1.20) 30s(3.40,-1.20) 40s(3.40,-1.20) 50s(3.40,-1.20) 60s(3.40,-1.20) 70s(3.40,-1.20) 80s(3.40,-1.20) 90s(3.40,-1.20)
+  person_2    0s(9.00,6.00) 10s(1.99,0.83) 20s(1.82,-0.88) 30s(2.09,0.66) 40s(2.24,-0.40) 50s(1.83,-1.40) 60s(3.28,-0.41) 70s(3.87,-1.60) 80s(3.75,-1.46) 90s(2.65,-1.32)
+  yoru_robot  0s(-0.00,0.00) 10s(-0.01,0.00) 20s(-0.01,0.00) 30s(-0.02,0.00) 40s(-0.02,0.00) 50s(-0.03,0.00) 60s(-0.04,0.00) 70s(-0.04,0.00) 80s(-0.05,0.00) 90s(-0.05,0.00)
+  min robot-person_1 centre distance: 3.61 m at t=0.1
+  min robot-person_2 centre distance: 1.91 m at t=14.9
+  min lidar range: 0.801 m at t=5.3
+
+== FSM transitions (/compliance/fsm_state)
+
+== audio events (/compliance/audio_event)
+
+== ground truth (/compliance/scenario_ground_truth, non-heartbeat)
+  t=    0.20  scenario_start       scenario=brief_device seed=4 violator=person_1 actors=[{'id': 'person_1', 'role': 'violator', 'x': 3.4, 'y': -1.2}, {'id': 'person_2', 'role': 'bystander', 'x': 2.6, 'y': 1.4}]
+  t=   30.20  confounder_onset     scenario=brief_device seed=4 violator=person_1 actors=[{'id': 'person_1', 'role': 'violator', 'x': 3.4, 'y': -1.2}, {'id': 'person_2', 'role': 'bystander', 'x': 2.0040445548250125, 'y': 0.6345723414969276}]
+  last frame_stats: {'frames': 481, 'violator_matched': 24, 'injected': 24, 'dropped': 0}
+  (98 heartbeat messages)
+
+== confirmation debug records: 2392
+    1185  ('confirm_cctv1', 'rejected')
+      27  ('confirm_cctv1', 'uncertain')
+    1180  ('confirm_cctv2', 'rejected')
+
+== nav status
+
+== incident log
+
+== incident log path: [{'raw': '/home/desh/Yoru_bot_publication/evidence/phase3/runs/P3_E/incident_logs/incidents.jsonl'}]
