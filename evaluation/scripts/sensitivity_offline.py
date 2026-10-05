@@ -297,8 +297,10 @@ def main():
     configs = configurations()
     rows, per_event = [], {}
     base_correct = np.where(base_ev['positive'], base_ev['any_conf'], ~base_ev['any_conf'])
+    base_frame = np.where(conf, 2, np.where(unc, 1, 0))   # frame-level 3-way decision
     for cfg in configs:
         _, c_cfg, u_cfg = decide(frames, cfg['weights'], cfg['tau'], ablate=cfg.get('ablate'))
+        frame_dec = np.where(c_cfg, 2, np.where(u_cfg, 1, 0))
         ev = event_table(frames, runs, c_cfg, u_cfg)
         ev = ev.set_index(['run_id', 'node']).reindex(
             base_ev.set_index(['run_id', 'node']).index).reset_index()
@@ -323,7 +325,10 @@ def main():
             'mcnemar_b': b, 'mcnemar_c': c, 'p_exact': mcnemar_exact(b, c),
             'median_latency_s': float(np.nanmedian(ev['latency'])) if ev['latency'].notna().any()
             else math.nan,
-            'frames_confirmed': int(c_cfg.sum())})
+            'frames_confirmed': int(c_cfg.sum()),
+            # frame level: how many individual person-frame decisions differ
+            'frames_changed': int((frame_dec != base_frame).sum()),
+            'frame_stability': float((frame_dec == base_frame).mean())})
     res = pd.DataFrame(rows)
     nonbase = res['config'] != 'baseline@0.60'
     res.loc[nonbase, 'p_holm'] = holm(res.loc[nonbase, 'p_exact'].to_numpy())
@@ -353,10 +358,12 @@ def main():
                   f'negative cctv1, {int((base_ev.node == "confirm_cctv2").sum())} negative cctv2 '
                   '(room B, never a device).\n')
     report.append('## Configurations\n')
+    report.append('Event-level columns, then frame level (every logged person-frame).\n')
     report.append('| Configuration | w_D | w_P | w_T | w_S | τ | confirmed | uncertain | rejected | '
                   'false conf. | misses | precision | recall | F1 | changed vs baseline | '
-                  'stability | McNemar b/c | p (exact) | p (Holm) | median latency (s) |')
-    report.append('|' + '---|' * 20)
+                  'stability | McNemar b/c | p (exact) | p (Holm) | median latency (s) | '
+                  'confirmed frames | frames changed | frame stability |')
+    report.append('|' + '---|' * 23)
     for r in res.itertuples():
         report.append(
             f'| {r.config} | {r.w_D:.3f} | {r.w_P:.3f} | {r.w_T:.3f} | {r.w_S:.3f} | {r.tau:.2f} | '
@@ -364,7 +371,8 @@ def main():
             f'{r.precision:.3f} | {r.recall:.3f} | {r.f1:.3f} | {r.decisions_changed} | '
             f'{r.stability_binary:.3f} | {r.mcnemar_b}/{r.mcnemar_c} | {r.p_exact:.3g} | '
             + ('–' if pd.isna(r.p_holm) else f'{r.p_holm:.3g}')
-            + f' | {r.median_latency_s:.2f} |')
+            + f' | {r.median_latency_s:.2f} | {r.frames_confirmed} | {r.frames_changed} | '
+            f'{r.frame_stability:.4f} |')
     report.append('\n## Precision / recall / F1 versus threshold (event level)\n')
     report.append('Full sweep τ = 0.40 … 0.90 (step 0.01) in `threshold_sweep.csv`.\n')
     report.append('| Weight set | τ range with precision = recall = 1 | F1 @ 0.50 | F1 @ 0.60 | '

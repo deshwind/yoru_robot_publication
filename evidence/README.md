@@ -566,6 +566,25 @@ therefore only cause misses, never false alarms. This is a limit of the scenario
 Regenerate: `python3 evaluation/scripts/sensitivity_offline.py` (full baseline, once the batch has
 finished) → `evaluation/results/sensitivity/`.
 
+### E6.2 Preview on the first 39 real baseline runs (A × 20, A-V × 19), 2026-10-05 16:30
+
+Real noisy data, but only two scenarios, both violations: **a preview, not the result.**
+Validation: 0 / 54,271 mismatches; 39 / 39 runs agree with the FSM. Findings:
+
+- **No event decision changes** under any of the 31 settings. A sustained violation produces about
+  160 confirmed frames and one is enough to escalate, so a setting must reject every frame to change
+  the outcome.
+- **Margins:** recall stays 1.0 up to τ = 0.81 (baseline), 0.80 (device), 0.83 (persistence),
+  0.71 (balanced).
+- **Frame level** (new columns `frames_changed`, `frame_stability`): persistence@0.50 changes 4,275
+  frame decisions (7.9 %, all between uncertain and rejected, because the uncertain band moves with τ);
+  balanced@0.70 moves 2,037 frames from confirmed to uncertain (confirmation 0.1 s later); C4 removed
+  changes 158 frames (the first 4 of each violation confirm, latency 0.8 → 0.0 s); 24 settings change
+  0–1 frames.
+- **Structural point for the paper:** violation-free scenarios fail a hard gate (no device at the
+  mouth → C2; brief device → C4), so the weights and τ cannot produce false confirmations. They
+  only act on weak-evidence violations (C and B-C7 have S = 0), which the full data will cover.
+
 ### Offline ablation (Phase 7 preview), computed in the same tool
 
 `sensitivity_offline.py` also evaluates the three Phase 7 ablations from the baseline logs, with the
