@@ -598,3 +598,23 @@ Implemented and tested in a scratch copy, **not applied to `src/`** while the ba
   unchanged) plus 7 new ones: default off; C4 off confirms on frame 1 (C = 0.642); C5 off gives
   C = 0.836 with weights renormalised; C7 off lets the B-C7 frame through while still reporting the raw
   risk; ablated debug records replay exactly for each flag.
+
+---
+
+## Figures (prepared; final versions are built from the full baseline)
+
+[`evaluation/scripts/make_figures.py`](../evaluation/scripts/make_figures.py) writes PDF + PNG to
+`evaluation/results/figures/`: **fig1** outcome distribution per scenario (100 % stacked bars,
+grouped by ground truth, with match counts); **fig2** median escalation timeline (stage
+durations from onset, with the moment the violation ended); **fig3** timing and proximity
+distributions (small multiples, runs + median, reference lines at the 8/10 s windows and the
+0.35 m e-stop); **fig4** event-level precision/recall/F1 against τ for the four weight sets.
+Colours are the reference palette of the dataviz guidance, used unchanged (categorical slots in
+fixed order, one blue ramp for the ordered stages, grey for "no escalation"). Node.js is not
+installed here, so its palette validator could not be run; only the pre-validated values are used,
+within their documented series limits. Layouts were checked visually on development data (the
+A/A-V baseline runs available so far plus the one-seed smoke runs); the figures in
+`evaluation/data/dev/figures/` are **layout checks, not results**.
+
+`evaluation/scripts/after_batch.sh` was started at 16:19: when the batch exits it runs
+`make_results.sh` (metrics → tables → sensitivity → figures) without touching `src/`.

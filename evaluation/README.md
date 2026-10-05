@@ -15,6 +15,8 @@ system under test is in [`../docs/sim_audit.md`](../docs/sim_audit.md).
 
 ```bash
 pip install -r evaluation/requirements.txt
+bash evaluation/scripts/configure_paths.sh        # only if not cloned to ~/Yoru_bot_publication
+python3 -c "from ultralytics import YOLO; YOLO('yolov8n.pt')"   # downloads the COCO weights here
 source /opt/ros/humble/setup.bash
 colcon build --symlink-install          # 4 packages incl. yoru_sim_plugins (Gazebo actor plugin)
 source install/setup.bash
@@ -100,6 +102,9 @@ python3 -m pytest evaluation/tests -q                                           
 | `bag_summary.py` | human-readable summary of one bag |
 | `check_run.sh` | one run with a hand-written overlay (Phase 3 checks) |
 | `make_eval_world.py` | regenerates the evaluation world |
+| `configure_paths.sh` | points the simulation configuration at the clone's location |
+| `make_results.sh`, `after_batch.sh` | build all Phase 5–6 results and figures (optionally once a running batch exits) |
+| `make_figures.py` | paper figures (PDF + PNG): outcomes, escalation timeline, metric distributions, threshold sensitivity |
 | `phase0_*.py`, `phase1_*`, `phase2_*` | evidence generators for those phases |
 | `extract_metrics.py`, `summarise.py` | Phase 5 metrics and tables |
 | `sensitivity_offline.py` | Phase 6: offline weight/threshold sensitivity from the logged frames → `evaluation/results/sensitivity/` |

@@ -17,9 +17,9 @@ Changes to the system under test are additive and default-off: with no new launc
 every node receives exactly the parameters it had in V2 (verified; see evidence E1.3/E2.3).
 
 **Not in this repository:** run recordings (rosbag2, several GB) and model weights
-(`yolov8n.pt` is downloaded by `ultralytics`). Some configuration files contain absolute paths
-under `/home/desh/Yoru_bot_publication/`; clone to that path or edit them
-(`src/yoru_bringup/config/yoru_sim.yaml`, `sim*.launch.py`) until they are made relative.
+(`yolov8n.pt`, see `evaluation/README.md`). After cloning anywhere other than
+`~/Yoru_bot_publication`, run `bash evaluation/scripts/configure_paths.sh` once: a few inherited
+configuration files hold absolute paths.
 
 The original V2 README follows.
 
