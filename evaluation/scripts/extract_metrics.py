@@ -177,6 +177,30 @@ def fsm_params(run_dir):
     return defaults
 
 
+INTERPRETATION = {
+    ('none', 'no_violation'): 'correct_no_intervention',
+    ('none', '*'): 'missed_violation',
+    ('safety_stop', '*'): 'interrupted_safety_stop',
+    ('admin_override', '*'): 'interrupted_admin_override',
+    ('complied', 'true_compliance'): 'compliance_correctly_recognised',
+    ('complied', 'departure'): 'departure_recorded_as_compliance',
+    ('complied', 'continued_violation'): 'continued_violation_recorded_as_compliance',
+    ('target_lost', 'departure'): 'departure_correctly_recorded_as_target_lost',
+    ('target_lost', 'true_compliance'): 'compliance_recorded_as_target_lost',
+    ('target_lost', 'continued_violation'): 'continued_violation_recorded_as_target_lost',
+    ('logged', 'continued_violation'): 'continued_violation_correctly_logged',
+    ('logged', 'true_compliance'): 'compliance_not_recognised_before_s4',
+    ('logged', 'departure'): 'departure_not_recognised_before_s4',
+}
+
+
+def outcome_vs_truth(outcome, truth):
+    if truth == 'no_violation':
+        return 'correct_no_intervention' if outcome == 'none' else 'false_intervention'
+    return INTERPRETATION.get((outcome, truth), INTERPRETATION.get((outcome, '*'),
+                                                                   f'{outcome}|{truth}'))
+
+
 def metrics(run_dir, ground_truth):
     d = RunData(os.path.join(run_dir, 'bag'))
     m = {}
@@ -234,6 +258,24 @@ def metrics(run_dir, ground_truth):
               'first_conf_D': conf['D'] if conf else NAN,
               'first_conf_C': conf['C'] if conf else NAN,
               'conf_node': conf['node'] if conf else ''})
+
+    # ------------------------------------------- outcome against the truth
+    # What the simulated person really did, judged at the FSM outcome time:
+    # stopped and stayed (scripted cessation), walked out of view (scripted
+    # departure), or kept violating. 'complied' / 'target_lost' only mean
+    # what their names say when they match this.
+    t_removed = gt['target_removed']['stamp'] if 'target_removed' in gt else NAN
+    t_judge = t_r if np.isfinite(t_r) else math.inf
+    if ground_truth != 'violation':
+        truth = 'no_violation'
+    elif np.isfinite(t_cess) and t_cess <= t_judge:
+        truth = 'true_compliance'
+    elif np.isfinite(t_removed) and t_removed <= t_judge:
+        truth = 'departure'
+    else:
+        truth = 'continued_violation'
+    m['truth_behaviour'] = truth
+    m['outcome_vs_truth'] = outcome_vs_truth(outcome, truth)
 
     # ----------------------------------------------------------- latencies
     m['confirmation_latency'] = t_conf - t_v

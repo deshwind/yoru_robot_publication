@@ -1,0 +1,16 @@
+scenario,truth_behaviour,admin_override,complied,logged,none,safety_stop,target_lost
+A,true_compliance,0,21,0,0,0,0
+A-V,true_compliance,0,21,0,0,0,0
+B,no_violation,0,0,0,16,0,0
+B-C7,continued_violation,0,0,1,0,0,0
+C,departure,0,0,0,0,0,1
+D,no_violation,0,0,0,1,0,0
+E,no_violation,0,0,0,1,0,0
+F-pen,no_violation,0,0,0,1,0,0
+F-straw,no_violation,0,0,0,1,0,0
+G,continued_violation,0,0,1,0,0,0
+H,true_compliance,0,0,0,0,0,1
+I,true_compliance,0,1,0,0,0,0
+J,true_compliance,0,1,0,0,0,0
+K,continued_violation,0,0,0,0,1,0
+L,continued_violation,1,0,0,0,0,0

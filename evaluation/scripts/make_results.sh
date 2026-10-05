@@ -8,6 +8,8 @@ echo "runs in manifest: $(($(wc -l < $M) - 1)); not ok: $(awk -F, 'NR>1 && $12!=
 python3 evaluation/scripts/extract_metrics.py --manifest $M --out evaluation/data/metrics.csv
 python3 evaluation/scripts/summarise.py --metrics evaluation/data/metrics.csv --outdir evaluation/results
 python3 evaluation/scripts/sensitivity_offline.py --manifest $M --outdir evaluation/results/sensitivity
+python3 evaluation/scripts/offline_extensions.py --manifest $M --metrics evaluation/data/metrics.csv \
+    --outdir evaluation/results/offline_extensions
 python3 evaluation/scripts/make_figures.py --metrics evaluation/data/metrics.csv \
     --sensitivity evaluation/results/sensitivity --out evaluation/results/figures
 echo "results: evaluation/results/tables.md, sensitivity/sensitivity.md, figures/"

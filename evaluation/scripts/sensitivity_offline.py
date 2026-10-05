@@ -122,8 +122,20 @@ def read_run(run_dir):
     return frames, gt, fsm
 
 
+def cache_current(manifests, cache):
+    """A cache is reused only if it holds exactly the runs that are 'ok' in
+    the manifests now (a cache built from a partial batch is rebuilt)."""
+    wanted = set()
+    for manifest in manifests:
+        table = pd.read_csv(manifest, dtype=str, keep_default_na=False)
+        table = table.drop_duplicates('run_id', keep='last')
+        wanted |= set(table.loc[table.status == 'ok', 'run_id'])
+    cached = set(pd.read_csv(cache + '.runs.csv', dtype=str)['run_id'])
+    return cached == wanted
+
+
 def load(manifests, cache):
-    if cache and os.path.isfile(cache + '.frames.csv.gz'):
+    if cache and os.path.isfile(cache + '.frames.csv.gz') and cache_current(manifests, cache):
         # round_trip: pandas' default parser can be 1 ulp off, which would
         # break the bit-exact reproduction (validation 1 would catch it)
         return (pd.read_csv(cache + '.frames.csv.gz', keep_default_na=False,

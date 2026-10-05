@@ -637,3 +637,97 @@ A/A-V baseline runs available so far plus the one-seed smoke runs); the figures 
 
 `evaluation/scripts/after_batch.sh` was started at 16:19: when the batch exits it runs
 `make_results.sh` (metrics → tables → sensitivity → figures) without touching `src/`.
+
+---
+
+## Offline extensions (requested 2026-10-05): deployment thresholds, sustained rule, outcome vs truth
+
+Script: [`evaluation/scripts/offline_extensions.py`](../evaluation/scripts/offline_extensions.py)
+(no change under `src/`). Tests: [`evaluation/tests/test_offline_extensions.py`](../evaluation/tests/test_offline_extensions.py),
+**28 passed** together with the statistics tests. These include the replay checked **bit-exact against the real
+scenario publisher** running in world mode, the C7 property on 20,000 random frames, the sustained
+rule at 100/80/60/50/16 % and with missed person detections, and every outcome-vs-truth mapping.
+The script is part of `make_results.sh`, so the after-batch pipeline regenerates it on the completed
+batch in `evaluation/results/offline_extensions/`.
+
+**Status: preliminary.** The baseline batch was not complete when this was requested (54 of 300 runs:
+A × 20, A-V × 20, B × 14). The numbers below come from those runs plus the 15 one-seed smoke runs
+(the only data for B-C7, C–L so far): 71 world-mode runs, 113,935 person-frames, in
+[`evaluation/results/offline_extensions/preliminary_20261005/`](../evaluation/results/offline_extensions/preliminary_20261005/).
+
+### Validation against the logs
+
+| Check | Result |
+|---|---|
+| Baseline values (device 0.6, override 0.75) reproduce C, the C7 risk after override, and the decision | **0 / 113,935** mismatches each |
+| Seeded noise replay: dropout counts at every 1 Hz heartbeat | **71 / 71** runs |
+| Replayed scores > 0.6 vs logged D | bit-exact and in order in 67 / 71 runs; an exact ordered subsequence in **71 / 71** (6 replayed values without a logged counterpart, consistent with devices not associated with a person in that frame; 11 logged values after the last heartbeat) |
+| Baseline FSM replay (S1 = first confirmed frame + 5 s) vs the real FSM | **71 / 71** runs |
+
+Found while validating: `recv_stamp` only has the `/clock` resolution (0.1 s), so frames can tie on it.
+Replay order therefore uses the camera header stamp, and time metrics based on `recv_stamp` are
+quantised to 0.1 s (to be stated in the paper).
+
+### 1. Deployment thresholds (device_confidence = confounder_override_confidence = 0.3, `yoru_real.yaml`)
+
+**C7 can never block a confirmation under these values.** Proof from the code: confirmation needs C2, C2
+needs a device with D > 0.3, and any such device satisfies D ≥ 0.3 = override, so a "high" risk is always
+overridden. Logs: 8,451 frames had a confounder at the mouth; 266 of them had C2 and were blocked by C7
+at the baseline values; **0** are blocked under the deployment values. The `yoru_real.yaml` comment shows
+this is intentional ("a real vape/cigarette detection this weak still outranks the COCO phone guess"), so in
+the deployed configuration **C7 is inactive**, which the paper must state.
+
+Lowering device_confidence from 0.6 to 0.3 cannot be recomputed from the logged D alone, because D = 0 is
+logged when no device passed 0.6. The injected scores were therefore replayed from the seeded noise generator
+(validated above). Devices scoring in (0.3, 0.6] number 12: B-C7 × 10 (0.531–0.599; base score 0.70),
+A × 1 (0.597), C × 1 (0.582). These can only add confirmations, and none of the affected events was
+unconfirmed, so **no event decision is undetermined.**
+
+| Scenario | GT | events | confirmed: baseline → deployment | false conf. | misses |
+|---|---|---|---|---|---|
+| A | V | 21 | 21 → 21 | – | 0 → 0 |
+| A-V | V | 21 | 21 → 21 | – | 0 → 0 |
+| **B** (phone) | N | 17 | 0 → 0 | 0 → 0 | – |
+| **B-C7** | V | 1 | 1 → 1 | – | 0 → 0 |
+| **F-pen**, **F-straw** | N | 1 + 1 | 0 → 0 | 0 → 0 | – |
+| C, D, E, G–L | | 1 each | unchanged | 0 → 0 | 0 → 0 |
+
+No event decision changes, in either direction, in these runs. B and F carry no device detection at all
+(the phone, pen and straw are confounder classes), so the device threshold cannot affect them. At frame
+level, the deployment values unblock the 266 C7-blocked frames. The B-C7 smoke run was already confirmed
+at baseline through noise (E4.2), so the event-level effect on B-C7 can only be assessed with its 20
+baseline seeds.
+
+### 2. Sustained-confirmation rule (≥ 60 % of YOLO frames confirmed in the 5 s window)
+
+Replay of the FSM S0 logic with the alternative rule: S1 at the first 0.1 s tick T ≥ t0 + 5 s (t0 = start
+of the confirmation episode) at which ≥ 60 % of the camera's YOLO frames in (T − 5, T] contained a
+confirmed person. The denominator counts **all** YOLO frames (`frame_stats`), so a missed person counts
+against the rule.
+
+- **1 of 142 events changes: smoke B-C7** (violation; escalated at baseline, would not escalate). Its first
+  window held 2 confirmed frames out of 26 YOLO frames (8 %).
+- **True violations, detection to intervention:** of the 50 violation events (all escalated at baseline), the
+  49 other than B-C7 still escalate, with **0.00 s
+  extra delay** (median and maximum). The violation was confirmed in ≥ 60 % of frames from the first window
+  on, so S1 stays at first confirmation + 5.00 s.
+- Interpretation (preliminary): the rule removes the noise-driven B-C7 escalation at no latency cost for
+  sustained violations. The full batch will show whether this holds over 20 seeds and for C/H.
+
+### 3. Outcome vs truth: new columns in `metrics.csv`
+
+`extract_metrics.py` now adds:
+
+- **`truth_behaviour`**: what the simulated person really did, judged at the FSM outcome time.
+  `true_compliance` means the scripted cessation (the person stopped and stayed), `departure` means the person
+  walked out of view, `continued_violation` means neither, and `no_violation` covers the violation-free scenarios.
+- **`outcome_vs_truth`**: for example `compliance_correctly_recognised`, `compliance_recorded_as_target_lost`,
+  `departure_correctly_recorded_as_target_lost`, `departure_recorded_as_compliance`,
+  `continued_violation_correctly_logged`, `false_intervention`, `missed_violation`, `interrupted_*`.
+
+Preliminary crosstab (`outcome_vs_truth.csv`): A, A-V, I, J `complied` = true compliance; C
+`target_lost` = departure; **H `target_lost` = true compliance** (the person stopped during S1 but the FSM
+reported target loss); G and B-C7 `logged` = continued violation; K and L interrupted; all violation-free
+runs `none`. Totals: compliance_correctly_recognised 44, correct_no_intervention 20,
+continued_violation_correctly_logged 2, compliance_recorded_as_target_lost 1,
+departure_correctly_recorded_as_target_lost 1, interrupted_admin_override 1, interrupted_safety_stop 1.
