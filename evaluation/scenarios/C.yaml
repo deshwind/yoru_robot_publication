@@ -1,0 +1,10 @@
+id: C
+title: Cigarette; violator walks out of the CCTV view 3 s into S2 (target loss)
+ground_truth: violation
+expected_outcome: target_lost
+max_sim_s: 190
+post_outcome_s: 10
+params:
+  scenario_publisher_node: {scenario_type: target_loss, comply_stage: none,
+                            target_loss_stage: APPROACH, target_loss_delay: 3.0}
+  human_actor_node: {scenario_type: target_loss}

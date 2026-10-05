@@ -1,0 +1,11 @@
+id: K
+title: Person crosses the robot's path during S2 (SAFE_STOP)
+ground_truth: violation
+expected_outcome: safety_stop
+max_sim_s: 190
+post_outcome_s: 10
+params:
+  scenario_publisher_node: {scenario_type: smoking, comply_stage: none}
+  human_actor_node: {scenario_type: smoking, intruder_enabled: true,
+                     intruder_trigger_delay: 0.0, intruder_trigger_min_x: 0.3,
+                     intruder_lead_m: 1.0, intruder_lateral_m: -2.0}

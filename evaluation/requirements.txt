@@ -1,0 +1,13 @@
+# Python packages used by the evaluation (versions as installed and tested,
+# 2026-10-05, Ubuntu 22.04 / Python 3.10 / ROS 2 Humble).
+# ROS 2 Humble itself, Gazebo 11 and Nav2 come from apt (see README.md).
+#
+#   pip install -r evaluation/requirements.txt
+PyYAML==6.0.3
+numpy==1.26.4
+ultralytics==8.4.59        # YOLOv8n person detection on the Gazebo CCTV images
+torch==2.12.0              # ultralytics backend (CPU is sufficient)
+opencv-python-headless==4.10.0.84  # the cv2 actually imported (opencv-python 4.13.0.92 is also installed)
+pytest==6.2.5
+rosbags==0.11.5             # Phase 5: reads the rosbag2 (sqlite3) bags
+pandas==2.3.3               # Phase 5: metrics tables

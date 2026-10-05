@@ -1,0 +1,10 @@
+id: L
+title: Admin pauses autonomy 5 s into S2 (admin override)
+ground_truth: violation
+expected_outcome: admin_override
+max_sim_s: 190
+post_outcome_s: 10
+params:
+  scenario_publisher_node: {scenario_type: smoking, comply_stage: none}
+  human_actor_node: {scenario_type: smoking, admin_override_state: APPROACH,
+                     admin_override_delay: 5.0}

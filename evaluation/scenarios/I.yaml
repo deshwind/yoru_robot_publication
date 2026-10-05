@@ -1,0 +1,9 @@
+id: I
+title: Smoking; complies 2 s after the first direct warning and steps back 1 m
+ground_truth: violation
+expected_outcome: complied
+max_sim_s: 190
+post_outcome_s: 10
+params:
+  scenario_publisher_node: {scenario_type: smoking, comply_stage: S3_first, comply_delay_s: 2.0}
+  human_actor_node: {scenario_type: smoking, step_back_m: 1.0}

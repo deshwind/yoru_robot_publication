@@ -1,0 +1,9 @@
+id: B-C7
+title: C7 conflict - real cigarette (D=0.70, below the 0.75 override) with a phone at the mouth
+ground_truth: violation
+expected_outcome: none   # C7 is designed to suppress this: a deliberate, measured miss
+max_sim_s: 120
+post_outcome_s: 10
+params:
+  scenario_publisher_node: {scenario_type: c7_conflict, comply_stage: none}
+  human_actor_node: {scenario_type: c7_conflict}

@@ -1,0 +1,222 @@
+--- ../../src/yoru_core/yoru_core/event_confirmation_node.py	2026-10-05 12:25:36.354199689 +0100
++++ yoru_core/yoru_core/event_confirmation_node.py	2026-10-05 15:39:53.588609810 +0100
+@@ -91,6 +91,12 @@
+         # Evaluation instrumentation: one JSON record per tracked person per
+         # frame (confirmed, uncertain AND rejected) for offline analysis
+         self.declare_parameter('publish_debug', True)
++        # Ablation study (evaluation only; all false = the system as designed):
++        #   ablate_c4  C4 is no longer a gate (T still enters the composite)
++        #   ablate_c5  w_S = 0, the other weights renormalised to sum to 1
++        #   ablate_c7  confounders no longer block confirmation
++        for criterion in ('c4', 'c5', 'c7'):
++            self.declare_parameter(f'ablate_{criterion}', False)
+         self.declare_parameter('debug_topic', '/compliance/confirmation_debug')
+ 
+         self.persistence_required = int(self.get_parameter('persistence_frames').value)
+@@ -113,7 +119,8 @@
+         self.get_logger().info(
+             'Event confirmation node ready (criteria C1-C7, weights '
+             + ', '.join(f'{k}={v:g}' for k, v in weights.items())
+-            + f', confirm>={self.get_parameter("confirm_confidence").value:g})')
++            + f', confirm>={self.get_parameter("confirm_confidence").value:g}'
++            + f', ablations={",".join(self.ablations()) or "none"})')
+         if abs(sum(weights.values()) - 1.0) > 1e-6:
+             self.get_logger().warn(
+                 f'Confidence weights sum to {sum(weights.values()):g}, not 1')
+@@ -132,8 +139,14 @@
+         self.debug_pub.publish(msg)
+ 
+     def weights(self):
+-        return {name: float(self.get_parameter(name).value)
+-                for name in rule.DEFAULT_WEIGHTS}
++        weights = {name: float(self.get_parameter(name).value)
++                   for name in rule.DEFAULT_WEIGHTS}
++        if self.get_parameter('ablate_c5').value:
++            weights = rule.without_support(weights)
++        return weights
++
++    def ablations(self):
++        return [c for c in ('c4', 'c5', 'c7') if self.get_parameter(f'ablate_{c}').value]
+ 
+     def tracked_callback(self, msg):
+         person_conf_min = self.get_parameter('person_confidence').value
+@@ -226,7 +239,10 @@
+             if fp_risk == 'high' and c2 and device_score >= override_at:
+                 fp_risk = 'overridden'
+ 
+-            is_confirmed = rule.is_confirmed(confidence, c1, c2, c4, fp_risk,
++            ablations = self.ablations()
++            c4_gate = True if 'c4' in ablations else c4
++            fp_gate = 'low' if 'c7' in ablations else fp_risk
++            is_confirmed = rule.is_confirmed(confidence, c1, c2, c4_gate, fp_gate,
+                                              confirm_at)
+ 
+             # Soft vape hint (dashboard only, never escalates): a phone-like
+@@ -268,6 +284,7 @@
+                     'weights': weights, 'confirm_confidence': confirm_at,
+                     'uncertain_confidence': uncertain_at,
+                     'override_confidence': override_at,
++                    'ablations': ablations,
+                 })
+ 
+             if is_confirmed:
+--- ../../src/yoru_core/yoru_core/confirmation_rule.py	2026-10-05 12:13:06.250558043 +0100
++++ yoru_core/yoru_core/confirmation_rule.py	2026-10-05 15:39:53.588609810 +0100
+@@ -33,3 +33,13 @@
+     return ('confirmed' if confirmed
+             else 'uncertain' if confidence >= uncertain_at
+             else 'rejected')
++
++
++def without_support(weights):
++    """C5 ablation: drop the support term and renormalise the other weights
++    so they keep their relative sizes and still sum to the original total."""
++    rest = weights['w_D'] + weights['w_P'] + weights['w_T']
++    total = rest + weights['w_S']
++    return {'w_D': weights['w_D'] * total / rest, 'w_P': weights['w_P'] * total / rest,
++            'w_T': weights['w_T'] * total / rest, 'w_S': 0.0}
++
+--- ../../src/yoru_core/test/test_confirmation_rule.py	2026-10-05 12:25:50.474117896 +0100
++++ yoru_core/test/test_confirmation_rule.py	2026-10-05 15:39:53.588609810 +0100
+@@ -267,3 +267,87 @@
+         assert 'rejected' in decisions  # rejected frames are now observable
+     finally:
+         node.destroy_node()
++
++
++# ----------------------------------------------------- Phase 7 ablations
++
++def c7_conflict_frame():
++    """Cigarette below the 0.75 override + phone at the mouth (B-C7)."""
++    frame = scenario_a_frame()
++    frame.detections[1].results[0].hypothesis.score = 0.70
++    px, py, ph = 320.0, 240.0, 150.0
++    frame.detections.append(det('mobile_phone', 0.8, px - 10, py - ph / 2 + 0.18 * ph + 4, 20, 30))
++    return frame
++
++
++def test_ablations_default_off(ros):
++    node = make_node()
++    try:
++        assert node.ablations() == []
++        assert node.weights() == rule.DEFAULT_WEIGHTS
++    finally:
++        node.destroy_node()
++
++
++def test_ablate_c4_confirms_on_the_first_frame(ros):
++    node = make_node()
++    try:
++        node.set_parameters([Parameter('ablate_c4', value=True)])
++        node.tracked_callback(scenario_a_frame())
++        last = node.metadata_pub.msgs[-1].data
++        # C = 0.312 + 0.24 + 0.2 * (1/5) + 0.05 = 0.642 >= 0.6, C4 no longer required
++        assert '"status": "confirmed"' in last and '"C4_persistence": false' in last
++    finally:
++        node.destroy_node()
++
++
++def test_ablate_c5_renormalises_without_support(ros):
++    node = make_node()
++    try:
++        node.set_parameters([Parameter('ablate_c5', value=True)])
++        w = node.weights()
++        assert w['w_S'] == 0.0 and abs(sum(w.values()) - 1.0) < 1e-12
++        assert abs(w['w_D'] / w['w_P'] - 0.4 / 0.3) < 1e-12
++        for _ in range(5):
++            node.tracked_callback(scenario_a_frame())
++        # (0.4*0.78 + 0.3*0.8 + 0.2*1.0) / 0.9 = 0.8356
++        assert '"confidence": 0.836' in node.metadata_pub.msgs[-1].data
++    finally:
++        node.destroy_node()
++
++
++def test_ablate_c7_lets_the_conflict_through(ros):
++    for ablate, expected in ((False, 'uncertain'), (True, 'confirmed')):
++        node = make_node()
++        try:
++            node.set_parameters([Parameter('ablate_c7', value=ablate)])
++            for _ in range(5):
++                node.tracked_callback(c7_conflict_frame())
++            meta = [m.data for m in node.metadata_pub.msgs if 'possible_vape' not in m.data]
++            assert f'"status": "{expected}"' in meta[-1], (ablate, meta[-1])
++            assert '"C7_fp_risk": "high"' in meta[-1]      # raw risk still reported
++        finally:
++            node.destroy_node()
++
++
++@pytest.mark.parametrize('ablation', ['c4', 'c5', 'c7'])
++def test_ablated_debug_records_replay_exactly(ros, ablation):
++    import json
++    rng = random.Random(7)
++    node = make_node()
++    node.debug_pub = Capture()
++    node.set_parameters([Parameter(f'ablate_{ablation}', value=True)])
++    try:
++        for _ in range(150):
++            node.tracked_callback(random_frame(rng, ['c1_1000', 'c1_1001', ''], 'c1_2000'))
++        for m in node.debug_pub.msgs:
++            r = json.loads(m.data)
++            assert r['ablations'] == [ablation]
++            c = rule.composite_confidence(r['D'], r['P'], r['T'], r['S'], r['weights'])
++            assert c == r['C']
++            c4 = True if 'c4' in r['ablations'] else r['C4']
++            fp = 'low' if 'c7' in r['ablations'] else r['C7_fp_risk']
++            confirmed = rule.is_confirmed(c, r['C1'], r['C2'], c4, fp, r['confirm_confidence'])
++            assert rule.decision_status(confirmed, c, r['uncertain_confidence']) == r['decision']
++    finally:
++        node.destroy_node()
+--- ../../src/yoru_bringup/launch/full_system.launch.py	2026-10-05 12:54:33.582562896 +0100
++++ yoru_bringup_launch/full_system.launch.py	2026-10-05 15:39:53.589609806 +0100
+@@ -29,6 +29,8 @@
+                          themselves on the node clock (sim time) instead of
+                          the wall clock
+   use_actors           : start human_actor_node (evaluation world only)
++  ablate_c4/c5/c7      : ablation study - disable C4 (persistence gate), C5
++                         (support, w_S = 0 renormalised) or C7 (confounder rule)
+   overlay_params       : extra parameter YAML applied to every node after
+                          params_file (evaluation runs: per-run settings)
+ """
+@@ -46,7 +48,9 @@
+ CONFIRM_OVERRIDES = ('w_D', 'w_P', 'w_T', 'w_S',
+                      'confirm_confidence', 'uncertain_confidence')
+ CLOCK_OVERRIDES = ('use_ros_clock',)
+-OVERRIDE_ARGS = CONFIRM_OVERRIDES + CLOCK_OVERRIDES + ('overlay_params',)
++ABLATION_OVERRIDES = ('ablate_c4', 'ablate_c5', 'ablate_c7')
++OVERRIDE_ARGS = (CONFIRM_OVERRIDES + CLOCK_OVERRIDES + ABLATION_OVERRIDES
++                 + ('overlay_params',))
+ 
+ 
+ def overrides(context, names, cast):
+@@ -68,6 +72,7 @@
+     use_audio_node = LaunchConfiguration('use_audio_node')
+     overlay = LaunchConfiguration('overlay_params').perform(context).strip()
+     confirm = overrides(context, CONFIRM_OVERRIDES, float)
++    confirm.update(overrides(context, ABLATION_OVERRIDES, lambda v: v.lower() == 'true'))
+     clock = overrides(context, CLOCK_OVERRIDES, lambda v: v.lower() == 'true')
+     use_actors = LaunchConfiguration('use_actors').perform(context).strip().lower() == 'true'
+ 
+--- ../../src/yoru_bringup/launch/server.launch.py	2026-10-05 12:54:22.828602918 +0100
++++ yoru_bringup_launch/server.launch.py	2026-10-05 15:39:53.589609806 +0100
+@@ -42,7 +42,8 @@
+ 
+ EVAL_OVERRIDE_ARGS = ('w_D', 'w_P', 'w_T', 'w_S', 'confirm_confidence',
+                       'uncertain_confidence', 'use_ros_clock',
+-                      'overlay_params', 'use_actors')
++                      'overlay_params', 'use_actors',
++                      'ablate_c4', 'ablate_c5', 'ablate_c7')
+ 
+ 
+ def launch_compliance(context):
+--- ../../src/yoru_bringup/launch/sim_full.launch.py	2026-10-05 13:22:56.245910639 +0100
++++ yoru_bringup_launch/sim_full.launch.py	2026-10-05 15:39:53.589609806 +0100
+@@ -36,7 +36,8 @@
+ 
+ EVAL_OVERRIDE_ARGS = ('w_D', 'w_P', 'w_T', 'w_S', 'confirm_confidence',
+                       'uncertain_confidence', 'use_ros_clock',
+-                      'overlay_params', 'use_actors')
++                      'overlay_params', 'use_actors',
++                      'ablate_c4', 'ablate_c5', 'ablate_c7')
+ DEFAULT_MAP = os.path.expanduser('~/Yoru_bot_publication/maps/sim/main_map.yaml')
+ 
+ # Everything the evaluation metrics are computed from (evaluation/README.md)

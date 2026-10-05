@@ -1,0 +1,9 @@
+id: F-straw
+title: Straw at the mouth (confounder)
+ground_truth: no_violation
+expected_outcome: none
+max_sim_s: 120
+post_outcome_s: 10
+params:
+  scenario_publisher_node: {scenario_type: straw, comply_stage: none}
+  human_actor_node: {scenario_type: straw}

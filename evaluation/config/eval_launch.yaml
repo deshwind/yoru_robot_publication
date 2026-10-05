@@ -1,0 +1,11 @@
+# Launch arguments shared by every evaluation run (run_batch.py)
+world: eval_two_room.world
+spawn_x: -4.0        # robot base in room B: realistic approach (about 6 m via the doorway)
+spawn_y: 1.5
+spawn_yaw: 0.0
+use_actors: true
+use_ros_clock: true
+gui: false
+rviz: false
+open_browser: false
+use_joystick: false

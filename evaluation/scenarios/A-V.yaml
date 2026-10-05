@@ -1,0 +1,9 @@
+id: A-V
+title: Vaping; complies during S3 (2 s after the first direct warning)
+ground_truth: violation
+expected_outcome: complied
+max_sim_s: 190
+post_outcome_s: 10
+params:
+  scenario_publisher_node: {scenario_type: vaping, comply_stage: S3_first, comply_delay_s: 2.0}
+  human_actor_node: {scenario_type: vaping}

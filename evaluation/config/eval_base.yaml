@@ -1,0 +1,46 @@
+# Evaluation base overlay: applied after yoru_sim.yaml for EVERY run, then
+# the scenario file, then per-run values (seed, log_dir) from run_batch.py.
+#
+# FSM timings are the research brief's, not yoru_sim.yaml's (see
+# docs/sim_audit.md section 4 and evidence/README.md E0.5 / E2.1 for why).
+
+compliance_fsm_node:
+  ros__parameters:
+    monitor_confirm_duration: 5.0     # confirmed event must persist 5 s before S1
+    pa_warning_duration: 3.0          # S1
+    approach_timeout: 90.0            # S2
+    direct_warning_repeats: 3         # S3: 3 warnings ...
+    direct_warning_interval: 8.0      # ... 8 s apart ...
+    direct_warning_duration: 30.0     # ... 30 s cap
+    logging_duration: 2.0             # S4
+    cooldown_duration: 60.0
+    compliance_clear_duration: 10.0   # confirmed event absent > 10 s -> complied
+    target_lost_timeout: 8.0          # target lost > 8 s in S2
+    obstacle_stop_distance: 0.35      # SAFE_STOP: < 0.35 m ...
+    obstacle_debounce_duration: 0.4   # ... for 0.4 s
+
+nav2_goal_sender_node:
+  ros__parameters:
+    goal_timeout: 90.0                # matches the S2 timeout
+
+scenario_publisher_node:
+  ros__parameters:
+    mode: world                       # real YOLO persons + injected devices
+    start_delay: 30.0                 # violation onset 30 s after start
+    direct_warning_repeats: 3
+    # Detector noise on the injected (specialist-model) detections
+    conf_jitter_sigma: 0.05
+    dropout_prob: 0.05
+    bbox_jitter_px: 3.0
+
+human_actor_node:
+  ros__parameters:
+    n_persons: 1
+
+# No side effects during batch runs
+incident_emailer_node:
+  ros__parameters:
+    enabled: false
+audio_warning_node:
+  ros__parameters:
+    use_audio: false                  # warnings are still logged on /compliance/audio_event

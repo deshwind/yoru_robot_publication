@@ -1,0 +1,11 @@
+id: H
+title: Smoking; complies during S1 (1 s after the PA warning)
+ground_truth: violation
+# FSM prediction: S1 lasts 3 s < the 10 s reset, so the robot is already in S2 when
+# the absence is noticed, and S2 checks target loss (8 s) first -> 'target_lost'.
+expected_outcome: target_lost
+max_sim_s: 190
+post_outcome_s: 10
+params:
+  scenario_publisher_node: {scenario_type: smoking, comply_stage: S1, comply_delay_s: 1.0}
+  human_actor_node: {scenario_type: smoking}
