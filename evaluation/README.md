@@ -103,6 +103,7 @@ python3 -m pytest evaluation/tests -q                                           
 | `check_run.sh` | one run with a hand-written overlay (Phase 3 checks) |
 | `make_eval_world.py` | regenerates the evaluation world |
 | `configure_paths.sh` | points the simulation configuration at the clone's location |
+| `resume_baseline.sh` | resume the baseline batch after a stop (skips valid runs, rebuilds results at the end) |
 | `make_results.sh`, `after_batch.sh` | build all Phase 5–6 results and figures (optionally once a running batch exits) |
 | `make_figures.py` | paper figures (PDF + PNG): outcomes, escalation timeline, metric distributions, threshold sensitivity |
 | `phase0_*.py`, `phase1_*`, `phase2_*` | evidence generators for those phases |

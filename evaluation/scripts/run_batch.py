@@ -218,6 +218,43 @@ def stop_group(proc, log):
     return not group_alive(pgid)
 
 
+WORLD_MARKERS = ('eval_two_room.world', 'two_room_world.world')
+
+
+def stale_gazebo():
+    """PIDs of Gazebo servers running one of THIS project's worlds. Only one
+    simulation runs at a time, so outside a run any such server is stale. A
+    stale server keeps Gazebo's master port and makes every later run fail
+    to start (found 2026-10-06: one escaped in its own session and blocked
+    108 runs). Gazebo instances of other projects are never touched."""
+    result = subprocess.run(['pgrep', '-a', '-f', 'gzserver'], capture_output=True, text=True)
+    pids = []
+    for line in result.stdout.splitlines():
+        pid, _, cmd = line.partition(' ')
+        # the process must BE a gazebo server (not a shell that mentions one)
+        is_server = cmd.startswith('gzserver ') or cmd.startswith('sh -c gzserver ')
+        if is_server and any(m in cmd for m in WORLD_MARKERS):
+            pids.append(int(pid))
+    return pids
+
+
+def kill_stale_gazebo(log=None):
+    pids = stale_gazebo()
+    for sig in (signal.SIGINT, signal.SIGKILL):
+        for pid in pids:
+            try:
+                os.killpg(os.getpgid(pid), sig)
+            except (ProcessLookupError, PermissionError):
+                pass
+        time.sleep(5 if sig == signal.SIGINT else 2)
+        pids = stale_gazebo()
+        if not pids:
+            break
+    if log is not None and pids:
+        log.write(f'\n[run_batch] stale gazebo still alive: {pids}\n')
+    return not pids
+
+
 def group_alive(pgid):
     result = subprocess.run(['pgrep', '-g', str(pgid)], capture_output=True, text=True)
     return bool(result.stdout.strip())
@@ -335,6 +372,11 @@ def run_once(scenario, seed, run_dir, weights, domain_id, cli):
     sim_end, outcome = monitor.state()
     end = time.time()
     clean = stop_group(proc, log)
+    # Gazebo may outlive the launch in its own session: sweep it too
+    leftovers = stale_gazebo()
+    if leftovers:
+        log.write(f'\n[run_batch] gazebo outlived the launch {leftovers}: killing\n')
+        clean = kill_stale_gazebo(log) and clean
     monitor.close()
     log.close()
     if not clean:
@@ -412,6 +454,8 @@ def main():
                     help='wall timeout = startup + max_sim_s / min_rtf')
     ap.add_argument('--nav2-deadline', type=float, default=28.0,
                     help='sim s by which Nav2 must report active (before the 30 s onset)')
+    ap.add_argument('--max-startup-failures', type=int, default=3,
+                    help='stop the batch after this many runs in a row fail to start')
     ap.add_argument('--dry-run', action='store_true')
     cli = ap.parse_args()
     cli.out = os.path.abspath(cli.out)
@@ -436,6 +480,11 @@ def main():
             print(f'  {s["id"]:8s} seed {seed}')
         return
 
+    if stale_gazebo():
+        print(f'[run_batch] stale gazebo before the batch {stale_gazebo()}: killing', flush=True)
+        if not kill_stale_gazebo():
+            sys.exit('[run_batch] a stale gazebo server cannot be stopped; aborting')
+    consecutive_startup_failures = 0
     os.makedirs(os.path.dirname(cli.manifest), exist_ok=True)
     new_manifest = not os.path.isfile(cli.manifest)
     with open(cli.manifest, 'a', newline='', encoding='utf-8') as mf:
@@ -448,6 +497,10 @@ def main():
                 continue
             run_dir = os.path.join(cli.out, tag, scenario['id'], str(seed))
             for attempt in range(1, cli.retries + 2):
+                if stale_gazebo():
+                    print(f'[run_batch]   stale gazebo {stale_gazebo()}: killing before the run',
+                          flush=True)
+                    kill_stale_gazebo()
                 domain_id = 60 + (index * 3 + attempt) % 40
                 print(f'[run_batch] {index + 1}/{len(plan)} {scenario["id"]} seed {seed} '
                       f'attempt {attempt} (domain {domain_id}) -> {run_dir}', flush=True)
@@ -466,6 +519,10 @@ def main():
                     break
                 time.sleep(5)
             time.sleep(3)  # let DDS / shared memory settle between runs
+            # Circuit breaker: identical start-up failures in a row mean the
+            # environment is broken; stop instead of failing every run.
+            consecutive_startup_failures = (consecutive_startup_failures + 1
+                                            if info['status'] == 'startup_failed' else 0)
             run_fingerprint = code_fingerprint()  # per run: catches mid-batch edits
             if run_fingerprint != fingerprint:
                 print(f'[run_batch]   WARNING code changed during the batch: '
@@ -486,6 +543,10 @@ def main():
                 'code_sha256': run_fingerprint,
                 'run_dir': os.path.relpath(run_dir, ROOT)})
             mf.flush()
+            if consecutive_startup_failures >= cli.max_startup_failures:
+                sys.exit(f'[run_batch] {consecutive_startup_failures} runs in a row failed to start '
+                         '(after retries): the environment is broken; stopping. Fix it and rerun '
+                         'with --skip-existing.')
 
 
 if __name__ == '__main__':

@@ -12,4 +12,6 @@ python3 evaluation/scripts/offline_extensions.py --manifest $M --metrics evaluat
     --outdir evaluation/results/offline_extensions
 python3 evaluation/scripts/make_figures.py --metrics evaluation/data/metrics.csv \
     --sensitivity evaluation/results/sensitivity --out evaluation/results/figures
-echo "results: evaluation/results/tables.md, sensitivity/sensitivity.md, figures/"
+# every output must be built from exactly the same runs (exit 1 otherwise)
+python3 evaluation/scripts/reconcile_counts.py --out evaluation/results/run_counts.md
+echo "results: evaluation/results/tables.md, sensitivity/, offline_extensions/, figures/, run_counts.md"

@@ -5,7 +5,8 @@ log/
 
 # runtime data - never commit
 # data/ holds the admin password hash; secrets.env the Gmail app password
-data/
+# (anchored to the root: evaluation/data/ has its own rules below)
+/data/
 secrets.env
 
 # YOLO weights (auto-downloaded by ultralytics)
@@ -43,8 +44,11 @@ maps/real_room_backup/
 maps/bases.json
 
 # --- simulation evaluation (publication) ---
-# Run recordings: several GB, published separately (see evaluation/README.md)
-evaluation/data/
+# Run recordings: several GB, published separately (see evaluation/README.md).
+# The run manifest and the per-run metrics ARE committed.
+evaluation/data/*
+!evaluation/data/manifest.csv
+!evaluation/data/metrics.csv
 **/bag/
 *.db3
 # Phase 7 patch staging copy (the reviewable diff is evaluation/pending_phase7.diff)
