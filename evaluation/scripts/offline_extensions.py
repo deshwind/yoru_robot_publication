@@ -104,14 +104,18 @@ def publisher_params(run_dir):
 
 def cache_current(manifests, cache):
     """A cache is reused only if it holds exactly the runs that are 'ok' in
-    the manifests now (a cache built from a partial batch is rebuilt)."""
+    the manifests now, each from the same attempt (a cache built from a
+    partial batch, or before a run was redone, is rebuilt)."""
     wanted = set()
     for manifest in manifests:
         table = pd.read_csv(manifest, dtype=str, keep_default_na=False)
         table = table.drop_duplicates('run_id', keep='last')
-        wanted |= set(table.loc[table.status == 'ok', 'run_id'])
-    cached = set(pd.read_csv(cache + '.runs.csv', dtype=str)['run_id'])
-    return cached == wanted
+        ok = table[table.status == 'ok']
+        wanted |= set(zip(ok.run_id, ok.start_wall))
+    cached = pd.read_csv(cache + '.runs.csv', dtype=str, keep_default_na=False)
+    if 'start_wall' not in cached:
+        return False   # cache from before attempts were recorded
+    return set(zip(cached.run_id, cached.start_wall)) == wanted
 
 
 def load(manifests, cache):
@@ -136,7 +140,8 @@ def load(manifests, cache):
                 continue  # not a world-mode run: no frame accounting
             s1 = next((e['stamp'] for e in fsm if e['new_state'] == 'PA_WARNING'), math.nan)
             run_rows.append({
-                'run_id': run['run_id'], 'tag': run['tag'], 'scenario': run['scenario'],
+                'run_id': run['run_id'], 'start_wall': run['start_wall'],
+                'tag': run['tag'], 'scenario': run['scenario'],
                 'seed': run['seed'], 'ground_truth': run['ground_truth'], 'run_dir': run['run_dir'],
                 't_v': events.get('violation_onset', math.nan),
                 't_cessation': events.get('violation_cessation', math.nan),
@@ -218,10 +223,12 @@ def frame_table(frames, node_conf):
         t=('t', 'min'), confirmed=('confirmed', 'any')).reset_index().sort_values('t')
 
 
-def escalation_times(conf_times, frame_count, start, end, sustained):
+def escalation_times(conf_times, frame_count, start, end, sustained, data_end=math.inf):
     """FSM S0 replay for one camera stream. conf_times: sorted times of
     frames with a confirmed person; frame_count(t0, t1): YOLO frames in
-    (t0, t1]. Returns the escalation time (first episode only) or NaN."""
+    (t0, t1]. Returns the escalation time (first episode only) or NaN.
+    data_end: no window ending after it is judged (the frame count is not
+    known past the last heartbeat, and the run's data stop there)."""
     conf_times = [t for t in conf_times if start <= t <= end]
     if not conf_times:
         return math.nan
@@ -238,7 +245,7 @@ def escalation_times(conf_times, frame_count, start, end, sustained):
         t0 = ep[0]
         if not sustained:
             return t0 + CONFIRM_DELAY
-        horizon = min(ep[-1] + CLEAR, end)
+        horizon = min(ep[-1] + CLEAR, end, data_end)
         for T in np.arange(t0 + CONFIRM_DELAY, horizon + 1e-9, TICK):
             n_conf = int(((arr > T - CONFIRM_DELAY) & (arr <= T)).sum())
             n_all = frame_count(T - CONFIRM_DELAY, T)
@@ -248,9 +255,10 @@ def escalation_times(conf_times, frame_count, start, end, sustained):
 
 
 def frame_counter(run, node_frames):
-    """(t0, t1] -> number of YOLO frames. cctv1 (world mode): from the
-    heartbeat frame_stats, which count every YOLO frame including those
-    without a person. Other cameras: frames with at least one person."""
+    """(t0, t1] -> number of YOLO frames, and the last time it is known for.
+    cctv1 (world mode): from the heartbeat frame_stats, which count every
+    YOLO frame including those without a person, so only up to the last
+    heartbeat. Other cameras: frames with at least one person."""
     beats = json.loads(run['heartbeats'])
     times = np.array([b[0] for b in beats])
     counts = np.array([b[1]['frames'] for b in beats], dtype=float)
@@ -261,7 +269,7 @@ def frame_counter(run, node_frames):
 
     def persons_only(t0, t1):
         return float(((ts > t0) & (ts <= t1)).sum())
-    return cctv1, persons_only
+    return (cctv1, float(times[-1])), (persons_only, float(ts[-1]) if len(ts) else math.nan)
 
 
 # ------------------------------------------------------------------- main
@@ -366,7 +374,7 @@ def main():
         for node, g in ft[ft.run_id == run.run_id].groupby('node'):
             conf_t = g[g.confirmed]['t'].tolist()
             cctv1, persons = frame_counter(runs.loc[run.run_id], g['t'].tolist())
-            t = escalation_times(conf_t, cctv1 if node == 'confirm_cctv1' else persons,
+            t = escalation_times(conf_t, (cctv1 if node == 'confirm_cctv1' else persons)[0],
                                  -math.inf, math.inf, sustained=False)
             t_pred = np.nanmin([t_pred, t]) if np.isfinite(t) else t_pred
         checks.append((run.run_id, t_pred, run.t_s1_actual))
@@ -448,10 +456,12 @@ def main():
     md.append('| Scenario | violation events escalated at baseline | still escalate | median d2i baseline (s) | '
               'median d2i sustained (s) | median / max extra delay (s) |')
     md.append('|---|---|---|---|---|---|')
+    def s2(x):  # '–' where no event escalates under the rule
+        return f'{x:.2f}' if np.isfinite(x) else '–'
     for r in by_s.itertuples():
-        md.append(f'| {r.scenario} | {r.events} | {r.still_escalate} | {r.median_d2i_baseline:.2f} | '
-                  f'{r.median_d2i_sustained:.2f} | {r.median_extra_delay:.2f} / '
-                  f'{r.max_extra_delay:.2f} |')
+        md.append(f'| {r.scenario} | {r.events} | {r.still_escalate} | {s2(r.median_d2i_baseline)} | '
+                  f'{s2(r.median_d2i_sustained)} | {s2(r.median_extra_delay)} / '
+                  f'{s2(r.max_extra_delay)} |')
 
     # ============================================= 3. outcome vs truth
     md.append('\n## 3. FSM outcome vs what the person really did\n')
@@ -507,9 +517,9 @@ def sustained_rows(ft, runs):
         end = run.t_cessation if positive and np.isfinite(run.t_cessation) else math.inf
         conf_t = g[g.confirmed]['t'].tolist()
         cctv1, persons = frame_counter(run, g['t'].tolist())
-        counter = cctv1 if node == 'confirm_cctv1' else persons
+        counter, data_end = cctv1 if node == 'confirm_cctv1' else persons
         t_b = escalation_times(conf_t, counter, start, end, sustained=False)
-        t_s = escalation_times(conf_t, counter, start, end, sustained=True)
+        t_s = escalation_times(conf_t, counter, start, end, sustained=True, data_end=data_end)
         first = [t for t in conf_t if start <= t <= end]
         t0 = first[0] if first else math.nan
         n_conf = sum(t0 < t <= t0 + CONFIRM_DELAY for t in first) + (1 if first else 0)

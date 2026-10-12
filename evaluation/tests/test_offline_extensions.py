@@ -84,6 +84,16 @@ def test_missing_frames_count_against_the_sustained_rule():
     assert np.isnan(ox.escalation_times(seen, counter_from(GRID), -math.inf, math.inf, True))
 
 
+def test_sustained_rule_never_judges_a_window_past_the_end_of_the_data():
+    # sparse confirmations; the frame count stops at the last heartbeat (20 s),
+    # so a window past it would see only the confirmed frames and pass
+    beats = [t for t in GRID if t <= 20.0]
+    conf = [t for t in GRID if t >= 10.0 and round(t * 5) % 5 == 0]   # 20 %, up to 29.8
+    counter = counter_from(beats)
+    assert np.isfinite(ox.escalation_times(conf, counter, -math.inf, math.inf, True))
+    assert np.isnan(ox.escalation_times(conf, counter, -math.inf, math.inf, True, data_end=20.0))
+
+
 # ------------------------------------------- seeded noise replay vs node
 
 def test_noise_replay_matches_the_real_scenario_publisher():

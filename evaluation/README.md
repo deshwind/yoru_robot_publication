@@ -68,7 +68,12 @@ SHA-256 fingerprint of `src/` + configs.
 A run stops 10 s (sim) after the FSM's outcome, or at the scenario's `max_sim_s` if it never
 escalates. The runner checks that the overlay was applied (`config_not_applied`), stops the
 whole process group (SIGINT, then SIGTERM, then SIGKILL) and verifies nothing survived
-(`cleanup_failed`). Start-up failures are retried once.
+(`cleanup_failed`). It also checks that Nav2 was active by sim 28 s, before the 30 s onset
+(`nav2_not_ready`), and that every person was placed inside the building after onset
+(`actors_not_placed`). It stops any leftover Gazebo server of this project before and after each
+run. Each of these failures is retried once (`--retries`). The batch stops after 3 runs in a row
+fail to start (`--max-startup-failures`). A replaced attempt is moved to
+`evaluation/data/runs_invalid/`, with its reason in the folder name, and is never deleted.
 
 Summarise any bag: `python3 evaluation/scripts/bag_summary.py <run_dir>/bag`.
 
@@ -91,7 +96,7 @@ Batch progress while it runs: `grep -c status= evaluation/data/baseline_batch.lo
 
 ```bash
 PYTHONPATH=src/yoru_core:$PYTHONPATH python3 -m pytest src/yoru_core/test -q   # system (82)
-python3 -m pytest evaluation/tests -q                                           # statistics (8)
+python3 -m pytest evaluation/tests -q                                           # evaluation scripts (28)
 ```
 
 ## 6. Scripts
@@ -109,3 +114,7 @@ python3 -m pytest evaluation/tests -q                                           
 | `phase0_*.py`, `phase1_*`, `phase2_*` | evidence generators for those phases |
 | `extract_metrics.py`, `summarise.py` | Phase 5 metrics and tables |
 | `sensitivity_offline.py` | Phase 6: offline weight/threshold sensitivity from the logged frames → `evaluation/results/sensitivity/` |
+| `offline_extensions.py` | deployment thresholds, sustained-confirmation rule and outcome vs truth, from the logged frames → `evaluation/results/offline_extensions/` |
+| `check_actor_placement.py` | checks every valid run had its people inside the building after onset (the runner also checks each new run) |
+| `reconcile_counts.py` | checks the manifest, metrics and both offline analyses use the same runs and the same attempt of each run; failure rate → `evaluation/results/run_counts.md` |
+| `watchdog.sh` | health check of a running batch every 10 min → `evaluation/data/batch_watchdog.log` |

@@ -26,7 +26,7 @@ from run_batch import nav2_ready  # noqa: E402  (the runner's own validity check
 
 DATA = os.path.join(ROOT, 'evaluation', 'data')
 INFRA = ('nav2_not_ready', 'startup_failed', 'launch_exited', 'config_not_applied',
-         'timeout', 'cleanup_failed', 'bag_missing')
+         'timeout', 'cleanup_failed', 'bag_missing', 'actors_not_placed')
 
 
 def scenario_of(run_id):
@@ -47,6 +47,13 @@ def main():
     valid = {r for r, row in latest.iterrows()
              if row.status == 'ok' and nav2_ready(os.path.join(ROOT, row.run_dir, 'launch.log'))
              and row.code_sha256 == cli.expected_code}
+    # A run is identified by its id AND its attempt (start time): a source built
+    # before a run was redone holds the right id but the superseded attempt.
+    valid_keys = {(r, latest.at[r, 'start_wall']) for r in valid}
+
+    def keys(table):
+        attempt = table.start_wall if 'start_wall' in table else [''] * len(table)
+        return set(zip(table.run_id, attempt))
     code_other = sorted(r for r, row in latest.iterrows() if row.code_sha256 != cli.expected_code)
 
     # every unused attempt, with its reason
@@ -67,6 +74,8 @@ def main():
             or ('[gzserver-4]: process has died' in text and 'exit code 255' in text))
         kind = ('runner defect: stale Gazebo server blocked start-up (fixed 2026-10-06)'
                 if stale_gazebo
+                else 'infrastructure: person not placed in the scene (lost placement message)'
+                if reason == 'actors_not_placed' or status == 'actors_not_placed'
                 else 'infrastructure: Nav2 never active (found post hoc)' if reason == 'nav2_not_ready_posthoc'
                 else f'infrastructure: {status}' if status in INFRA
                 else 'interrupted by the batch restart (operator)' if status == 'interrupted'
@@ -75,17 +84,17 @@ def main():
                        'reason': reason, 'status': status, 'kind': kind})
     failed = pd.DataFrame(failed, columns=['run_id', 'reason', 'status', 'kind'])
 
-    sources = {'manifest (valid)': valid}
+    sources = {'manifest (valid)': valid_keys}
     metrics_path = os.path.join(DATA, 'metrics.csv')
     if os.path.isfile(metrics_path):
         m = pd.read_csv(metrics_path, dtype=str, keep_default_na=False)
         m = m[(m.tag == cli.tag) & (m.status == 'ok')]
-        sources['metrics.csv'] = set(m.run_id)
+        sources['metrics.csv'] = keys(m)
     for label, cache in (('sensitivity analysis', 'frames_baseline.runs.csv'),
                          ('offline extensions', 'frames_extensions.runs.csv')):
         path = os.path.join(DATA, cache)
         if os.path.isfile(path):
-            sources[label] = set(pd.read_csv(path, dtype=str)['run_id'])
+            sources[label] = keys(pd.read_csv(path, dtype=str, keep_default_na=False))
 
     scenarios = sorted({scenario_of(r) for r in latest.index})
     header = (['Scenario', 'valid (manifest)'] + [s for s in sources if s != 'manifest (valid)']
@@ -98,7 +107,7 @@ def main():
         | {r for r, row in latest.iterrows() if row.attempts not in ('', '1')}
     for s in scenarios:
         v = {r for r in valid if scenario_of(r) == s}
-        cells = [str(len({r for r in ids if scenario_of(r) == s}))
+        cells = [str(len({r for r, _ in ids if scenario_of(r) == s}))
                  for label, ids in sources.items() if label != 'manifest (valid)']
         row = [s, str(len(v))] + cells + [
             str(len({r for r in redone_runs if scenario_of(r) == s})),
@@ -109,11 +118,13 @@ def main():
              + [f'**{len(redone_runs)}**', f'**{len(failed)}**'])
     lines.append('| ' + ' | '.join(total) + ' |')
 
-    agree = all(ids == valid for ids in sources.values())
-    lines.append(f'\n**Identical run sets in every source: {"yes" if agree else "NO"}.**')
+    agree = all(ids == valid_keys for ids in sources.values())
+    lines.append(f'\n**Identical run sets in every source (same run and same attempt): '
+                 f'{"yes" if agree else "NO"}.**')
     for label, ids in sources.items():
-        if ids != valid:
-            lines.append(f'- {label}: missing {sorted(valid - ids)[:10]}, extra {sorted(ids - valid)[:10]}')
+        if ids != valid_keys:
+            lines.append(f'- {label}: missing or superseded {sorted(valid_keys - ids)[:10]}, '
+                         f'extra {sorted(ids - valid_keys)[:10]}')
     if code_other:
         lines.append(f'- runs with a different code fingerprint: {code_other}')
 

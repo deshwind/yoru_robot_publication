@@ -124,14 +124,18 @@ def read_run(run_dir):
 
 def cache_current(manifests, cache):
     """A cache is reused only if it holds exactly the runs that are 'ok' in
-    the manifests now (a cache built from a partial batch is rebuilt)."""
+    the manifests now, each from the same attempt (a cache built from a
+    partial batch, or before a run was redone, is rebuilt)."""
     wanted = set()
     for manifest in manifests:
         table = pd.read_csv(manifest, dtype=str, keep_default_na=False)
         table = table.drop_duplicates('run_id', keep='last')
-        wanted |= set(table.loc[table.status == 'ok', 'run_id'])
-    cached = set(pd.read_csv(cache + '.runs.csv', dtype=str)['run_id'])
-    return cached == wanted
+        ok = table[table.status == 'ok']
+        wanted |= set(zip(ok.run_id, ok.start_wall))
+    cached = pd.read_csv(cache + '.runs.csv', dtype=str, keep_default_na=False)
+    if 'start_wall' not in cached:
+        return False   # cache from before attempts were recorded
+    return set(zip(cached.run_id, cached.start_wall)) == wanted
 
 
 def load(manifests, cache):
@@ -155,7 +159,8 @@ def load(manifests, cache):
             s1 = next((e['stamp'] for e in fsm if e['new_state'] == 'PA_WARNING'), math.nan)
             t_end = max([f['recv_stamp'] for f in frames] or [math.nan])
             run_rows.append({
-                'run_id': run['run_id'], 'tag': run['tag'], 'scenario': run['scenario'],
+                'run_id': run['run_id'], 'start_wall': run['start_wall'],
+                'tag': run['tag'], 'scenario': run['scenario'],
                 'seed': run['seed'], 'ground_truth': run['ground_truth'],
                 't_v': events.get('violation_onset', math.nan),
                 't_cessation': events.get('violation_cessation', math.nan),

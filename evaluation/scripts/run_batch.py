@@ -384,6 +384,16 @@ def run_once(scenario, seed, run_dir, weights, domain_id, cli):
 
     died = died_before(log_path, offset)
     bag_ok = os.path.isfile(os.path.join(run_dir, 'bag', 'metadata.yaml'))
+    if status == 'ok' and bag_ok:
+        # the scenario only happened if its people were really in the scene
+        # (a lost placement message leaves a person parked outside)
+        from check_actor_placement import check as actors_placed
+        placed, detail = actors_placed(run_dir)
+        if not placed:
+            status = 'actors_not_placed'
+            log = open(log_path, 'a', encoding='utf-8')
+            log.write(f'\n[run_batch] actors not placed: {detail}\n')
+            log.close()
     if status == 'ok' and not bag_ok:
         status = 'bag_missing'
     info = {
@@ -469,6 +479,11 @@ def main():
         tag = f'ablate_{cli.ablate}' if tag == 'baseline' else f'{tag}_ablate_{cli.ablate}'
     plan = [(s, seed) for s in scenarios for seed in seeds]
     done, invalid = completed_runs(cli.manifest) if cli.skip_existing else (set(), {})
+    latest_status = {}
+    if os.path.isfile(cli.manifest):
+        with open(cli.manifest, encoding='utf-8') as f:
+            for r in csv.DictReader(f):
+                latest_status[(r['tag'], r['scenario'], r['seed'])] = r['status']
     for key in invalid:
         print(f'[run_batch] {"/".join(key)} was ok but Nav2 never came up: will redo',
               flush=True)
@@ -505,8 +520,10 @@ def main():
                 print(f'[run_batch] {index + 1}/{len(plan)} {scenario["id"]} seed {seed} '
                       f'attempt {attempt} (domain {domain_id}) -> {run_dir}', flush=True)
                 if os.path.isdir(run_dir):
-                    reason = ('nav2_not_ready_posthoc'
-                              if (tag, scenario['id'], str(seed)) in invalid and attempt == 1
+                    key = (tag, scenario['id'], str(seed))
+                    reason = ('nav2_not_ready_posthoc' if key in invalid and attempt == 1
+                              else latest_status.get(key, 'superseded') if attempt == 1
+                              and latest_status.get(key, 'ok') not in ('ok', '')
                               else 'superseded')
                     moved = quarantine(run_dir, reason)
                     print(f'[run_batch]   previous attempt moved to {moved}', flush=True)
@@ -515,7 +532,8 @@ def main():
                       f'stage={info["outcome_stage"]} sim={info["sim_s"]}s '
                       f'wall={info["wall_s"]}s rtf={info["rtf"]}', flush=True)
                 if info['status'] not in ('startup_failed', 'launch_exited',
-                                          'config_not_applied', 'nav2_not_ready'):
+                                          'config_not_applied', 'nav2_not_ready',
+                                          'actors_not_placed'):
                     break
                 time.sleep(5)
             time.sleep(3)  # let DDS / shared memory settle between runs

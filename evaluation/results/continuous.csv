@@ -1,0 +1,271 @@
+tag,scenario,metric,label,unit,n,mean,sd,median,q1,q3,min,max,ci_low,ci_high
+baseline,A,confirmation_latency,Confirmation latency,s,20,0.8650,0.1387,0.8000,0.8000,0.9000,0.8000,1.3000,0.8150,0.9300
+baseline,A,detection_to_intervention,Detection to intervention,s,20,5.0650,0.0489,5.1000,5.0000,5.1000,5.0000,5.1000,5.0450,5.0850
+baseline,A,navigation_time,Navigation time,s,20,23.5313,0.0978,23.5309,23.4560,23.5841,23.3480,23.7638,23.4914,23.5739
+baseline,A,path_length,Path length (S2),m,20,5.8519,0.0141,5.8520,5.8427,5.8601,5.8234,5.8824,5.8460,5.8580
+baseline,A,plan_updates,Plan updates (S2),,20,25.3500,0.5871,25.0000,25.0000,26.0000,25.0000,27.0000,25.1000,25.6000
+baseline,A,nav_recoveries,Nav2 recoveries (S2),,20,0.0500,0.2236,0.0000,0.0000,0.0000,0.0000,1.0000,0.0000,0.1500
+baseline,A,compliance_latency,Compliance latency,s,20,29.0150,0.1755,29.0000,28.9000,29.1250,28.7000,29.4000,28.9400,29.0900
+baseline,A,violation_duration,Violation duration,s,20,34.0800,0.1936,34.1000,34.0000,34.2000,33.7000,34.5000,33.9950,34.1650
+baseline,A,termination_latency,Termination latency,s,20,9.7850,0.0671,9.8000,9.7000,9.8000,9.7000,9.9000,9.7550,9.8150
+baseline,A,stop_back_distance,Stop-back distance,m,20,2.0094,0.3625,2.1929,1.7201,2.2625,1.3939,2.4850,1.8556,2.1602
+baseline,A,min_distance,Min robot-violator distance,m,20,2.0048,0.3638,2.1886,1.7178,2.2601,1.3912,2.4831,1.8474,2.1577
+baseline,A,min_distance_any_person,Min robot-person distance,m,20,2.0048,0.3638,2.1886,1.7178,2.2601,1.3912,2.4831,1.8471,2.1583
+baseline,A,step_back_distance,Step-back distance,m,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,A,min_scan_range,Min lidar range (S2-S3),m,20,0.6346,0.0133,0.6360,0.6294,0.6437,0.6040,0.6569,0.6286,0.6400
+baseline,A,escalation_depth,Escalation depth,,20,3.0000,0.0000,3.0000,3.0000,3.0000,3.0000,3.0000,3.0000,3.0000
+baseline,A,warnings_delivered,Warnings delivered,,20,3.0000,0.0000,3.0000,3.0000,3.0000,3.0000,3.0000,3.0000,3.0000
+baseline,A,cctv1_frame_hz,cctv1 frame rate (sim),Hz,20,4.9474,0.0428,4.9548,4.9212,4.9819,4.8325,5.0000,4.9279,4.9649
+baseline,A,rtf,Real-time factor,,20,0.8915,0.0071,0.8920,0.8900,0.8960,0.8740,0.9020,0.8883,0.8945
+baseline,A-V,confirmation_latency,Confirmation latency,s,20,0.9750,0.2291,0.9000,0.8000,1.1250,0.8000,1.7000,0.8900,1.0800
+baseline,A-V,detection_to_intervention,Detection to intervention,s,20,5.0350,0.0489,5.0000,5.0000,5.1000,5.0000,5.1000,5.0150,5.0550
+baseline,A-V,navigation_time,Navigation time,s,20,23.5180,0.1181,23.5069,23.4138,23.5747,23.3751,23.8214,23.4698,23.5699
+baseline,A-V,path_length,Path length (S2),m,20,5.8499,0.0178,5.8442,5.8360,5.8664,5.8227,5.8774,5.8424,5.8572
+baseline,A-V,plan_updates,Plan updates (S2),,20,25.5500,0.8256,25.0000,25.0000,26.0000,25.0000,28.0000,25.2500,25.9000
+baseline,A-V,nav_recoveries,Nav2 recoveries (S2),,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,A-V,compliance_latency,Compliance latency,s,20,28.9150,0.2519,29.0000,28.8750,29.1000,28.1000,29.2000,28.8000,29.0100
+baseline,A-V,violation_duration,Violation duration,s,20,33.9500,0.2666,34.0000,33.9500,34.1000,33.1000,34.2000,33.8250,34.0500
+baseline,A-V,termination_latency,Termination latency,s,20,9.7750,0.0639,9.8000,9.7000,9.8000,9.7000,9.9000,9.7500,9.8050
+baseline,A-V,stop_back_distance,Stop-back distance,m,20,2.0057,0.3641,2.1812,1.6878,2.2706,1.3983,2.4748,1.8491,2.1607
+baseline,A-V,min_distance,Min robot-violator distance,m,20,1.9997,0.3622,2.1755,1.6835,2.2609,1.3943,2.4697,1.8460,2.1522
+baseline,A-V,min_distance_any_person,Min robot-person distance,m,20,1.9997,0.3622,2.1755,1.6835,2.2609,1.3943,2.4697,1.8419,2.1515
+baseline,A-V,step_back_distance,Step-back distance,m,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,A-V,min_scan_range,Min lidar range (S2-S3),m,20,0.6389,0.0190,0.6367,0.6245,0.6582,0.6025,0.6674,0.6309,0.6469
+baseline,A-V,escalation_depth,Escalation depth,,20,3.0000,0.0000,3.0000,3.0000,3.0000,3.0000,3.0000,3.0000,3.0000
+baseline,A-V,warnings_delivered,Warnings delivered,,20,3.0000,0.0000,3.0000,3.0000,3.0000,3.0000,3.0000,3.0000,3.0000
+baseline,A-V,cctv1_frame_hz,cctv1 frame rate (sim),Hz,20,4.9336,0.0727,4.9459,4.9071,4.9940,4.7356,5.0120,4.9002,4.9630
+baseline,A-V,rtf,Real-time factor,,20,0.8859,0.0125,0.8890,0.8808,0.8970,0.8600,0.9000,0.8803,0.8910
+baseline,B,confirmation_latency,Confirmation latency,s,0,,,,,,,,,
+baseline,B,detection_to_intervention,Detection to intervention,s,0,,,,,,,,,
+baseline,B,navigation_time,Navigation time,s,0,,,,,,,,,
+baseline,B,path_length,Path length (S2),m,0,,,,,,,,,
+baseline,B,plan_updates,Plan updates (S2),,0,,,,,,,,,
+baseline,B,nav_recoveries,Nav2 recoveries (S2),,0,,,,,,,,,
+baseline,B,compliance_latency,Compliance latency,s,0,,,,,,,,,
+baseline,B,violation_duration,Violation duration,s,0,,,,,,,,,
+baseline,B,termination_latency,Termination latency,s,0,,,,,,,,,
+baseline,B,stop_back_distance,Stop-back distance,m,0,,,,,,,,,
+baseline,B,min_distance,Min robot-violator distance,m,0,,,,,,,,,
+baseline,B,min_distance_any_person,Min robot-person distance,m,0,,,,,,,,,
+baseline,B,step_back_distance,Step-back distance,m,0,,,,,,,,,
+baseline,B,min_scan_range,Min lidar range (S2-S3),m,0,,,,,,,,,
+baseline,B,escalation_depth,Escalation depth,,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,B,warnings_delivered,Warnings delivered,,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,B,cctv1_frame_hz,cctv1 frame rate (sim),Hz,20,4.9661,0.0577,4.9852,4.9598,5.0000,4.8051,5.0169,4.9401,4.9886
+baseline,B,rtf,Real-time factor,,20,0.8995,0.0168,0.9060,0.8925,0.9110,0.8560,0.9130,0.8918,0.9059
+baseline,B-C7,confirmation_latency,Confirmation latency,s,20,2.0150,0.9132,1.8000,1.2000,2.6500,1.0000,3.7000,1.6400,2.4300
+baseline,B-C7,detection_to_intervention,Detection to intervention,s,20,5.0050,0.0224,5.0000,5.0000,5.0000,5.0000,5.1000,5.0000,5.0150
+baseline,B-C7,navigation_time,Navigation time,s,20,23.5785,0.1679,23.5562,23.4820,23.6164,23.4023,24.1579,23.5158,23.6585
+baseline,B-C7,path_length,Path length (S2),m,20,5.8569,0.0120,5.8553,5.8506,5.8621,5.8343,5.8771,5.8519,5.8620
+baseline,B-C7,plan_updates,Plan updates (S2),,20,25.1000,0.3078,25.0000,25.0000,25.0000,25.0000,26.0000,25.0000,25.2500
+baseline,B-C7,nav_recoveries,Nav2 recoveries (S2),,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,B-C7,compliance_latency,Compliance latency,s,0,,,,,,,,,
+baseline,B-C7,violation_duration,Violation duration,s,0,,,,,,,,,
+baseline,B-C7,termination_latency,Termination latency,s,0,,,,,,,,,
+baseline,B-C7,stop_back_distance,Stop-back distance,m,20,2.0059,0.3667,2.1925,1.7012,2.2535,1.4166,2.4693,1.8498,2.1600
+baseline,B-C7,min_distance,Min robot-violator distance,m,20,2.0003,0.3641,2.1878,1.7002,2.2513,1.4108,2.4644,1.8432,2.1536
+baseline,B-C7,min_distance_any_person,Min robot-person distance,m,20,2.0003,0.3641,2.1878,1.7002,2.2513,1.4108,2.4644,1.8465,2.1531
+baseline,B-C7,step_back_distance,Step-back distance,m,0,,,,,,,,,
+baseline,B-C7,min_scan_range,Min lidar range (S2-S3),m,20,0.6345,0.0184,0.6341,0.6169,0.6463,0.6094,0.6715,0.6268,0.6425
+baseline,B-C7,escalation_depth,Escalation depth,,20,4.0000,0.0000,4.0000,4.0000,4.0000,4.0000,4.0000,4.0000,4.0000
+baseline,B-C7,warnings_delivered,Warnings delivered,,20,4.0000,0.0000,4.0000,4.0000,4.0000,4.0000,4.0000,4.0000,4.0000
+baseline,B-C7,cctv1_frame_hz,cctv1 frame rate (sim),Hz,20,4.9752,0.0341,4.9924,4.9449,5.0012,4.8938,5.0155,4.9599,4.9891
+baseline,B-C7,rtf,Real-time factor,,20,0.9040,0.0023,0.9040,0.9030,0.9050,0.8980,0.9080,0.9030,0.9049
+baseline,C,confirmation_latency,Confirmation latency,s,20,0.8800,0.1361,0.8000,0.8000,0.9000,0.8000,1.3000,0.8300,0.9450
+baseline,C,detection_to_intervention,Detection to intervention,s,20,5.0600,0.0503,5.1000,5.0000,5.1000,5.0000,5.1000,5.0400,5.0800
+baseline,C,navigation_time,Navigation time,s,0,,,,,,,,,
+baseline,C,path_length,Path length (S2),m,20,3.3661,0.3434,3.2668,3.1003,3.4482,2.9406,4.1301,3.2246,3.5184
+baseline,C,plan_updates,Plan updates (S2),,20,14.7500,1.5517,14.0000,14.0000,15.2500,13.0000,18.0000,14.1000,15.4500
+baseline,C,nav_recoveries,Nav2 recoveries (S2),,20,0.0500,0.2236,0.0000,0.0000,0.0000,0.0000,1.0000,0.0000,0.1500
+baseline,C,compliance_latency,Compliance latency,s,0,,,,,,,,,
+baseline,C,violation_duration,Violation duration,s,0,,,,,,,,,
+baseline,C,termination_latency,Termination latency,s,20,7.8800,0.0696,7.9000,7.8000,7.9000,7.8000,8.0000,7.8500,7.9100
+baseline,C,stop_back_distance,Stop-back distance,m,0,,,,,,,,,
+baseline,C,min_distance,Min robot-violator distance,m,20,6.7707,0.5236,7.1084,6.3018,7.1890,5.9853,7.4129,6.5448,6.9928
+baseline,C,min_distance_any_person,Min robot-person distance,m,20,6.7707,0.5236,7.1084,6.3018,7.1890,5.9853,7.4129,6.5428,6.9932
+baseline,C,step_back_distance,Step-back distance,m,0,,,,,,,,,
+baseline,C,min_scan_range,Min lidar range (S2-S3),m,20,1.0013,0.1989,1.0232,0.9108,1.1598,0.6523,1.3071,0.9132,1.0832
+baseline,C,escalation_depth,Escalation depth,,20,2.0000,0.0000,2.0000,2.0000,2.0000,2.0000,2.0000,2.0000,2.0000
+baseline,C,warnings_delivered,Warnings delivered,,20,1.0000,0.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000
+baseline,C,cctv1_frame_hz,cctv1 frame rate (sim),Hz,20,4.1705,0.1198,4.1565,4.0893,4.1896,3.9635,4.4094,4.1215,4.2247
+baseline,C,rtf,Real-time factor,,20,0.8811,0.0048,0.8805,0.8780,0.8845,0.8730,0.8890,0.8790,0.8831
+baseline,D,confirmation_latency,Confirmation latency,s,0,,,,,,,,,
+baseline,D,detection_to_intervention,Detection to intervention,s,0,,,,,,,,,
+baseline,D,navigation_time,Navigation time,s,0,,,,,,,,,
+baseline,D,path_length,Path length (S2),m,0,,,,,,,,,
+baseline,D,plan_updates,Plan updates (S2),,0,,,,,,,,,
+baseline,D,nav_recoveries,Nav2 recoveries (S2),,0,,,,,,,,,
+baseline,D,compliance_latency,Compliance latency,s,0,,,,,,,,,
+baseline,D,violation_duration,Violation duration,s,0,,,,,,,,,
+baseline,D,termination_latency,Termination latency,s,0,,,,,,,,,
+baseline,D,stop_back_distance,Stop-back distance,m,0,,,,,,,,,
+baseline,D,min_distance,Min robot-violator distance,m,0,,,,,,,,,
+baseline,D,min_distance_any_person,Min robot-person distance,m,0,,,,,,,,,
+baseline,D,step_back_distance,Step-back distance,m,0,,,,,,,,,
+baseline,D,min_scan_range,Min lidar range (S2-S3),m,0,,,,,,,,,
+baseline,D,escalation_depth,Escalation depth,,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,D,warnings_delivered,Warnings delivered,,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,D,cctv1_frame_hz,cctv1 frame rate (sim),Hz,20,4.9578,0.0322,4.9642,4.9441,4.9758,4.8688,5.0042,4.9432,4.9704
+baseline,D,rtf,Real-time factor,,20,0.9021,0.0019,0.9020,0.9010,0.9030,0.9000,0.9070,0.9013,0.9029
+baseline,E,confirmation_latency,Confirmation latency,s,0,,,,,,,,,
+baseline,E,detection_to_intervention,Detection to intervention,s,0,,,,,,,,,
+baseline,E,navigation_time,Navigation time,s,0,,,,,,,,,
+baseline,E,path_length,Path length (S2),m,0,,,,,,,,,
+baseline,E,plan_updates,Plan updates (S2),,0,,,,,,,,,
+baseline,E,nav_recoveries,Nav2 recoveries (S2),,0,,,,,,,,,
+baseline,E,compliance_latency,Compliance latency,s,0,,,,,,,,,
+baseline,E,violation_duration,Violation duration,s,0,,,,,,,,,
+baseline,E,termination_latency,Termination latency,s,0,,,,,,,,,
+baseline,E,stop_back_distance,Stop-back distance,m,0,,,,,,,,,
+baseline,E,min_distance,Min robot-violator distance,m,0,,,,,,,,,
+baseline,E,min_distance_any_person,Min robot-person distance,m,0,,,,,,,,,
+baseline,E,step_back_distance,Step-back distance,m,0,,,,,,,,,
+baseline,E,min_scan_range,Min lidar range (S2-S3),m,0,,,,,,,,,
+baseline,E,escalation_depth,Escalation depth,,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,E,warnings_delivered,Warnings delivered,,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,E,cctv1_frame_hz,cctv1 frame rate (sim),Hz,20,4.9683,0.0261,4.9704,4.9567,4.9884,4.9111,5.0042,4.9569,4.9789
+baseline,E,rtf,Real-time factor,,20,0.9028,0.0019,0.9030,0.9020,0.9042,0.8980,0.9050,0.9019,0.9036
+baseline,F-pen,confirmation_latency,Confirmation latency,s,0,,,,,,,,,
+baseline,F-pen,detection_to_intervention,Detection to intervention,s,0,,,,,,,,,
+baseline,F-pen,navigation_time,Navigation time,s,0,,,,,,,,,
+baseline,F-pen,path_length,Path length (S2),m,0,,,,,,,,,
+baseline,F-pen,plan_updates,Plan updates (S2),,0,,,,,,,,,
+baseline,F-pen,nav_recoveries,Nav2 recoveries (S2),,0,,,,,,,,,
+baseline,F-pen,compliance_latency,Compliance latency,s,0,,,,,,,,,
+baseline,F-pen,violation_duration,Violation duration,s,0,,,,,,,,,
+baseline,F-pen,termination_latency,Termination latency,s,0,,,,,,,,,
+baseline,F-pen,stop_back_distance,Stop-back distance,m,0,,,,,,,,,
+baseline,F-pen,min_distance,Min robot-violator distance,m,0,,,,,,,,,
+baseline,F-pen,min_distance_any_person,Min robot-person distance,m,0,,,,,,,,,
+baseline,F-pen,step_back_distance,Step-back distance,m,0,,,,,,,,,
+baseline,F-pen,min_scan_range,Min lidar range (S2-S3),m,0,,,,,,,,,
+baseline,F-pen,escalation_depth,Escalation depth,,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,F-pen,warnings_delivered,Warnings delivered,,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,F-pen,cctv1_frame_hz,cctv1 frame rate (sim),Hz,20,4.9653,0.0423,4.9874,4.9367,4.9969,4.8776,5.0084,4.9465,4.9826
+baseline,F-pen,rtf,Real-time factor,,20,0.9022,0.0032,0.9025,0.9000,0.9050,0.8940,0.9070,0.9008,0.9036
+baseline,F-straw,confirmation_latency,Confirmation latency,s,0,,,,,,,,,
+baseline,F-straw,detection_to_intervention,Detection to intervention,s,0,,,,,,,,,
+baseline,F-straw,navigation_time,Navigation time,s,0,,,,,,,,,
+baseline,F-straw,path_length,Path length (S2),m,0,,,,,,,,,
+baseline,F-straw,plan_updates,Plan updates (S2),,0,,,,,,,,,
+baseline,F-straw,nav_recoveries,Nav2 recoveries (S2),,0,,,,,,,,,
+baseline,F-straw,compliance_latency,Compliance latency,s,0,,,,,,,,,
+baseline,F-straw,violation_duration,Violation duration,s,0,,,,,,,,,
+baseline,F-straw,termination_latency,Termination latency,s,0,,,,,,,,,
+baseline,F-straw,stop_back_distance,Stop-back distance,m,0,,,,,,,,,
+baseline,F-straw,min_distance,Min robot-violator distance,m,0,,,,,,,,,
+baseline,F-straw,min_distance_any_person,Min robot-person distance,m,0,,,,,,,,,
+baseline,F-straw,step_back_distance,Step-back distance,m,0,,,,,,,,,
+baseline,F-straw,min_scan_range,Min lidar range (S2-S3),m,0,,,,,,,,,
+baseline,F-straw,escalation_depth,Escalation depth,,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,F-straw,warnings_delivered,Warnings delivered,,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,F-straw,cctv1_frame_hz,cctv1 frame rate (sim),Hz,20,5.0004,0.0102,5.0042,5.0000,5.0042,4.9619,5.0084,4.9953,5.0038
+baseline,F-straw,rtf,Real-time factor,,20,0.9351,0.0182,0.9415,0.9395,0.9430,0.8990,0.9560,0.9266,0.9423
+baseline,G,confirmation_latency,Confirmation latency,s,20,0.8400,0.1231,0.8000,0.8000,0.8000,0.8000,1.2000,0.8000,0.9000
+baseline,G,detection_to_intervention,Detection to intervention,s,20,5.0900,0.0308,5.1000,5.1000,5.1000,5.0000,5.1000,5.0750,5.1000
+baseline,G,navigation_time,Navigation time,s,20,23.4865,0.1176,23.5049,23.4016,23.5630,23.2664,23.6872,23.4367,23.5364
+baseline,G,path_length,Path length (S2),m,20,5.8536,0.0206,5.8558,5.8346,5.8668,5.8226,5.8988,5.8451,5.8624
+baseline,G,plan_updates,Plan updates (S2),,20,24.0000,0.0000,24.0000,24.0000,24.0000,24.0000,24.0000,24.0000,24.0000
+baseline,G,nav_recoveries,Nav2 recoveries (S2),,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,G,compliance_latency,Compliance latency,s,0,,,,,,,,,
+baseline,G,violation_duration,Violation duration,s,0,,,,,,,,,
+baseline,G,termination_latency,Termination latency,s,0,,,,,,,,,
+baseline,G,stop_back_distance,Stop-back distance,m,20,2.0101,0.3654,2.1833,1.6994,2.2821,1.4296,2.4775,1.8502,2.1646
+baseline,G,min_distance,Min robot-violator distance,m,20,2.0041,0.3644,2.1816,1.6948,2.2609,1.4197,2.4711,1.8404,2.1612
+baseline,G,min_distance_any_person,Min robot-person distance,m,20,2.0041,0.3644,2.1816,1.6948,2.2609,1.4197,2.4711,1.8490,2.1592
+baseline,G,step_back_distance,Step-back distance,m,0,,,,,,,,,
+baseline,G,min_scan_range,Min lidar range (S2-S3),m,20,0.6441,0.0175,0.6428,0.6362,0.6567,0.6148,0.6888,0.6370,0.6518
+baseline,G,escalation_depth,Escalation depth,,20,4.0000,0.0000,4.0000,4.0000,4.0000,4.0000,4.0000,4.0000,4.0000
+baseline,G,warnings_delivered,Warnings delivered,,20,4.0000,0.0000,4.0000,4.0000,4.0000,4.0000,4.0000,4.0000,4.0000
+baseline,G,cctv1_frame_hz,cctv1 frame rate (sim),Hz,20,5.0036,0.0038,5.0051,5.0000,5.0052,4.9948,5.0103,5.0020,5.0052
+baseline,G,rtf,Real-time factor,,20,0.9371,0.0015,0.9370,0.9360,0.9380,0.9340,0.9410,0.9365,0.9378
+baseline,H,confirmation_latency,Confirmation latency,s,20,0.8400,0.1231,0.8000,0.8000,0.8000,0.8000,1.2000,0.8000,0.9000
+baseline,H,detection_to_intervention,Detection to intervention,s,20,5.0900,0.0308,5.1000,5.1000,5.1000,5.0000,5.1000,5.0750,5.1000
+baseline,H,navigation_time,Navigation time,s,0,,,,,,,,,
+baseline,H,path_length,Path length (S2),m,20,1.3861,0.0166,1.3819,1.3773,1.3857,1.3716,1.4401,1.3801,1.3939
+baseline,H,plan_updates,Plan updates (S2),,20,6.0000,0.0000,6.0000,6.0000,6.0000,6.0000,6.0000,6.0000,6.0000
+baseline,H,nav_recoveries,Nav2 recoveries (S2),,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,H,compliance_latency,Compliance latency,s,0,,,,,,,,,
+baseline,H,violation_duration,Violation duration,s,0,,,,,,,,,
+baseline,H,termination_latency,Termination latency,s,20,7.9000,0.0000,7.9000,7.9000,7.9000,7.9000,7.9000,7.9000,7.9000
+baseline,H,stop_back_distance,Stop-back distance,m,0,,,,,,,,,
+baseline,H,min_distance,Min robot-violator distance,m,20,6.1226,0.5392,6.4984,5.6368,6.5518,5.3335,6.7873,5.8925,6.3514
+baseline,H,min_distance_any_person,Min robot-person distance,m,20,6.1226,0.5392,6.4984,5.6368,6.5518,5.3335,6.7873,5.8907,6.3488
+baseline,H,step_back_distance,Step-back distance,m,0,,,,,,,,,
+baseline,H,min_scan_range,Min lidar range (S2-S3),m,20,1.7975,0.0000,1.7975,1.7975,1.7975,1.7975,1.7976,1.7975,1.7975
+baseline,H,escalation_depth,Escalation depth,,20,2.0000,0.0000,2.0000,2.0000,2.0000,2.0000,2.0000,2.0000,2.0000
+baseline,H,warnings_delivered,Warnings delivered,,20,1.0000,0.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000
+baseline,H,cctv1_frame_hz,cctv1 frame rate (sim),Hz,20,5.0005,0.0382,5.0093,5.0000,5.0117,4.8411,5.0188,4.9822,5.0112
+baseline,H,rtf,Real-time factor,,20,0.9147,0.0040,0.9140,0.9120,0.9153,0.9090,0.9290,0.9132,0.9166
+baseline,I,confirmation_latency,Confirmation latency,s,20,0.8400,0.1231,0.8000,0.8000,0.8000,0.8000,1.2000,0.8000,0.9000
+baseline,I,detection_to_intervention,Detection to intervention,s,20,5.0900,0.0308,5.1000,5.1000,5.1000,5.0000,5.1000,5.0750,5.1000
+baseline,I,navigation_time,Navigation time,s,20,23.5109,0.2131,23.4782,23.3872,23.5564,23.2381,24.0249,23.4276,23.6063
+baseline,I,path_length,Path length (S2),m,20,5.8412,0.0196,5.8449,5.8265,5.8502,5.8106,5.8711,5.8329,5.8495
+baseline,I,plan_updates,Plan updates (S2),,20,24.1000,0.3078,24.0000,24.0000,24.0000,24.0000,25.0000,24.0000,24.2500
+baseline,I,nav_recoveries,Nav2 recoveries (S2),,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,I,compliance_latency,Compliance latency,s,20,28.9700,0.2342,28.9000,28.9000,28.9500,28.6000,29.5000,28.8750,29.0750
+baseline,I,violation_duration,Violation duration,s,20,34.0600,0.2521,34.0000,34.0000,34.0500,33.6000,34.6000,33.9600,34.1700
+baseline,I,termination_latency,Termination latency,s,20,9.8000,0.0000,9.8000,9.8000,9.8000,9.8000,9.8000,9.8000,9.8000
+baseline,I,stop_back_distance,Stop-back distance,m,20,2.0164,0.3587,2.1849,1.7048,2.2693,1.4240,2.4705,1.8626,2.1678
+baseline,I,min_distance,Min robot-violator distance,m,20,2.0117,0.3598,2.1812,1.7042,2.2681,1.4055,2.4632,1.8546,2.1638
+baseline,I,min_distance_any_person,Min robot-person distance,m,20,2.0117,0.3598,2.1812,1.7042,2.2681,1.4055,2.4632,1.8552,2.1632
+baseline,I,step_back_distance,Step-back distance,m,20,0.9804,0.0000,0.9804,0.9804,0.9804,0.9804,0.9804,0.9804,0.9804
+baseline,I,min_scan_range,Min lidar range (S2-S3),m,20,0.6396,0.0142,0.6418,0.6319,0.6454,0.6036,0.6647,0.6333,0.6455
+baseline,I,escalation_depth,Escalation depth,,20,3.0000,0.0000,3.0000,3.0000,3.0000,3.0000,3.0000,3.0000,3.0000
+baseline,I,warnings_delivered,Warnings delivered,,20,3.0000,0.0000,3.0000,3.0000,3.0000,3.0000,3.0000,3.0000,3.0000
+baseline,I,cctv1_frame_hz,cctv1 frame rate (sim),Hz,20,4.9310,0.1036,4.9970,4.8203,5.0015,4.7464,5.0121,4.8862,4.9732
+baseline,I,rtf,Real-time factor,,20,0.9322,0.0015,0.9325,0.9318,0.9330,0.9280,0.9340,0.9316,0.9328
+baseline,J,confirmation_latency,Confirmation latency,s,17,0.8706,0.2114,0.8000,0.8000,0.8000,0.8000,1.6000,0.8000,0.9882
+baseline,J,detection_to_intervention,Detection to intervention,s,17,5.0882,0.0332,5.1000,5.1000,5.1000,5.0000,5.1000,5.0706,5.1000
+baseline,J,navigation_time,Navigation time,s,17,23.4767,0.1562,23.4343,23.3990,23.5035,23.3046,23.9800,23.4147,23.5572
+baseline,J,path_length,Path length (S2),m,17,5.8461,0.0156,5.8511,5.8376,5.8558,5.8174,5.8692,5.8388,5.8533
+baseline,J,plan_updates,Plan updates (S2),,17,24.0588,0.2425,24.0000,24.0000,24.0000,24.0000,25.0000,24.0000,24.1765
+baseline,J,nav_recoveries,Nav2 recoveries (S2),,17,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,J,compliance_latency,Compliance latency,s,17,28.9235,0.2251,28.9000,28.9000,28.9000,28.4000,29.5000,28.8176,29.0294
+baseline,J,violation_duration,Violation duration,s,17,34.0118,0.2497,34.0000,34.0000,34.0000,33.4000,34.6000,33.8941,34.1176
+baseline,J,termination_latency,Termination latency,s,17,9.8000,0.0000,9.8000,9.8000,9.8000,9.8000,9.8000,9.8000,9.8000
+baseline,J,stop_back_distance,Stop-back distance,m,17,2.0290,0.4221,2.1896,1.7181,2.3846,1.4140,2.5011,1.8321,2.2208
+baseline,J,min_distance,Min robot-violator distance,m,17,2.0224,0.4225,2.1826,1.7160,2.3788,1.3861,2.4950,1.8223,2.2112
+baseline,J,min_distance_any_person,Min robot-person distance,m,17,1.5671,0.1313,1.6529,1.4413,1.6883,1.3861,1.7417,1.5066,1.6272
+baseline,J,step_back_distance,Step-back distance,m,17,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,J,min_scan_range,Min lidar range (S2-S3),m,17,0.6356,0.0206,0.6338,0.6274,0.6442,0.6080,0.6829,0.6265,0.6453
+baseline,J,escalation_depth,Escalation depth,,20,2.5500,1.0990,3.0000,3.0000,3.0000,0.0000,3.0000,2.1000,3.0000
+baseline,J,warnings_delivered,Warnings delivered,,20,2.5500,1.0990,3.0000,3.0000,3.0000,0.0000,3.0000,1.9500,3.0000
+baseline,J,cctv1_frame_hz,cctv1 frame rate (sim),Hz,20,5.0042,0.0065,5.0060,5.0000,5.0076,4.9879,5.0121,5.0014,5.0069
+baseline,J,rtf,Real-time factor,,20,0.9346,0.0069,0.9320,0.9318,0.9333,0.9290,0.9510,0.9319,0.9378
+baseline,K,confirmation_latency,Confirmation latency,s,20,0.8400,0.1231,0.8000,0.8000,0.8000,0.8000,1.2000,0.8000,0.9000
+baseline,K,detection_to_intervention,Detection to intervention,s,20,5.0900,0.0308,5.1000,5.1000,5.1000,5.0000,5.1000,5.0750,5.1000
+baseline,K,navigation_time,Navigation time,s,0,,,,,,,,,
+baseline,K,path_length,Path length (S2),m,20,5.1638,0.0196,5.1581,5.1536,5.1722,5.1423,5.2277,5.1563,5.1729
+baseline,K,plan_updates,Plan updates (S2),,20,21.8500,0.3663,22.0000,22.0000,22.0000,21.0000,22.0000,21.7000,22.0000
+baseline,K,nav_recoveries,Nav2 recoveries (S2),,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,K,compliance_latency,Compliance latency,s,0,,,,,,,,,
+baseline,K,violation_duration,Violation duration,s,0,,,,,,,,,
+baseline,K,termination_latency,Termination latency,s,0,,,,,,,,,
+baseline,K,stop_back_distance,Stop-back distance,m,0,,,,,,,,,
+baseline,K,min_distance,Min robot-violator distance,m,20,2.5718,0.4292,2.8045,2.1206,2.9020,2.0858,3.1188,2.3894,2.7523
+baseline,K,min_distance_any_person,Min robot-person distance,m,20,0.4139,0.0147,0.4146,0.4088,0.4255,0.3696,0.4298,0.4072,0.4196
+baseline,K,step_back_distance,Step-back distance,m,0,,,,,,,,,
+baseline,K,min_scan_range,Min lidar range (S2-S3),m,20,0.3178,0.0105,0.3175,0.3108,0.3283,0.3001,0.3304,0.3134,0.3221
+baseline,K,escalation_depth,Escalation depth,,20,2.0000,0.0000,2.0000,2.0000,2.0000,2.0000,2.0000,2.0000,2.0000
+baseline,K,warnings_delivered,Warnings delivered,,20,1.0000,0.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000
+baseline,K,cctv1_frame_hz,cctv1 frame rate (sim),Hz,20,5.0056,0.0062,5.0070,5.0000,5.0087,4.9930,5.0141,5.0028,5.0084
+baseline,K,rtf,Real-time factor,,20,0.9257,0.0022,0.9250,0.9248,0.9280,0.9220,0.9290,0.9248,0.9266
+baseline,L,confirmation_latency,Confirmation latency,s,20,0.8400,0.1231,0.8000,0.8000,0.8000,0.8000,1.2000,0.8000,0.9000
+baseline,L,detection_to_intervention,Detection to intervention,s,20,5.0900,0.0308,5.1000,5.1000,5.1000,5.0000,5.1000,5.0750,5.1000
+baseline,L,navigation_time,Navigation time,s,0,,,,,,,,,
+baseline,L,path_length,Path length (S2),m,20,1.1591,0.0242,1.1533,1.1504,1.1557,1.1273,1.2292,1.1504,1.1706
+baseline,L,plan_updates,Plan updates (S2),,20,5.1000,0.3078,5.0000,5.0000,5.0000,5.0000,6.0000,5.0000,5.2500
+baseline,L,nav_recoveries,Nav2 recoveries (S2),,20,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+baseline,L,compliance_latency,Compliance latency,s,0,,,,,,,,,
+baseline,L,violation_duration,Violation duration,s,0,,,,,,,,,
+baseline,L,termination_latency,Termination latency,s,0,,,,,,,,,
+baseline,L,stop_back_distance,Stop-back distance,m,0,,,,,,,,,
+baseline,L,min_distance,Min robot-violator distance,m,20,6.3437,0.5426,6.7147,5.8552,6.7806,5.5454,7.0110,6.1109,6.5670
+baseline,L,min_distance_any_person,Min robot-person distance,m,20,6.3437,0.5426,6.7147,5.8552,6.7806,5.5454,7.0110,6.1050,6.5705
+baseline,L,step_back_distance,Step-back distance,m,0,,,,,,,,,
+baseline,L,min_scan_range,Min lidar range (S2-S3),m,20,1.7975,0.0000,1.7975,1.7975,1.7975,1.7975,1.7975,1.7975,1.7975
+baseline,L,escalation_depth,Escalation depth,,20,2.0000,0.0000,2.0000,2.0000,2.0000,2.0000,2.0000,2.0000,2.0000
+baseline,L,warnings_delivered,Warnings delivered,,20,1.0000,0.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000
+baseline,L,cctv1_frame_hz,cctv1 frame rate (sim),Hz,20,4.9976,0.0316,5.0000,5.0000,5.0095,4.8664,5.0190,4.9823,5.0067
+baseline,L,rtf,Real-time factor,,20,0.9125,0.0027,0.9120,0.9110,0.9140,0.9070,0.9160,0.9113,0.9136

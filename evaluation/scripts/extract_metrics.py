@@ -393,7 +393,7 @@ def main():
                                        'ground_truth', 'expected_outcome', 'w_D', 'w_P',
                                        'w_T', 'w_S', 'confirm_confidence',
                                        'uncertain_confidence', 'ablation', 'rtf',
-                                       'code_sha256', 'run_dir')}
+                                       'code_sha256', 'run_dir', 'start_wall')}
             expected = row['expected_outcome'].split()[0]
             row['expected_outcome'] = OUTCOMES.get(expected, expected)  # same names as 'outcome'
             run_dir = os.path.join(ROOT, run['run_dir'])
