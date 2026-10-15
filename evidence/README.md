@@ -21,6 +21,7 @@ the files listed. Where something has **not** been measured, it says so.
 | 6 Sensitivity analysis | **final** (300 runs): [E6.3](#e63-final-results-300-runs-600-events) | [`evaluation/results/sensitivity/`](../evaluation/results/sensitivity/) |
 | 7 Ablation | offline ablation **final** (E6.3); node flags implemented and tested in a pending patch, **not yet applied** (no ablation runs in Gazebo) | [`phase6/`](phase6/) |
 | Offline extensions | **final** (300 runs): [deployment thresholds, sustained rule, outcome vs truth](#final-results-300-runs) | [`evaluation/results/offline_extensions/`](../evaluation/results/offline_extensions/) |
+| Extension A: FSM design variants | implemented, unit-tested, replay-validated on the 300 baseline bags; **not yet run in Gazebo** | [section](#extension-a-fsm-design-variants-2026-10-15), [`evaluation/results/fsm_replay/`](../evaluation/results/fsm_replay/) |
 
 **Final numbers, in one place:** [E5.3](#e53-final-results-300-valid-runs) (outcomes, timing, proximity),
 [E6.3](#e63-final-results-300-runs-600-events) (sensitivity and ablation), the
@@ -952,3 +953,84 @@ regression-tested.
 - The cause of the lost placement message in K/1 (a race in `human_actor_node`) is not fixed. It is caught by the
   placement check on every run.
 - Bags (about 4 GB) are not in the repository; they are to be archived separately with a DOI.
+
+---
+
+## Extension A: FSM design variants (2026-10-15)
+
+Three new behaviours of the compliance FSM, each a parameter of `compliance_fsm_node` that is **off by
+default**. The 300 baseline runs are not touched or re-run; they keep code fingerprint `e76b171d83faafe5`, and
+new runs will carry the new fingerprint under their own tags. Code:
+[`compliance_fsm_node.py`](../src/yoru_core/yoru_core/compliance_fsm_node.py). Tests:
+[`test_compliance_fsm.py`](../src/yoru_core/test/test_compliance_fsm.py). Replay:
+[`replay_fsm.py`](../evaluation/scripts/replay_fsm.py) →
+[`fsm_replay/report.md`](../evaluation/results/fsm_replay/report.md).
+
+| Parameter | Default | What it does when set |
+|---|---|---|
+| `skip_pa_warning` | `false` | Single-stage condition: a confirmation goes from S0 straight to S2 (APPROACH); no PA warning is played. Stage S1 is skipped. |
+| `sustained_confirmation_ratio` | `0.0` (= the single-frame rule) | S1 (or S2 when skipping) also needs this share of the camera's frames in the last `monitor_confirm_duration` (5 s) to hold a confirmed person. Missed frames count against the rule. Evaluation value 0.6. Needs `frame_topics`. |
+| `compliance_aware_approach` | `''` (off) | `hold_s1`, `reset_first` or `both`; see below. |
+| `frame_topics` | `['']` (none) | One topic per camera, in the order of `events_topics`, carrying every frame's tracked detections (`/compliance/cctvN/tracked`, published even when empty). Provides the frame count and the presence check. |
+| `compliance_hold_evidence`, `presence_window`, `presence_iou` | 1.0 s, 1.0 s, 0.1 | Evidence freshness for `hold_s1`; presence window and box-overlap threshold. |
+
+The node logs one line with every variant value (`FSM variants: ...`), so a run can be checked against its
+configuration. A variant that needs `frame_topics` without them is refused at start-up (ValueError). The same
+happens for an unknown mode or a mismatched topic count. The variant bookkeeping runs only when a variant is on.
+
+### Fixing scenario H: two implementations and their trade-offs
+
+At baseline, a person who stops during S1 (H) is approached. S1 lasts 3 s and S2 starts regardless. The
+person is then reported as `target_lost` 8 s after the last confirmation, before the 10 s compliance reset
+can fire.
+
+| | `hold_s1`: hold S1 until the reset can complete | `reset_first`: compliance reset before target loss in S2 |
+|---|---|---|
+| Rule | At the end of the PA warning, approach only if the target was confirmed within the last 1 s. Otherwise stay in S1 (`compliance_hold` event) until a confirmation returns (`hold_released`, then approach) or the 10 s reset is due. | In S2, after 8 s without a confirmation, a target still in view is not ended as lost (`target_lost_deferred`). The FSM waits for the 10 s reset; if confirmations return, the approach continues. |
+| H (stops in S1) | `complied` in **S1**; the robot never moves | `complied` in **S2**: the robot drives towards a person who already complied (≈8 s of approach) |
+| Stops during S2 | unchanged: still `target_lost` | `complied` |
+| Cost | Delays the approach whenever evidence is sparse at the end of S1. On the baseline bags it held S1 in 11/20 B-C7 runs, for a median of 1.0 s (maximum 2.1 s), then approached. | The robot keeps driving for up to 2 s more while it waits (8 → 10 s). If it arrived in that window it would warn a compliant person (not seen: arrival takes ≈23.5 s). |
+| Needs presence | to tell a departure during the hold from compliance | to tell a departure in S2 from compliance |
+
+`both` combines them. **Telling departure (C) from compliance.** With either mode, an absence that ends in S1
+or S2 is resolved by presence: `complied` if the target camera still tracks the person, otherwise
+`target_lost`. Presence means the same track ID, or a person box overlapping the last confirmed box (IoU ≥ 0.1),
+within the last 1 s. A person who walks out of view (C) therefore stays `target_lost`. **Where this fails:**
+- presence is unknown without `frame_topics`; the mode then keeps the default outcome in S2 and reports
+  `complied` after a hold;
+- a bystander standing where the violator stood (J-like layouts) would count as the violator still being in
+  view, so a departure there would be recorded as compliance;
+- an absence in S3 is not changed by either mode: it is still `complied`, as at baseline.
+
+### Validation
+
+| Check | Result |
+|---|---|
+| Unit tests, system ([`test_compliance_fsm.py`](../src/yoru_core/test/test_compliance_fsm.py) + existing) | **105 passed**: the 82 existing ones plus 23 new. The new tests cover the defaults (S1 5 s after a single confirmed frame; H → `target_lost`), `skip_pa_warning` (S0 → S2, no PA), the sustained rule (100/80/60 % escalate, 50/20 % and a single frame do not, missed frames count against, ratio 0 = default), `hold_s1` (H → complied in S1 with no approach; a departure during the hold → `target_lost`; a sustained violation is approached as before; the hold is released when evidence returns), `reset_first` (stop in S2 → complied; leaves view → `target_lost`; matching by box after a new track ID; no frames → default), and refused configurations |
+| Unit tests, evaluation | **29 passed** |
+| Real node, started through ROS with the variants as ROS parameters | parameters parsed; `FSM variants: skip_pa_warning=True, sustained_confirmation_ratio=0.6, compliance_aware_approach=both, frame_topics=2`; defaults report all off |
+| Bag replay, default parameters, 300 baseline runs | **same transitions and reasons in 300 / 300**; times within 0.15 s in 299, K/11 within 0.20 s (one 0.1 s tick earlier at two transitions: message/tick order at the same clock instant) |
+| **Online vs offline sustained rule** (ratio 0.6): node vs `offline_extensions.escalation_times` on identical inputs | escalation and S1 time agree in **300 / 300** runs |
+| Node vs the published offline result (`sustained_events.csv`, all YOLO frames counted from the heartbeat) | escalation decision agrees in **300 / 300** runs; S1 within 0.10 s (median 0.00 s). B-C7: 20 → 0 escalations; every other scenario unchanged |
+
+**How the replay works.** The replay is open loop. Each run's recorded FSM inputs (both confirmed topics,
+event metadata, navigation status, `/scan`, the admin pause) are fed to the deployed node class in the
+recorder's order. The clock follows the recorded `/clock`, with one tick per value; the parameters are the
+run's own. The baseline bags do not contain the per-camera frame topic. Frames are rebuilt from
+`/compliance/confirmation_debug`, one record per tracked person per frame, so a frame with no tracked person
+is missing from the count, and presence can match by track ID only (the debug records carry no box). The
+agreement with the heartbeat-based offline result shows this made no difference here. **From now on, runs
+record `/compliance/cctv1/tracked` and `/compliance/cctv2/tracked`**
+([`sim_full.launch.py`](../src/yoru_bringup/launch/sim_full.launch.py)), so variant runs can be replayed
+exactly.
+
+**Open-loop preview** (not a result; Phase C runs are): only H changes. Under `hold_s1` or `both` it is
+`complied` in S1 in 20 / 20 runs, with no approach; under `reset_first` it is `complied` in S2 in 20 / 20. C stays
+`target_lost` in S2 in 20 / 20 under every mode, and A, A-V, G, I, J, K, L, B-C7 and the violation-free scenarios
+are unchanged.
+
+**Open points for Phases B and C:**
+- With `skip_pa_warning`, a person scripted to comply after the PA warning (H, and `comply_stage` S1 in the
+  stochastic model) never hears it. The human model must say what such a person does instead, for example
+  respond to the first warning they do hear. That is a modelling decision for Phase B.
+- The runner's configuration guard should also require the `FSM variants:` line to match the run's tag.

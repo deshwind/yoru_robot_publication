@@ -16,8 +16,24 @@ compliance reset at any stage after compliance_clear_duration.
 Instrumentation (evaluation): /compliance/fsm_state (std_msgs/String JSON)
 carries every transition with stamp, previous/new state, reason, track and
 room, plus a 'cooldown_end' event when a track's cooldown expires.
+
+Design variants for the evaluation (all off by default; defaults behave
+exactly as before):
+  skip_pa_warning              single-stage: confirmation -> APPROACH, no S1.
+  sustained_confirmation_ratio > 0: S1 also needs this share of the camera's
+                               frames in the last monitor_confirm_duration to
+                               hold a confirmed person (needs frame_topics).
+  compliance_aware_approach    'hold_s1': at the end of S1, approach only on
+                               fresh evidence, otherwise hold S1 until the
+                               evidence returns or the compliance reset is due;
+                               'reset_first': in APPROACH, a target still in
+                               view is not 'lost' - wait for the compliance
+                               reset instead; 'both'. A reset in S1/S2 then ends
+                               as target_lost if the person left the camera's
+                               view (needs frame_topics), else complied.
 """
 
+import collections
 import json
 import math
 import time
@@ -32,12 +48,29 @@ from vision_msgs.msg import Detection2DArray
 PA_MESSAGE = 'Smoking is not allowed here. Please stop immediately.'
 DIRECT_MESSAGE = ('This is a final warning. Smoking is not allowed here. '
                   'This incident has been recorded and will be reported.')
+COMPLIANCE_AWARE_MODES = ('', 'hold_s1', 'reset_first', 'both')
+
+
+def box_iou(a, b):
+    """IoU of (cx, cy, w, h) boxes."""
+    ax1, ay1, ax2, ay2 = a[0] - a[2] / 2, a[1] - a[3] / 2, a[0] + a[2] / 2, a[1] + a[3] / 2
+    bx1, by1, bx2, by2 = b[0] - b[2] / 2, b[1] - b[3] / 2, b[0] + b[2] / 2, b[1] + b[3] / 2
+    iw = max(0.0, min(ax2, bx2) - max(ax1, bx1))
+    ih = max(0.0, min(ay2, by2) - max(ay1, by1))
+    union = a[2] * a[3] + b[2] * b[3] - iw * ih
+    return iw * ih / union if union > 0 else 0.0
+
+
+def det_box(det):
+    b = det.bbox
+    return (b.center.position.x, b.center.position.y, b.size_x, b.size_y)
 
 
 class ComplianceFsmNode(Node):
 
-    def __init__(self):
-        super().__init__('compliance_fsm_node')
+    def __init__(self, **kwargs):
+        # kwargs: e.g. parameter_overrides, for tests and the bag replay
+        super().__init__('compliance_fsm_node', **kwargs)
 
         # false: every duration uses the wall clock (time.monotonic), as
         # deployed. true: use the node clock, i.e. sim time when
@@ -81,6 +114,48 @@ class ComplianceFsmNode(Node):
         self.declare_parameter('pa_message', PA_MESSAGE)
         self.declare_parameter('direct_message', DIRECT_MESSAGE)
 
+        # ---- design variants (evaluation; all off by default) ----
+        self.declare_parameter('skip_pa_warning', False)
+        self.declare_parameter('sustained_confirmation_ratio', 0.0)
+        self.declare_parameter('compliance_aware_approach', '')
+        # hold_s1: the target counts as still violating at the end of S1 only
+        # if it was confirmed within this many seconds
+        self.declare_parameter('compliance_hold_evidence', 1.0)
+        # The person counts as still in view if the target camera tracked
+        # them (same track, or a box overlapping their last confirmed box)
+        # within this many seconds
+        self.declare_parameter('presence_window', 1.0)
+        self.declare_parameter('presence_iou', 0.1)
+        # One topic per camera, in the order of events_topics, carrying every
+        # frame's tracked detections (published even when empty). Needed by
+        # the sustained rule (frame count) and the presence check. [''] = none.
+        self.declare_parameter('frame_topics', [''])
+        self.skip_pa = bool(self.param('skip_pa_warning'))
+        self.sustained_ratio = float(self.param('sustained_confirmation_ratio'))
+        self.compliance_aware = str(self.param('compliance_aware_approach')).strip()
+        if self.compliance_aware not in COMPLIANCE_AWARE_MODES:
+            raise ValueError(f'compliance_aware_approach must be one of '
+                             f'{COMPLIANCE_AWARE_MODES}, not {self.compliance_aware!r}')
+        self.hold_s1 = self.compliance_aware in ('hold_s1', 'both')
+        self.reset_first = self.compliance_aware in ('reset_first', 'both')
+        self.variants_active = self.sustained_ratio > 0 or bool(self.compliance_aware)
+        events_topics = list(self.param('events_topics'))
+        frame_topics = [t for t in self.param('frame_topics') if t]
+        if frame_topics and len(frame_topics) != len(events_topics):
+            raise ValueError('frame_topics must list one topic per events_topics entry')
+        if self.sustained_ratio > 0 and not frame_topics:
+            raise ValueError('sustained_confirmation_ratio > 0 needs frame_topics '
+                             '(the frame count of each camera)')
+        # Per-camera bookkeeping for the variants (camera = index in
+        # events_topics). Only read when a variant is on.
+        self.track_camera = {}
+        self.conf_frame_times = collections.defaultdict(collections.deque)
+        self.frame_times = collections.defaultdict(collections.deque)
+        self.frame_persons = collections.defaultdict(collections.deque)
+        self.last_confirmed = {}  # camera -> [(track, box)] of the newest confirmed frame
+        self.holding = False
+        self.loss_deferred = False
+
         self.state = 'MONITORING'
         self.state_since = self.now_s()
         self.target_track = None
@@ -116,9 +191,14 @@ class ComplianceFsmNode(Node):
             String, '/compliance/fsm_state', 50)
         self.cooldown_reported = {}  # track -> cooldown start already reported
 
-        for topic in self.get_parameter('events_topics').value:
-            self.create_subscription(Detection2DArray, topic,
-                                     self.events_callback, 10)
+        for camera, topic in enumerate(events_topics):
+            self.create_subscription(
+                Detection2DArray, topic,
+                lambda msg, camera=camera: self.events_callback(msg, camera), 10)
+        for camera, topic in enumerate(frame_topics):
+            self.create_subscription(
+                Detection2DArray, topic,
+                lambda msg, camera=camera: self.frame_callback(msg, camera), 10)
         self.create_subscription(String, '/compliance/event_metadata',
                                  self.metadata_callback, 10)
         self.create_subscription(String, '/compliance/nav_status',
@@ -130,16 +210,54 @@ class ComplianceFsmNode(Node):
         self.create_timer(0.1, self.tick)
 
         self.get_logger().info('Compliance FSM ready (state: MONITORING)')
+        # One line with every variant value, so a run can be checked against
+        # its configuration (evaluation runner)
+        self.get_logger().info(
+            f'FSM variants: skip_pa_warning={self.skip_pa}, '
+            f'sustained_confirmation_ratio={self.sustained_ratio:g}, '
+            f'compliance_aware_approach={self.compliance_aware or "off"}, '
+            f'frame_topics={len(frame_topics)}')
+        if self.compliance_aware and not frame_topics:
+            self.get_logger().warn(
+                'compliance_aware_approach without frame_topics: a person who '
+                'left the camera view cannot be told from one who complied')
 
     # ------------------------------------------------------------------ inputs
 
-    def events_callback(self, msg):
+    def events_callback(self, msg, camera=None):
         now = self.now_s()
         for det in msg.detections:
             track = det.id or 'untracked'
             if track not in self.track_first_seen:
                 self.track_first_seen[track] = now
             self.track_last_seen[track] = now
+        if self.variants_active and camera is not None and msg.detections:
+            # variants: one confirmed frame of this camera, and who it was
+            self.conf_frame_times[camera].append(now)
+            self.last_confirmed[camera] = [(det.id or 'untracked', det_box(det))
+                                           for det in msg.detections]
+            for det in msg.detections:
+                self.track_camera[det.id or 'untracked'] = camera
+            self._prune(camera, now)
+
+    def frame_callback(self, msg, camera):
+        """Every frame of one camera (tracked detections, possibly none)."""
+        now = self.now_s()
+        self.frame_times[camera].append(now)
+        persons = [(det.id, det_box(det)) for det in msg.detections
+                   if det.results and det.results[0].hypothesis.class_id == 'person']
+        self.frame_persons[camera].append((now, persons))
+        self._prune(camera, now)
+
+    def _prune(self, camera, now):
+        keep = max(self.param('monitor_confirm_duration'),
+                   self.param('presence_window')) + 1.0
+        for queue in (self.conf_frame_times[camera], self.frame_times[camera]):
+            while queue and queue[0] < now - keep:
+                queue.popleft()
+        persons = self.frame_persons[camera]
+        while persons and persons[0][0] < now - keep:
+            persons.popleft()
 
     def metadata_callback(self, msg):
         try:
@@ -286,6 +404,56 @@ class ComplianceFsmNode(Node):
         return last is None or \
             self.now_s() - last > self.param('target_lost_timeout')
 
+    # ------------------------------------------------- design variants
+
+    def sustained_ok(self, camera, now):
+        """sustained_confirmation_ratio: at least this share of the camera's
+        frames in (now - monitor_confirm_duration, now] held a confirmed
+        person (offline_extensions.escalation_times, sustained=True)."""
+        if self.sustained_ratio <= 0:
+            return True
+        if camera is None:
+            return False
+        start = now - self.param('monitor_confirm_duration')
+        n_all = sum(1 for t in self.frame_times[camera] if start < t <= now)
+        n_conf = sum(1 for t in self.conf_frame_times[camera] if start < t <= now)
+        return n_all > 0 and n_conf >= self.sustained_ratio * n_all
+
+    def target_present(self):
+        """Is the target person still in the target camera's view? True /
+        False, or None when unknown (no frame topics, or no frames lately)."""
+        camera = self.track_camera.get(self.target_track)
+        if camera is None:
+            return None
+        now = self.now_s()
+        recent = [persons for t, persons in self.frame_persons[camera]
+                  if t > now - self.param('presence_window')]
+        if not recent:
+            return None
+        targets = self.last_confirmed.get(camera, [])
+        ids = {track for track, _ in targets} | {self.target_track}
+        threshold = self.param('presence_iou')
+        for persons in recent:
+            for track, box in persons:
+                if track in ids or any(box_iou(box, target_box) >= threshold
+                                       for _, target_box in targets):
+                    return True
+        return False
+
+    def end_absence(self):
+        """The target has not been confirmed for compliance_clear_duration.
+        Default: complied. compliance_aware_approach in S1/S2: complied only
+        if the person is still in view; a person who left is target_lost."""
+        if self.compliance_aware and self.state in ('PA_WARNING', 'APPROACH'):
+            present = self.target_present()
+            if present is False:
+                self.get_logger().info(f'Target left the view at {self.state}')
+                self.finish_escalation('target_lost', presence=False)
+                return
+            self.finish_escalation('complied', presence=present)
+            return
+        self.finish_escalation('complied')
+
     def log_incident(self, outcome):
         meta = self.track_metadata.get(self.target_track, {})
         incident = {
@@ -301,7 +469,7 @@ class ComplianceFsmNode(Node):
         msg.data = json.dumps(incident)
         self.incident_pub.publish(msg)
 
-    def finish_escalation(self, outcome):
+    def finish_escalation(self, outcome, **extra):
         track = self.target_track
         room = self.track_metadata.get(track, {}).get('room', '')
         stage = self.stage_reached  # reset to S0 below; the event reports it
@@ -313,8 +481,10 @@ class ComplianceFsmNode(Node):
         self.nav_result = None
         self.stage_reached = 'S0'
         self.direct_count = 0
+        self.holding = False
+        self.loss_deferred = False
         self.transition('MONITORING', outcome, track=track, room=room,
-                        outcome=outcome, stage_reached=stage)
+                        outcome=outcome, stage_reached=stage, **extra)
 
     def send_direct_warning(self):
         meta = self.track_metadata.get(self.target_track, {})
@@ -348,16 +518,32 @@ class ComplianceFsmNode(Node):
         if in_escalation and not self.target_active():
             self.get_logger().info(
                 f'Compliance detected at {self.state}; resetting to MONITORING')
-            self.finish_escalation('complied')
+            self.end_absence()
             return
 
         if self.state == 'MONITORING':
             self.monitoring_tick(now)
         elif self.state == 'PA_WARNING':
             if self.elapsed() >= self.param('pa_warning_duration'):
-                self.stage_reached = 'S2'
-                self.obstacle_since = None
-                self.transition('APPROACH', 'pa_expired')
+                last = self._target_last_seen()
+                fresh = last is not None and \
+                    now - last <= self.param('compliance_hold_evidence')
+                if self.hold_s1 and not fresh:
+                    # No fresh evidence: do not approach a person who may have
+                    # stopped; wait for evidence or the compliance reset
+                    if not self.holding:
+                        self.holding = True
+                        self.publish_fsm_state(
+                            self.state, self.state, 'compliance_hold',
+                            self.target_track,
+                            self.track_metadata.get(self.target_track, {}).get('room', ''),
+                            last_confirmed=last)
+                else:
+                    self.stage_reached = 'S2'
+                    self.obstacle_since = None
+                    self.transition('APPROACH',
+                                    'hold_released' if self.holding else 'pa_expired')
+                    self.holding = False
         elif self.state == 'APPROACH':
             self.approach_tick()
         elif self.state == 'DIRECT_WARNING':
@@ -396,6 +582,7 @@ class ComplianceFsmNode(Node):
                 self.track_first_seen.pop(track, None)
                 self.track_last_seen.pop(track, None)
                 self.track_metadata.pop(track, None)
+                self.track_camera.pop(track, None)
                 continue
             if track in self.cooldowns and now - self.cooldowns[track] < cooldown:
                 continue
@@ -407,10 +594,17 @@ class ComplianceFsmNode(Node):
                     now - self.room_last_seen.get(room, 0.0) <= \
                     self.param('compliance_clear_duration'):
                 first = min(first, self.room_first_seen[room])
-            if now - first >= confirm:
+            if now - first >= confirm and \
+                    self.sustained_ok(self.track_camera.get(track), now):
                 self.target_track = track
                 meta = self.track_metadata.get(track, {})
                 self.target_class = meta.get('event_class', 'cigarette')
+                if self.skip_pa:
+                    # single-stage condition: straight to the approach, no PA
+                    self.stage_reached = 'S2'
+                    self.obstacle_since = None
+                    self.transition('APPROACH', 'confirmed')
+                    return
                 self.stage_reached = 'S1'
                 room = meta.get('room', '')
                 message = self.param('pa_message')
@@ -445,9 +639,23 @@ class ComplianceFsmNode(Node):
         else:
             self.obstacle_since = None
         if self.target_lost():
-            self.get_logger().info('Target lost during approach')
-            self.finish_escalation('target_lost')
-            return
+            present = self.target_present() if self.reset_first else None
+            if present:
+                # Not confirmed, but still in view: possibly complied. Wait
+                # for the compliance reset instead of reporting a lost target.
+                if not self.loss_deferred:
+                    self.loss_deferred = True
+                    self.publish_fsm_state(
+                        self.state, self.state, 'target_lost_deferred',
+                        self.target_track,
+                        self.track_metadata.get(self.target_track, {}).get('room', ''))
+            else:
+                self.get_logger().info('Target lost during approach')
+                self.finish_escalation(
+                    'target_lost', **({'presence': present} if self.reset_first else {}))
+                return
+        elif self.loss_deferred:
+            self.loss_deferred = False  # confirmed again: approach continues
         if self.nav_result == 'succeeded':
             self.nav_result = None
             self.stage_reached = 'S3'

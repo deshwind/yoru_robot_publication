@@ -46,6 +46,9 @@ BAG_TOPICS = [
     '/compliance/fsm_state', '/compliance/fsm_status',
     '/compliance/confirmation_debug', '/compliance/event_metadata',
     '/compliance/cctv1/confirmed', '/compliance/cctv2/confirmed',
+    # every frame's tracked persons per camera: the FSM variants' frame count
+    # and presence input (frame_topics), so they can be replayed exactly
+    '/compliance/cctv1/tracked', '/compliance/cctv2/tracked',
     '/compliance/tracking_info',
     '/compliance/audio_event', '/compliance/pa_warning',
     '/compliance/direct_warning',
