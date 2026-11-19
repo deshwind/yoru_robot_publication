@@ -22,7 +22,7 @@ the files listed. Where something has **not** been measured, it says so.
 | 7 Ablation | offline ablation **final** (E6.3); node flags implemented and tested in a pending patch, **not yet applied** (no ablation runs in Gazebo) | [`phase6/`](phase6/) |
 | Offline extensions | **final** (300 runs): [deployment thresholds, sustained rule, outcome vs truth](#final-results-300-runs) | [`evaluation/results/offline_extensions/`](../evaluation/results/offline_extensions/) |
 | Extension A: FSM design variants | implemented, unit-tested, replay-validated on the 300 baseline bags; **not yet run in Gazebo** | [section](#extension-a-fsm-design-variants-2026-10-15), [`evaluation/results/fsm_replay/`](../evaluation/results/fsm_replay/) |
-| Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended. Runner support for the variants done (23 tests). Phase C runs not started | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
+| Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended. Runner support for the variants (23 tests) and laptop-safe gentle sessions (17 tests) done. Phase C runs not started | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
 | Same laptop, new OS (after the SSD slot failure) | set up; 2 set-up problems fixed (clock steps, CPU threads); **reproduction: 45 / 45 outcomes match the baseline** (3 seeds × 15 scenarios); speed depends on background load; baseline bags not available | [section](#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties), [`machine_change/`](machine_change/), [`evaluation/results/repro_wsl/`](../evaluation/results/repro_wsl/) |
 
 **Final numbers, in one place:** [E5.3](#e53-final-results-300-valid-runs) (outcomes, timing, proximity),
@@ -1143,6 +1143,27 @@ that the runner's configuration guard should require the `FSM variants:` line to
   first Phase C run will be the first. A wrong log-line expectation would make that run fail loudly
   (`config_not_applied`); it could not produce a wrong result.
 
+**Gentle sessions.** [`gentle_batch.py`](../evaluation/scripts/gentle_batch.py) runs the Phase C runs the
+way decided for this laptop (it already lost an SSD slot). It calls `run_batch.py` for one run at a time,
+so every run gets the same checks, retries, manifest row and directory as in a plain batch. Around the
+runs it enforces:
+
+| Rule | Default |
+|---|---|
+| no new run after the session's time budget | 60 min |
+| idle time between runs | 120 s (so about 13 runs per session) |
+| stop if Windows reports the CPU throttled: median `% processor performance` while busy (utility ≥ 40 %) | below 85 % (98–108 % in today's runs) |
+| stop after failed runs in a row | 2 |
+| manual stop | `evaluation/progress/STOP` |
+| resume | runs already `ok` in the manifest are skipped |
+
+The host monitor runs for the whole session. Each run's monitor reading and the reason the session
+stopped are written to the live log. Tests:
+[`test_gentle_batch.py`](../evaluation/tests/test_gentle_batch.py), 17, including today's monitor lines
+(idle samples at 72 % are not counted as throttling). **Evaluation tests 69 passed (52 + 17).** Dry run:
+the suggested first session plan (H, C, A × 10 seeds, `hold_s1`) lists 30 runs. At about 13 runs per
+session, the compliance-aware variant's three modes (90 runs) take about 7 sessions.
+
 ---
 
 ## Same laptop, new operating system (2026-11-19): set-up, incidents and open uncertainties
@@ -1445,3 +1466,4 @@ See [`pictures/README.md`](pictures/README.md).
 | [`run_repro_wsl.sh`](../evaluation/scripts/run_repro_wsl.sh) | the reproduction batch (all scenarios × seeds 0–2), detached, resumable |
 | [`compare_repro.py`](../evaluation/scripts/compare_repro.py) | run-by-run comparison of a run set with the baseline → `runs.csv`, `summary.md` |
 | [`host_monitor.sh`](../evaluation/scripts/host_monitor.sh) | logs the Windows CPU performance level and the busiest Windows processes every minute while a batch runs |
+| [`gentle_batch.py`](../evaluation/scripts/gentle_batch.py) | laptop-safe Phase C sessions: time budget, cool-downs, stop on throttling, failures or a STOP file, resume |

@@ -1,0 +1,243 @@
+#!/usr/bin/env python3
+"""Gentle batch: run_batch.py one run at a time, with the laptop's limits built in.
+
+The laptop that runs the evaluation already lost an SSD slot, so batches are
+kept short and supervised (decision of 2026-11-19):
+
+  - one session lasts at most --max-minutes (default 60): no new run starts
+    after that;
+  - --cooldown-s (default 120) of idle time between runs;
+  - the host monitor (host_monitor.sh) runs for the whole session, and the
+    session stops if Windows reports the CPU throttled while a run was busy
+    (median '% processor performance' below --min-perf, default 85; it is
+    98-108 % in normal runs);
+  - the session stops after --max-failures (default 2) failed runs in a row;
+  - creating evaluation/progress/STOP stops it after the current run;
+  - each session resumes where the last one stopped: runs already 'ok' in the
+    manifest are skipped.
+
+Each run is an ordinary run_batch.py run (same checks, retries, manifest row and
+run directory), so gentle sessions and plain batches produce identical records.
+Progress goes to evaluation/progress/live.log ([gentle] lines); run_batch.py's
+own output is appended to <out>/batch.log.
+
+  python3 evaluation/scripts/gentle_batch.py --scenarios H,C,A --seeds 10 \\
+      --compliance-aware hold_s1 --out evaluation/data/variants \\
+      --manifest evaluation/data/variants/manifest.csv
+  touch evaluation/progress/STOP      # stop after the current run
+"""
+
+import argparse
+import csv
+import datetime
+import os
+import statistics
+import subprocess
+import sys
+import time
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import run_batch as rb  # noqa: E402
+
+PROGRESS = os.path.join(rb.EVAL, 'progress')
+LIVE = os.path.join(PROGRESS, 'live.log')
+MONITOR_LOG = os.path.join(PROGRESS, 'host_monitor.log')
+STOP_FILE = os.path.join(PROGRESS, 'STOP')
+
+
+# ------------------------------------------------------------ pure helpers
+
+def run_tag(cli_tag, variant):
+    """The run-set tag run_batch.py will use (no weight options here)."""
+    if cli_tag:
+        return cli_tag
+    return variant['tag'] or 'baseline'
+
+
+def pending_runs(plan, manifest, tag):
+    """(scenario_id, seed) pairs of the plan not yet 'ok' in the manifest
+    (latest row per run counts, as in run_batch --skip-existing)."""
+    latest = {}
+    if os.path.isfile(manifest):
+        with open(manifest, encoding='utf-8') as f:
+            for r in csv.DictReader(f):
+                latest[(r['tag'], r['scenario'], r['seed'])] = r['status']
+    return [(s, seed) for s, seed in plan if latest.get((tag, s, str(seed))) != 'ok']
+
+
+def last_row(manifest, run_id):
+    if not os.path.isfile(manifest):
+        return None
+    row = None
+    with open(manifest, encoding='utf-8') as f:
+        for r in csv.DictReader(f):
+            if r['run_id'] == run_id:
+                row = r
+    return row
+
+
+def monitor_samples(path, start, end):
+    """(time, performance %, utility %) samples of host_monitor.log taken
+    between two datetimes of the same day (the log has times only)."""
+    samples = []
+    if not os.path.isfile(path):
+        return samples
+    with open(path, encoding='utf-8', errors='replace') as f:
+        for line in f:
+            parts = [p.strip() for p in line.split('|')]
+            if line.startswith('#') or len(parts) < 3:
+                continue
+            try:
+                t = datetime.datetime.combine(start.date(),
+                                              datetime.time.fromisoformat(parts[0]))
+                perf, util = float(parts[1]), float(parts[2])
+            except ValueError:
+                continue
+            if start <= t <= end:
+                samples.append((t, perf, util))
+    return samples
+
+
+def throttled(samples, min_perf, busy_util=40.0, min_busy=2):
+    """True if the CPU ran below min_perf % of its nominal performance while
+    busy (utility >= busy_util): median over the busy samples, at least
+    min_busy of them. Idle samples are ignored (low performance is normal
+    when idle)."""
+    busy = [perf for _, perf, util in samples if util >= busy_util]
+    if len(busy) < min_busy:
+        return False, None
+    median = statistics.median(busy)
+    return median < min_perf, median
+
+
+def stop_reason(*, elapsed_min, max_minutes, failures, max_failures, throttle,
+                stop_file_present):
+    """Why the session must stop before the next run, or None to continue."""
+    if stop_file_present:
+        return 'STOP file present (manual stop)'
+    if throttle:
+        return 'CPU throttling reported by Windows while a run was busy'
+    if failures >= max_failures:
+        return f'{failures} failed runs in a row'
+    if elapsed_min >= max_minutes:
+        return f'session time budget used ({max_minutes:g} min)'
+    return None
+
+
+# ------------------------------------------------------------ the session
+
+def live(message):
+    os.makedirs(PROGRESS, exist_ok=True)
+    with open(LIVE, 'a', encoding='utf-8') as f:
+        f.write(f'{datetime.datetime.now():%H:%M:%S} [gentle] {message}\n')
+    print(f'[gentle] {message}', flush=True)
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('--scenarios', default='all')
+    ap.add_argument('--seeds', type=int, default=10, help='seeds 0..N-1')
+    ap.add_argument('--seed-list')
+    ap.add_argument('--skip-pa', action='store_true')
+    ap.add_argument('--sustained-ratio', type=float, default=0.0)
+    ap.add_argument('--compliance-aware', choices=('hold_s1', 'reset_first', 'both'), default='')
+    ap.add_argument('--tag')
+    ap.add_argument('--out', required=True)
+    ap.add_argument('--manifest', required=True)
+    ap.add_argument('--max-minutes', type=float, default=60.0)
+    ap.add_argument('--cooldown-s', type=float, default=120.0)
+    ap.add_argument('--min-perf', type=float, default=85.0)
+    ap.add_argument('--max-failures', type=int, default=2)
+    ap.add_argument('--dry-run', action='store_true')
+    cli = ap.parse_args()
+
+    try:
+        variant = rb.variant_settings(cli.skip_pa, cli.sustained_ratio, cli.compliance_aware)
+        rb.manifest_fieldnames(os.path.abspath(cli.manifest), variant['tag'])
+    except ValueError as exc:
+        sys.exit(f'[gentle] {exc}')
+    tag = run_tag(cli.tag, variant)
+    seeds = ([int(s) for s in cli.seed_list.split(',')] if cli.seed_list
+             else list(range(cli.seeds)))
+    plan = [(s['id'], seed) for s in rb.load_scenarios(cli.scenarios) for seed in seeds]
+    todo = pending_runs(plan, cli.manifest, tag)
+    print(f'[gentle] tag={tag}: {len(plan)} runs planned, {len(plan) - len(todo)} already ok, '
+          f'{len(todo)} to do; session <= {cli.max_minutes:g} min, cool-down {cli.cooldown_s:g} s')
+    if cli.dry_run or not todo:
+        for s, seed in todo:
+            print(f'  {s:8s} seed {seed}')
+        return 0
+    if os.path.exists(STOP_FILE):
+        sys.exit(f'[gentle] {STOP_FILE} exists: remove it to start a session')
+
+    passthrough = []
+    if cli.skip_pa:
+        passthrough.append('--skip-pa')
+    if cli.sustained_ratio:
+        passthrough += ['--sustained-ratio', str(cli.sustained_ratio)]
+    if cli.compliance_aware:
+        passthrough += ['--compliance-aware', cli.compliance_aware]
+    if cli.tag:
+        passthrough += ['--tag', cli.tag]
+
+    monitor = subprocess.Popen(
+        ['bash', os.path.join(rb.EVAL, 'scripts', 'host_monitor.sh'), str(os.getpid()), '60'],
+        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+    session_start = datetime.datetime.now()
+    live(f'session start: tag={tag}, {len(todo)} of {len(plan)} runs to do; '
+         f'budget {cli.max_minutes:g} min, cool-down {cli.cooldown_s:g} s, '
+         f'stop if CPU performance < {cli.min_perf:g} % while busy')
+    done = failures = 0
+    reason = None
+    try:
+        for i, (scenario, seed) in enumerate(todo):
+            run_start = datetime.datetime.now()
+            live(f'run {i + 1}/{len(todo)}: {scenario} seed {seed}')
+            cmd = [sys.executable, '-u', os.path.join(rb.EVAL, 'scripts', 'run_batch.py'),
+                   '--scenarios', scenario, '--seed-list', str(seed), '--skip-existing',
+                   '--out', cli.out, '--manifest', cli.manifest, *passthrough]
+            os.makedirs(cli.out, exist_ok=True)
+            with open(os.path.join(cli.out, 'batch.log'), 'a', encoding='utf-8') as log:
+                subprocess.run(cmd, cwd=rb.ROOT, check=False, stdout=log,
+                               stderr=subprocess.STDOUT)
+            row = last_row(cli.manifest, f'{tag}/{scenario}/{seed}')
+            status = row['status'] if row else 'no_manifest_row'
+            if status == 'ok':
+                done += 1
+                failures = 0
+                live(f'  ok: {row["outcome"]} {row["outcome_stage"]} at {row["outcome_sim_t"]} s sim, '
+                     f'RTF {row["rtf"]}')
+            else:
+                failures += 1
+                live(f'  NOT ok: {status} ({failures} in a row)')
+            samples = monitor_samples(MONITOR_LOG, run_start, datetime.datetime.now())
+            is_throttled, median_perf = throttled(samples, cli.min_perf)
+            if median_perf is not None:
+                live(f'  CPU performance while busy: median {median_perf:.0f} % '
+                     f'({len(samples)} monitor samples)')
+            elapsed = (datetime.datetime.now() - session_start).total_seconds() / 60.0
+            reason = stop_reason(elapsed_min=elapsed, max_minutes=cli.max_minutes,
+                                 failures=failures, max_failures=cli.max_failures,
+                                 throttle=is_throttled,
+                                 stop_file_present=os.path.exists(STOP_FILE))
+            if reason or i == len(todo) - 1:
+                break
+            live(f'  cool-down {cli.cooldown_s:g} s')
+            time.sleep(cli.cooldown_s)
+            if os.path.exists(STOP_FILE):
+                reason = 'STOP file present (manual stop)'
+                break
+    except KeyboardInterrupt:
+        reason = 'interrupted (Ctrl+C)'
+    finally:
+        monitor.terminate()
+    remaining = len(pending_runs(plan, cli.manifest, tag))
+    minutes = (datetime.datetime.now() - session_start).total_seconds() / 60.0
+    live(f'session end after {minutes:.0f} min: {done} run(s) ok this session; {remaining} of '
+         f'{len(plan)} still to do; reason: {reason or "all planned runs done"}')
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

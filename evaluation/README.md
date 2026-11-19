@@ -74,6 +74,22 @@ python3 evaluation/scripts/run_batch.py --scenarios H,C,A --seeds 10 --complianc
     --out evaluation/data/variants --manifest evaluation/data/variants/manifest.csv
 ```
 
+**Gentle sessions (on the laptop, from 2026-11-19).** The laptop that runs the evaluation already lost
+an SSD slot, so Phase C runs go through [`gentle_batch.py`](scripts/gentle_batch.py). It calls
+`run_batch.py` one run at a time, with the same checks and records:
+- at most 60 min per session;
+- 2 min of idle time between runs (so about 13 runs per session);
+- the host monitor running throughout;
+- a stop if Windows reports the CPU below 85 % of its nominal performance while busy;
+- a stop after 2 failed runs in a row, or when `evaluation/progress/STOP` exists;
+- the next session resumes where the last stopped.
+
+```bash
+python3 evaluation/scripts/gentle_batch.py --scenarios H,C,A --seeds 10 --compliance-aware hold_s1 \
+    --out evaluation/data/variants --manifest evaluation/data/variants/manifest.csv
+touch evaluation/progress/STOP        # stop after the current run
+```
+
 Each run writes `<out>/<tag>/<scenario>/<seed>/` containing `overlay.yaml`, `launch.log`,
 `bag/` (rosbag2, sqlite3), `incident_logs/incidents.jsonl` and `run_info.json`, plus one row in
 the manifest CSV: scenario, seed, weights, status, outcome, stage, sim time of the outcome, expected
@@ -118,7 +134,9 @@ python3 -m pytest evaluation/tests -q                                           
 
 | Script | Purpose |
 |---|---|
-| `run_batch.py` | batch runner (Phase 4) |
+| `run_batch.py` | batch runner (Phase 4); FSM-variant options (Phase C) |
+| `gentle_batch.py` | laptop-safe sessions of `run_batch.py` runs (time budget, cool-downs, throttling stop, resume) |
+| `host_monitor.sh` | Windows CPU performance and busiest Windows processes, every minute, during a batch |
 | `bag_summary.py` | human-readable summary of one bag |
 | `check_run.sh` | one run with a hand-written overlay (Phase 3 checks) |
 | `make_eval_world.py` | regenerates the evaluation world |
