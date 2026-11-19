@@ -7,6 +7,7 @@
 cd "$(dirname "$0")/../.."
 PID=$1; INTERVAL=${2:-60}
 LOG=evaluation/progress/host_monitor.log
+mkdir -p evaluation/progress
 echo "# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files" >> "$LOG"
 while kill -0 "$PID" 2>/dev/null; do
     win=$(powershell.exe -NoProfile -c "

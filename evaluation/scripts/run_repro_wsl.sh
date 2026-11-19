@@ -9,6 +9,7 @@ source /opt/ros/humble/setup.bash
 source install/setup.bash
 export MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA      # Gazebo rendering on the NVIDIA GPU
 LIVE=evaluation/progress/live.log
+mkdir -p evaluation/progress
 mkdir -p evaluation/data/repro
 echo "$(date +%T) [repro] start: all scenarios x seeds 0,1,2 (45 runs), tag repro_wsl" >> "$LIVE"
 python3 -u evaluation/scripts/run_batch.py --scenarios all --seed-list 0,1,2 --tag repro_wsl \
