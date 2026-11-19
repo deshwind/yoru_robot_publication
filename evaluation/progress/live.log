@@ -104,3 +104,12 @@
 12:28:55 [repro] [run_batch] 24/45 F-pen seed 2 attempt 1 (domain 90) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-pen/2
 12:32:05 [repro] [run_batch]   status=ok outcome=none stage= sim=120.7s wall=134.2s rtf=0.9
 12:32:08 [repro] [run_batch] 25/45 F-straw seed 0 attempt 1 (domain 93) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-straw/0
+12:32:22 [watchdog] health OK; repro 24/45 done (23 ok, B-C7/1 to redo); RTF 0.87-0.91 since launchers closed
+12:35:20 [repro] [run_batch]   status=ok outcome=none stage= sim=120.3s wall=136.1s rtf=0.884
+12:35:23 [repro] [run_batch] 26/45 F-straw seed 1 attempt 1 (domain 96) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-straw/1
+12:38:34 [repro] [run_batch]   status=ok outcome=none stage= sim=120.4s wall=135.1s rtf=0.891
+12:38:37 [repro] [run_batch] 27/45 F-straw seed 2 attempt 1 (domain 99) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-straw/2
+12:41:46 [repro] [run_batch]   status=ok outcome=none stage= sim=120.5s wall=133.1s rtf=0.905
+12:41:49 [repro] [run_batch] 28/45 G seed 0 attempt 1 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/G/0
+12:44:35 [repro] [run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=98.8s wall=110.1s rtf=0.897
+12:44:38 [repro] [run_batch] 29/45 G seed 1 attempt 1 (domain 65) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/G/1

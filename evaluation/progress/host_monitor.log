@@ -18,3 +18,16 @@
 12:30:05 | 104 | 59 | vmmemwsl=711 code=24 system=19 | 8.10 | 3606 | 942
 12:31:10 | 104 | 66 | vmmemwsl=842 system=44 claude=26 | 7.13 | 3906 | 804
 12:32:16 | 108 | 44 | vmmemwsl=1003 chrome=37 system=36 | 3.41 | 3784 | 935
+12:33:21 | 105 | 68 | vmmemwsl=712 claude=33 chrome=27 | 8.47 | 3526 | 973
+12:34:26 | 104 | 68 | vmmemwsl=680 msedgewebview2=34 chrome=28 | 8.27 | 5945 | 827
+12:35:31 | 107 | 48 | vmmemwsl=620 razer synapse service=32 msrdc=19 | 7.07 | 3828 | 961
+12:36:36 | 104 | 58 | vmmemwsl=673 system=37 msrdc=14 | 9.65 | 3651 | 1001
+12:37:41 | 105 | 63 | vmmemwsl=82 cefsharp.browsersubprocess=17 audiodg=9 | 12.30 | 5979 | 870
+12:38:46 | 100 | 64 | vmmemwsl=736 system=33 msrdc=17 | 8.08 | 3821 | 1006
+12:39:51 | 107 | 60 | vmmemwsl=723 system=44 audiodg=9 | 9.20 | 3617 | 1046
+12:40:55 | 70 | 5 | cefsharp.browsersubprocess=15 vmmemwsl=12 system=5 | 7.88 | 6030 | 890
+12:42:01 | 106 | 62 | vmmemwsl=1076 msrdc=20 system=8 | 9.17 | 3730 | 1067
+12:43:06 | 105 | 60 | vmmemwsl=693 msrdc=16 cefsharp.browsersubprocess=14 | 10.08 | 3627 | 1072
+12:44:10 | 66 | 5 | system=24 svchost=19 cefsharp.browsersubprocess=10 | 5.16 | 6074 | 906
+12:45:15 | 107 | 58 | vmmemwsl=715 msrdc=12 cefsharp.browsersubprocess=10 | 16.19 | 3618 | 1088
+12:46:20 | 105 | 56 | vmmemwsl=741 system=27 cefsharp.browsersubprocess=12 | 10.43 | 3630 | 1088

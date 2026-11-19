@@ -23,3 +23,7 @@ repro_wsl/E/2,repro_wsl,E,2,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:19:
 repro_wsl/F-pen/0,repro_wsl,F-pen,0,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:22:27,2026-11-19T12:24:46,138.1,120.3,0.871,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/F-pen/0
 repro_wsl/F-pen/1,repro_wsl,F-pen,1,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:25:44,2026-11-19T12:27:56,132.1,120.1,0.909,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/F-pen/1
 repro_wsl/F-pen/2,repro_wsl,F-pen,2,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:28:55,2026-11-19T12:31:09,134.2,120.7,0.9,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/F-pen/2
+repro_wsl/F-straw/0,repro_wsl,F-straw,0,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:32:08,2026-11-19T12:34:24,136.1,120.3,0.884,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/F-straw/0
+repro_wsl/F-straw/1,repro_wsl,F-straw,1,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:35:23,2026-11-19T12:37:38,135.1,120.4,0.891,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/F-straw/1
+repro_wsl/F-straw/2,repro_wsl,F-straw,2,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:38:37,2026-11-19T12:40:50,133.1,120.5,0.905,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/F-straw/2
+repro_wsl/G/0,repro_wsl,G,0,,,,,,,,ok,logged_no_compliance,S4,88.4,logged_no_compliance,violation,2026-11-19T12:41:49,2026-11-19T12:43:39,110.1,98.8,0.897,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/G/0
