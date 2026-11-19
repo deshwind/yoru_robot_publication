@@ -41,3 +41,4 @@
 11:12:03 [pictures] [INFO] [1795086679.125623463] [doc_picture_capture]: end at sim 85.5 s: 7 pictures
 11:12:03 [pictures] 9 snapshots -> evidence/pictures/A_seed0
 11:12:54 [pictures] doc run ok (complied S3 74.9 s, RTF 0.742); 63 pictures + storyboard -> evidence/pictures/ ; captions + 5 observations in evidence/pictures/README.md
+11:12:57 [git] pushed 7325abc to wsl-progress

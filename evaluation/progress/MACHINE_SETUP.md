@@ -1,5 +1,9 @@
 # Replacement machine: setup and fixes (2026-11-19)
 
+> **Superseded:** the authoritative record, including the CPU-thread fix and every incident, is
+> [`evidence/README.md`, "Replacement machine"](../../evidence/README.md#replacement-machine-2026-11-19-set-up-incidents-and-open-uncertainties).
+> This file was the first working note.
+
 The original laptop failed (broken SSD slot) after commit `f350fb4` (2026-10-15). Runs now happen on:
 
 | | |
