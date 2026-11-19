@@ -57,3 +57,14 @@
 11:27:47 [repro] [run_batch] 5/45 A-V seed 1 attempt 1 (domain 73) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A-V/1
 11:30:27 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.6s wall=105.1s rtf=0.814
 11:30:30 [repro] [run_batch] 6/45 A-V seed 2 attempt 1 (domain 76) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A-V/2
+11:32:23 [watchdog] health OK; repro 5/45 done (all ok, RTF 0.78-0.83); about 3 min per run
+11:33:10 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.5s wall=104.1s rtf=0.821
+11:33:13 [repro] [run_batch] 7/45 B seed 0 attempt 1 (domain 79) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B/0
+11:36:31 [repro] [run_batch]   status=ok outcome=none stage= sim=120.0s wall=142.2s rtf=0.844
+11:36:34 [repro] [run_batch] 8/45 B seed 1 attempt 1 (domain 82) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B/1
+11:40:18 [repro] [run_batch]   status=ok outcome=none stage= sim=120.0s wall=168.3s rtf=0.713
+11:40:21 [repro] [run_batch] 9/45 B seed 2 attempt 1 (domain 85) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B/2
+11:43:53 [repro] [run_batch]   status=ok outcome=none stage= sim=120.5s wall=156.3s rtf=0.771
+11:43:56 [repro] [run_batch] 10/45 B-C7 seed 0 attempt 1 (domain 88) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/0
+11:47:12 [repro] [run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=99.7s wall=140.2s rtf=0.711
+11:47:15 [repro] [run_batch] 11/45 B-C7 seed 1 attempt 1 (domain 91) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/1

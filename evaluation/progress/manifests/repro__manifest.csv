@@ -4,3 +4,8 @@ repro_wsl/A/1,repro_wsl,A,1,,,,,,,,ok,complied,S3,74.7,complied,violation,2026-1
 repro_wsl/A/2,repro_wsl,A,2,,,,,,,,ok,complied,S3,74.9,complied,violation,2026-11-19T11:22:21,2026-11-19T11:24:04,103.1,85.2,0.826,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/A/2
 repro_wsl/A-V/0,repro_wsl,A-V,0,,,,,,,,ok,complied,S3,74.9,complied,violation,2026-11-19T11:25:03,2026-11-19T11:26:48,105.1,85.4,0.812,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/A-V/0
 repro_wsl/A-V/1,repro_wsl,A-V,1,,,,,,,,ok,complied,S3,74.9,complied,violation,2026-11-19T11:27:47,2026-11-19T11:29:32,105.1,85.6,0.814,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/A-V/1
+repro_wsl/A-V/2,repro_wsl,A-V,2,,,,,,,,ok,complied,S3,74.7,complied,violation,2026-11-19T11:30:30,2026-11-19T11:32:15,104.1,85.5,0.821,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/A-V/2
+repro_wsl/B/0,repro_wsl,B,0,,,,,,,,ok,none,,,none,no_violation,2026-11-19T11:33:13,2026-11-19T11:35:35,142.2,120.0,0.844,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/B/0
+repro_wsl/B/1,repro_wsl,B,1,,,,,,,,ok,none,,,none,no_violation,2026-11-19T11:36:34,2026-11-19T11:39:22,168.3,120.0,0.713,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/B/1
+repro_wsl/B/2,repro_wsl,B,2,,,,,,,,ok,none,,,none,no_violation,2026-11-19T11:40:21,2026-11-19T11:42:57,156.3,120.5,0.771,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/B/2
+repro_wsl/B-C7/0,repro_wsl,B-C7,0,,,,,,,,ok,logged_no_compliance,S4,89.1,none,violation,2026-11-19T11:43:56,2026-11-19T11:46:16,140.2,99.7,0.711,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/B-C7/0
