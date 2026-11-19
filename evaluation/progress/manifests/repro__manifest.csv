@@ -1,0 +1,6 @@
+run_id,tag,scenario,seed,w_D,w_P,w_T,w_S,confirm_confidence,uncertain_confidence,ablation,status,outcome,outcome_stage,outcome_sim_t,expected_outcome,ground_truth,start_wall,end_wall,wall_s,sim_s,rtf,attempts,bag_ok,died_processes,code_sha256,run_dir
+repro_wsl/A/0,repro_wsl,A,0,,,,,,,,ok,complied,S3,74.7,complied,violation,2026-11-19T11:16:51,2026-11-19T11:18:41,110.1,85.5,0.776,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/A/0
+repro_wsl/A/1,repro_wsl,A,1,,,,,,,,ok,complied,S3,74.7,complied,violation,2026-11-19T11:19:40,2026-11-19T11:21:22,102.1,85.2,0.834,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/A/1
+repro_wsl/A/2,repro_wsl,A,2,,,,,,,,ok,complied,S3,74.9,complied,violation,2026-11-19T11:22:21,2026-11-19T11:24:04,103.1,85.2,0.826,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/A/2
+repro_wsl/A-V/0,repro_wsl,A-V,0,,,,,,,,ok,complied,S3,74.9,complied,violation,2026-11-19T11:25:03,2026-11-19T11:26:48,105.1,85.4,0.812,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/A-V/0
+repro_wsl/A-V/1,repro_wsl,A-V,1,,,,,,,,ok,complied,S3,74.9,complied,violation,2026-11-19T11:27:47,2026-11-19T11:29:32,105.1,85.6,0.814,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/A-V/1

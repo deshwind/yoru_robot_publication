@@ -46,3 +46,14 @@
 11:16:51 [repro] [run_batch] tag=repro_wsl runs=45 code=f7bb8f4bdff9a649 weights={}
 11:16:51 [repro] [run_batch] 1/45 A seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A/0
 11:17:43 [tool] compare_repro.py ready: run-by-run comparison with the baseline (used when the batch ends)
+11:18:07 [watchdog] health OK; repro batch run 1/45 in progress; pushed
+11:19:37 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.5s wall=110.1s rtf=0.776
+11:19:40 [repro] [run_batch] 2/45 A seed 1 attempt 1 (domain 64) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A/1
+11:22:18 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.2s wall=102.1s rtf=0.834
+11:22:21 [repro] [run_batch] 3/45 A seed 2 attempt 1 (domain 67) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A/2
+11:25:00 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.2s wall=103.1s rtf=0.826
+11:25:03 [repro] [run_batch] 4/45 A-V seed 0 attempt 1 (domain 70) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A-V/0
+11:27:44 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.4s wall=105.1s rtf=0.812
+11:27:47 [repro] [run_batch] 5/45 A-V seed 1 attempt 1 (domain 73) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A-V/1
+11:30:27 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.6s wall=105.1s rtf=0.814
+11:30:30 [repro] [run_batch] 6/45 A-V seed 2 attempt 1 (domain 76) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A-V/2
