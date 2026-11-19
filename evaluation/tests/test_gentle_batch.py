@@ -134,3 +134,12 @@ def test_tag_matches_run_batch():
     assert gb.run_tag(None, rb.variant_settings(compliance_aware='hold_s1')) == 'aware_hold_s1'
     assert gb.run_tag(None, rb.variant_settings()) == 'baseline'
     assert gb.run_tag('mine', rb.variant_settings(skip_pa=True)) == 'mine'
+
+
+def test_monitor_lines_with_thermal_columns_are_read(tmp_path):
+    # host_monitor.sh format from 2026-11-19 16:41: thermal zone and passive limit appended
+    path = tmp_path / 'host_monitor.log'
+    path.write_text('16:41:22 | 88 | 8 | code=16 cefsharp.browsersubprocess=10 code=10 | 0.58 | '
+                    '9349 | 134 | 42.9 | 100\n')
+    assert [(p, u) for _, p, u in gb.monitor_samples(str(path), at('16:40:00'), at('16:42:00'))] \
+        == [(88.0, 8.0)]

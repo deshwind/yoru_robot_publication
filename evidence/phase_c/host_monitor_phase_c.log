@@ -1,0 +1,57 @@
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files
+15:47:22 | 106 | 59 | vmmemwsl=598 system=106 code=34 | 0.41 | 8041 | 151
+15:48:27 | 107 | 62 | vmmemwsl=796 system=52 memory compression=32 | 6.35 | 6935 | 191
+15:49:32 | 52 | 4 | system=40 cefsharp.browsersubprocess=16 epicgameslauncher=10 | 2.22 | 9379 | 40
+15:50:36 | 79 | 6 | vmmemwsl=30 cefsharp.browsersubprocess=5 msmpeng=5 | 0.89 | 9401 | 40
+15:51:42 | 105 | 72 | vmmemwsl=679 system=120 cefsharp.browsersubprocess=19 | 1.80 | 6882 | 186
+15:52:46 | 89 | 9 | memory compression=37 system=13 vmmemwsl=12 | 4.64 | 9332 | 55
+15:53:51 | 85 | 7 | vmmemwsl=16 code=12 cefsharp.browsersubprocess=11 | 1.69 | 9374 | 52
+15:54:56 | 75 | 5 | system=33 cefsharp.browsersubprocess=15 vmmemwsl=8 | 0.75 | 9389 | 52
+15:56:01 | 106 | 69 | vmmemwsl=780 system=28 msrdc=17 | 2.36 | 6850 | 193
+15:57:06 | 63 | 4 | system=18 memory compression=12 vmmemwsl=11 | 4.28 | 9374 | 65
+15:58:10 | 77 | 5 | system=34 cefsharp.browsersubprocess=15 vmmemwsl=4 | 1.62 | 9416 | 62
+15:59:15 | 77 | 4 | cefsharp.browsersubprocess=9 vmmemwsl=8 system=6 | 0.66 | 9420 | 62
+16:00:20 | 105 | 57 | vmmemwsl=704 msrdc=20 code=18 | 7.59 | 6894 | 193
+16:01:25 | 54 | 3 | cefsharp.browsersubprocess=14 vmmemwsl=12 svchost=4 | 5.36 | 9352 | 65
+16:02:29 | 57 | 5 | code=35 system=12 cefsharp.browsersubprocess=11 | 1.90 | 9367 | 62
+16:03:34 | 87 | 10 | chrome=122 system=61 chrome=45 | 0.64 | 9375 | 62
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files
+16:04:12 | 100 | 58 | vmmemwsl=903 code=55 chrome=53 | 0.87 | 8141 | 166
+16:05:17 | 107 | 56 | vmmemwsl=704 system=45 cefsharp.browsersubprocess=14 | 5.56 | 6809 | 191
+16:06:22 | 61 | 4 | vmmemwsl=29 cefsharp.browsersubprocess=19 svchost=9 | 2.13 | 9363 | 57
+16:07:27 | 105 | 68 | vmmemwsl=974 code=35 system=30 | 9.40 | 6977 | 193
+16:08:32 | 94 | 34 | nitrosense=79 memory compression=26 code=20 | 8.17 | 9309 | 67
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files
+16:09:37 | 102 | 74 | vmmemwsl=409 system=40 code=27 | 2.95 | 7765 | 171
+16:10:41 | 74 | 5 | system=45 vmmemwsl=8 cefsharp.browsersubprocess=7 | 3.16 | 9316 | 80
+16:11:46 | 107 | 57 | vmmemwsl=659 msrdc=12 cefsharp.browsersubprocess=11 | 5.88 | 6887 | 262
+16:12:51 | 64 | 5 | code=36 code=18 svchost=11 | 3.86 | 9293 | 136
+16:13:56 | 107 | 66 | vmmemwsl=729 msmpeng=90 cefsharp.browsersubprocess=12 | 6.60 | 6871 | 249
+16:15:01 | 72 | 5 | vmmemwsl=97 system=30 code=10 | 5.74 | 9284 | 134
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files
+16:15:28 | 105 | 83 | vmmemwsl=379 system=29 code=10 | 3.72 | 7562 | 224
+16:16:33 | 106 | 57 | vmmemwsl=86 system=30 wslservice=19 | 9.10 | 8531 | 129
+16:17:38 | 105 | 63 | vmmemwsl=655 razer synapse service=26 system=14 | 3.89 | 7053 | 217
+16:18:42 | 87 | 11 | vmmemwsl=15 system=11 memory compression=10 | 5.52 | 9275 | 121
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files
+16:19:41 | 106 | 82 | vmmemwsl=416 system=26 code=16 | 13.66 | 7537 | 217
+16:20:46 | 107 | 59 | vmmemwsl=560 msrdc=18 svchost=11 | 9.61 | 6942 | 249
+16:21:51 | 92 | 17 | vmmemwsl=756 msedgewebview2=42 msedgewebview2=28 | 4.76 | 8469 | 201
+16:22:56 | 105 | 55 | vmmemwsl=669 system=83 memory compression=68 | 7.09 | 6868 | 249
+16:24:01 | 87 | 8 | vmmemwsl=271 system=35 code=9 | 2.78 | 8890 | 128
+16:25:06 | 107 | 67 | vmmemwsl=727 system=46 wmiprvse=18 | 5.94 | 6859 | 249
+16:26:11 | 79 | 5 | system=31 vmmemwsl=25 cefsharp.browsersubprocess=8 | 2.25 | 9279 | 108
+16:27:16 | 107 | 55 | vmmemwsl=713 msrdc=15 audiodg=9 | 8.41 | 6781 | 249
+16:28:20 | 53 | 3 | cefsharp.browsersubprocess=13 vmmemwsl=10 svchost=8 | 3.34 | 9352 | 109
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files
+16:28:30 | 105 | 83 | vmmemwsl=407 system=38 code=18 | 3.14 | 7525 | 217
+16:29:35 | 82 | 6 | system=29 vmmemwsl=9 cefsharp.browsersubprocess=6 | 1.94 | 9346 | 113
+16:30:40 | 106 | 56 | vmmemwsl=663 msrdc=23 system=15 | 6.44 | 6929 | 239
+16:31:44 | 78 | 9 | system=30 vmmemwsl=22 code=5 | 7.21 | 9243 | 111
+16:32:50 | 107 | 66 | vmmemwsl=1060 msmpeng=96 memory compression=48 | 6.87 | 6947 | 242
+16:33:56 | 108 | 61 | vmmemwsl=718 msrdc=14 system=13 | 10.58 | 6909 | 247
+16:35:00 | 56 | 3 | vmmemwsl=34 code=23 cefsharp.browsersubprocess=9 | 4.88 | 9313 | 108
+16:36:05 | 60 | 4 | system=33 cefsharp.browsersubprocess=15 vmmemwsl=9 | 4.48 | 9295 | 139
+16:37:10 | 106 | 50 | vmmemwsl=802 msrdc=18 system=15 | 7.30 | 6909 | 267
+16:38:15 | 108 | 58 | vmmemwsl=717 system=29 msrdc=14 | 10.09 | 6823 | 267
+16:39:20 | 73 | 5 | cefsharp.browsersubprocess=19 vmmemwsl=10 cefsharp.browsersubprocess=5 | 3.95 | 9341 | 137
