@@ -1,0 +1,2 @@
+run_id,tag,scenario,seed,w_D,w_P,w_T,w_S,confirm_confidence,uncertain_confidence,ablation,status,outcome,outcome_stage,outcome_sim_t,expected_outcome,ground_truth,start_wall,end_wall,wall_s,sim_s,rtf,attempts,bag_ok,died_processes,code_sha256,run_dir
+wsl_pilot_nvidia/A/0,wsl_pilot_nvidia,A,0,,,,,,,,nav2_not_ready,none,,,complied,violation,2026-11-19T10:44:45,2026-11-19T10:47:33,167.8,28.2,0.168,2,True,ERROR,1f3cbba050f38e2e,evaluation/data/pilot/wsl_pilot_nvidia/A/0
