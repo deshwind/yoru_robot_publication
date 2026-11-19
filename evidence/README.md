@@ -1234,6 +1234,9 @@ frame_topics=2` and `comply_s1_fallback=off`. This was the first use of the guar
   - At 16:20 (no cool-down) the Windows thermal zone read **77.9 °C** with the passive-cooling limit at
     100 % (no thermal throttling), and the GPU was at 44 °C. CPU core temperatures need administrator
     rights and were not read.
+  - From 16:41, [`host_monitor.sh`](../evaluation/scripts/host_monitor.sh) also logs the thermal-zone
+    temperature and the passive limit every minute, in two columns at the end of each line (first
+    reading, idle: 42.9 °C, 100 %). Future sessions record heat alongside speed.
 
 **Limitations of this set.**
 - C has 4 seeds and A has 3, so they show "no change" only on a small sample. H has 10.

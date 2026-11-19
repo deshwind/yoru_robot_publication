@@ -136,7 +136,7 @@ python3 -m pytest evaluation/tests -q                                           
 |---|---|
 | `run_batch.py` | batch runner (Phase 4); FSM-variant options (Phase C) |
 | `gentle_batch.py` | laptop-safe sessions of `run_batch.py` runs (time budget, cool-downs, throttling stop, resume) |
-| `host_monitor.sh` | Windows CPU performance and busiest Windows processes, every minute, during a batch |
+| `host_monitor.sh` | Windows CPU performance, busiest Windows processes, thermal-zone temperature and passive (throttling) limit, every minute, during a batch |
 | `bag_summary.py` | human-readable summary of one bag |
 | `check_run.sh` | one run with a hand-written overlay (Phase 3 checks) |
 | `make_eval_world.py` | regenerates the evaluation world |
