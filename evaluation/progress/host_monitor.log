@@ -1,0 +1,2 @@
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files
+12:12:40 | 101 | 89 | vmmemwsl=822 system=298 battle.net=86 | 18.38 | 3712 | 811
