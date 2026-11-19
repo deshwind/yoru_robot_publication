@@ -67,6 +67,12 @@ class YoloDetectorNode(Node):
         self.declare_parameter('detections_topic', '/compliance/detections')
         self.declare_parameter('debug_image_topic', '/compliance/debug_image')
         self.declare_parameter('use_coco_class_map', True)
+        # Compute only, no effect on what is detected: PyTorch CPU threads for
+        # this node. 0 keeps the library default (ultralytics sets
+        # min(8, CPUs - 1) on its first prediction), which oversubscribes the
+        # CPU when two detector nodes share a 16-thread machine
+        # (evidence/README.md, "Same laptop, new operating system").
+        self.declare_parameter('torch_threads', 0)
 
         self.source_type = self.get_parameter('source_type').value
         self.conf_threshold = self.get_parameter('confidence_threshold').value
@@ -139,6 +145,24 @@ class YoloDetectorNode(Node):
                 self.get_logger().error(
                     f'Could not load extra model "{extra_path}": {exc}. '
                     'Continuing with the main model only.')
+        self._limit_torch_threads()
+
+    def _limit_torch_threads(self):
+        threads = int(self.get_parameter('torch_threads').value)
+        if threads <= 0 or self.model is None:
+            return
+        import numpy as np
+        import torch
+        # ultralytics resets the thread count on its first prediction only, so
+        # warm every model up once on a blank frame, then apply the limit.
+        blank = np.zeros((self.input_size, self.input_size, 3), np.uint8)
+        for model in (self.model, self.extra_model):
+            if model is not None:
+                model.predict(blank, imgsz=self.input_size, verbose=False)
+        default = torch.get_num_threads()
+        torch.set_num_threads(threads)
+        self.get_logger().info(
+            f'torch_threads={torch.get_num_threads()} (library default {default})')
 
     def _open_capture(self):
         if self.source_type == 'usb':

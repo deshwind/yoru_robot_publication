@@ -53,3 +53,6 @@ evaluation/data/*
 *.db3
 # Phase 7 patch staging copy (the reviewable diff is evaluation/pending_phase7.diff)
 evaluation/pending_phase7_patch/
+
+# Watchdog snapshots and live logs of running batches (kept on branch wsl-progress)
+evaluation/progress/

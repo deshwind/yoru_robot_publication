@@ -22,6 +22,7 @@ the files listed. Where something has **not** been measured, it says so.
 | 7 Ablation | offline ablation **final** (E6.3); node flags implemented and tested in a pending patch, **not yet applied** (no ablation runs in Gazebo) | [`phase6/`](phase6/) |
 | Offline extensions | **final** (300 runs): [deployment thresholds, sustained rule, outcome vs truth](#final-results-300-runs) | [`evaluation/results/offline_extensions/`](../evaluation/results/offline_extensions/) |
 | Extension A: FSM design variants | implemented, unit-tested, replay-validated on the 300 baseline bags; **not yet run in Gazebo** | [section](#extension-a-fsm-design-variants-2026-10-15), [`evaluation/results/fsm_replay/`](../evaluation/results/fsm_replay/) |
+| Same laptop, new OS (after the SSD slot failure) | set up; 2 set-up problems fixed (clock steps, CPU threads); **reproduction: 45 / 45 outcomes match the baseline** (3 seeds × 15 scenarios); speed depends on background load; baseline bags not available | [section](#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties), [`machine_change/`](machine_change/), [`evaluation/results/repro_wsl/`](../evaluation/results/repro_wsl/) |
 
 **Final numbers, in one place:** [E5.3](#e53-final-results-300-valid-runs) (outcomes, timing, proximity),
 [E6.3](#e63-final-results-300-runs-600-events) (sensitivity and ablation), the
@@ -1034,3 +1035,306 @@ are unchanged.
   stochastic model) never hears it. The human model must say what such a person does instead, for example
   respond to the first warning they do hear. That is a modelling decision for Phase B.
 - The runner's configuration guard should also require the `FSM variants:` line to match the run's tag.
+
+---
+
+## Same laptop, new operating system (2026-11-19): set-up, incidents and open uncertainties
+
+**Why this section exists.** Every run above was made on one laptop running **native Ubuntu 22.04**
+from the drive in its first SSD slot. That slot failed (the drive can no longer be read in the laptop)
+some time after the last commit from that installation, `f350fb4` (2026-10-15). Work continues on **the
+same laptop** (same CPU, GPU and memory), now running **Windows with Ubuntu 22.04 under WSL2** from
+another drive. The hardware is unchanged; the operating system, the graphics path and the detector's
+inference device are not (table below). This section records how the new set-up was made, every
+failure and odd event met on it, how each was diagnosed and fixed, and what remains uncertain. Every attempt is kept, including the
+failed ones ([`machine_change/attempts/`](machine_change/attempts/)). The working log, with times, is
+[`machine_change/live_log_2026-11-19.txt`](machine_change/live_log_2026-11-19.txt); the 15-minute watchdog
+snapshots are on branch `wsl-progress` (`evaluation/progress/`).
+
+### What may have been lost with the failed drive
+
+| Item | Status on 2026-11-19 |
+|---|---|
+| Everything committed up to `f350fb4`: code, configs, manifests, `metrics.csv`, results, figures, this evidence | **safe** (GitHub) |
+| The 300 baseline bags (about 4 GB) and per-run launch logs (`evaluation/data/runs/`, git-ignored) | **not available now.** They exist only on the drive in the failed slot, unless it can be read in an external (USB) enclosure. Until then: `replay_fsm.py`, `sensitivity_offline.py`, `offline_extensions.py` and `extract_metrics.py` cannot be re-run on the baseline, and the DOI archive of the bags (a limitation above) cannot be made. The published numbers are unaffected: they are in committed files. |
+| Work after `f350fb4` that was never pushed (for example Phase C variant runs, if any were started) | **unknown**. The pushed runner has no FSM-variant options, so any such runs would have used unpushed code. |
+| `secrets.env`, dashboard password, `yolov8n.pt` | not needed for the evaluation; the weights were re-downloaded (below) |
+
+### Baseline set-up and the set-up now
+
+| | Baseline (300 runs, until 2026-10-15) | Now (2026-11-19) |
+|---|---|---|
+| Hardware | the same laptop | Intel Core i5-12500H (12 cores, 16 threads); 15.7 GB RAM; Intel Iris Xe and NVIDIA GeForce RTX 3050 Ti Laptop (4 GB) |
+| Operating system | native Ubuntu 22.04, HWE kernel 6.8, NVIDIA driver 580 ([`docs/DEVLOG.md`](../docs/DEVLOG.md)) | Windows; Ubuntu 22.04.5 under **WSL2** (WSL 3.0.5, WSLg 1.0.79, kernel 6.18.58) |
+| YOLO inference | **most likely the GPU (CUDA)**: the DEVLOG records `torch.cuda` available on the RTX 3050 Ti, the pinned `torch==2.12.0` is the CUDA-capable PyPI build, and ultralytics uses a CUDA device automatically when one is available. The device was not logged per run. | **CPU**: torch `2.12.0+cpu`, 2 threads per detector (incident 9) |
+| Gazebo rendering | native OpenGL (driver not recorded per run) | OpenGL through WSL's D3D12 layer (Mesa 23.2.1) on the RTX 3050 Ti (`MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA`; the default was the Intel GPU) |
+| Gazebo, ROS | Gazebo 11.10.2, ROS 2 Humble | the same versions |
+
+Details of the set-up now:
+
+| | |
+|---|---|
+| Linux | **WSL2** (WSL 3.0.5, WSLg 1.0.79, kernel 6.18.58), Ubuntu 22.04.5, ROS 2 Humble, Gazebo 11.10.2 (same Gazebo version as the baseline) |
+| Repository | `~/yoru_ws/yoru_robot_publication`; `~/Yoru_bot_publication` is a symlink to it, so the absolute paths in the configuration resolve without editing tracked files |
+| Python packages | `evaluation/requirements.txt`, as pinned. torch 2.12.0 is the **CPU** build (`2.12.0+cpu`), chosen on 2026-11-19 because the requirements file says the CPU is sufficient. This was before the DEVLOG note on CUDA had been read; see open uncertainty 2. `opencv-python-headless` 4.10.0.84 was reinstalled last so that it provides `cv2`, as the requirements file records for the baseline |
+| YOLO weights | `yolov8n.pt` downloaded by ultralytics 8.4.59 (asset v8.4.0), SHA-256 `f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36`. The baseline file's hash was not recorded, so identity with the baseline weights cannot be proved. |
+| WSL memory | `C:\Users\User\.wslconfig`: `memory=11GB`, `swap=8GB`. **Not yet in effect**: it needs `wsl --shutdown`. All runs in this section had about 7.7 GB. |
+
+Checks after set-up: system tests **105 passed**, evaluation tests **29 passed**; `summarise.py` and
+`make_figures.py` regenerate every committed table, CSV and PNG byte for byte from the committed
+`metrics.csv` (the four PDFs differ only in their embedded creation date).
+
+### Incident log
+
+All attempts are Scenario A, seed 0, so they can be compared with `baseline/A/0`. Records:
+[`machine_change/attempts/`](machine_change/attempts/) (`run_info.json`, `overlay.yaml`, compressed
+`launch.log`, bag summary, incident log), manifest
+[`machine_change/attempts/pilot_manifest.csv`](machine_change/attempts/pilot_manifest.csv).
+
+| # | Time | Attempt | Result | What happened |
+|---|---|---|---|---|
+| 1 | 10:26 | `1_wsl_pilot_1026` | `nav2_not_ready`, RTF 0.10 | `spawn_entity`: "Service /spawn_entity unavailable", so the robot was never spawned; Gazebo's plugins came up about 38 s after the spawner gave up. On this first start Gazebo also downloaded the `sun` model from the online model database. Cause found later: incident 5. |
+| – | 10:30 | (runner) | runner crashed | Moving the failed attempt aside raised `PermissionError`: `run_batch.py` builds the `runs_invalid/` path relative to `evaluation/data/`, so an `--out` outside the repository breaks it. Runner limitation, not fixed; all later attempts use `--out evaluation/data/...`. |
+| 2 | 10:32 | `2_wsl_pilot_1032_interrupted` | **stopped by the operator** | Robot spawned and Nav2 became active, but the simulation advanced about 8 s in about 5 min (RTF ≈ 0.03) while the CPU was mostly idle (Gazebo 8 %, load 5–7 of 16). Stopped deliberately to test GPU rendering. The runner was stopped with SIGINT and left the launch processes running; they were stopped by hand. No `run_info.json` was written. |
+| 3, 4 | 10:40, 10:44 | `3_…nvidia_attempt1`, `4_…nvidia_attempt2` | `nav2_not_ready` ×2, RTF 0.154 / 0.168 | Rendering moved to the NVIDIA GPU (confirmed in `~/.gazebo/ogre.log`). Same spawner timeout. Gazebo alone, started by hand with the same world and plugins, offered `/spawn_entity` after **3.5 s**: the delay only appeared with the full system running. The launch log has a 24 s gap in which no process logged anything. |
+| 5 | 10:50 | diagnosis | **root cause** | A resource logger meant to write every 10 s wrote at 10:33:43, then 10:34:14, then **10:34:24 followed by 10:34:13**: the wall clock went backwards. [`clock_probe.py`](../evaluation/scripts/clock_probe.py) showed the **monotonic clock was steady (no stall) but the wall clock stepped by ±21.6 s every few seconds**, idle and under load. Cause: the Windows clock is 21.6 s fast (`w32tm`: source "Local CMOS Clock", never synchronised); inside WSL, `systemd-timesyncd` kept stepping Linux to internet time while WSL kept stepping it back to the Windows time. Gazebo paces simulation against the wall clock, so each backward step stalled it; the spawner's 30 s timeout expired early; every RTF was understated. Fix: `systemctl disable --now systemd-timesyncd` (Linux now follows the Windows clock). Before/after: [`machine_change/clock_probe_before_after.txt`](machine_change/clock_probe_before_after.txt): 5 + 8 steps before, 0 under load after. |
+| 6 | 10:53 | `5_wsl_pilot_clockfix` | **ok**, complied S3 at 76.6 s, RTF 0.57 | First valid run. Outcome as baseline (complied S3 at 74.8 s), but perception was slow: **cctv1 YOLO rate 1.50 Hz vs 4.98 Hz**, confirmation latency **3.0 s vs 0.8 s** (table below). Also, at shutdown Gazebo aborted (exit −6, `boost::thread_resource_error: trying joining itself`) after the SIGINT. The runner does not count this (its `died_processes` is empty). Whether the baseline runs ended the same way cannot be checked: their launch logs are on the failed SSD. |
+| 7 | 10:58 | `6_wsl_pilot_perf` | **ok**, complied S3, RTF 0.55, cctv1 1.39 Hz | Same run with a per-process CPU sampler: the machine was saturated (1477 % of 1600 %), **1187 % of it in the two YOLO nodes**, which still managed only 1.4 Hz ([`machine_change/cpu_profile_8threads.csv`](machine_change/cpu_profile_8threads.csv)). |
+| 8 | 11:03 | benchmark | **cause** | YOLOv8n alone: 71 ms per 640×480 frame (14 Hz possible). Two processes at once, as in a run: **373–390 ms** per frame each. ultralytics sets PyTorch to min(8, CPUs − 1) threads on its first CPU prediction (8 here) and ignores `OMP_NUM_THREADS`, so two detectors run 16 compute threads on 16 hardware threads beside Gazebo and Nav2. Two processes at once, threads per process → ms per frame: 8 → 373–390; 6 → 132–135; 4 → 107–108; 3 → 108–111; **2 → 104–109**; 1 → 135. |
+| 9 | 11:05 | `7_wsl_threads2` | **ok**, complied S3 at 74.7 s, RTF 0.80 | Fix: new parameter `torch_threads` of `yolo_detector_node` (default 0 = unchanged library behaviour; after a warm-up prediction it sets the PyTorch thread count and logs `torch_threads=2 (library default 8)`), set to 2 for `yolo_cctv1` and `yolo_cctv2` in [`eval_base.yaml`](../evaluation/config/eval_base.yaml). Code fingerprint `f7bb8f4bdff9a649`. CPU 872 % of 1600 % ([`machine_change/cpu_profile_2threads.csv`](machine_change/cpu_profile_2threads.csv)). Tests: 105 + 29 passed. |
+| 10 | 11:09 | `doc_pictures` (documentation, not evaluation) | **ok**, complied S3 at 74.9 s, RTF 0.742 | Same configuration as #9, plus two documentation cameras and the picture capture ([pictures](#pictures-of-the-simulation)). The lower RTF (0.742 vs 0.80) is the cost of the extra cameras. |
+
+### Seed A/0: native Ubuntu and WSL2
+
+[`machine_change/pilot_vs_baseline_A0.csv`](machine_change/pilot_vs_baseline_A0.csv), computed with
+`extract_metrics.py` (same code as the published metrics):
+
+| Metric | baseline/A/0 (native Ubuntu) | WSL2, 8 threads (#6) | WSL2, 8 threads (#7) | **WSL2, 2 threads (#9)** |
+|---|---|---|---|---|
+| outcome | complied S3 | complied S3 | complied S3 | **complied S3** |
+| RTF | 0.893 | 0.57 | 0.548 | **0.80** |
+| cctv1 YOLO rate (Hz, sim time) | 4.976 | 1.495 | 1.386 | **4.994** |
+| confirmed frames | 162 | 50 | 37 | **161** |
+| confirmation (s) | 31.0 | 33.2 | 32.8 | **31.1** |
+| confirmation latency (s) | 0.8 | 3.0 | 2.6 | **0.9** |
+| PA warning / approach start (s) | 36.1 / 39.1 | 38.2 / 41.2 | 37.8 / 40.8 | **36.1 / 39.1** |
+| arrival (s) | 62.96 | 64.82 | 64.55 | **62.83** |
+| outcome time (s) | 74.8 | 76.6 | 76.3 | **74.7** |
+| navigation time (s) | 23.46 | 23.32 | 23.55 | **23.33** |
+| compliance latency (s) | 28.9 | 29.0 | 29.5 | **28.8** |
+| path length (m) | 5.858 | 5.829 | 5.835 | **5.836** |
+| Nav2 recoveries | 0 | 1 | 0 | **0** |
+| minimum robot–person distance (m) | 2.447 | 2.458 | 2.491 | **2.483** |
+| warnings delivered | 3 | 3 | 3 | **3** |
+| first confirmed confidence C | 0.7942 | 0.7942 | 0.7942 | **0.7942** |
+
+With the thread fix, seed A/0 under WSL2 agrees with the baseline to within 0.13 s on every
+timing metric (0.1 s on the decision times; 0.13 s on arrival and navigation time) and to within 2.2 cm
+on path length. This is **one run**: it shows the machine is
+fit to run, not that the 300 baseline runs reproduce. That needs a reproduction sample (below).
+
+![Seed A/0 under WSL2](machine_change/topdown_A0_wsl_threads2.png)
+
+*Top-down view of run #9 (`7_wsl_threads2`), drawn from its bag by
+[`plot_run_topdown.py`](../evaluation/scripts/plot_run_topdown.py) over the saved simulation map: robot
+path (blue), violator (red), CCTV cameras (green triangles), the cctv1 camera spot (star), and the robot's
+position at each escalation-stage change (orange). [PDF](machine_change/topdown_A0_wsl_threads2.pdf)*
+
+### Open uncertainties (to be stated if new runs are reported)
+
+1. **Reproduction.** Measured on a sample of 45 runs: see
+   [Reproduction sample](#reproduction-sample-all-scenarios--seeds-02-2026-11-19) below.
+2. **Inference device: CPU now, most likely GPU in the baseline.** The baseline's detector most likely
+   ran on the RTX 3050 Ti through CUDA (set-up table above); now it runs on the CPU. Both reach the
+   configured 5 Hz (`process_hz`), so the detector sees the same number of frames per second of
+   simulation. On a given image, however, GPU and CPU inference can give slightly different confidences
+   and box coordinates. The thread fix (incident 9) was only needed because inference is on the CPU:
+   with CUDA, the baseline's two detectors did not compete for CPU threads, which explains why the
+   baseline reached 5 Hz with the library-default thread setting. Running the detector on the GPU under
+   WSL2 (which supports CUDA) would match the baseline more closely and remove about 3 cores of CPU
+   load. It needs the CUDA build of torch and has not been tried.
+3. **Rendering path.** The same GPU now renders the CCTV images through WSL's D3D12 translation layer
+   instead of the native Linux OpenGL driver. Pixel-level differences can shift YOLO confidences slightly.
+4. **WSL2 instead of native Ubuntu**, with about 7.7 GB of memory for these runs (11 GB configured,
+   not yet active), sharing the CPU with Windows and everything running on it (item 7).
+5. **Wall-clock timestamps.** Linux now follows the Windows clock, which was 21.6 s fast on 2026-11-19.
+   The `start_wall`/`end_wall` columns of new manifests carry that offset until Windows is synchronised.
+   All metrics use simulation time and are unaffected. Synchronising Windows during a run would step the
+   clock once by about 21 s and could break that run, so do it between batches.
+6. **Gazebo abort at shutdown** (incident 6): seen after the outcome and the bag were complete, so it
+   does not affect the recorded data. Whether it also happened under native Ubuntu is unknown, because
+   the baseline launch logs are on the failed drive.
+7. **Simulation speed depends on everything else running on the computer.** See
+   [Speed and background load](#speed-and-background-load) below.
+
+### Reproduction sample: all scenarios × seeds 0–2 (2026-11-19)
+
+**Question.** Does the system, run under WSL2 with the fixes above, produce the same results as the 300
+baseline runs made under native Ubuntu?
+
+**Runs.** Every scenario with seeds 0, 1 and 2 (45 runs). Configuration: the baseline configuration,
+plus `torch_threads: 2` for both detectors (incident 9) and Gazebo rendering on the NVIDIA GPU. Code
+fingerprint `f7bb8f4bdff9a649`, run-set tag `repro_wsl`. Launched with
+[`run_repro_wsl.sh`](../evaluation/scripts/run_repro_wsl.sh) at 11:16; runs 1–45 ended at 13:27; the
+missing run was redone at 13:34. The baseline's runs for the same seeds are the comparison. Data:
+[`evaluation/results/repro_wsl/`](../evaluation/results/repro_wsl/) (`manifest.csv`, `metrics.csv`,
+run-by-run [`runs.csv`](../evaluation/results/repro_wsl/runs.csv), [`summary.md`](../evaluation/results/repro_wsl/summary.md)),
+made by [`compare_repro.py`](../evaluation/scripts/compare_repro.py) from `extract_metrics.py` output.
+Batch log: [`machine_change/repro_batch.log`](machine_change/repro_batch.log).
+
+**Attempts and failures.** 47 attempts for 45 valid runs. **Two infrastructure failures, both B-C7
+seed 1** (`nav2_not_ready`, 11:49 and the runner's automatic retry). In both, `map_server` did not answer
+the localization lifecycle manager in time ("failed to send response to /map_server/change_state
+(timeout)"), so localization never became active and Nav2 was not ready by 28 s sim. That is the same
+kind of failure as the baseline's 14 `nav2_not_ready` attempts. The run was redone once, after the
+batch, and was valid (logged, S4, 89.7 s). Infrastructure failure rate: **2 of 47 attempts (4.3 %)**,
+against 17 of 317 (5.4 %) for the baseline. Both failed attempts are kept:
+[`machine_change/attempts/repro_B-C7_1_attempt1/`](machine_change/attempts/repro_B-C7_1_attempt1/),
+[`…attempt2/`](machine_change/attempts/repro_B-C7_1_attempt2/).
+
+**Result: outcomes.** Every run reproduces its baseline counterpart:
+
+| Quantity | same as baseline | Wilson 95 % CI |
+|---|---|---|
+| outcome | **45 / 45** | [0.921, 1.000] |
+| escalation depth (stage reached) | **45 / 45** | [0.921, 1.000] |
+| false intervention, missed violation, expected-outcome match | 45 / 45 each | [0.921, 1.000] |
+
+This includes the runs whose baseline outcome is not the scenario's typical one: J seed 1 ends with no
+outcome in both.
+
+**Result: timing and distances** (reproduction − baseline, simulation seconds; pairs where both are
+defined):
+
+| Metric | pairs | median diff | median abs diff | max abs diff |
+|---|---|---|---|---|
+| confirmation time `t_conf` | 29 | +0.10 | 0.10 | 0.20 |
+| PA warning `t_w1` / approach start `t_s2` | 29 | 0.00 | 0.00 | 0.30 |
+| confirmation latency | 29 | +0.10 | 0.10 | 0.20 |
+| detection to intervention | 29 | −0.10 | 0.10 | 0.10 |
+| arrival `t_a` | 17 | +0.02 | 0.08 | 1.86 |
+| navigation time | 17 | 0.00 | 0.08 | 1.76 |
+| outcome time `t_r` | 29 | 0.00 | 0.10 | **2.10** |
+| compliance latency | 11 | +0.10 | 0.10 | 2.00 |
+| path length (m) | 29 | 0.00 | 0.016 | 0.24 |
+| minimum robot–person distance (m) | 29 | 0.00 | 0.012 | 0.05 |
+| first confirmed confidence C | 29 | 0.000 | 0.000 | 0.000 |
+| cctv1 YOLO rate (Hz, sim time) | 45 | 0.00 | 0.018 | 0.65 |
+| warnings delivered | 45 | 0 | 0 | 0 |
+
+The median difference is at most one simulation tick (0.1 s) on every timing metric. **Four runs differ
+by more**, and each is explained as far as the data allow:
+
+| Run | Difference | Where it comes from |
+|---|---|---|
+| **I/1** | outcome **+2.1 s**, compliance latency +2.0 s | **Navigation**: the robot needed 25.30 s instead of 23.54 s for the same path (5.855 vs 5.850 m), with no recovery behaviours. Detection and the stage times up to S2 match to within 0.1 s. The scripted compliance follows the robot's direct warning, so the outcome moved with the arrival. The run's speed was normal (RTF 0.886). **The cause of the slower drive is not determined.** |
+| **C/0** | outcome **−0.9 s** (target lost) | **Perception at the edge of the camera's view**: the departing person was last detected 0.8 s earlier (44.3 vs 45.1 s), so the 8 s target-loss timer started earlier; the robot drove 0.24 m less. This ran during the speed dip (RTF 0.676), but its YOLO rate equalled the baseline's (4.19 Hz). |
+| **G/0** | outcome **−0.7 s** | Confirmation 0.2 s and the stage changes 0.3 s earlier, plus a 0.15 s faster drive: small detection-timing and navigation differences that add up. |
+| **B-C7/2** | timing within 0.08 s, but YOLO 4.30 vs 4.95 Hz and **4 Nav2 recovery behaviours** (baseline 0) | ran in the slowest conditions of the batch (RTF 0.648; see below) |
+
+**Nav2 recovery behaviours.** Six runs needed recoveries that their baseline counterparts did not:
+A/0, A-V/0 and A-V/2 (1 each), B-C7/2 (4), C/1 and C/2 (1 each). **All six ran between 11:16 and 12:02.**
+None of the 29 runs after 12:02 needed a recovery. None changed an outcome.
+
+**Conclusion.** Under WSL2 with the fixes above, the system reproduces the baseline's outcomes and escalation
+depths in 45 of 45 runs, and its timing to within one 0.1 s tick in the median. The remaining differences
+are a few tenths of a second, up to 2.1 s in one run (I/1, navigation). They are of the size expected when
+detection or control timing shifts slightly. **This is a sample of 3 of the 20 seeds per scenario, not a
+re-run of the baseline.**
+
+### Speed and background load
+
+**The simulation's real-time factor depends on everything else running on the computer**, and under WSL2
+this includes every Windows program. Speed does not change the decision logic, which runs entirely on
+simulation time. It can change **timing by fractions of a second**, and occasionally navigation behaviour,
+when the processes that turn sensor data into decisions (YOLO, the tracker, Nav2's controller) receive
+less CPU time per simulated second. Observed during the reproduction batch:
+
+| Period | Runs | RTF (min–max, median) | What was running besides the simulation |
+|---|---|---|---|
+| 11:16–11:36 | A, A-V, B/0 (7) | 0.78–0.84, 0.82 | not logged at the time |
+| **11:36–12:01** | B/1 → C/2 (7) | **0.65–0.77, 0.71** (dip) | not logged at the time |
+| 12:01–12:19 | D, E/0, E/1 (5) | 0.78–0.83, 0.82 | from 12:12 (monitor start): Battle.net (game launcher) 31–86 % of one core and Windows `system` 166–298 % in every sample ([`machine_change/host_monitor_repro.log`](machine_change/host_monitor_repro.log)) |
+| 12:19–13:27 | E/2 → L/2 (25) | 0.74–0.91, 0.88 | Battle.net last seen 12:21, then closed; Riot Client (game launcher) 29–83 % in 11 of 64 samples (12:22, 13:10–13:21); Windows `system` 5–286 %, median 37 % |
+| 13:34 | B-C7/1 redo (1) | 0.87 | – |
+
+The baseline, under native Ubuntu, ran at a median RTF of 0.907; this batch at 0.834 (minimum 0.648).
+Windows reported the CPU at 98–108 % of its nominal performance in every sample taken while a simulation
+was running (lower values appear only in idle samples between runs), so there was no sign of thermal
+throttling.
+
+**What the dip changed.**
+- **Simulation speed and the detector's rate fell together** (correlation 0.86 over the first 17 runs, computed
+  during the batch). If only Gazebo had slowed, YOLO would have processed *more* frames per simulated second.
+  So the whole Linux VM had less CPU.
+- In the slowest run (B-C7/2) the cctv1 rate fell to 4.30 Hz (baseline 4.95 Hz), and Nav2 needed 4
+  recoveries. All six runs with Nav2 recoveries ran before 12:02.
+- No outcome changed.
+
+**The cause of the dip is not proven**, because the host monitor was started after it ended. CPU taken by
+Windows programs is the most likely explanation: the game launchers, and work in Windows' own `system`
+process, which carries the GPU and VM traffic of WSL2. The monitor's records are consistent with it.
+Thermal throttling was not seen. Memory (no trend) and the number of people in the scenarios (one in every
+scenario affected) were ruled out.
+
+**For future runs:** close other programs, game launchers in particular, keep the host monitor running
+([`host_monitor.sh`](../evaluation/scripts/host_monitor.sh)), and report the RTF and YOLO rate with any
+timing result.
+
+### What to report in the paper
+
+Suggested points, to adapt to the manuscript; every number is from this section:
+
+1. **Platform.** The baseline evaluation (300 runs) was run in Gazebo 11 / ROS 2 Humble on native Ubuntu
+   22.04 on a laptop (Intel i5-12500H, RTX 3050 Ti), with YOLOv8n most likely on the GPU. After the
+   laptop's system drive failed, a reproduction sample was run on the same laptop under Windows with
+   Ubuntu 22.04 in WSL2, with YOLOv8n on the CPU.
+2. **Two set-up problems were found and fixed before any reported run.**
+   - The Linux wall clock was being stepped by ±21.6 s, because WSL's time sync and the Linux NTP service
+     disagreed. This stalled Gazebo; the fix was to disable the Linux NTP service.
+   - CPU inference with the library's default of 8 threads per detector starved the detectors (1.5 Hz
+     instead of 5 Hz). The fix was 2 threads per detector, a compute-only setting.
+3. **Reproduction.** On 45 runs (15 scenarios × 3 seeds), outcome and escalation depth matched the
+   baseline in 45 of 45 (Wilson 95 % CI 0.92–1.00). Timing metrics matched to a median of ≤ 0.1 s, with
+   a largest difference of 2.1 s (one run, navigation). Infrastructure failures: 2 of 47 attempts
+   (4.3 %; baseline 5.4 %), both Nav2 start-up timeouts, redone.
+4. **Limitation: speed and background load.** The real-time factor ranged from 0.65 to 0.91 (baseline
+   median 0.91). It depended on other software running on the host, and the slowest periods coincided
+   with fractions-of-a-second timing differences, a lower detector rate (down to 4.3 Hz against 4.95)
+   and Nav2 recovery behaviours, though not with any change of outcome. Decision logic runs on simulation
+   time.
+5. **Limitation: no run-level replay of the baseline.** The baseline's rosbags are on the failed drive.
+   Run-level analyses that need them (FSM replay, the offline sensitivity) cannot be repeated until it is
+   recovered; their published results come from files committed before the failure.
+6. **Limitation: inference device and rendering path differ** (GPU then, CPU now; native OpenGL then,
+   D3D12 translation now). The agreement above was measured under these differences.
+
+### Pictures of the simulation
+
+[`pictures/`](pictures/) holds snapshots from a documentation run of A/0 (tag `doc_pictures`, with two
+extra overview cameras; not an evaluation run). Every camera is saved at each escalation-stage change,
+and there is a storyboard figure. The pictures show five things to state when they are used:
+
+1. the cigarette is injected, not rendered;
+2. CCTV 1 sees and detects the demo world's scripted walker in room B through the doorway;
+3. that walker passes next to the robot at its base (actors have no collision geometry);
+4. at the direct warning, the violator is at the left edge of the robot camera's view, because the robot
+   keeps the camera spot's heading;
+5. the unused scenario people wait outside the building.
+
+See [`pictures/README.md`](pictures/README.md).
+
+![Storyboard](pictures/A_seed0_storyboard.png)
+
+### Tools added for this
+
+| Tool | Purpose |
+|---|---|
+| [`clock_probe.py`](../evaluation/scripts/clock_probe.py) | detects stalls and wall-clock steps, idle and under load |
+| [`progress_status.py`](../evaluation/scripts/progress_status.py) | health and progress snapshot of runs (`evaluation/progress/STATUS.md`, `watchdog.log`); run every 15 min by a watchdog that pushes to branch `wsl-progress` |
+| [`capture_pictures.py`](../evaluation/scripts/capture_pictures.py) | PNG snapshots of every camera at each escalation-stage change, with optional overview cameras. Documentation runs only. |
+| [`plot_run_topdown.py`](../evaluation/scripts/plot_run_topdown.py) | top-down figure of a run from its bag |
+| [`make_storyboard.py`](../evaluation/scripts/make_storyboard.py) | storyboard figure (stages × cameras) from `capture_pictures.py` output |
+| [`run_repro_wsl.sh`](../evaluation/scripts/run_repro_wsl.sh) | the reproduction batch (all scenarios × seeds 0–2), detached, resumable |
+| [`compare_repro.py`](../evaluation/scripts/compare_repro.py) | run-by-run comparison of a run set with the baseline → `runs.csv`, `summary.md` |
+| [`host_monitor.sh`](../evaluation/scripts/host_monitor.sh) | logs the Windows CPU performance level and the busiest Windows processes every minute while a batch runs |

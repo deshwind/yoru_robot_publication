@@ -1,0 +1,20 @@
+# evaluation/scripts/clock_probe.py 14, on the replacement machine, 2026-11-19
+# Each tuple: (monotonic gap s, wall-clock gap s) for an interval that was flagged.
+# The monotonic gaps are 0.05 s (no stall); the wall clock steps by about ±21.6 s.
+
+## Before: systemd-timesyncd active (about 10:50)
+idle: 5 stalls/jumps (monotonic gap, wall gap): [(0.05, -21.56), (0.05, 21.66), (0.05, -21.56), (0.05, 21.66), (0.05, -21.55)]
+load 14 procs: 8 stalls/jumps (monotonic gap, wall gap): [(0.05, 21.65), (0.05, -21.56), (0.05, 21.66), (0.05, -21.56), (0.05, 21.66), (0.05, -21.56), (0.05, 21.66), (0.05, -21.56)]
+
+## Clocks compared at the time (UTC, HH:MM:SS; "internet" = HTTP Date header of www.google.com)
+linux=10:51:55  internet=10:51:33  windows=10:51:55
+linux=10:51:58  internet=10:51:37  windows=10:51:59
+linux=10:52:02  internet=10:51:41  windows=10:52:03
+# Windows: w32tm /query /status -> Source: Local CMOS Clock, Last Successful Sync Time: unspecified
+# timedatectl in WSL: RTC time 10:51:20 while system time 10:51:41; NTP service active; synchronized: no
+
+## Fix: sudo systemctl disable --now systemd-timesyncd  (Linux follows the clock WSL takes from Windows)
+
+## After (immediately)
+idle: 1 stalls/jumps (monotonic gap, wall gap): [(0.05, 21.67)]      <- the single final step onto the Windows clock
+load 14 procs: 0 stalls/jumps (monotonic gap, wall gap): []

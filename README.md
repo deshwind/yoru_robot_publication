@@ -13,6 +13,13 @@ Robotics*.
 | `evaluation/scenarios/` | scenario definitions A–L (+ B-C7, F-pen, F-straw) |
 | `src/yoru_sim_plugins/` | Gazebo plugin: ROS-driven human actors visible to the lidar |
 
+**Operating-system change (2026-11-19).** The 300 baseline runs were made on this laptop under native
+Ubuntu, from the drive in an SSD slot that failed after `f350fb4`. Work continues on the same laptop under
+Windows + WSL2. The set-up, every failure met on it (wall-clock steps, CPU-thread oversubscription in the
+detectors, background load), the fixes, the reproduction check and the remaining uncertainties are in
+[`evidence/README.md`](evidence/README.md#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties).
+The baseline bags are on the failed drive and are not available.
+
 Changes to the system under test are additive and default-off: with no new launch arguments,
 every node receives exactly the parameters it had in V2 (verified; see evidence E1.3/E2.3).
 

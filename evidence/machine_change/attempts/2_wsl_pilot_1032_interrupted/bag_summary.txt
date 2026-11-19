@@ -1,0 +1,71 @@
+bag: evaluation/data/pilot/wsl_pilot/A/0/bag
+
+== topics (messages, type)
+        8  /amcl_pose  [geometry_msgs/msg/PoseWithCovarianceStamped]
+      470  /clock  [rosgraph_msgs/msg/Clock]
+        1  /compliance/actor_events  [std_msgs/msg/String]
+        1  /compliance/audio_event  [std_msgs/msg/String]
+       47  /compliance/autonomy_paused  [std_msgs/msg/Bool]
+       22  /compliance/cctv1/confirmed  [vision_msgs/msg/Detection2DArray]
+       78  /compliance/cctv1/tracked  [vision_msgs/msg/Detection2DArray]
+       74  /compliance/cctv2/tracked  [vision_msgs/msg/Detection2DArray]
+      288  /compliance/confirmation_debug  [std_msgs/msg/String]
+       26  /compliance/event_metadata  [std_msgs/msg/String]
+        2  /compliance/fsm_state  [std_msgs/msg/String]
+       61  /compliance/fsm_status  [std_msgs/msg/String]
+        1  /compliance/incident_log_path  [std_msgs/msg/String]
+        2  /compliance/nav_status  [std_msgs/msg/String]
+       22  /compliance/navigation_targets  [geometry_msgs/msg/PoseStamped]
+        1  /compliance/pa_warning  [std_msgs/msg/String]
+       49  /compliance/scenario_ground_truth  [std_msgs/msg/String]
+      152  /compliance/tracking_info  [std_msgs/msg/String]
+     1564  /diff_cont/cmd_vel_unstamped  [geometry_msgs/msg/Twist]
+     1360  /diff_cont/odom  [nav_msgs/msg/Odometry]
+      939  /gazebo/model_states  [gazebo_msgs/msg/ModelStates]
+     8035  /navigate_to_pose/_action/feedback  [nav2_msgs/action/NavigateToPose_FeedbackMessage]
+        2  /navigate_to_pose/_action/status  [action_msgs/msg/GoalStatusArray]
+       33  /plan  [nav_msgs/msg/Path]
+      468  /scan  [sensor_msgs/msg/LaserScan]
+     2716  /tf  [tf2_msgs/msg/TFMessage]
+        3  /tf_static  [tf2_msgs/msg/TFMessage]
+
+== real-time factor: 45.1 s sim / 363.3 s wall = 0.124
+
+== gazebo models: ['cctv_camera_1', 'cctv_camera_2', 'ground_plane', 'internal_wall', 'intruder_1', 'intruder_1_body', 'obstacle_room_a', 'obstacle_room_b', 'outer_walls', 'person_1', 'person_1_body', 'person_2', 'person_2_body', 'person_3', 'person_3_body', 'person_walking', 'yoru_robot']
+
+== actor events (/compliance/actor_events)
+  t=    0.10  layout             {"persons": [{"actor": "person_1", "x": 3.9, "y": 0.9, "yaw": -0.442, "role": "violator"}]}
+
+== positions in the building (every ~10 s sim)
+  person_1    0s(8.00,6.00) 10s(3.90,0.90) 20s(3.90,0.90) 30s(3.90,0.90) 40s(3.90,0.90)
+  yoru_robot  0s(-4.00,1.50) 10s(-4.01,1.50) 20s(-4.01,1.50) 30s(-4.02,1.50) 40s(-3.94,1.49)
+  min robot-person_1 centre distance: 6.15 m at t=47.1
+  min lidar range: 1.797 m at t=39.6
+
+== FSM transitions (/compliance/fsm_state)
+  t=   36.40      MONITORING -> PA_WARNING     reason=confirmed            track=c1_1000 room=room_a stage=S1 in_state=36.4
+  t=   39.40      PA_WARNING -> APPROACH       reason=pa_expired           track=c1_1000 room=room_a stage=S2 in_state=3.0
+
+== audio events (/compliance/audio_event)
+  t=   36.40  pa_warning      backend=log_only track=c1_1000 room=room_a
+
+== ground truth (/compliance/scenario_ground_truth, non-heartbeat)
+  t=    0.20  scenario_start       scenario=smoking seed=0 violator=person_1 actors=[{'id': 'person_1', 'role': 'violator', 'x': 3.9, 'y': 0.9}]
+  t=   30.20  violation_onset      scenario=smoking seed=0 violator=person_1 actors=[{'id': 'person_1', 'role': 'violator', 'x': 3.9, 'y': 0.9}]
+  last frame_stats: {'frames': 78, 'violator_matched': 26, 'injected': 26, 'dropped': 0}
+  (47 heartbeat messages)
+
+== confirmation debug records: 288
+      22  ('confirm_cctv1', 'confirmed')
+     114  ('confirm_cctv1', 'rejected')
+       4  ('confirm_cctv1', 'uncertain')
+     148  ('confirm_cctv2', 'rejected')
+  first confirmed record: {"stamp": 31.399, "node": "confirm_cctv1", "track_id": "c1_1000", "D": 0.76051060562401, "P": 0.8, "T": 1.0, "S": 0.5, "C": 0.7942042422496041, "persistence_count": 5, "C1": true, "C2": true, "C4": true, "C7_fp_risk": "low"}
+
+== nav status
+  {'state': 'navigating', 'goal': {'x': 1.8, 'y': 0.0}}
+  {'state': 'aborted', 'code': 6}
+
+== incident log
+
+== incident log path: [{'raw': '/home/desh/yoru_ws/yoru_robot_publication/evaluation/data/pilot/wsl_pilot/A/0/incident_logs/incidents.jsonl'}]

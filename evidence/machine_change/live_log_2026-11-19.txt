@@ -1,0 +1,209 @@
+=== 2026-11-19 11:03:13 live log started: benchmarks and runs on the replacement machine ===
+11:03:13 [bench] YOLOv8n alone: 71 ms/frame; two processes at once: 482-645 ms/frame (torch 8 threads each) -> CPU oversubscription
+11:03:13 [run] wsl_pilot_perf A/0 finished: status=ok outcome=complied stage=S3 sim=86.3s wall=157.3s rtf=0.548
+11:03:59 [bench] 2 YOLO processes at once, torch threads=8 each: 373 390 ms/frame
+11:04:08 [bench] 2 YOLO processes at once, torch threads=6 each: 135 132 ms/frame
+11:04:16 [bench] 2 YOLO processes at once, torch threads=4 each: 108 107 ms/frame
+11:04:23 [bench] 2 YOLO processes at once, torch threads=3 each: 108 111 ms/frame
+11:04:30 [bench] 2 YOLO processes at once, torch threads=2 each: 104 109 ms/frame
+11:04:38 [bench] 2 YOLO processes at once, torch threads=1 each: 135 135 ms/frame
+11:05:46 [tests] system: 105 passed in 6.30s | evaluation: 29 passed in 0.69s
+11:05:54 [run] starting validation run: A seed 0, torch_threads=2 (tag wsl_threads2)
+11:05:54 [run] [run_batch] tag=wsl_threads2 runs=1 code=f7bb8f4bdff9a649 weights={}
+11:05:54 [run] [run_batch] 1/1 A seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/pilot/wsl_threads2/A/0
+11:06:45 [watchdog] health OK, validation run in progress; pushed 59e292d to wsl-progress
+11:05:54 [run] [run_batch]   status=ok outcome=complied stage=S3 sim=84.9s wall=106.1s rtf=0.8
+11:08:39 [cpu] samples while Gazebo up: 53; total CPU 872% of 1600%
+11:08:39 [cpu]    315.8%  yolo_detector_n
+11:08:39 [cpu]    201.5%  tracking_node
+11:08:39 [cpu]    108.9%  gzserver
+11:08:39 [cpu]     20.4%  ros2
+11:08:39 [cpu]     19.4%  lifecycle_manag
+11:08:39 [cpu]     18.7%  dashboard_node
+11:08:39 [cpu]     13.3%  return_to_base_
+11:09:08 [result] validation wsl_threads2 A/0: ok, complied S3 at 74.7 s; cctv1 4.99 Hz (baseline 4.98); confirmation latency 0.9 s (baseline 0.8); RTF 0.80 (baseline 0.89); CPU 872% (was 1477%)
+11:09:08 [pictures] starting documentation run (tag doc_pictures, A seed 0) with camera capture + 2 overview cameras
+11:09:08 [pictures-run] [run_batch] tag=doc_pictures runs=1 code=f7bb8f4bdff9a649 weights={}
+11:09:08 [pictures-run] [run_batch] 1/1 A seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/doc/doc_pictures/A/0
+11:09:54 [figure] top-down map figure of the validation run -> evidence/machine_change/topdown_A0_wsl_threads2.png
+11:10:53 [docs] evidence/README.md: replacement-machine section written (incidents 1-9, A/0 comparison, 8 open uncertainties)
+11:12:00 [pictures-run] [run_batch]   status=ok outcome=complied stage=S3 sim=85.5s wall=115.2s rtf=0.742
+11:12:03 [pictures] [INFO] [1795086557.424842011] [doc_picture_capture]: spawn overview_top: SpawnEntity: Successfully spawned entity [doc_overview_top]
+11:12:03 [pictures] [INFO] [1795086559.922931221] [doc_picture_capture]: spawn overview_oblique: SpawnEntity: Successfully spawned entity [doc_overview_oblique]
+11:12:03 [pictures] [INFO] [1795086585.757759818] [doc_picture_capture]: at 20 s at sim 20.0 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086600.946317430] [doc_picture_capture]: at 33 s at sim 33.0 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086604.371864209] [doc_picture_capture]: MONITORING -> PA_WARNING (confirmed) at sim 36.1 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086607.845096174] [doc_picture_capture]: PA_WARNING -> APPROACH (pa_expired) at sim 39.1 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086621.298756196] [doc_picture_capture]: at 50 s at sim 50.0 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086637.571997526] [doc_picture_capture]: APPROACH -> DIRECT_WARNING (goal_reached) at sim 63.1 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086643.238665380] [doc_picture_capture]: at 68 s at sim 68.0 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086651.230367861] [doc_picture_capture]: DIRECT_WARNING -> MONITORING (complied) at sim 74.9 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086679.125623463] [doc_picture_capture]: end at sim 85.5 s: 7 pictures
+11:12:03 [pictures] 9 snapshots -> evidence/pictures/A_seed0
+11:12:54 [pictures] doc run ok (complied S3 74.9 s, RTF 0.742); 63 pictures + storyboard -> evidence/pictures/ ; captions + 5 observations in evidence/pictures/README.md
+11:12:57 [git] pushed 7325abc to wsl-progress
+11:16:50 [repro] start: all scenarios x seeds 0,1,2 (45 runs), tag repro_wsl
+11:16:51 [repro] [run_batch] tag=repro_wsl runs=45 code=f7bb8f4bdff9a649 weights={}
+11:16:51 [repro] [run_batch] 1/45 A seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A/0
+11:17:43 [tool] compare_repro.py ready: run-by-run comparison with the baseline (used when the batch ends)
+11:18:07 [watchdog] health OK; repro batch run 1/45 in progress; pushed
+11:19:37 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.5s wall=110.1s rtf=0.776
+11:19:40 [repro] [run_batch] 2/45 A seed 1 attempt 1 (domain 64) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A/1
+11:22:18 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.2s wall=102.1s rtf=0.834
+11:22:21 [repro] [run_batch] 3/45 A seed 2 attempt 1 (domain 67) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A/2
+11:25:00 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.2s wall=103.1s rtf=0.826
+11:25:03 [repro] [run_batch] 4/45 A-V seed 0 attempt 1 (domain 70) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A-V/0
+11:27:44 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.4s wall=105.1s rtf=0.812
+11:27:47 [repro] [run_batch] 5/45 A-V seed 1 attempt 1 (domain 73) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A-V/1
+11:30:27 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.6s wall=105.1s rtf=0.814
+11:30:30 [repro] [run_batch] 6/45 A-V seed 2 attempt 1 (domain 76) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A-V/2
+11:32:23 [watchdog] health OK; repro 5/45 done (all ok, RTF 0.78-0.83); about 3 min per run
+11:33:10 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.5s wall=104.1s rtf=0.821
+11:33:13 [repro] [run_batch] 7/45 B seed 0 attempt 1 (domain 79) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B/0
+11:36:31 [repro] [run_batch]   status=ok outcome=none stage= sim=120.0s wall=142.2s rtf=0.844
+11:36:34 [repro] [run_batch] 8/45 B seed 1 attempt 1 (domain 82) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B/1
+11:40:18 [repro] [run_batch]   status=ok outcome=none stage= sim=120.0s wall=168.3s rtf=0.713
+11:40:21 [repro] [run_batch] 9/45 B seed 2 attempt 1 (domain 85) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B/2
+11:43:53 [repro] [run_batch]   status=ok outcome=none stage= sim=120.5s wall=156.3s rtf=0.771
+11:43:56 [repro] [run_batch] 10/45 B-C7 seed 0 attempt 1 (domain 88) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/0
+11:47:12 [repro] [run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=99.7s wall=140.2s rtf=0.711
+11:47:15 [repro] [run_batch] 11/45 B-C7 seed 1 attempt 1 (domain 91) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/1
+11:47:26 [watchdog] health OK; repro 10/45 done, all ok (A, A-V complied S3; B none; B-C7/0 logged S4 - same outcomes as baseline so far)
+11:48:55 [repro] [run_batch]   status=nav2_not_ready outcome=none stage= sim=28.0s wall=44.1s rtf=0.635
+11:49:00 [repro] [run_batch] 11/45 B-C7 seed 1 attempt 2 (domain 92) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/1
+11:49:00 [repro] [run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/repro/repro_wsl/B-C7/1__20261119T114900__superseded
+11:50:44 [repro] [run_batch]   status=nav2_not_ready outcome=none stage= sim=28.6s wall=48.1s rtf=0.595
+11:50:52 [repro] [run_batch] 12/45 B-C7 seed 2 attempt 1 (domain 94) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/2
+11:54:24 [repro] [run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=101.2s wall=156.3s rtf=0.648
+11:54:27 [repro] [run_batch] 13/45 C seed 0 attempt 1 (domain 97) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/C/0
+11:56:55 [repro] [run_batch]   status=ok outcome=target_lost stage=S2 sim=62.3s wall=92.2s rtf=0.676
+11:56:58 [repro] [run_batch] 14/45 C seed 1 attempt 1 (domain 60) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/C/1
+11:59:26 [repro] [run_batch]   status=ok outcome=target_lost stage=S2 sim=62.4s wall=92.2s rtf=0.677
+11:59:29 [repro] [run_batch] 15/45 C seed 2 attempt 1 (domain 63) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/C/2
+12:01:54 [repro] [run_batch]   status=ok outcome=target_lost stage=S2 sim=64.2s wall=90.1s rtf=0.712
+12:01:57 [repro] [run_batch] 16/45 D seed 0 attempt 1 (domain 66) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/D/0
+12:03:46 [watchdog] B-C7/1 failed twice (nav2_not_ready: map_server lifecycle reply lost; infrastructure, same kind as baseline) - will be redone at the end with --skip-existing. RTF drifting down 0.83->0.68 over the batch; /dev/shm had 821 stale Fast DDS files -> 'fastdds shm clean' (zombie segments only) -> 707. Clock checked: no steps.
+12:05:27 [repro] [run_batch]   status=ok outcome=none stage= sim=120.6s wall=154.2s rtf=0.782
+12:05:30 [repro] [run_batch] 17/45 D seed 1 attempt 1 (domain 69) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/D/1
+12:08:52 [repro] [run_batch]   status=ok outcome=none stage= sim=120.6s wall=146.2s rtf=0.825
+12:08:55 [repro] [run_batch] 18/45 D seed 2 attempt 1 (domain 72) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/D/2
+12:12:18 [repro] [run_batch]   status=ok outcome=none stage= sim=120.1s wall=147.2s rtf=0.816
+12:12:21 [repro] [run_batch] 19/45 E seed 0 attempt 1 (domain 75) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/E/0
+12:12:42 [monitor] host monitor started (Windows CPU performance %, top Windows processes, every 60 s) -> evaluation/progress/host_monitor.log; reason: RTF dip 11:36-12:01 with YOLO rate dropping too (whole VM short of CPU)
+12:15:44 [repro] [run_batch]   status=ok outcome=none stage= sim=120.2s wall=147.2s rtf=0.817
+12:15:47 [repro] [run_batch] 20/45 E seed 1 attempt 1 (domain 78) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/E/1
+12:17:22 [watchdog] health OK; repro 19/45 done (18 ok, B-C7/1 to redo); RTF back to 0.78-0.83; Windows CPU not throttled (98-105%); battle.net still 31-86% of a core
+12:19:09 [repro] [run_batch]   status=ok outcome=none stage= sim=120.3s wall=146.2s rtf=0.823
+12:19:12 [repro] [run_batch] 21/45 E seed 2 attempt 1 (domain 81) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/E/2
+12:22:24 [repro] [run_batch]   status=ok outcome=none stage= sim=120.8s wall=137.1s rtf=0.881
+12:22:27 [repro] [run_batch] 22/45 F-pen seed 0 attempt 1 (domain 84) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-pen/0
+12:25:10 [note] user: laptop is on edge - no speed tweaks or extra load; batch continues unchanged
+12:25:41 [repro] [run_batch]   status=ok outcome=none stage= sim=120.3s wall=138.1s rtf=0.871
+12:25:44 [repro] [run_batch] 23/45 F-pen seed 1 attempt 1 (domain 87) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-pen/1
+12:28:52 [repro] [run_batch]   status=ok outcome=none stage= sim=120.1s wall=132.1s rtf=0.909
+12:28:55 [repro] [run_batch] 24/45 F-pen seed 2 attempt 1 (domain 90) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-pen/2
+12:32:05 [repro] [run_batch]   status=ok outcome=none stage= sim=120.7s wall=134.2s rtf=0.9
+12:32:08 [repro] [run_batch] 25/45 F-straw seed 0 attempt 1 (domain 93) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-straw/0
+12:32:22 [watchdog] health OK; repro 24/45 done (23 ok, B-C7/1 to redo); RTF 0.87-0.91 since launchers closed
+12:35:20 [repro] [run_batch]   status=ok outcome=none stage= sim=120.3s wall=136.1s rtf=0.884
+12:35:23 [repro] [run_batch] 26/45 F-straw seed 1 attempt 1 (domain 96) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-straw/1
+12:38:34 [repro] [run_batch]   status=ok outcome=none stage= sim=120.4s wall=135.1s rtf=0.891
+12:38:37 [repro] [run_batch] 27/45 F-straw seed 2 attempt 1 (domain 99) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-straw/2
+12:41:46 [repro] [run_batch]   status=ok outcome=none stage= sim=120.5s wall=133.1s rtf=0.905
+12:41:49 [repro] [run_batch] 28/45 G seed 0 attempt 1 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/G/0
+12:44:35 [repro] [run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=98.8s wall=110.1s rtf=0.897
+12:44:38 [repro] [run_batch] 29/45 G seed 1 attempt 1 (domain 65) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/G/1
+12:47:21 [watchdog] health OK; repro 28/45 done (27 ok, B-C7/1 to redo); RTF ~0.89-0.91
+12:47:25 [repro] [run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=99.8s wall=111.1s rtf=0.898
+12:47:28 [repro] [run_batch] 30/45 G seed 2 attempt 1 (domain 68) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/G/2
+12:50:14 [repro] [run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=99.1s wall=110.1s rtf=0.9
+12:50:17 [repro] [run_batch] 31/45 H seed 0 attempt 1 (domain 71) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/H/0
+12:52:18 [repro] [run_batch]   status=ok outcome=target_lost stage=S2 sim=55.9s wall=65.1s rtf=0.859
+12:52:21 [repro] [run_batch] 32/45 H seed 1 attempt 1 (domain 74) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/H/1
+12:54:31 [repro] [run_batch]   status=ok outcome=target_lost stage=S2 sim=55.4s wall=75.1s rtf=0.738
+12:54:34 [repro] [run_batch] 33/45 H seed 2 attempt 1 (domain 77) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/H/2
+12:56:38 [repro] [run_batch]   status=ok outcome=target_lost stage=S2 sim=55.3s wall=68.1s rtf=0.812
+12:56:41 [repro] [run_batch] 34/45 I seed 0 attempt 1 (domain 80) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/I/0
+12:59:14 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.5s wall=97.1s rtf=0.881
+12:59:17 [repro] [run_batch] 35/45 I seed 1 attempt 1 (domain 83) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/I/1
+13:01:52 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=87.8s wall=99.1s rtf=0.886
+13:01:55 [repro] [run_batch] 36/45 I seed 2 attempt 1 (domain 86) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/I/2
+13:02:22 [watchdog] health OK; repro 35/45 done (34 ok, B-C7/1 to redo); outcomes 34/34 match baseline (quick check)
+13:04:27 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.3s wall=96.1s rtf=0.888
+13:04:30 [repro] [run_batch] 37/45 J seed 0 attempt 1 (domain 89) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/J/0
+13:07:02 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.4s wall=96.1s rtf=0.889
+13:07:05 [repro] [run_batch] 38/45 J seed 1 attempt 1 (domain 92) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/J/1
+13:11:35 [repro] [run_batch]   status=ok outcome=none stage= sim=190.7s wall=214.3s rtf=0.89
+13:11:38 [repro] [run_batch] 39/45 J seed 2 attempt 1 (domain 95) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/J/2
+13:14:16 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.7s wall=102.1s rtf=0.839
+13:14:19 [repro] [run_batch] 40/45 K seed 0 attempt 1 (domain 98) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/K/0
+13:16:44 [repro] [run_batch]   status=ok outcome=safety_stop stage=S2 sim=74.3s wall=89.1s rtf=0.834
+13:16:47 [repro] [run_batch] 41/45 K seed 1 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/K/1
+13:17:27 [watchdog] health OK; repro 40/45 done (39 ok, B-C7/1 to redo); J/1 ended 'none' - same as baseline J/1
+13:19:11 [repro] [run_batch]   status=ok outcome=safety_stop stage=S2 sim=73.8s wall=89.1s rtf=0.828
+13:19:14 [repro] [run_batch] 42/45 K seed 2 attempt 1 (domain 64) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/K/2
+13:21:39 [repro] [run_batch]   status=ok outcome=safety_stop stage=S2 sim=74.0s wall=89.1s rtf=0.83
+13:21:42 [repro] [run_batch] 43/45 L seed 0 attempt 1 (domain 67) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/L/0
+13:21:51 [decision] user: (1) after the reproduction write-up, merge wsl-progress into main (watchdog snapshots stay on the branch); (2) Phase B: under skip_pa_warning a person scripted to comply after the PA warning complies after the first warning actually heard (same delay)
+13:23:49 [repro] [run_batch]   status=ok outcome=admin_override stage=S2 sim=54.3s wall=71.1s rtf=0.764
+13:23:52 [repro] [run_batch] 44/45 L seed 1 attempt 1 (domain 70) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/L/1
+13:25:53 [repro] [run_batch]   status=ok outcome=admin_override stage=S2 sim=55.1s wall=65.1s rtf=0.847
+13:25:56 [repro] [run_batch] 45/45 L seed 2 attempt 1 (domain 73) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/L/2
+13:27:55 [repro] [run_batch]   status=ok outcome=admin_override stage=S2 sim=54.6s wall=64.1s rtf=0.852
+13:27:59 [repro] batch runner exited
+13:29:24 [decision] user: same laptop as the baseline (original native Ubuntu on the SSD in the broken slot; now Windows + WSL2 on another drive). B-C7/1: one run after 10 min cooling. Phase C: gentle batches.
+13:29:24 [cooldown] laptop resting 10 min before the single B-C7/1 run
+13:34:11 [repro] user asked to start now: cool-down cut short at 13:34:11 (started 13:29:24); single redo of B-C7/1
+13:34:16 [repro] start: all scenarios x seeds 0,1,2 (45 runs), tag repro_wsl
+13:34:16 [repro] [run_batch] tag=repro_wsl runs=45 code=f7bb8f4bdff9a649 weights={}
+13:34:16 [repro] [run_batch] skip A seed 0 (already ok)
+13:34:16 [repro] [run_batch] skip A seed 1 (already ok)
+13:34:16 [repro] [run_batch] skip A seed 2 (already ok)
+13:34:16 [repro] [run_batch] skip A-V seed 0 (already ok)
+13:34:16 [repro] [run_batch] skip A-V seed 1 (already ok)
+13:34:16 [repro] [run_batch] skip A-V seed 2 (already ok)
+13:34:16 [repro] [run_batch] skip B seed 0 (already ok)
+13:34:16 [repro] [run_batch] skip B seed 1 (already ok)
+13:34:16 [repro] [run_batch] skip B seed 2 (already ok)
+13:34:16 [repro] [run_batch] skip B-C7 seed 0 (already ok)
+13:34:16 [repro] [run_batch] 11/45 B-C7 seed 1 attempt 1 (domain 91) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/1
+13:34:16 [repro] [run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/repro/repro_wsl/B-C7/1__20261119T133416__nav2_not_ready
+13:37:08 [repro] [run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=99.7s wall=115.1s rtf=0.866
+13:37:11 [repro] [run_batch] skip B-C7 seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip C seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip C seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip C seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip D seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip D seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip D seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip E seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip E seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip E seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip F-pen seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip F-pen seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip F-pen seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip F-straw seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip F-straw seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip F-straw seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip G seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip G seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip G seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip H seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip H seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip H seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip I seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip I seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip I seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip J seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip J seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip J seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip K seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip K seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip K seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip L seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip L seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip L seed 2 (already ok)
+13:37:11 [repro] batch runner exited
+13:37:17 [repro] B-C7/1 redo ok (logged S4 at 89.7 s, RTF 0.866): 45/45 valid. Simulations finished.
+13:41:02 [tests] system: 105 passed in 5.65s | evaluation: 29 passed in 0.63s
+13:41:13 [docs] reproduction write-up done: 45/45 outcomes match; 4 timing differences explained; speed/background-load section; 'What to report in the paper'; same-laptop corrections. Next: merge into main, push, stop watchdog.
