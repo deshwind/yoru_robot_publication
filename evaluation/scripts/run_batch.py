@@ -22,6 +22,12 @@ weight/threshold setting). Requires ROS 2 and this workspace to be sourced:
   python3 evaluation/scripts/run_batch.py --scenarios all --seeds 20       # full
   python3 evaluation/scripts/run_batch.py --scenarios A,G --seeds 20 \\
       --w-d 0.5 --w-p 0.25 --w-t 0.15 --w-s 0.10 --threshold 0.6
+  # FSM design variants (Extension A; tag e.g. aware_hold_s1); variant runs
+  # need their own manifest (the baseline manifest has no 'variant' column)
+  python3 evaluation/scripts/run_batch.py --scenarios H,C,A --seeds 10 \\
+      --compliance-aware hold_s1 --out evaluation/data/variants \\
+      --manifest evaluation/data/variants/manifest.csv
+  # --skip-pa also sets the human model's Phase B rule (comply_s1_fallback)
 """
 
 import argparse
@@ -49,10 +55,59 @@ MANIFEST_FIELDS = [
     'confirm_confidence', 'uncertain_confidence', 'ablation', 'status', 'outcome',
     'outcome_stage', 'outcome_sim_t', 'expected_outcome', 'ground_truth',
     'start_wall', 'end_wall', 'wall_s', 'sim_s', 'rtf', 'attempts', 'bag_ok',
-    'died_processes', 'code_sha256', 'run_dir']
+    'died_processes', 'code_sha256', 'run_dir', 'variant']
+
+# Per-camera tracked topics, in the order of compliance_fsm_node's events_topics
+# (yoru_sim.yaml): the frame count and presence check of the FSM variants
+FRAME_TOPICS = ['/compliance/cctv1/tracked', '/compliance/cctv2/tracked']
 
 
 # ------------------------------------------------------------------ config
+
+def variant_settings(skip_pa=False, sustained_ratio=0.0, compliance_aware=''):
+    """FSM design variants (Extension A) for one run set.
+
+    Returns {'fsm': compliance_fsm_node parameters, 'human':
+    scenario_publisher_node parameters, 'tag': run-set tag fragment ('' when
+    no variant is on)}. With skip_pa the human model's Phase B rule is set too:
+    a person scripted to comply after the PA warning, which is not played,
+    complies after the first warning heard (comply_s1_fallback first_heard).
+    The sustained rule and the compliance-aware modes need the per-camera
+    frame topics.
+    """
+    if sustained_ratio and not 0.0 < sustained_ratio <= 1.0:
+        raise ValueError(f'sustained ratio must be in (0, 1], not {sustained_ratio}')
+    if compliance_aware not in ('', 'hold_s1', 'reset_first', 'both'):
+        raise ValueError(f'unknown compliance-aware mode {compliance_aware!r}')
+    fsm, human, parts = {}, {}, []
+    if skip_pa:
+        fsm['skip_pa_warning'] = True
+        human['comply_s1_fallback'] = 'first_heard'
+        parts.append('skip_pa')
+    if sustained_ratio:
+        fsm['sustained_confirmation_ratio'] = float(sustained_ratio)
+        parts.append(f'sustained{sustained_ratio:g}')
+    if compliance_aware:
+        fsm['compliance_aware_approach'] = compliance_aware
+        parts.append(f'aware_{compliance_aware}')
+    if sustained_ratio or compliance_aware:
+        fsm['frame_topics'] = list(FRAME_TOPICS)
+    return {'fsm': fsm, 'human': human, 'tag': '_'.join(parts)}
+
+
+def expected_log_lines(variant):
+    """The start-up lines compliance_fsm_node and scenario_publisher_node must
+    print for this variant (all off when no variant is on)."""
+    fsm, human = variant['fsm'], variant['human']
+    return [
+        'FSM variants: '
+        f'skip_pa_warning={bool(fsm.get("skip_pa_warning", False))}, '
+        f'sustained_confirmation_ratio={float(fsm.get("sustained_confirmation_ratio", 0.0)):g}, '
+        f'compliance_aware_approach={fsm.get("compliance_aware_approach") or "off"}, '
+        f'frame_topics={len(fsm.get("frame_topics", []))}',
+        f'comply_s1_fallback={human.get("comply_s1_fallback") or "off"}',
+    ]
+
 
 def deep_merge(base, extra):
     out = copy.deepcopy(base)
@@ -79,12 +134,16 @@ def load_scenarios(selection):
     return [scenarios[s] for s in selection.split(',')]
 
 
-def build_overlay(scenario, seed, run_dir):
+def build_overlay(scenario, seed, run_dir, variant=None):
     with open(os.path.join(EVAL, 'config', 'eval_base.yaml'), encoding='utf-8') as f:
         overlay = yaml.safe_load(f)
     scenario_params = {node: {'ros__parameters': params}
                        for node, params in scenario['params'].items()}
     overlay = deep_merge(overlay, scenario_params)
+    if variant and (variant['fsm'] or variant['human']):
+        overlay = deep_merge(overlay, {
+            'compliance_fsm_node': {'ros__parameters': dict(variant['fsm'])},
+            'scenario_publisher_node': {'ros__parameters': dict(variant['human'])}})
     per_run = {
         'scenario_publisher_node': {'ros__parameters': {
             'seed': seed, 'scenario_id': f'{scenario["id"]}_s{seed}'}},
@@ -271,7 +330,7 @@ def died_before(log_path, offset):
     return sorted(set(died))
 
 
-def config_applied(log_path, seed, ablation=None):
+def config_applied(log_path, seed, ablation=None, variant=None):
     """launch_ros ignores a parameter file it cannot open, so check the
     nodes actually report the overlay's values before trusting a run."""
     with open(log_path, encoding='utf-8', errors='replace') as f:
@@ -280,7 +339,25 @@ def config_applied(log_path, seed, ablation=None):
                and f'Human actor node: seed={seed},' in text)
     if ablation:  # both confirmation nodes must report the ablation
         applied = applied and text.count(f'ablations={ablation})') >= 2
+    if variant is not None:  # the FSM and the human model report the variant
+        applied = applied and all(line in text for line in expected_log_lines(variant))
     return applied
+
+
+def manifest_fieldnames(manifest, variant_tag):
+    """Columns to append with. An existing manifest from before the 'variant'
+    column keeps its own header (rows stay aligned); variant runs must not go
+    into such a manifest, since the column naming the variant would be lost."""
+    if not os.path.isfile(manifest):
+        return list(MANIFEST_FIELDS)
+    with open(manifest, encoding='utf-8') as f:
+        header = next(csv.reader(f), [])
+    if header == MANIFEST_FIELDS:
+        return header
+    if variant_tag:
+        raise ValueError(f'{manifest} has no "variant" column (older manifest): '
+                         'give FSM-variant runs their own --manifest')
+    return header
 
 
 def nav2_ready(log_path):
@@ -314,7 +391,7 @@ def run_once(scenario, seed, run_dir, weights, domain_id, cli):
     os.makedirs(run_dir, exist_ok=True)
     with open(os.path.join(run_dir, 'overlay.yaml'), 'w', encoding='utf-8') as f:
         f.write(f'# GENERATED by run_batch.py for {scenario["id"]} seed {seed}\n')
-        yaml.safe_dump(build_overlay(scenario, seed, run_dir), f, sort_keys=False)
+        yaml.safe_dump(build_overlay(scenario, seed, run_dir, cli.variant), f, sort_keys=False)
     cmd = ['ros2', 'launch', 'yoru_bringup', 'sim_full.launch.py',
            *launch_args(weights, cli.ablate),
            f'overlay_params:={os.path.join(run_dir, "overlay.yaml")}',
@@ -351,7 +428,7 @@ def run_once(scenario, seed, run_dir, weights, domain_id, cli):
             continue
         if not checked_config and elapsed > 20.0:
             checked_config = True
-            if not config_applied(log_path, seed, cli.ablate):
+            if not config_applied(log_path, seed, cli.ablate, cli.variant):
                 status = 'config_not_applied'
                 break
         # Nav2 must be up before the violation onset (sim 30 s)
@@ -407,6 +484,7 @@ def run_once(scenario, seed, run_dir, weights, domain_id, cli):
         'rtf': round((sim_end or 0.0) / max(end - start - 1e-9, 1e-9), 3),
         'bag_ok': bag_ok, 'died_processes': ';'.join(died),
         'command': cmd, 'domain_id': domain_id,
+        'variant': cli.variant,
     }
     with open(os.path.join(run_dir, 'run_info.json'), 'w', encoding='utf-8') as f:
         json.dump(info, f, indent=2)
@@ -451,7 +529,14 @@ def main():
     ap.add_argument('--ablate', choices=('c4', 'c5', 'c7'),
                     help='Phase 7: disable C4 (persistence gate), C5 (support, w_S=0 '
                          'renormalised) or C7 (confounder rule) in both confirmation nodes')
-    ap.add_argument('--tag', help='run-set name (default: baseline / weight string)')
+    ap.add_argument('--skip-pa', action='store_true',
+                    help='FSM variant skip_pa_warning (no S1 PA warning); also sets the '
+                         'human model rule comply_s1_fallback=first_heard (Phase B)')
+    ap.add_argument('--sustained-ratio', type=float, default=0.0,
+                    help='FSM variant sustained_confirmation_ratio in (0, 1], e.g. 0.6')
+    ap.add_argument('--compliance-aware', choices=('hold_s1', 'reset_first', 'both'),
+                    default='', help='FSM variant compliance_aware_approach')
+    ap.add_argument('--tag', help='run-set name (default: baseline / weight string / variant)')
     ap.add_argument('--out', default=os.path.join(EVAL, 'data', 'runs'))
     ap.add_argument('--manifest', default=os.path.join(EVAL, 'data', 'manifest.csv'))
     ap.add_argument('--retries', type=int, default=1,
@@ -477,6 +562,16 @@ def main():
     weights, tag = weight_settings(cli)
     if cli.ablate and not cli.tag:
         tag = f'ablate_{cli.ablate}' if tag == 'baseline' else f'{tag}_ablate_{cli.ablate}'
+    try:
+        cli.variant = variant_settings(cli.skip_pa, cli.sustained_ratio, cli.compliance_aware)
+    except ValueError as exc:
+        sys.exit(f'[run_batch] {exc}')
+    if cli.variant['tag'] and not cli.tag:
+        tag = cli.variant['tag'] if tag == 'baseline' else f'{tag}_{cli.variant["tag"]}'
+    try:
+        fieldnames = manifest_fieldnames(cli.manifest, cli.variant['tag'])
+    except ValueError as exc:
+        sys.exit(f'[run_batch] {exc}')
     plan = [(s, seed) for s in scenarios for seed in seeds]
     done, invalid = completed_runs(cli.manifest) if cli.skip_existing else (set(), {})
     latest_status = {}
@@ -489,7 +584,8 @@ def main():
               flush=True)
     fingerprint = code_fingerprint()
     print(f'[run_batch] tag={tag} runs={len(plan)} code={fingerprint} '
-          f'weights={ {k: v for k, v in weights.items() if v is not None} }')
+          f'weights={ {k: v for k, v in weights.items() if v is not None} } '
+          f'variant={cli.variant["tag"] or "none"}')
     if cli.dry_run:
         for s, seed in plan:
             print(f'  {s["id"]:8s} seed {seed}')
@@ -503,7 +599,7 @@ def main():
     os.makedirs(os.path.dirname(cli.manifest), exist_ok=True)
     new_manifest = not os.path.isfile(cli.manifest)
     with open(cli.manifest, 'a', newline='', encoding='utf-8') as mf:
-        writer = csv.DictWriter(mf, fieldnames=MANIFEST_FIELDS)
+        writer = csv.DictWriter(mf, fieldnames=fieldnames, extrasaction='ignore')
         if new_manifest:
             writer.writeheader()
         for index, (scenario, seed) in enumerate(plan):
@@ -559,7 +655,8 @@ def main():
                 'attempts': attempt, 'bag_ok': info['bag_ok'],
                 'died_processes': info['died_processes'],
                 'code_sha256': run_fingerprint,
-                'run_dir': os.path.relpath(run_dir, ROOT)})
+                'run_dir': os.path.relpath(run_dir, ROOT),
+                'variant': cli.variant['tag']})
             mf.flush()
             if consecutive_startup_failures >= cli.max_startup_failures:
                 sys.exit(f'[run_batch] {consecutive_startup_failures} runs in a row failed to start '

@@ -59,6 +59,21 @@ python3 evaluation/scripts/run_batch.py --scenarios A,G --seeds 20 \
 
 `--skip-existing` resumes an interrupted batch. `--dry-run` lists the planned runs.
 
+**FSM design variants (Extension A, Phase C).** `--skip-pa`, `--sustained-ratio R` and
+`--compliance-aware hold_s1|reset_first|both` set the corresponding `compliance_fsm_node` parameters,
+and the per-camera `frame_topics` where a variant needs them. `--skip-pa` also sets the human model's
+Phase B rule (`comply_s1_fallback: first_heard`). The run-set tag follows the variant (for example
+`aware_hold_s1`), and the manifest's `variant` column records it. Variant runs need their **own
+manifest**: the runner refuses to add them to a manifest without that column, such as the baseline
+manifest. Before trusting a run, the runner checks that the FSM's `FSM variants:` start-up line and the
+human model's `comply_s1_fallback=` line match the requested variant, otherwise the run fails with
+`config_not_applied`. Baseline runs must report every variant off.
+
+```bash
+python3 evaluation/scripts/run_batch.py --scenarios H,C,A --seeds 10 --compliance-aware hold_s1 \
+    --out evaluation/data/variants --manifest evaluation/data/variants/manifest.csv
+```
+
 Each run writes `<out>/<tag>/<scenario>/<seed>/` containing `overlay.yaml`, `launch.log`,
 `bag/` (rosbag2, sqlite3), `incident_logs/incidents.jsonl` and `run_info.json`, plus one row in
 the manifest CSV: scenario, seed, weights, status, outcome, stage, sim time of the outcome, expected
@@ -95,8 +110,8 @@ Batch progress while it runs: `grep -c status= evaluation/data/baseline_batch.lo
 ## 5. Tests
 
 ```bash
-PYTHONPATH=src/yoru_core:$PYTHONPATH python3 -m pytest src/yoru_core/test -q   # system (82)
-python3 -m pytest evaluation/tests -q                                           # evaluation scripts (28)
+PYTHONPATH=src/yoru_core:$PYTHONPATH python3 -m pytest src/yoru_core/test -q   # system (119)
+python3 -m pytest evaluation/tests -q                                           # evaluation scripts (52)
 ```
 
 ## 6. Scripts

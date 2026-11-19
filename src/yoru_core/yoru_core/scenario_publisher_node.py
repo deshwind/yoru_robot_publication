@@ -335,6 +335,12 @@ class ScenarioPublisherNode(Node):
 
         g = self.get_parameter
         check_comply_s1_fallback(g('comply_s1_fallback').value)
+        # One line with the human model's compliance settings, so a run can be
+        # checked against its configuration (evaluation runner)
+        self.get_logger().info(
+            f'Human model: comply_stage={g("comply_stage").value}, '
+            f'comply_delay_s={g("comply_delay_s").value:g}, '
+            f'comply_s1_fallback={g("comply_s1_fallback").value or "off"}')
         self.camera = CameraModel(list(g('camera_pose').value), g('camera_hfov').value,
                                   g('image_width').value, g('image_height').value)
         self.noise = DetectionNoise(int(g('seed').value), g('conf_jitter_sigma').value,

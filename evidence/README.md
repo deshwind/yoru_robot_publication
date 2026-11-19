@@ -22,7 +22,7 @@ the files listed. Where something has **not** been measured, it says so.
 | 7 Ablation | offline ablation **final** (E6.3); node flags implemented and tested in a pending patch, **not yet applied** (no ablation runs in Gazebo) | [`phase6/`](phase6/) |
 | Offline extensions | **final** (300 runs): [deployment thresholds, sustained rule, outcome vs truth](#final-results-300-runs) | [`evaluation/results/offline_extensions/`](../evaluation/results/offline_extensions/) |
 | Extension A: FSM design variants | implemented, unit-tested, replay-validated on the 300 baseline bags; **not yet run in Gazebo** | [section](#extension-a-fsm-design-variants-2026-10-15), [`evaluation/results/fsm_replay/`](../evaluation/results/fsm_replay/) |
-| Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended; Phase C runs not started | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
+| Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended. Runner support for the variants done (23 tests). Phase C runs not started | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
 | Same laptop, new OS (after the SSD slot failure) | set up; 2 set-up problems fixed (clock steps, CPU threads); **reproduction: 45 / 45 outcomes match the baseline** (3 seeds × 15 scenarios); speed depends on background load; baseline bags not available | [section](#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties), [`machine_change/`](machine_change/), [`evaluation/results/repro_wsl/`](../evaluation/results/repro_wsl/) |
 
 **Final numbers, in one place:** [E5.3](#e53-final-results-300-valid-runs) (outcomes, timing, proximity),
@@ -1108,6 +1108,40 @@ position at each stage change (no S1). [PDF](phase_b/check_H0_topdown.pdf)*
   stopped before the 60 s cooldown ended.
 - The run was made on the same laptop under WSL2 as the reproduction (section below), with the same
   configuration (2 YOLO threads, rendering on the NVIDIA GPU).
+
+
+### Phase C preparation: runner support for the variants (2026-11-19)
+
+[`run_batch.py`](../evaluation/scripts/run_batch.py) can now run the FSM design variants (usage:
+[`evaluation/README.md`](../evaluation/README.md)). This closes the second open point of Extension A,
+that the runner's configuration guard should require the `FSM variants:` line to match the run.
+
+| Option | Sets in the run's overlay | Tag fragment |
+|---|---|---|
+| `--skip-pa` | FSM `skip_pa_warning: true`; human model `comply_s1_fallback: first_heard` (Phase B) | `skip_pa` |
+| `--sustained-ratio R` (0 < R ≤ 1) | FSM `sustained_confirmation_ratio: R`, `frame_topics` (both cameras' tracked topics) | `sustainedR` |
+| `--compliance-aware MODE` | FSM `compliance_aware_approach: MODE`, `frame_topics` | `aware_MODE` |
+
+- **Configuration guard.** At the start of every run, the runner requires the FSM's start-up line
+  `FSM variants: skip_pa_warning=…, sustained_confirmation_ratio=…, compliance_aware_approach=…,
+  frame_topics=N` and the human model's new start-up line (`Human model: … comply_s1_fallback=…`) to
+  show exactly the requested values. Otherwise the run fails with `config_not_applied` and is retried
+  or reported, never counted. Baseline runs must report every variant off. The expected FSM lines are
+  tested against the lines that real runs printed today: the reproduction (all off) and the Phase B
+  check run (skip PA).
+- **Separate manifests.** The manifest gains a `variant` column. An older manifest without it keeps its
+  header for baseline runs. Variant runs are refused there, so they cannot be mixed into the 300-run
+  baseline manifest.
+- **Records.** Each run's `run_info.json` records the full variant settings; `overlay.yaml` holds the
+  parameters.
+- **Tests.** [`test_run_batch_variants.py`](../evaluation/tests/test_run_batch_variants.py), 23 new: the
+  settings, tags, overlays (scenario, base and per-run values kept), the guard accepting and refusing
+  runs, and manifest handling. **Evaluation tests 52 passed (29 + 23); system tests 119 passed.**
+  Dry runs: a compliance-aware plan, refusal of skip-PA runs into the baseline manifest, refusal of an
+  invalid ratio, and baseline plans unchanged.
+- **Not yet exercised end to end.** No Gazebo run has gone through the runner with a variant yet; the
+  first Phase C run will be the first. A wrong log-line expectation would make that run fail loudly
+  (`config_not_applied`); it could not produce a wrong result.
 
 ---
 
