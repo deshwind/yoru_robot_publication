@@ -42,3 +42,7 @@
 11:12:03 [pictures] 9 snapshots -> evidence/pictures/A_seed0
 11:12:54 [pictures] doc run ok (complied S3 74.9 s, RTF 0.742); 63 pictures + storyboard -> evidence/pictures/ ; captions + 5 observations in evidence/pictures/README.md
 11:12:57 [git] pushed 7325abc to wsl-progress
+11:16:50 [repro] start: all scenarios x seeds 0,1,2 (45 runs), tag repro_wsl
+11:16:51 [repro] [run_batch] tag=repro_wsl runs=45 code=f7bb8f4bdff9a649 weights={}
+11:16:51 [repro] [run_batch] 1/45 A seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A/0
+11:17:43 [tool] compare_repro.py ready: run-by-run comparison with the baseline (used when the batch ends)
