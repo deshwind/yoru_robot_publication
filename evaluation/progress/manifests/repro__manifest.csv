@@ -9,3 +9,8 @@ repro_wsl/B/0,repro_wsl,B,0,,,,,,,,ok,none,,,none,no_violation,2026-11-19T11:33:
 repro_wsl/B/1,repro_wsl,B,1,,,,,,,,ok,none,,,none,no_violation,2026-11-19T11:36:34,2026-11-19T11:39:22,168.3,120.0,0.713,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/B/1
 repro_wsl/B/2,repro_wsl,B,2,,,,,,,,ok,none,,,none,no_violation,2026-11-19T11:40:21,2026-11-19T11:42:57,156.3,120.5,0.771,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/B/2
 repro_wsl/B-C7/0,repro_wsl,B-C7,0,,,,,,,,ok,logged_no_compliance,S4,89.1,none,violation,2026-11-19T11:43:56,2026-11-19T11:46:16,140.2,99.7,0.711,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/B-C7/0
+repro_wsl/B-C7/1,repro_wsl,B-C7,1,,,,,,,,nav2_not_ready,none,,,none,violation,2026-11-19T11:49:00,2026-11-19T11:49:48,48.1,28.6,0.595,2,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/B-C7/1
+repro_wsl/B-C7/2,repro_wsl,B-C7,2,,,,,,,,ok,logged_no_compliance,S4,91.1,none,violation,2026-11-19T11:50:52,2026-11-19T11:53:28,156.3,101.2,0.648,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/B-C7/2
+repro_wsl/C/0,repro_wsl,C,0,,,,,,,,ok,target_lost,S2,52.0,target_lost,violation,2026-11-19T11:54:27,2026-11-19T11:55:59,92.2,62.3,0.676,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/C/0
+repro_wsl/C/1,repro_wsl,C,1,,,,,,,,ok,target_lost,S2,51.9,target_lost,violation,2026-11-19T11:56:58,2026-11-19T11:58:30,92.2,62.4,0.677,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/C/1
+repro_wsl/C/2,repro_wsl,C,2,,,,,,,,ok,target_lost,S2,53.9,target_lost,violation,2026-11-19T11:59:29,2026-11-19T12:00:59,90.1,64.2,0.712,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/C/2

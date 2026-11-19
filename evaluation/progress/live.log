@@ -68,3 +68,18 @@
 11:43:56 [repro] [run_batch] 10/45 B-C7 seed 0 attempt 1 (domain 88) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/0
 11:47:12 [repro] [run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=99.7s wall=140.2s rtf=0.711
 11:47:15 [repro] [run_batch] 11/45 B-C7 seed 1 attempt 1 (domain 91) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/1
+11:47:26 [watchdog] health OK; repro 10/45 done, all ok (A, A-V complied S3; B none; B-C7/0 logged S4 - same outcomes as baseline so far)
+11:48:55 [repro] [run_batch]   status=nav2_not_ready outcome=none stage= sim=28.0s wall=44.1s rtf=0.635
+11:49:00 [repro] [run_batch] 11/45 B-C7 seed 1 attempt 2 (domain 92) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/1
+11:49:00 [repro] [run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/repro/repro_wsl/B-C7/1__20261119T114900__superseded
+11:50:44 [repro] [run_batch]   status=nav2_not_ready outcome=none stage= sim=28.6s wall=48.1s rtf=0.595
+11:50:52 [repro] [run_batch] 12/45 B-C7 seed 2 attempt 1 (domain 94) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/2
+11:54:24 [repro] [run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=101.2s wall=156.3s rtf=0.648
+11:54:27 [repro] [run_batch] 13/45 C seed 0 attempt 1 (domain 97) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/C/0
+11:56:55 [repro] [run_batch]   status=ok outcome=target_lost stage=S2 sim=62.3s wall=92.2s rtf=0.676
+11:56:58 [repro] [run_batch] 14/45 C seed 1 attempt 1 (domain 60) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/C/1
+11:59:26 [repro] [run_batch]   status=ok outcome=target_lost stage=S2 sim=62.4s wall=92.2s rtf=0.677
+11:59:29 [repro] [run_batch] 15/45 C seed 2 attempt 1 (domain 63) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/C/2
+12:01:54 [repro] [run_batch]   status=ok outcome=target_lost stage=S2 sim=64.2s wall=90.1s rtf=0.712
+12:01:57 [repro] [run_batch] 16/45 D seed 0 attempt 1 (domain 66) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/D/0
+12:03:46 [watchdog] B-C7/1 failed twice (nav2_not_ready: map_server lifecycle reply lost; infrastructure, same kind as baseline) - will be redone at the end with --skip-existing. RTF drifting down 0.83->0.68 over the batch; /dev/shm had 821 stale Fast DDS files -> 'fastdds shm clean' (zombie segments only) -> 707. Clock checked: no steps.
