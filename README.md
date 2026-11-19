@@ -20,6 +20,18 @@ detectors, background load), the fixes, the reproduction check and the remaining
 [`evidence/README.md`](evidence/README.md#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties).
 The baseline bags are on the failed drive and are not available.
 
+**FSM design variants: Phase B and the first Phase C set (2026-11-19).**
+- **Phase B (human model):** a person scripted to comply after the PA warning complies after the first
+  warning they actually hear when no PA warning is played (`comply_s1_fallback`, default off).
+- **Runner support:** `run_batch.py` can run the variants (`--skip-pa`, `--sustained-ratio`,
+  `--compliance-aware`) with a check that every run really got its variant.
+- **Gentle sessions:** `gentle_batch.py` runs them in laptop-safe sessions.
+- **First set:** `compliance_aware_approach = hold_s1` fixed scenario H in 10 of 10 runs (complied in S1
+  instead of target lost in S2), and left C (4 runs) and A (3 runs) unchanged.
+
+Details, failures and what is not run yet:
+[`evidence/README.md`](evidence/README.md#phase-b-human-model-under-skip_pa_warning-2026-11-19).
+
 Changes to the system under test are additive and default-off: with no new launch arguments,
 every node receives exactly the parameters it had in V2 (verified; see evidence E1.3/E2.3).
 
