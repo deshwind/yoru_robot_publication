@@ -1,0 +1,13 @@
+=== 2026-11-19 11:03:13 live log started: benchmarks and runs on the replacement machine ===
+11:03:13 [bench] YOLOv8n alone: 71 ms/frame; two processes at once: 482-645 ms/frame (torch 8 threads each) -> CPU oversubscription
+11:03:13 [run] wsl_pilot_perf A/0 finished: status=ok outcome=complied stage=S3 sim=86.3s wall=157.3s rtf=0.548
+11:03:59 [bench] 2 YOLO processes at once, torch threads=8 each: 373 390 ms/frame
+11:04:08 [bench] 2 YOLO processes at once, torch threads=6 each: 135 132 ms/frame
+11:04:16 [bench] 2 YOLO processes at once, torch threads=4 each: 108 107 ms/frame
+11:04:23 [bench] 2 YOLO processes at once, torch threads=3 each: 108 111 ms/frame
+11:04:30 [bench] 2 YOLO processes at once, torch threads=2 each: 104 109 ms/frame
+11:04:38 [bench] 2 YOLO processes at once, torch threads=1 each: 135 135 ms/frame
+11:05:46 [tests] system: 105 passed in 6.30s | evaluation: 29 passed in 0.69s
+11:05:54 [run] starting validation run: A seed 0, torch_threads=2 (tag wsl_threads2)
+11:05:54 [run] [run_batch] tag=wsl_threads2 runs=1 code=f7bb8f4bdff9a649 weights={}
+11:05:54 [run] [run_batch] 1/1 A seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/pilot/wsl_threads2/A/0
