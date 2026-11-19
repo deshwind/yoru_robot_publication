@@ -1,10 +1,10 @@
-# Simulation progress: 2026-11-19 11:17:49
+# Simulation progress: 2026-11-19 11:18:01
 
 **Health: OK**
 
-Batch runner: running for 00:58 (`--scenarios all --seed-list 0,1,2 --tag repro_wsl --out evaluation/data/repro --manifest evaluation/data/repro/manifest.csv --skip-existing`)
-Gazebo servers: 1 (up 00:56)
-Memory available: 3653 / 7795 MB, swap used 1 MB, disk free 945 GB, load 10.45
+Batch runner: running for 01:10 (`--scenarios all --seed-list 0,1,2 --tag repro_wsl --out evaluation/data/repro --manifest evaluation/data/repro/manifest.csv --skip-existing`)
+Gazebo servers: 1 (up 01:08)
+Memory available: 3659 / 7795 MB, swap used 1 MB, disk free 945 GB, load 12.00
 Failed attempts set aside (runs_invalid): 1
 
 ## Run sets
