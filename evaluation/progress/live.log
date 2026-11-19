@@ -113,3 +113,18 @@
 12:41:49 [repro] [run_batch] 28/45 G seed 0 attempt 1 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/G/0
 12:44:35 [repro] [run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=98.8s wall=110.1s rtf=0.897
 12:44:38 [repro] [run_batch] 29/45 G seed 1 attempt 1 (domain 65) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/G/1
+12:47:21 [watchdog] health OK; repro 28/45 done (27 ok, B-C7/1 to redo); RTF ~0.89-0.91
+12:47:25 [repro] [run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=99.8s wall=111.1s rtf=0.898
+12:47:28 [repro] [run_batch] 30/45 G seed 2 attempt 1 (domain 68) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/G/2
+12:50:14 [repro] [run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=99.1s wall=110.1s rtf=0.9
+12:50:17 [repro] [run_batch] 31/45 H seed 0 attempt 1 (domain 71) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/H/0
+12:52:18 [repro] [run_batch]   status=ok outcome=target_lost stage=S2 sim=55.9s wall=65.1s rtf=0.859
+12:52:21 [repro] [run_batch] 32/45 H seed 1 attempt 1 (domain 74) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/H/1
+12:54:31 [repro] [run_batch]   status=ok outcome=target_lost stage=S2 sim=55.4s wall=75.1s rtf=0.738
+12:54:34 [repro] [run_batch] 33/45 H seed 2 attempt 1 (domain 77) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/H/2
+12:56:38 [repro] [run_batch]   status=ok outcome=target_lost stage=S2 sim=55.3s wall=68.1s rtf=0.812
+12:56:41 [repro] [run_batch] 34/45 I seed 0 attempt 1 (domain 80) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/I/0
+12:59:14 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=85.5s wall=97.1s rtf=0.881
+12:59:17 [repro] [run_batch] 35/45 I seed 1 attempt 1 (domain 83) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/I/1
+13:01:52 [repro] [run_batch]   status=ok outcome=complied stage=S3 sim=87.8s wall=99.1s rtf=0.886
+13:01:55 [repro] [run_batch] 36/45 I seed 2 attempt 1 (domain 86) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/I/2
