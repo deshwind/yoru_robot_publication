@@ -59,3 +59,14 @@
 13:14:35 | 107 | 74 | vmmemwsl=674 system=166 riotclientservices=46 | 11.94 | 3713 | 1396
 13:15:41 | 103 | 82 | vmmemwsl=790 system=225 riotclientservices=73 | 11.41 | 3689 | 1401
 13:16:46 | 105 | 20 | system=136 riotclientservices=34 vmmemwsl=8 | 3.85 | 6038 | 1216
+13:17:52 | 102 | 85 | vmmemwsl=872 system=171 riotclientservices=44 | 11.16 | 3598 | 1361
+13:18:56 | 101 | 24 | system=143 code=82 riotclientservices=29 | 5.58 | 6006 | 1217
+13:20:02 | 103 | 73 | vmmemwsl=758 system=206 riotclientservices=66 | 11.10 | 3601 | 1381
+13:21:07 | 100 | 20 | system=136 riotclientservices=44 code=22 | 7.78 | 5996 | 1217
+13:22:12 | 102 | 89 | vmmemwsl=774 system=286 svchost=89 | 10.45 | 3531 | 1376
+13:23:17 | 55 | 3 | svchost=12 msmpeng=9 cefsharp.browsersubprocess=7 | 6.58 | 5992 | 1245
+13:24:22 | 105 | 60 | vmmemwsl=762 msrdc=20 cefsharp.browsersubprocess=12 | 4.62 | 3532 | 1397
+13:25:27 | 59 | 3 | cefsharp.browsersubprocess=9 vmmemwsl=7 code=7 | 4.26 | 5994 | 1274
+13:26:32 | 104 | 57 | vmmemwsl=712 system=31 msrdc=19 | 8.05 | 3616 | 1424
+13:27:37 | 74 | 5 | cefsharp.browsersubprocess=16 system=12 code=8 | 4.21 | 5994 | 1283
+13:28:37 monitored process 36773 exited; monitor stopped

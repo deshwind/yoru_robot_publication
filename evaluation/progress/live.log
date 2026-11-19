@@ -139,3 +139,17 @@
 13:14:19 [repro] [run_batch] 40/45 K seed 0 attempt 1 (domain 98) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/K/0
 13:16:44 [repro] [run_batch]   status=ok outcome=safety_stop stage=S2 sim=74.3s wall=89.1s rtf=0.834
 13:16:47 [repro] [run_batch] 41/45 K seed 1 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/K/1
+13:17:27 [watchdog] health OK; repro 40/45 done (39 ok, B-C7/1 to redo); J/1 ended 'none' - same as baseline J/1
+13:19:11 [repro] [run_batch]   status=ok outcome=safety_stop stage=S2 sim=73.8s wall=89.1s rtf=0.828
+13:19:14 [repro] [run_batch] 42/45 K seed 2 attempt 1 (domain 64) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/K/2
+13:21:39 [repro] [run_batch]   status=ok outcome=safety_stop stage=S2 sim=74.0s wall=89.1s rtf=0.83
+13:21:42 [repro] [run_batch] 43/45 L seed 0 attempt 1 (domain 67) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/L/0
+13:21:51 [decision] user: (1) after the reproduction write-up, merge wsl-progress into main (watchdog snapshots stay on the branch); (2) Phase B: under skip_pa_warning a person scripted to comply after the PA warning complies after the first warning actually heard (same delay)
+13:23:49 [repro] [run_batch]   status=ok outcome=admin_override stage=S2 sim=54.3s wall=71.1s rtf=0.764
+13:23:52 [repro] [run_batch] 44/45 L seed 1 attempt 1 (domain 70) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/L/1
+13:25:53 [repro] [run_batch]   status=ok outcome=admin_override stage=S2 sim=55.1s wall=65.1s rtf=0.847
+13:25:56 [repro] [run_batch] 45/45 L seed 2 attempt 1 (domain 73) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/L/2
+13:27:55 [repro] [run_batch]   status=ok outcome=admin_override stage=S2 sim=54.6s wall=64.1s rtf=0.852
+13:27:59 [repro] batch runner exited
+13:29:24 [decision] user: same laptop as the baseline (original native Ubuntu on the SSD in the broken slot; now Windows + WSL2 on another drive). B-C7/1: one run after 10 min cooling. Phase C: gentle batches.
+13:29:24 [cooldown] laptop resting 10 min before the single B-C7/1 run
