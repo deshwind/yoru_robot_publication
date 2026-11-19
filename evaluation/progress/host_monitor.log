@@ -45,3 +45,17 @@
 12:59:23 | 108 | 64 | vmmemwsl=599 system=26 msrdc=13 | 4.78 | 3914 | 1182
 13:00:28 | 106 | 63 | vmmemwsl=799 msrdc=16 system=12 | 6.41 | 3598 | 1212
 13:01:33 | 72 | 5 | system=38 svchost=14 cefsharp.browsersubprocess=8 | 3.66 | 6039 | 1078
+13:02:38 | 104 | 65 | vmmemwsl=726 cefsharp.browsersubprocess=16 code=16 | 9.16 | 3599 | 1260
+13:03:43 | 57 | 3 | system=27 overwolf=9 vmmemwsl=9 | 6.52 | 6011 | 1142
+13:04:48 | 106 | 51 | vmmemwsl=783 cefsharp.browsersubprocess=18 msrdc=14 | 5.99 | 3723 | 1324
+13:05:53 | 107 | 62 | vmmemwsl=793 system=49 cefsharp.browsersubprocess=12 | 10.88 | 3585 | 1324
+13:06:57 | 97 | 10 | system=30 wmiprvse=14 cefsharp.browsersubprocess=11 | 5.30 | 6050 | 1183
+13:08:02 | 106 | 57 | vmmemwsl=746 cefsharp.browsersubprocess=16 msrdc=14 | 6.05 | 3600 | 1307
+13:09:08 | 105 | 72 | vmmemwsl=820 system=49 code=41 | 9.76 | 3565 | 1307
+13:10:13 | 103 | 90 | vmmemwsl=742 riot client=92 riotclientservices=83 | 9.58 | 3618 | 1307
+13:11:18 | 96 | 15 | system=109 riotclientservices=47 chrome=8 | 6.71 | 6053 | 1205
+13:12:24 | 103 | 89 | vmmemwsl=779 system=256 riotclientservices=69 | 10.28 | 3645 | 1387
+13:13:29 | 87 | 14 | system=63 chrome=42 cefsharp.browsersubprocess=16 | 9.02 | 6032 | 1219
+13:14:35 | 107 | 74 | vmmemwsl=674 system=166 riotclientservices=46 | 11.94 | 3713 | 1396
+13:15:41 | 103 | 82 | vmmemwsl=790 system=225 riotclientservices=73 | 11.41 | 3689 | 1401
+13:16:46 | 105 | 20 | system=136 riotclientservices=34 vmmemwsl=8 | 3.85 | 6038 | 1216
