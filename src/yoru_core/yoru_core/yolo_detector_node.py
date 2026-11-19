@@ -71,7 +71,7 @@ class YoloDetectorNode(Node):
         # this node. 0 keeps the library default (ultralytics sets
         # min(8, CPUs - 1) on its first prediction), which oversubscribes the
         # CPU when two detector nodes share a 16-thread machine
-        # (evidence/README.md, "Replacement machine").
+        # (evidence/README.md, "Same laptop, new operating system").
         self.declare_parameter('torch_threads', 0)
 
         self.source_type = self.get_parameter('source_type').value

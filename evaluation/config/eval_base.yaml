@@ -23,11 +23,11 @@ nav2_goal_sender_node:
   ros__parameters:
     goal_timeout: 90.0                # matches the S2 timeout
 
-# Compute only (not a decision parameter), added 2026-11-19 for the replacement
-# machine: 2 PyTorch CPU threads per YOLO node instead of the library's
+# Compute only (not a decision parameter), added 2026-11-19 for the WSL2
+# set-up (CPU inference): 2 PyTorch CPU threads per YOLO node instead of the library's
 # min(8, CPUs - 1). With 8 threads each, the two detectors starved each other
 # (1.5 Hz instead of 5 Hz on cctv1). The 300 baseline runs predate this
-# setting. See evidence/README.md, "Replacement machine".
+# setting. See evidence/README.md, "Same laptop, new operating system".
 yolo_cctv1:
   ros__parameters:
     torch_threads: 2

@@ -153,3 +153,57 @@
 13:27:59 [repro] batch runner exited
 13:29:24 [decision] user: same laptop as the baseline (original native Ubuntu on the SSD in the broken slot; now Windows + WSL2 on another drive). B-C7/1: one run after 10 min cooling. Phase C: gentle batches.
 13:29:24 [cooldown] laptop resting 10 min before the single B-C7/1 run
+13:34:11 [repro] user asked to start now: cool-down cut short at 13:34:11 (started 13:29:24); single redo of B-C7/1
+13:34:16 [repro] start: all scenarios x seeds 0,1,2 (45 runs), tag repro_wsl
+13:34:16 [repro] [run_batch] tag=repro_wsl runs=45 code=f7bb8f4bdff9a649 weights={}
+13:34:16 [repro] [run_batch] skip A seed 0 (already ok)
+13:34:16 [repro] [run_batch] skip A seed 1 (already ok)
+13:34:16 [repro] [run_batch] skip A seed 2 (already ok)
+13:34:16 [repro] [run_batch] skip A-V seed 0 (already ok)
+13:34:16 [repro] [run_batch] skip A-V seed 1 (already ok)
+13:34:16 [repro] [run_batch] skip A-V seed 2 (already ok)
+13:34:16 [repro] [run_batch] skip B seed 0 (already ok)
+13:34:16 [repro] [run_batch] skip B seed 1 (already ok)
+13:34:16 [repro] [run_batch] skip B seed 2 (already ok)
+13:34:16 [repro] [run_batch] skip B-C7 seed 0 (already ok)
+13:34:16 [repro] [run_batch] 11/45 B-C7 seed 1 attempt 1 (domain 91) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/1
+13:34:16 [repro] [run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/repro/repro_wsl/B-C7/1__20261119T133416__nav2_not_ready
+13:37:08 [repro] [run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=99.7s wall=115.1s rtf=0.866
+13:37:11 [repro] [run_batch] skip B-C7 seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip C seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip C seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip C seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip D seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip D seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip D seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip E seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip E seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip E seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip F-pen seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip F-pen seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip F-pen seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip F-straw seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip F-straw seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip F-straw seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip G seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip G seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip G seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip H seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip H seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip H seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip I seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip I seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip I seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip J seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip J seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip J seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip K seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip K seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip K seed 2 (already ok)
+13:37:11 [repro] [run_batch] skip L seed 0 (already ok)
+13:37:11 [repro] [run_batch] skip L seed 1 (already ok)
+13:37:11 [repro] [run_batch] skip L seed 2 (already ok)
+13:37:11 [repro] batch runner exited
+13:37:17 [repro] B-C7/1 redo ok (logged S4 at 89.7 s, RTF 0.866): 45/45 valid. Simulations finished.
+13:41:02 [tests] system: 105 passed in 5.65s | evaluation: 29 passed in 0.63s
+13:41:13 [docs] reproduction write-up done: 45/45 outcomes match; 4 timing differences explained; speed/background-load section; 'What to report in the paper'; same-laptop corrections. Next: merge into main, push, stop watchdog.

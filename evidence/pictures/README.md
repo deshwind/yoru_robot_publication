@@ -9,7 +9,7 @@ for the same seed without them.
 
 | | |
 |---|---|
-| Run | tag `doc_pictures`, scenario A, seed 0, 2026-11-19, replacement machine ([`../README.md`](../README.md#replacement-machine-2026-11-19-set-up-incidents-and-open-uncertainties)) |
+| Run | tag `doc_pictures`, scenario A, seed 0, 2026-11-19, same laptop under WSL2 ([`../README.md`](../README.md#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties)) |
 | Code | fingerprint `f7bb8f4bdff9a649` (branch `wsl-progress`; YOLO `torch_threads` = 2) |
 | Result | `ok`, outcome **complied** in **S3** at 74.9 s sim, RTF 0.742 ([`A_seed0_run_info.json`](A_seed0_run_info.json), [`A_seed0_overlay.yaml`](A_seed0_overlay.yaml)). The same seed without the documentation cameras: complied S3 at 74.7 s; baseline: 74.8 s. |
 | How | [`capture_pictures.py`](../../evaluation/scripts/capture_pictures.py)` --domain 61 --overview --at 20 33 50 68`, started together with `run_batch.py --tag doc_pictures`. One snapshot of every camera at each FSM transition and at 20, 33, 50 and 68 s sim, plus one at the end. |

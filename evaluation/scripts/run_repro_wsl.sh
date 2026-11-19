@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Reproduction sample on the replacement machine: every scenario x seeds 0-2,
+# Reproduction sample on the same laptop under WSL2: every scenario x seeds 0-2,
 # baseline configuration (+ YOLO torch_threads=2 from eval_base.yaml).
 # Detached so it survives the terminal; progress goes to evaluation/progress/live.log.
 #   bash evaluation/scripts/run_repro_wsl.sh

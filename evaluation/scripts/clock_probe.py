@@ -8,8 +8,8 @@ the monotonic gap by more than 0.5 s (the wall clock was stepped).
 
   python3 evaluation/scripts/clock_probe.py [N busy processes, default 14]
 
-Used on 2026-11-19 to find the ±21.6 s wall-clock jumps on the replacement
-machine (evidence/README.md, "Replacement machine").
+Used on 2026-11-19 to find the ±21.6 s wall-clock jumps on the laptop under
+WSL2 (evidence/README.md, "Same laptop, new operating system").
 """
 
 import multiprocessing as mp
