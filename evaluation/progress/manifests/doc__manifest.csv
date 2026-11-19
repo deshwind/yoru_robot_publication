@@ -1,0 +1,2 @@
+run_id,tag,scenario,seed,w_D,w_P,w_T,w_S,confirm_confidence,uncertain_confidence,ablation,status,outcome,outcome_stage,outcome_sim_t,expected_outcome,ground_truth,start_wall,end_wall,wall_s,sim_s,rtf,attempts,bag_ok,died_processes,code_sha256,run_dir
+doc_pictures/A/0,doc_pictures,A,0,,,,,,,,ok,complied,S3,74.9,complied,violation,2026-11-19T11:09:08,2026-11-19T11:11:04,115.2,85.5,0.742,1,True,,f7bb8f4bdff9a649,evaluation/data/doc/doc_pictures/A/0

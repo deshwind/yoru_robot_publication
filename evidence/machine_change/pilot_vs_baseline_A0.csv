@@ -1,0 +1,20 @@
+,baseline A/0,WSL 8 thr (clockfix),WSL 8 thr (perf),WSL 2 thr
+outcome,complied,complied,complied,complied
+escalation_depth,3,3.0000,3.0000,3.0000
+rtf,0.893,0.57,0.548,0.8
+cctv1_frame_hz,4.9759,1.4952,1.3859,4.9940
+confirmed_frames,162,50.0000,37.0000,161.0000
+t_conf,31.0000,33.2000,32.8000,31.1000
+t_w1,36.1000,38.2000,37.8000,36.1000
+t_s2,39.1000,41.2000,40.8000,39.1000
+t_a,62.9579,64.8210,64.5493,62.8259
+t_r,74.8000,76.6000,76.3000,74.7000
+confirmation_latency,0.8000,3.0000,2.6000,0.9000
+detection_to_intervention,5.1000,5.0000,5.0000,5.0000
+navigation_time,23.4579,23.3210,23.5493,23.3259
+compliance_latency,28.9000,29.0000,29.5000,28.8000
+path_length,5.8582,5.8290,5.8345,5.8362
+nav_recoveries,0.0000,1.0000,0.0000,0.0000
+min_distance,2.4468,2.4582,2.4905,2.4825
+warnings_delivered,3,3.0000,3.0000,3.0000
+first_conf_C,0.7942,0.7942,0.7942,0.7942

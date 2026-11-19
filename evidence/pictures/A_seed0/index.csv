@@ -1,0 +1,64 @@
+file,sim_time_s,trigger,stage,camera,topic
+01_0020.0s_START__cctv1_raw.png,20.0,at 20 s,,cctv1_raw,/cctv1/image_raw
+01_0020.0s_START__cctv1_yolo.png,20.0,at 20 s,,cctv1_yolo,/compliance/cctv1/debug_image
+01_0020.0s_START__cctv2_raw.png,20.0,at 20 s,,cctv2_raw,/cctv2/image_raw
+01_0020.0s_START__cctv2_yolo.png,20.0,at 20 s,,cctv2_yolo,/compliance/cctv2/debug_image
+01_0020.0s_START__overview_oblique.png,20.0,at 20 s,,overview_oblique,/doc/overview_oblique/image_raw
+01_0020.0s_START__overview_top.png,20.0,at 20 s,,overview_top,/doc/overview_top/image_raw
+01_0020.0s_START__robot_camera.png,20.0,at 20 s,,robot_camera,/camera/image_raw
+02_0033.0s_START__cctv1_raw.png,33.0,at 33 s,,cctv1_raw,/cctv1/image_raw
+02_0033.0s_START__cctv1_yolo.png,33.0,at 33 s,,cctv1_yolo,/compliance/cctv1/debug_image
+02_0033.0s_START__cctv2_raw.png,33.0,at 33 s,,cctv2_raw,/cctv2/image_raw
+02_0033.0s_START__cctv2_yolo.png,33.0,at 33 s,,cctv2_yolo,/compliance/cctv2/debug_image
+02_0033.0s_START__overview_oblique.png,33.0,at 33 s,,overview_oblique,/doc/overview_oblique/image_raw
+02_0033.0s_START__overview_top.png,33.0,at 33 s,,overview_top,/doc/overview_top/image_raw
+02_0033.0s_START__robot_camera.png,33.0,at 33 s,,robot_camera,/camera/image_raw
+03_0036.1s_PA_WARNING__cctv1_raw.png,36.1,MONITORING -> PA_WARNING (confirmed),PA_WARNING,cctv1_raw,/cctv1/image_raw
+03_0036.1s_PA_WARNING__cctv1_yolo.png,36.1,MONITORING -> PA_WARNING (confirmed),PA_WARNING,cctv1_yolo,/compliance/cctv1/debug_image
+03_0036.1s_PA_WARNING__cctv2_raw.png,36.1,MONITORING -> PA_WARNING (confirmed),PA_WARNING,cctv2_raw,/cctv2/image_raw
+03_0036.1s_PA_WARNING__cctv2_yolo.png,36.1,MONITORING -> PA_WARNING (confirmed),PA_WARNING,cctv2_yolo,/compliance/cctv2/debug_image
+03_0036.1s_PA_WARNING__overview_oblique.png,36.1,MONITORING -> PA_WARNING (confirmed),PA_WARNING,overview_oblique,/doc/overview_oblique/image_raw
+03_0036.1s_PA_WARNING__overview_top.png,36.1,MONITORING -> PA_WARNING (confirmed),PA_WARNING,overview_top,/doc/overview_top/image_raw
+03_0036.1s_PA_WARNING__robot_camera.png,36.1,MONITORING -> PA_WARNING (confirmed),PA_WARNING,robot_camera,/camera/image_raw
+04_0039.1s_APPROACH__cctv1_raw.png,39.1,PA_WARNING -> APPROACH (pa_expired),APPROACH,cctv1_raw,/cctv1/image_raw
+04_0039.1s_APPROACH__cctv1_yolo.png,39.1,PA_WARNING -> APPROACH (pa_expired),APPROACH,cctv1_yolo,/compliance/cctv1/debug_image
+04_0039.1s_APPROACH__cctv2_raw.png,39.1,PA_WARNING -> APPROACH (pa_expired),APPROACH,cctv2_raw,/cctv2/image_raw
+04_0039.1s_APPROACH__cctv2_yolo.png,39.1,PA_WARNING -> APPROACH (pa_expired),APPROACH,cctv2_yolo,/compliance/cctv2/debug_image
+04_0039.1s_APPROACH__overview_oblique.png,39.1,PA_WARNING -> APPROACH (pa_expired),APPROACH,overview_oblique,/doc/overview_oblique/image_raw
+04_0039.1s_APPROACH__overview_top.png,39.1,PA_WARNING -> APPROACH (pa_expired),APPROACH,overview_top,/doc/overview_top/image_raw
+04_0039.1s_APPROACH__robot_camera.png,39.1,PA_WARNING -> APPROACH (pa_expired),APPROACH,robot_camera,/camera/image_raw
+05_0050.0s_APPROACH__cctv1_raw.png,50.0,at 50 s,APPROACH,cctv1_raw,/cctv1/image_raw
+05_0050.0s_APPROACH__cctv1_yolo.png,50.0,at 50 s,APPROACH,cctv1_yolo,/compliance/cctv1/debug_image
+05_0050.0s_APPROACH__cctv2_raw.png,50.0,at 50 s,APPROACH,cctv2_raw,/cctv2/image_raw
+05_0050.0s_APPROACH__cctv2_yolo.png,50.0,at 50 s,APPROACH,cctv2_yolo,/compliance/cctv2/debug_image
+05_0050.0s_APPROACH__overview_oblique.png,50.0,at 50 s,APPROACH,overview_oblique,/doc/overview_oblique/image_raw
+05_0050.0s_APPROACH__overview_top.png,50.0,at 50 s,APPROACH,overview_top,/doc/overview_top/image_raw
+05_0050.0s_APPROACH__robot_camera.png,50.0,at 50 s,APPROACH,robot_camera,/camera/image_raw
+06_0063.1s_DIRECT_WARNING__cctv1_raw.png,63.1,APPROACH -> DIRECT_WARNING (goal_reached),DIRECT_WARNING,cctv1_raw,/cctv1/image_raw
+06_0063.1s_DIRECT_WARNING__cctv1_yolo.png,63.1,APPROACH -> DIRECT_WARNING (goal_reached),DIRECT_WARNING,cctv1_yolo,/compliance/cctv1/debug_image
+06_0063.1s_DIRECT_WARNING__cctv2_raw.png,63.1,APPROACH -> DIRECT_WARNING (goal_reached),DIRECT_WARNING,cctv2_raw,/cctv2/image_raw
+06_0063.1s_DIRECT_WARNING__cctv2_yolo.png,63.1,APPROACH -> DIRECT_WARNING (goal_reached),DIRECT_WARNING,cctv2_yolo,/compliance/cctv2/debug_image
+06_0063.1s_DIRECT_WARNING__overview_oblique.png,63.1,APPROACH -> DIRECT_WARNING (goal_reached),DIRECT_WARNING,overview_oblique,/doc/overview_oblique/image_raw
+06_0063.1s_DIRECT_WARNING__overview_top.png,63.1,APPROACH -> DIRECT_WARNING (goal_reached),DIRECT_WARNING,overview_top,/doc/overview_top/image_raw
+06_0063.1s_DIRECT_WARNING__robot_camera.png,63.1,APPROACH -> DIRECT_WARNING (goal_reached),DIRECT_WARNING,robot_camera,/camera/image_raw
+07_0068.0s_DIRECT_WARNING__cctv1_raw.png,68.0,at 68 s,DIRECT_WARNING,cctv1_raw,/cctv1/image_raw
+07_0068.0s_DIRECT_WARNING__cctv1_yolo.png,68.0,at 68 s,DIRECT_WARNING,cctv1_yolo,/compliance/cctv1/debug_image
+07_0068.0s_DIRECT_WARNING__cctv2_raw.png,68.0,at 68 s,DIRECT_WARNING,cctv2_raw,/cctv2/image_raw
+07_0068.0s_DIRECT_WARNING__cctv2_yolo.png,68.0,at 68 s,DIRECT_WARNING,cctv2_yolo,/compliance/cctv2/debug_image
+07_0068.0s_DIRECT_WARNING__overview_oblique.png,68.0,at 68 s,DIRECT_WARNING,overview_oblique,/doc/overview_oblique/image_raw
+07_0068.0s_DIRECT_WARNING__overview_top.png,68.0,at 68 s,DIRECT_WARNING,overview_top,/doc/overview_top/image_raw
+07_0068.0s_DIRECT_WARNING__robot_camera.png,68.0,at 68 s,DIRECT_WARNING,robot_camera,/camera/image_raw
+08_0074.9s_MONITORING__cctv1_raw.png,74.9,DIRECT_WARNING -> MONITORING (complied),MONITORING,cctv1_raw,/cctv1/image_raw
+08_0074.9s_MONITORING__cctv1_yolo.png,74.9,DIRECT_WARNING -> MONITORING (complied),MONITORING,cctv1_yolo,/compliance/cctv1/debug_image
+08_0074.9s_MONITORING__cctv2_raw.png,74.9,DIRECT_WARNING -> MONITORING (complied),MONITORING,cctv2_raw,/cctv2/image_raw
+08_0074.9s_MONITORING__cctv2_yolo.png,74.9,DIRECT_WARNING -> MONITORING (complied),MONITORING,cctv2_yolo,/compliance/cctv2/debug_image
+08_0074.9s_MONITORING__overview_oblique.png,74.9,DIRECT_WARNING -> MONITORING (complied),MONITORING,overview_oblique,/doc/overview_oblique/image_raw
+08_0074.9s_MONITORING__overview_top.png,74.9,DIRECT_WARNING -> MONITORING (complied),MONITORING,overview_top,/doc/overview_top/image_raw
+08_0074.9s_MONITORING__robot_camera.png,74.9,DIRECT_WARNING -> MONITORING (complied),MONITORING,robot_camera,/camera/image_raw
+09_0085.5s_MONITORING__cctv1_raw.png,85.5,end,MONITORING,cctv1_raw,/cctv1/image_raw
+09_0085.5s_MONITORING__cctv1_yolo.png,85.5,end,MONITORING,cctv1_yolo,/compliance/cctv1/debug_image
+09_0085.5s_MONITORING__cctv2_raw.png,85.5,end,MONITORING,cctv2_raw,/cctv2/image_raw
+09_0085.5s_MONITORING__cctv2_yolo.png,85.5,end,MONITORING,cctv2_yolo,/compliance/cctv2/debug_image
+09_0085.5s_MONITORING__overview_oblique.png,85.5,end,MONITORING,overview_oblique,/doc/overview_oblique/image_raw
+09_0085.5s_MONITORING__overview_top.png,85.5,end,MONITORING,overview_top,/doc/overview_top/image_raw
+09_0085.5s_MONITORING__robot_camera.png,85.5,end,MONITORING,robot_camera,/camera/image_raw

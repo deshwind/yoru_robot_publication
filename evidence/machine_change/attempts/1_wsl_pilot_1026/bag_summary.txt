@@ -1,0 +1,44 @@
+bag: /tmp/claude-1000/-home-desh-yoru-ws/9a0cb2a6-e9af-44a4-ad80-34b6271b8e0d/scratchpad/pilot/runs/wsl_pilot/A/0/bag
+
+== topics (messages, type)
+      279  /clock  [rosgraph_msgs/msg/Clock]
+        1  /compliance/actor_events  [std_msgs/msg/String]
+       28  /compliance/autonomy_paused  [std_msgs/msg/Bool]
+      100  /compliance/cctv1/tracked  [vision_msgs/msg/Detection2DArray]
+      102  /compliance/cctv2/tracked  [vision_msgs/msg/Detection2DArray]
+      383  /compliance/confirmation_debug  [std_msgs/msg/String]
+       28  /compliance/fsm_status  [std_msgs/msg/String]
+        1  /compliance/incident_log_path  [std_msgs/msg/String]
+       29  /compliance/scenario_ground_truth  [std_msgs/msg/String]
+      202  /compliance/tracking_info  [std_msgs/msg/String]
+      555  /gazebo/model_states  [gazebo_msgs/msg/ModelStates]
+        3  /tf_static  [tf2_msgs/msg/TFMessage]
+
+== real-time factor: 25.0 s sim / 183.4 s wall = 0.136
+
+== gazebo models: ['cctv_camera_1', 'cctv_camera_2', 'ground_plane', 'internal_wall', 'intruder_1', 'intruder_1_body', 'obstacle_room_a', 'obstacle_room_b', 'outer_walls', 'person_1', 'person_1_body', 'person_2', 'person_2_body', 'person_3', 'person_3_body', 'person_walking']
+
+== actor events (/compliance/actor_events)
+  t=    0.10  layout             {"persons": [{"actor": "person_1", "x": 3.9, "y": 0.9, "yaw": -0.442, "role": "violator"}]}
+
+== positions in the building (every ~10 s sim)
+  person_1    0s(8.00,6.00) 10s(3.90,0.90) 20s(3.90,0.90)
+
+== FSM transitions (/compliance/fsm_state)
+
+== audio events (/compliance/audio_event)
+
+== ground truth (/compliance/scenario_ground_truth, non-heartbeat)
+  t=    0.20  scenario_start       scenario=smoking seed=0 violator=person_1 actors=[{'id': 'person_1', 'role': 'violator', 'x': 3.9, 'y': 0.9}]
+  last frame_stats: {'frames': 100, 'violator_matched': 0, 'injected': 0, 'dropped': 0}
+  (28 heartbeat messages)
+
+== confirmation debug records: 383
+     179  ('confirm_cctv1', 'rejected')
+     204  ('confirm_cctv2', 'rejected')
+
+== nav status
+
+== incident log
+
+== incident log path: [{'raw': '/tmp/claude-1000/-home-desh-yoru-ws/9a0cb2a6-e9af-44a4-ad80-34b6271b8e0d/scratchpad/pilot/runs/wsl_pilot/A/0/incident_logs/incidents.jsonl'}]

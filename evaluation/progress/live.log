@@ -11,3 +11,33 @@
 11:05:54 [run] starting validation run: A seed 0, torch_threads=2 (tag wsl_threads2)
 11:05:54 [run] [run_batch] tag=wsl_threads2 runs=1 code=f7bb8f4bdff9a649 weights={}
 11:05:54 [run] [run_batch] 1/1 A seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/pilot/wsl_threads2/A/0
+11:06:45 [watchdog] health OK, validation run in progress; pushed 59e292d to wsl-progress
+11:05:54 [run] [run_batch]   status=ok outcome=complied stage=S3 sim=84.9s wall=106.1s rtf=0.8
+11:08:39 [cpu] samples while Gazebo up: 53; total CPU 872% of 1600%
+11:08:39 [cpu]    315.8%  yolo_detector_n
+11:08:39 [cpu]    201.5%  tracking_node
+11:08:39 [cpu]    108.9%  gzserver
+11:08:39 [cpu]     20.4%  ros2
+11:08:39 [cpu]     19.4%  lifecycle_manag
+11:08:39 [cpu]     18.7%  dashboard_node
+11:08:39 [cpu]     13.3%  return_to_base_
+11:09:08 [result] validation wsl_threads2 A/0: ok, complied S3 at 74.7 s; cctv1 4.99 Hz (baseline 4.98); confirmation latency 0.9 s (baseline 0.8); RTF 0.80 (baseline 0.89); CPU 872% (was 1477%)
+11:09:08 [pictures] starting documentation run (tag doc_pictures, A seed 0) with camera capture + 2 overview cameras
+11:09:08 [pictures-run] [run_batch] tag=doc_pictures runs=1 code=f7bb8f4bdff9a649 weights={}
+11:09:08 [pictures-run] [run_batch] 1/1 A seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/doc/doc_pictures/A/0
+11:09:54 [figure] top-down map figure of the validation run -> evidence/machine_change/topdown_A0_wsl_threads2.png
+11:10:53 [docs] evidence/README.md: replacement-machine section written (incidents 1-9, A/0 comparison, 8 open uncertainties)
+11:12:00 [pictures-run] [run_batch]   status=ok outcome=complied stage=S3 sim=85.5s wall=115.2s rtf=0.742
+11:12:03 [pictures] [INFO] [1795086557.424842011] [doc_picture_capture]: spawn overview_top: SpawnEntity: Successfully spawned entity [doc_overview_top]
+11:12:03 [pictures] [INFO] [1795086559.922931221] [doc_picture_capture]: spawn overview_oblique: SpawnEntity: Successfully spawned entity [doc_overview_oblique]
+11:12:03 [pictures] [INFO] [1795086585.757759818] [doc_picture_capture]: at 20 s at sim 20.0 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086600.946317430] [doc_picture_capture]: at 33 s at sim 33.0 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086604.371864209] [doc_picture_capture]: MONITORING -> PA_WARNING (confirmed) at sim 36.1 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086607.845096174] [doc_picture_capture]: PA_WARNING -> APPROACH (pa_expired) at sim 39.1 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086621.298756196] [doc_picture_capture]: at 50 s at sim 50.0 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086637.571997526] [doc_picture_capture]: APPROACH -> DIRECT_WARNING (goal_reached) at sim 63.1 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086643.238665380] [doc_picture_capture]: at 68 s at sim 68.0 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086651.230367861] [doc_picture_capture]: DIRECT_WARNING -> MONITORING (complied) at sim 74.9 s: 7 pictures
+11:12:03 [pictures] [INFO] [1795086679.125623463] [doc_picture_capture]: end at sim 85.5 s: 7 pictures
+11:12:03 [pictures] 9 snapshots -> evidence/pictures/A_seed0
+11:12:54 [pictures] doc run ok (complied S3 74.9 s, RTF 0.742); 63 pictures + storyboard -> evidence/pictures/ ; captions + 5 observations in evidence/pictures/README.md

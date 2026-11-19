@@ -13,6 +13,12 @@ Robotics*.
 | `evaluation/scenarios/` | scenario definitions A–L (+ B-C7, F-pen, F-straw) |
 | `src/yoru_sim_plugins/` | Gazebo plugin: ROS-driven human actors visible to the lidar |
 
+**Machine change (2026-11-19).** The laptop that produced the 300 baseline runs failed after
+`f350fb4`. Work continues on a WSL2 machine; its set-up, every failure met on it (wall-clock steps,
+CPU-thread oversubscription in the detectors), the fixes and the remaining uncertainties are in
+[`evidence/README.md`](evidence/README.md#replacement-machine-2026-11-19-set-up-incidents-and-open-uncertainties).
+The baseline bags are not on the new machine.
+
 Changes to the system under test are additive and default-off: with no new launch arguments,
 every node receives exactly the parameters it had in V2 (verified; see evidence E1.3/E2.3).
 
