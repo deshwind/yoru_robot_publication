@@ -1,12 +1,12 @@
-# Simulation progress: 2026-11-19 10:48:43
+# Simulation progress: 2026-11-19 10:53:40
 
 **Health: PROBLEM**
 
 - last run's real-time factor 0.168 is below 0.4
 
-Batch runner: not running
-Gazebo servers: 0
-Memory available: 6137 / 7795 MB, swap used 0 MB, disk free 945 GB, load 2.37
+Batch runner: running for 00:21 (`--scenarios A --seed-list 0 --tag wsl_pilot_clockfix --out evaluation/data/pilot --manifest evaluation/data/pilot/manifest.csv`)
+Gazebo servers: 1 (up 00:20)
+Memory available: 3871 / 7795 MB, swap used 0 MB, disk free 945 GB, load 14.22
 Failed attempts set aside (runs_invalid): 1
 
 ## Run sets
@@ -31,9 +31,4 @@ Failed attempts set aside (runs_invalid): 1
 
 Newest run: `evaluation/data/pilot/wsl_pilot_nvidia/A/0/run_info.json`: status nav2_not_ready, RTF 0.168, sim 28.2 s, wall 167.8 s
 
-Newest launch log: `evaluation/data/pilot/wsl_pilot_nvidia/A/0/launch.log`
-
-```
-[spawn_entity.py-5] [ERROR] [1795085139.933160691] [spawn_entity]: Spawn service failed. Exiting.
-[ERROR] [spawn_entity.py-5]: process has died [pid 21102, exit code 1, cmd '/opt/ros/humble/lib/gazebo_ros/spawn_entity.py -topic robot_description -entity yoru_robot -x -4.0 -y 1.5 -z 0.05 -Y 0.0 --r
-```
+Newest launch log: `evaluation/data/pilot/wsl_pilot_clockfix/A/0/launch.log`
