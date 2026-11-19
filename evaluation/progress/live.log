@@ -92,3 +92,15 @@
 12:12:42 [monitor] host monitor started (Windows CPU performance %, top Windows processes, every 60 s) -> evaluation/progress/host_monitor.log; reason: RTF dip 11:36-12:01 with YOLO rate dropping too (whole VM short of CPU)
 12:15:44 [repro] [run_batch]   status=ok outcome=none stage= sim=120.2s wall=147.2s rtf=0.817
 12:15:47 [repro] [run_batch] 20/45 E seed 1 attempt 1 (domain 78) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/E/1
+12:17:22 [watchdog] health OK; repro 19/45 done (18 ok, B-C7/1 to redo); RTF back to 0.78-0.83; Windows CPU not throttled (98-105%); battle.net still 31-86% of a core
+12:19:09 [repro] [run_batch]   status=ok outcome=none stage= sim=120.3s wall=146.2s rtf=0.823
+12:19:12 [repro] [run_batch] 21/45 E seed 2 attempt 1 (domain 81) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/E/2
+12:22:24 [repro] [run_batch]   status=ok outcome=none stage= sim=120.8s wall=137.1s rtf=0.881
+12:22:27 [repro] [run_batch] 22/45 F-pen seed 0 attempt 1 (domain 84) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-pen/0
+12:25:10 [note] user: laptop is on edge - no speed tweaks or extra load; batch continues unchanged
+12:25:41 [repro] [run_batch]   status=ok outcome=none stage= sim=120.3s wall=138.1s rtf=0.871
+12:25:44 [repro] [run_batch] 23/45 F-pen seed 1 attempt 1 (domain 87) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-pen/1
+12:28:52 [repro] [run_batch]   status=ok outcome=none stage= sim=120.1s wall=132.1s rtf=0.909
+12:28:55 [repro] [run_batch] 24/45 F-pen seed 2 attempt 1 (domain 90) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-pen/2
+12:32:05 [repro] [run_batch]   status=ok outcome=none stage= sim=120.7s wall=134.2s rtf=0.9
+12:32:08 [repro] [run_batch] 25/45 F-straw seed 0 attempt 1 (domain 93) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-straw/0

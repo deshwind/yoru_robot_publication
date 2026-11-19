@@ -18,3 +18,8 @@ repro_wsl/D/0,repro_wsl,D,0,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:01:
 repro_wsl/D/1,repro_wsl,D,1,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:05:30,2026-11-19T12:07:56,146.2,120.6,0.825,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/D/1
 repro_wsl/D/2,repro_wsl,D,2,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:08:55,2026-11-19T12:11:22,147.2,120.1,0.816,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/D/2
 repro_wsl/E/0,repro_wsl,E,0,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:12:21,2026-11-19T12:14:48,147.2,120.2,0.817,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/E/0
+repro_wsl/E/1,repro_wsl,E,1,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:15:47,2026-11-19T12:18:13,146.2,120.3,0.823,1,True,ERROR,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/E/1
+repro_wsl/E/2,repro_wsl,E,2,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:19:12,2026-11-19T12:21:29,137.1,120.8,0.881,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/E/2
+repro_wsl/F-pen/0,repro_wsl,F-pen,0,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:22:27,2026-11-19T12:24:46,138.1,120.3,0.871,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/F-pen/0
+repro_wsl/F-pen/1,repro_wsl,F-pen,1,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:25:44,2026-11-19T12:27:56,132.1,120.1,0.909,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/F-pen/1
+repro_wsl/F-pen/2,repro_wsl,F-pen,2,,,,,,,,ok,none,,,none,no_violation,2026-11-19T12:28:55,2026-11-19T12:31:09,134.2,120.7,0.9,1,True,,f7bb8f4bdff9a649,evaluation/data/repro/repro_wsl/F-pen/2

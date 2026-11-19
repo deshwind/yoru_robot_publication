@@ -4,3 +4,17 @@
 12:14:51 | 99 | 87 | system=200 battle.net=31 agent=29 | 12.31 | 5888 | 654
 12:15:57 | 105 | 95 | vmmemwsl=758 system=213 battle.net=60 | 5.99 | 3749 | 832
 12:17:03 | 98 | 85 | vmmemwsl=822 system=216 battle.net=48 | 10.86 | 3630 | 832
+12:18:09 | 98 | 83 | vmmemwsl=793 system=166 battle.net=54 | 12.04 | 3553 | 832
+12:19:14 | 95 | 18 | vmmemwsl=887 battle.net=85 system=84 | 6.37 | 5083 | 810
+12:20:19 | 102 | 62 | vmmemwsl=745 battle.net=21 wmiprvse=18 | 8.77 | 3558 | 860
+12:21:25 | 103 | 58 | vmmemwsl=751 system=70 battle.net=29 | 8.46 | 3629 | 860
+12:22:30 | 94 | 19 | vmmemwsl=926 riotclientservices=79 system=62 | 3.17 | 5052 | 849
+12:23:35 | 103 | 59 | vmmemwsl=767 code=26 system=16 | 6.05 | 3629 | 899
+12:24:40 | 103 | 61 | vmmemwsl=739 system=17 cefsharp.browsersubprocess=15 | 8.71 | 3592 | 899
+12:25:44 | 61 | 4 | system=27 vmmemwsl=12 cefsharp.browsersubprocess=5 | 3.19 | 6012 | 735
+12:26:50 | 107 | 60 | vmmemwsl=719 msrdc=14 cefsharp.browsersubprocess=12 | 7.33 | 3625 | 915
+12:27:55 | 105 | 59 | vmmemwsl=731 cefsharp.browsersubprocess=14 msrdc=13 | 8.12 | 3635 | 915
+12:28:59 | 107 | 66 | vmmemwsl=348 system=37 vmwp=7 | 3.01 | 4267 | 902
+12:30:05 | 104 | 59 | vmmemwsl=711 code=24 system=19 | 8.10 | 3606 | 942
+12:31:10 | 104 | 66 | vmmemwsl=842 system=44 claude=26 | 7.13 | 3906 | 804
+12:32:16 | 108 | 44 | vmmemwsl=1003 chrome=37 system=36 | 3.41 | 3784 | 935
