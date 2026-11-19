@@ -22,6 +22,7 @@ the files listed. Where something has **not** been measured, it says so.
 | 7 Ablation | offline ablation **final** (E6.3); node flags implemented and tested in a pending patch, **not yet applied** (no ablation runs in Gazebo) | [`phase6/`](phase6/) |
 | Offline extensions | **final** (300 runs): [deployment thresholds, sustained rule, outcome vs truth](#final-results-300-runs) | [`evaluation/results/offline_extensions/`](../evaluation/results/offline_extensions/) |
 | Extension A: FSM design variants | implemented, unit-tested, replay-validated on the 300 baseline bags; **not yet run in Gazebo** | [section](#extension-a-fsm-design-variants-2026-10-15), [`evaluation/results/fsm_replay/`](../evaluation/results/fsm_replay/) |
+| Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended; Phase C runs not started | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
 | Same laptop, new OS (after the SSD slot failure) | set up; 2 set-up problems fixed (clock steps, CPU threads); **reproduction: 45 / 45 outcomes match the baseline** (3 seeds × 15 scenarios); speed depends on background load; baseline bags not available | [section](#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties), [`machine_change/`](machine_change/), [`evaluation/results/repro_wsl/`](../evaluation/results/repro_wsl/) |
 
 **Final numbers, in one place:** [E5.3](#e53-final-results-300-valid-runs) (outcomes, timing, proximity),
@@ -1033,8 +1034,80 @@ are unchanged.
 **Open points for Phases B and C:**
 - With `skip_pa_warning`, a person scripted to comply after the PA warning (H, and `comply_stage` S1 in the
   stochastic model) never hears it. The human model must say what such a person does instead, for example
-  respond to the first warning they do hear. That is a modelling decision for Phase B.
+  respond to the first warning they do hear. That is a modelling decision for Phase B. **Decided and
+  implemented on 2026-11-19:** [Phase B](#phase-b-human-model-under-skip_pa_warning-2026-11-19).
 - The runner's configuration guard should also require the `FSM variants:` line to match the run's tag.
+
+
+## Phase B: human model under `skip_pa_warning` (2026-11-19)
+
+**The problem** (from Extension A's open points). The simulated person's compliance is a reaction to a
+warning they actually hear. `comply_stage: S1` means "comply `comply_delay_s` after hearing the PA warning".
+With the FSM variant `skip_pa_warning` no PA warning is played, so such a person never complies. Only
+scenario H uses `comply_stage: S1` (1 s delay), and no seeded compliance model in the code uses it.
+
+**Decision (user, 2026-11-19).** Under `skip_pa_warning`, a person scripted to comply after the PA warning
+complies after **the first warning they actually hear** (the robot's first direct warning), **with the same
+delay**. The alternative, never complying, was considered and not chosen.
+
+**Implementation.** [`scenario_publisher_node.py`](../src/yoru_core/yoru_core/scenario_publisher_node.py),
+`mode: world`, new parameter **`comply_s1_fallback`**:
+
+| Value | Behaviour |
+|---|---|
+| `''` (**default**) | unchanged: an S1 person reacts only to the PA warning |
+| `first_heard` | an S1 person who has heard no PA warning complies `comply_delay_s` after the first direct warning |
+
+- **No effect when the PA warning plays.** The PA warning always comes before any direct warning, so with
+  `first_heard` set the person still reacts to it, exactly as with `''`.
+- **Refused at start-up** if the value is anything other than `''` or `first_heard` (`ValueError`), so a
+  typo cannot silently keep the default.
+- **Recorded in every run's ground truth.** The `comply_s1_fallback` value appears in every
+  `/compliance/scenario_ground_truth` record, and the `comply_trigger` event carries `s1_fallback: true`
+  when the fallback fired. That makes a run's human model checkable from its bag.
+
+Nothing in the evaluation configuration sets it yet. It is meant to be set together with `skip_pa_warning`
+for the Phase C runs, through the runner (step 2).
+
+**Tests** ([`test_scenario_model.py`](../src/yoru_core/test/test_scenario_model.py)): **14 new; system tests
+119 passed (105 + 14), evaluation tests 29 passed.** They cover:
+- the gap itself (default, no PA: no compliance);
+- the fix (no PA: compliance 1.0 s after the first direct warning, once only, recorded with
+  `s1_fallback: true`);
+- no change for any `comply_stage` (S1, S3_first, S3_last, none) when the PA warning plays;
+- other stages unaffected without a PA warning;
+- a confounder never complying;
+- unknown values refused.
+
+**Check run in Gazebo.** One run: H, seed 0, `skip_pa_warning: true` + `comply_s1_fallback: first_heard`,
+made with [`check_run.sh`](../evaluation/scripts/check_run.sh), robot spawned at the baseline's base (−4.0, 1.5).
+A single check that the parts work together, **not an evaluation run** (no runner, no manifest row).
+Files: [`phase_b/`](phase_b/) (overlay, bag summary, incident log, launch log, figure).
+
+| Sim time | Event (from the bag) | As intended |
+|---|---|---|
+| 36.1 s | `MONITORING → APPROACH`, reason `confirmed`: **no PA warning stage**; the `FSM variants:` log line reports `skip_pa_warning=True` | ✓ |
+| 60.1 s | `APPROACH → DIRECT_WARNING` (goal reached); first direct warning; ground truth `comply_trigger`: `warning: S3, direct_count: 1, comply_stage: S1, s1_fallback: true` | ✓ |
+| 61.1 s | `violation_cessation`: the person complied 1.0 s after the warning | ✓ |
+| 68.1 s | second direct warning, 8 s after the first, since the 10 s compliance reset had not yet completed | expected FSM behaviour |
+| 71.1 s | `DIRECT_WARNING → MONITORING`, reason `complied`; incident logged: stage S3, outcome **complied** | ✓ |
+
+Audio events in the bag: the two direct warnings only, no PA warning. Compare baseline H (PA warning
+played, the person complied during S1, and the run ended `target_lost` in S2). With this variant the robot
+always reaches the person, and the person complies after its first warning.
+
+![Phase B check run](phase_b/check_H0_topdown.png)
+
+*Check run H/0 with `skip_pa_warning` and `comply_s1_fallback: first_heard`: the robot's path and its
+position at each stage change (no S1). [PDF](phase_b/check_H0_topdown.pdf)*
+
+**Notes.**
+- While making this figure, [`plot_run_topdown.py`](../evaluation/scripts/plot_run_topdown.py) labelled
+  the FSM's later `MONITORING → MONITORING` (`cooldown_end`) record as an outcome, and the label hid other
+  labels. It now skips such self-transitions. The figures made earlier are unaffected, because those runs
+  stopped before the 60 s cooldown ended.
+- The run was made on the same laptop under WSL2 as the reproduction (section below), with the same
+  configuration (2 YOLO threads, rendering on the NVIDIA GPU).
 
 ---
 

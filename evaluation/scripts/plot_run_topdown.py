@@ -79,7 +79,10 @@ def main():
         ax.plot(rx[0], ry[0], 's', color='#1f5fa8', ms=9, zorder=6)
         ax.annotate('robot base', (rx[0], ry[0]), xytext=(6, -14), textcoords='offset points',
                     fontsize=8, color='#1f5fa8')
-        for i, ev in enumerate(data.fsm):
+        # Stage changes only: a self-transition (e.g. MONITORING -> MONITORING,
+        # reason cooldown_end) is bookkeeping, not an escalation step
+        changes = [ev for ev in data.fsm if ev['new_state'] != ev['previous_state']]
+        for i, ev in enumerate(changes):
             pos = data.position_at('yoru_robot', ev['stamp'])
             if pos is None:
                 continue
