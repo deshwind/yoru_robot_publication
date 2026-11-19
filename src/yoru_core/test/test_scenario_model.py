@@ -133,6 +133,102 @@ def test_comply_stage_reacts_to_the_right_warning(ros, stage, warnings, triggers
         node.destroy_node()
 
 
+# Phase B (2026-11-19): with the FSM variant skip_pa_warning no PA warning is
+# played, so the warnings heard are only the direct ones (S3).
+NO_PA = ['S3', 'S3', 'S3']
+WITH_PA = ['S1', 'S3', 'S3', 'S3']
+
+
+def set_fallback(node, value):
+    node.set_parameters([Parameter('comply_s1_fallback', value=value)])
+
+
+def test_s1_person_never_complies_without_pa_by_default(ros):
+    """The gap Phase B closes: default behaviour, no PA warning heard."""
+    node = world_node('S1', delay=1.0)
+    try:
+        assert node.get_parameter('comply_s1_fallback').value == ''
+        for kind in NO_PA:
+            node.warning_heard(kind)
+        assert node.comply_time is None
+        assert not [e for e in node.published if e['event'] == 'comply_trigger']
+    finally:
+        node.destroy_node()
+
+
+def test_first_heard_complies_after_first_direct_warning_without_pa(ros):
+    node = world_node('S1', delay=1.0)
+    try:
+        set_fallback(node, 'first_heard')
+        node.warning_heard('S3')
+        assert node.comply_time is not None
+        assert abs(node.comply_time - (node.now_s() + 1.0)) < 0.05   # same delay
+        first = node.comply_time
+        node.warning_heard('S3')
+        node.warning_heard('S3')
+        assert node.comply_time == first                            # only once
+        trig = [e for e in node.published if e['event'] == 'comply_trigger']
+        assert len(trig) == 1
+        assert trig[0]['warning'] == 'S3' and trig[0]['direct_count'] == 1
+        assert trig[0]['comply_stage'] == 'S1' and trig[0]['s1_fallback'] is True
+        assert trig[0]['comply_s1_fallback'] == 'first_heard'         # recorded in truth
+    finally:
+        node.destroy_node()
+
+
+@pytest.mark.parametrize('stage, triggers_on', [
+    ('S1', 0), ('S3_first', 1), ('S3_last', 3), ('none', None)])
+def test_first_heard_changes_nothing_when_the_pa_warning_plays(ros, stage, triggers_on):
+    """Same trigger as the default for every comply_stage when S1 is heard."""
+    node = world_node(stage)
+    try:
+        set_fallback(node, 'first_heard')
+        for i, kind in enumerate(WITH_PA):
+            node.warning_heard(kind)
+            assert (node.comply_time is not None) == \
+                (triggers_on is not None and i >= triggers_on), (stage, i)
+        trig = [e for e in node.published if e['event'] == 'comply_trigger']
+        assert all(e['s1_fallback'] is False for e in trig)
+    finally:
+        node.destroy_node()
+
+
+@pytest.mark.parametrize('stage, triggers_on', [
+    ('S3_first', 0), ('S3_last', 2), ('none', None)])
+def test_first_heard_leaves_other_stages_alone_without_pa(ros, stage, triggers_on):
+    node = world_node(stage)
+    try:
+        set_fallback(node, 'first_heard')
+        for i, kind in enumerate(NO_PA):
+            node.warning_heard(kind)
+            assert (node.comply_time is not None) == \
+                (triggers_on is not None and i >= triggers_on), (stage, i)
+    finally:
+        node.destroy_node()
+
+
+def test_first_heard_confounder_never_complies(ros):
+    node = world_node('S1', scenario='phone')
+    try:
+        set_fallback(node, 'first_heard')
+        for kind in NO_PA:
+            node.warning_heard(kind)
+        assert node.comply_time is None
+    finally:
+        node.destroy_node()
+
+
+@pytest.mark.parametrize('value, ok', [
+    ('', True), ('first_heard', True), ('first-heard', False), ('S3', False)])
+def test_unknown_comply_s1_fallback_is_refused(value, ok):
+    from yoru_core.scenario_publisher_node import check_comply_s1_fallback
+    if ok:
+        check_comply_s1_fallback(value)
+    else:
+        with pytest.raises(ValueError):
+            check_comply_s1_fallback(value)
+
+
 def test_confounder_never_complies(ros):
     node = world_node('S1', scenario='phone')
     try:

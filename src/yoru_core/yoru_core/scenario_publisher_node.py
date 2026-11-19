@@ -25,7 +25,10 @@ half of the simulated human response model, used with eval_two_room.world:
     camera (CameraModel) and matching by IoU - so multi-person scenes work
   - one output frame per YOLO frame (persistence counts real frames)
   - compliance after a real warning: comply_stage none | S1 | S3_first |
-    S3_last, comply_delay_s after it
+    S3_last, comply_delay_s after it. comply_s1_fallback 'first_heard'
+    (default '' = off): a person scripted for S1 who hears no PA warning
+    (FSM variant skip_pa_warning) complies after the first warning they do
+    hear, with the same delay (Phase B decision, 2026-11-19)
   - seeded detection noise: confidence jitter, frame dropout, bbox jitter
   - scenario types add phone, pen, straw (confounders), brief_device
     (device at the mouth shorter than the persistence window),
@@ -310,6 +313,11 @@ class ScenarioPublisherNode(Node):
         p = self.declare_parameter
         p('comply_stage', 'S3_first')       # none | S1 | S3_first | S3_last
         p('comply_delay_s', 5.0)
+        # '' (off) | first_heard: comply_stage S1 without a PA warning (FSM
+        # variant skip_pa_warning) -> comply after the first warning heard.
+        # The PA warning always precedes the direct warnings, so whenever it
+        # plays the behaviour is the same as with ''.
+        p('comply_s1_fallback', '')
         p('direct_warning_repeats', 3)      # which direct warning is "last"
         p('conf_jitter_sigma', 0.0)
         p('dropout_prob', 0.0)
@@ -326,6 +334,7 @@ class ScenarioPublisherNode(Node):
         p('match_iou', 0.3)
 
         g = self.get_parameter
+        check_comply_s1_fallback(g('comply_s1_fallback').value)
         self.camera = CameraModel(list(g('camera_pose').value), g('camera_hfov').value,
                                   g('image_width').value, g('image_height').value)
         self.noise = DetectionNoise(int(g('seed').value), g('conf_jitter_sigma').value,
@@ -382,7 +391,12 @@ class ScenarioPublisherNode(Node):
         if self.comply_time is not None or not self.is_violation():
             return
         repeats = int(self.get_parameter('direct_warning_repeats').value)
+        # Phase B: no PA warning was heard (skip_pa_warning), so a person
+        # scripted for S1 reacts to the first warning they do hear
+        s1_fallback = (stage == 'S1' and kind == 'S3' and self.direct_count == 1
+                       and self.get_parameter('comply_s1_fallback').value == 'first_heard')
         triggered = ((stage == 'S1' and kind == 'S1')
+                     or s1_fallback
                      or (stage == 'S3_first' and kind == 'S3' and self.direct_count == 1)
                      or (stage == 'S3_last' and kind == 'S3'
                          and self.direct_count == repeats))
@@ -390,11 +404,12 @@ class ScenarioPublisherNode(Node):
             self.comply_time = self.now_s() + self.get_parameter('comply_delay_s').value
             self.publish_ground_truth('comply_trigger', warning=kind,
                                       direct_count=self.direct_count,
-                                      comply_stage=stage)
+                                      comply_stage=stage, s1_fallback=s1_fallback)
 
     def world_ground_truth(self):
         record = {'comply_stage': self.get_parameter('comply_stage').value,
                   'comply_delay_s': self.get_parameter('comply_delay_s').value,
+                  'comply_s1_fallback': self.get_parameter('comply_s1_fallback').value,
                   'violator': self.violator, 'layout': self.layout,
                   'fsm_state': self.fsm_state}
         if self.layout:
@@ -523,6 +538,13 @@ class ScenarioPublisherNode(Node):
 WORLD_VIOLATIONS = ('smoking', 'vaping', 'target_loss', 'c7_conflict')
 WORLD_DEVICE_CLASS = {'phone': 'mobile_phone', 'pen': 'pen', 'straw': 'straw',
                       'walking': None}
+
+
+def check_comply_s1_fallback(value):
+    """Refuse an unknown comply_s1_fallback at start-up (a typo would
+    otherwise silently keep the default behaviour)."""
+    if value not in ('', 'first_heard'):
+        raise ValueError(f"comply_s1_fallback must be '' or 'first_heard', not {value!r}")
 
 
 def box_iou(a, b):
