@@ -22,7 +22,7 @@ the files listed. Where something has **not** been measured, it says so.
 | 7 Ablation | offline ablation **final** (E6.3); node flags implemented and tested in a pending patch, **not yet applied** (no ablation runs in Gazebo) | [`phase6/`](phase6/) |
 | Offline extensions | **final** (300 runs): [deployment thresholds, sustained rule, outcome vs truth](#final-results-300-runs) | [`evaluation/results/offline_extensions/`](../evaluation/results/offline_extensions/) |
 | Extension A: FSM design variants | implemented, unit-tested, replay-validated on the 300 baseline bags; **not yet run in Gazebo** | [section](#extension-a-fsm-design-variants-2026-10-15), [`evaluation/results/fsm_replay/`](../evaluation/results/fsm_replay/) |
-| Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended. Runner support (23 tests) and gentle sessions (17 tests) done. **Phase C `hold_s1`: H fixed in 10/10 (complied S1 instead of target_lost S2), C 4/4 and A 3/3 unchanged**; C 4–9, A 3–9 and the other two modes not run yet | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
+| Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended. Runner support (23 tests) and gentle sessions (17 tests) done. **Phase C `hold_s1` complete (30 runs): H fixed in 10/10 (complied S1 instead of target_lost S2), C 10/10 and A 10/10 unchanged**; `reset_first` and `both` not run yet | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
 | Same laptop, new OS (after the SSD slot failure) | set up; 2 set-up problems fixed (clock steps, CPU threads); **reproduction: 45 / 45 outcomes match the baseline** (3 seeds × 15 scenarios); speed depends on background load; baseline bags not available | [section](#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties), [`machine_change/`](machine_change/), [`evaluation/results/repro_wsl/`](../evaluation/results/repro_wsl/) |
 
 **Final numbers, in one place:** [E5.3](#e53-final-results-300-valid-runs) (outcomes, timing, proximity),
@@ -1165,36 +1165,45 @@ the suggested first session plan (H, C, A × 10 seeds, `hold_s1`) lists 30 runs.
 session, the compliance-aware variant's three modes (90 runs) take about 7 sessions.
 
 
-### Phase C, first variant set: `compliance_aware_approach = hold_s1` (2026-11-19)
+### Phase C, first variant set: `compliance_aware_approach = hold_s1` (2026-11-19 and 2026-11-23)
 
-**What was run.** Planned: H, C and A × seeds 0–9 under `hold_s1`, the variant designed to fix scenario H.
-Because of time, it was reduced to **17 runs: H seeds 0–9, C seeds 0–3, A seeds 0–2** (user, 16:14).
-C seeds 4–9 and A seeds 3–9 are **not run yet**. The next session resumes them automatically. Run set
-`aware_hold_s1`, code fingerprint `7310e62f04ee1977`, same laptop under WSL2 (2 YOLO threads, rendering on
-the NVIDIA GPU). Results:
-[`evaluation/results/phase_c/aware_hold_s1/`](../evaluation/results/phase_c/aware_hold_s1/) (`manifest.csv`,
-`metrics.csv`, run-by-run `runs.csv`, `summary.md`). Batch log, host monitor and failed attempts:
-[`phase_c/`](phase_c/).
+**What was run.** H, C and A × seeds 0–9 (**30 runs, all valid**) under `hold_s1`, the variant designed
+to fix scenario H.
+- **19 Nov:** 17 runs (H 0–9, C 0–3, A 0–2), reduced to fit a deadline.
+- **23 Nov:** the remaining 13 (C 4–9, A 3–9).
 
-**How it was run** (gentle sessions; cool-down changed twice at the user's request):
+Run set `aware_hold_s1`, code fingerprint `7310e62f04ee1977` on both days. Same laptop under WSL2, with
+2 YOLO threads and rendering on the NVIDIA GPU. Results:
+[`evaluation/results/phase_c/aware_hold_s1/`](../evaluation/results/phase_c/aware_hold_s1/)
+(`manifest.csv`, `metrics.csv`, run-by-run `runs.csv`, `summary.md`). Batch log, host-monitor logs and
+every failed attempt: [`phase_c/`](phase_c/).
 
-| Session | Start | Cool-down | Runs | Ended |
-|---|---|---|---|---|
-| 1 | 15:47 | 120 s | H 0–3 | stopped by STOP file to shorten the cool-down |
-| 2 | 16:04 | 60 s | H 4–5 | stopped by STOP file to remove it |
-| 3 | 16:09 | **0 s** | H 6–7 | stopped by STOP file to reduce the plan to fit 17:00 |
-| 4–6 (chained) | 16:15 | **0 s** | H 8–9, C 0–3, A 0–2 | all planned runs done, 16:39 |
+**How it was run** (gentle sessions; settings changed at the user's requests):
 
-The **configuration guard** passed on every run: each run printed `compliance_aware_approach=hold_s1,
-frame_topics=2` and `comply_s1_fallback=off`. This was the first use of the guard end to end.
+| Date | Session | Cool-down | CPU turbo | Runs | Ended |
+|---|---|---|---|---|---|
+| 19 Nov | 1 (15:47) | 120 s | on | H 0–3 | STOP file: shorten the cool-down |
+| 19 Nov | 2 (16:04) | 60 s | on | H 4–5 | STOP file: remove the cool-down |
+| 19 Nov | 3 (16:09) | 0 s | on | H 6–7 | STOP file: cut the plan to fit 17:00 |
+| 19 Nov | 4–6 (16:15) | 0 s | on | H 8–9, C 0–3, A 0–2 | done 16:39 |
+| 23 Nov | 7 (10:56) | 120 s | on | C 4–6 | STOP file: user said "don't overpush it" after an 84.9 °C peak |
+| 23 Nov | 8 (11:19) | 120 s + until ≤ 65 °C | **off** | C 7–9, A 3–9 | done 12:06 |
 
-**Results: outcomes**
+The **configuration guard** passed on every run: each printed `compliance_aware_approach=hold_s1,
+frame_topics=2` and `comply_s1_fallback=off`.
 
-| Scenario | Runs | Baseline (same seeds) | `hold_s1` | Changed |
+**Results: outcomes** (baseline = the same seeds of the 300-run baseline)
+
+| Scenario | Runs | Baseline | `hold_s1` | Changed |
 |---|---|---|---|---|
 | **H** (person stops during the PA warning) | 10 | target_lost, S2 (10/10) | **complied, S1 (10/10)** | **10 / 10, as intended** |
-| C (person walks away) | 4 | target_lost, S2 | target_lost, S2 | 0 / 4: must not change ✓ |
-| A (full escalation, complies after direct warning) | 3 | complied, S3 | complied, S3 | 0 / 3: must not change ✓ |
+| C (person walks away) | 10 | target_lost, S2 (10/10) | target_lost, S2 (10/10) | 0 / 10: must not change ✓ |
+| A (full escalation, complies after the direct warning) | 10 | complied, S3 (10/10) | complied, S3 (10/10) | 0 / 10: must not change ✓ |
+
+`compare_repro.py` reports outcome agreement of 20/30: those are the A and C runs, while the 10 H runs
+differ by design. Its `expected_outcome_match` column also reads 20/30, because scenario H's
+`expected_outcome` describes the baseline FSM (`target_lost`). No false interventions or missed
+violations: 30/30 the same as the baseline.
 
 **H in detail.**
 - **Variant:** the PA warning played at 36.1 s, and the FSM held S1 instead of approaching. The person
@@ -1203,45 +1212,75 @@ frame_topics=2` and `comply_s1_fallback=off`. This was the first use of the guar
   navigation goal and no path. One warning was delivered (the PA warning).
 - **Baseline:** H went to S2. The robot drove a median of 1.38 m towards a person who had already
   stopped, and the run ended `target_lost` at 45.1–45.3 s.
-- This is what the October bag replay predicted for `hold_s1`
-  ([`fsm_replay/report.md`](../evaluation/results/fsm_replay/report.md): H complied/S1 in 20/20, C
-  target_lost/S2, A complied/S3). The Gazebo runs now confirm it in closed loop.
+- This is what the October bag replay predicted
+  ([`fsm_replay/report.md`](../evaluation/results/fsm_replay/report.md): H complied/S1 20/20, C
+  target_lost/S2, A complied/S3). The Gazebo runs confirm it in closed loop.
 
-**A and C timing.** Outcome-time differences from the baseline: C 0.0, 0.0, +0.1, +0.1 s; A +0.8, −0.2,
-0.0 s. Confirmation time is within 0.1 s in every A and C run. The cctv1 YOLO rate in H was 5.00–5.01 Hz.
+**A and C timing.** Outcome-time differences from the baseline: median 0.0 s (A) and 0.0–0.3 s (C).
+Three runs differ by 0.5 s or more:
 
-**Failures and odd events**
-- **3 failed attempts, all `nav2_not_ready`** (Nav2 not active by 28 s sim), each retried automatically.
-  Every retry was valid.
-  - H/6 attempt 1 (16:09): neither Nav2 lifecycle manager active.
-  - A/0 attempt 1 (16:28): `map_server` lifecycle reply lost, the same pattern as in the reproduction.
-  - A/2 attempt 1 (16:35): localization active, navigation not.
-  - **3 of 20 attempts (15 %)**, against 2 of 47 in the reproduction and 17 of 317 in the baseline.
-  - **All three happened with no cool-down** between runs. The 6 runs made with a cool-down (sessions
-    1–2) had none. The numbers are too small to prove a link. Nav2's bring-up is sensitive to load, and
-    a run starting seconds after the previous one ended is plausible as a contributor. **Recommendation:**
-    keep at least a 60 s cool-down in future sessions.
-  - Logs: [`phase_c/failed_attempts/`](phase_c/failed_attempts/).
-- **`robot_state_publisher` segfaulted (exit −11) during the shutdown of H/6 attempt 2**, after the
-  runner's stop signal (launch log line 468; first SIGINT at line 422). The outcome and the bag were
-  already recorded, and the runner did not count it (`died_processes` empty). This is the same kind of
-  shutdown-only crash as the Gazebo abort in incident 6.
-- **Speed and heat.**
-  - RTF 0.813–0.894 (median 0.862), higher than the reproduction's 0.834. Fewer Windows programs were
-    open: the Epic Games Launcher was idle; no Battle.net or Riot Client.
-  - Windows reported the CPU at 100–108 % of nominal performance whenever busy, so there was no
-    throttling.
-  - At 16:20 (no cool-down) the Windows thermal zone read **77.9 °C** with the passive-cooling limit at
-    100 % (no thermal throttling), and the GPU was at 44 °C. CPU core temperatures need administrator
-    rights and were not read.
-  - From 16:41, [`host_monitor.sh`](../evaluation/scripts/host_monitor.sh) also logs the thermal-zone
-    temperature and the passive limit every minute, in two columns at the end of each line (first
-    reading, idle: 42.9 °C, 100 %). Future sessions record heat alongside speed.
+| Run | Difference | Where it comes from |
+|---|---|---|
+| A/8 | outcome −1.1 s | confirmation 1.3 s earlier (detection timing); navigation −0.19 s |
+| A/0 | outcome +0.8 s | navigation 0.67 s slower |
+| C/7 | outcome +0.7 s | target-loss timing; confirmation unchanged |
+
+The YOLO rate on cctv1 was 5.00–5.01 Hz in H and A and 4.41–4.45 Hz in C (baseline C: about 4.1–4.4 Hz).
+
+**Turbo on and off.** The last 10 runs (C 7–9, A 3–9) ran with the CPU's turbo boost disabled (below).
+Perception and results were the same in both groups:
+
+| | turbo on | turbo off |
+|---|---|---|
+| A: runs / median RTF / YOLO Hz / confirmation latency / outcome time | 3 / 0.889 / 5.006 / 0.8 s / 74.9 s | 7 / 0.808 / 5.000 / 0.9 s / 74.9 s |
+| C: runs / median RTF / YOLO Hz / confirmation latency / outcome time | 7 / 0.866 / 4.412 / 0.9 s / 52.2 s | 3 / 0.742 / 4.446 / 0.9 s / 52.9 s |
+| Thermal-zone peak during a run | about 82–85 °C | **53–57 °C** |
+
+**Failures and odd events (both days)**
+- **5 failed attempts in 35 (14 %)**, all infrastructure, each retried automatically, every retry valid.
+  Logs: [`phase_c/failed_attempts/`](phase_c/failed_attempts/).
+
+  | Attempt | Status | What happened | Cool-down before it |
+  |---|---|---|---|
+  | H/6 #1 (19 Nov) | `nav2_not_ready` | neither Nav2 lifecycle manager active by 28 s | 0 s |
+  | A/0 #1 (19 Nov) | `nav2_not_ready` | `map_server` lifecycle reply lost | 0 s |
+  | A/2 #1 (19 Nov) | `nav2_not_ready` | localization active, navigation not | 0 s |
+  | C/5 #1 (23 Nov) | `nav2_not_ready` | `map_server` lifecycle reply lost | **120 s** |
+  | A/6 #1 (23 Nov) | **`startup_failed`** | the simulation was up (robot spawned, localization active), but the runner's monitor never received `/clock` (sim_s 0.0 after 120 s): a DDS discovery failure between the runner and the simulation, not a simulation fault. First of its kind in these runs. | 120 s |
+
+  On 19 Nov all three failures happened with no cool-down, and I suggested a link. **C/5 failed with a
+  120 s cool-down, so that explanation does not hold.** The rate here (4 `nav2_not_ready` in 35) is
+  higher than in the reproduction (2 in 47) and the baseline (14 `nav2_not_ready` in 317), but the
+  numbers are small. Nav2's start-up on this WSL set-up is the weak point.
+- **`robot_state_publisher` segfaulted (exit −11) during the shutdown of H/6 attempt 2** (19 Nov), after
+  the runner's stop signal. The result was already recorded, and the runner did not count it.
+- **Slow start after a cold boot (23 Nov).** The first run, 3 minutes after Windows started, ran at RTF
+  0.748. Windows start-up work was competing for the CPU: `memory compression` 167 %, `msedgewebview2`
+  126 %, then `taskhostw` 94 %, `microsoftedgeupdate` 68 % and `svchost` 57 %
+  ([`phase_c/host_monitor_2026-11-23.log`](phase_c/host_monitor_2026-11-23.log)).
+- **Heat (23 Nov).**
+  - With turbo on, the thermal zone peaked at **84.9 °C** (19 Nov: 77.9 °C). It rose within a minute of a
+    run starting and fell to about 47–57 °C within a minute of it ending. The passive (thermal
+    throttling) limit stayed at 100 %, so there was no throttling.
+  - At the user's request ("don't overpush it"), the session was stopped, and `gentle_batch.py` gained a
+    **temperature-aware cool-down**: wait at least 120 s and until the thermal zone is ≤ 65 °C. It also
+    gained a **thermal stop** at 88 °C. The watchdog's alarm was lowered to 85 °C.
+- **CPU turbo disabled for the last 10 runs** (user's choice). Windows' "maximum processor state" set to
+  99 % did **not** stop turbo: a 10 s load still showed 109 % performance and 82.9 °C. Setting the hidden
+  "processor performance boost mode" (AC) to *Disabled* did: 79 % (base clock) and **56.9 °C** under the
+  same load. Gentle's throttling threshold was set to 70 % for that session, because the base clock reads
+  79 % by design. Afterwards both settings were restored: max processor state 100 %, boost mode 2
+  (*Aggressive*). **The original AC boost mode was not recorded before the change** (it is a hidden
+  setting and was read with the wrong query). It is assumed to have been 2, the DC value and Windows'
+  default.
+- **Speed.** RTF 0.739–0.894 over the 30 runs (median 0.826). No throttling while busy on either day.
 
 **Limitations of this set.**
-- C has 4 seeds and A has 3, so they show "no change" only on a small sample. H has 10.
-- The hold mechanism's own events (`compliance_hold`, `hold_released`) were not yet analysed.
+- 10 seeds per scenario.
+- The hold mechanism's own events (`compliance_hold`, `hold_released`) were not analysed separately.
 - `reset_first` and `both` are not run.
+- The 30 runs mix turbo on (20) and turbo off (10); the table above shows no effect on perception or
+  outcomes.
 
 ---
 

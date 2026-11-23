@@ -1,0 +1,182 @@
+=== 2026-11-19 14:33:00 Phase B started (branch phase-b-human-model from main 413ae7c): under skip_pa_warning, a person scripted to comply after the PA warning complies after the first warning actually heard ===
+14:34:01 [phase-b] scenario_publisher_node: parameter comply_s1_fallback ('' default | first_heard) implemented; recorded in ground truth
+14:34:44 [phase-b] tests: system 119 passed in 5.75s (105 before + 14 new) | evaluation 29 passed in 0.83s
+14:35:05 [phase-b] committed locally 918c753 (push waits for the token)
+14:35:20 [phase-b] starting the single Gazebo check run: H seed 0, skip_pa_warning + comply_s1_fallback first_heard (expect: no PA, approach, direct warning, complied ~1 s later, outcome complied S3)
+14:38:54 [phase-b] check run so far: MONITORING -> APPROACH directly (no PA warning) at 36.1 s sim; APPROACH -> DIRECT_WARNING after 24.0 s; person complied ~1 s after the first direct warning; compliance detected -> outcome complied S3 (as expected). Run winding down (fixed 180 s window).
+14:39:00 [phase-b] check run finished; gzserver left: 0
+14:39:29 [phase-b] check run verified (ground truth: comply_trigger warning=S3 direct_count=1 s1_fallback=True; no PA audio event; FSM variants line skip_pa_warning=True); archived to evidence/phase_b/ with a top-down figure
+14:40:25 [phase-b] step 1 DONE: evidence section 'Phase B' written (decision, implementation, 14 tests, check run table + figure); committed locally 2bab9ae; push waits for the token
+14:46:45 [watchdog] health OK; idle (no Gazebo, 9.4 GB free); Phase B step 1 done, 2 commits local (918c753, 2bab9ae); push waits for the token
+15:01:41 [watchdog] health OK; idle; Phase B step 1 done (2 local commits); waiting for go-ahead on step 2 and the token to push
+15:16:41 [watchdog] health OK; idle; waiting for go-ahead on step 2 and the token
+15:21:47 [step2] started: run_batch.py support for the FSM variants (+ Phase B rule for skip-PA runs, + config guard on the 'FSM variants:' line)
+15:24:13 [step2] tests: system 119 passed in 6.07s | evaluation 52 passed in 0.90s (29 before + 23 new)
+15:25:00 [step2] docs: evaluation/README.md (usage, test counts) + evidence 'Phase C preparation: runner support'
+15:25:08 [step2] DONE: committed locally 55fa73c; push waits for the token
+15:31:26 [stepB] started: gentle_batch.py (1 h sessions, 2 min cool-downs, stop on CPU throttling / repeated failures / STOP file, resumable)
+15:32:47 [stepB] tests: system 119 passed in 6.08s | evaluation 69 passed in 0.97s (52 before + 17 new)
+15:33:12 [stepB] DONE: committed locally 5081700; Phase C ready to start (needs: scope decision, you around, token to push)
+15:33:25 [watchdog] health OK; idle; steps 1, A, B done (4 local commits, latest 5081700); waiting for Phase C scope + token
+15:46:42 [watchdog] health OK; idle; waiting for Phase C scope + token
+15:47:16 [phaseC] user: go. First gentle session: compliance_aware hold_s1, H,C,A x seeds 0-9 (30 runs, ~13 this session); out evaluation/data/variants. Epic Games Launcher open (idle) at start.
+15:47:16 [gentle] session start: tag=aware_hold_s1, 30 of 30 runs to do; budget 60 min, cool-down 120 s, stop if CPU performance < 85 % while busy
+15:47:16 [gentle] run 1/30: H seed 0
+15:48:22 [phaseC] first variant run passed the new configuration guard: 'FSM variants: ... compliance_aware_approach=hold_s1, frame_topics=2' and 'Human model: ... comply_s1_fallback=off' as expected
+15:49:26 [gentle]   ok: complied S1 at 47.0 s sim, RTF 0.819
+15:49:26 [gentle]   CPU performance while busy: median 106 % (2 monitor samples)
+15:49:26 [gentle]   cool-down 120 s
+15:51:27 [gentle] run 2/30: H seed 1
+15:53:37 [gentle]   ok: complied S1 at 47.0 s sim, RTF 0.816
+15:53:37 [gentle]   cool-down 120 s
+15:53:51 [phaseC] estimate: ~4 min 10 s per H cycle (2:10 run + 2:00 cool-down), ~4:15 C, ~4:45 A; this session ~15 runs (10 H + ~5 C), ends ~16:49; remaining ~15 runs = 1 more full session + a short one
+15:55:37 [gentle] run 3/30: H seed 2
+15:57:45 [gentle]   ok: complied S1 at 46.9 s sim, RTF 0.84
+15:57:45 [gentle]   cool-down 120 s
+15:59:45 [gentle] run 4/30: H seed 3
+16:01:54 [gentle]   ok: complied S1 at 47.3 s sim, RTF 0.837
+16:01:54 [gentle]   cool-down 120 s
+16:03:13 [phaseC] user chose option B (speed up): STOP file created so the session ends after its current run; it will be restarted with --cooldown-s 60 (throttling stop and 60 min budget unchanged)
+16:03:54 [gentle] session end after 17 min: 4 run(s) ok this session; 26 of 30 still to do; reason: STOP file present (manual stop)
+16:04:06 [phaseC] restarting with 1-min cool-down (option B); 26 of 30 runs to do
+16:04:07 [gentle] session start: tag=aware_hold_s1, 26 of 30 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 85 % while busy
+16:04:07 [gentle] run 1/26: H seed 4
+16:04:56 [git] token stored in git's credential store (~/.git-credentials, 600); branch phase-b-human-model pushed (5 commits)
+16:06:17 [gentle]   ok: complied S1 at 46.9 s sim, RTF 0.813
+16:06:17 [gentle]   CPU performance while busy: median 104 % (2 monitor samples)
+16:06:17 [gentle]   cool-down 60 s
+16:07:17 [gentle] run 2/26: H seed 5
+16:08:15 [phaseC] user chose MAX: no cool-down, one session for the remaining runs (throttling + failure stops kept); STOP file created to end the current session after its current run
+16:09:25 [gentle]   ok: complied S1 at 46.9 s sim, RTF 0.845
+16:09:25 [gentle] session end after 5 min: 2 run(s) ok this session; 24 of 30 still to do; reason: STOP file present (manual stop)
+16:09:31 [phaseC] restart at MAX: --cooldown-s 0 --max-minutes 120; 24 of 30 to do
+16:09:32 [gentle] session start: tag=aware_hold_s1, 24 of 30 runs to do; budget 120 min, cool-down 0 s, stop if CPU performance < 85 % while busy
+16:09:32 [gentle] run 1/24: H seed 6
+16:13:15 [gentle]   ok: complied S1 at 47.2 s sim, RTF 0.867
+16:13:15 [gentle]   CPU performance while busy: median 104 % (4 monitor samples)
+16:13:15 [gentle]   cool-down 0 s
+16:13:15 [gentle] run 2/24: H seed 7
+16:13:25 [phaseC] H/6: attempt 1 nav2_not_ready (Nav2 start-up, retried automatically; 1st run with no cool-down, started ~8 s after the previous run ended); attempt 2 ok complied S1, RTF 0.867. robot_state_publisher segfaulted (exit -11) DURING shutdown (log line 468, after the first SIGINT at 422): not a run failure (died_processes empty), recorded as an odd event.
+16:14:37 [phaseC] user: must finish by 17:00 -> reduce to 10 more runs: H 7-9, C 0-3, A 0-2 (balanced; rest of C and A later). STOP file to end the current session after H/7, then three chained sessions, no cool-down.
+16:15:22 [gentle]   ok: complied S1 at 47.0 s sim, RTF 0.856
+16:15:22 [gentle] session end after 6 min: 2 run(s) ok this session; 22 of 30 still to do; reason: STOP file present (manual stop)
+16:15:23 [gentle] session start: tag=aware_hold_s1, 2 of 2 runs to do; budget 45 min, cool-down 0 s, stop if CPU performance < 85 % while busy
+16:15:23 [gentle] run 1/2: H seed 8
+16:16:55 [watchdog] health OK; H 9/10 done (all complied S1); chain running; pushed 58f11df
+16:17:29 [gentle]   ok: complied S1 at 47.0 s sim, RTF 0.862
+16:17:29 [gentle]   CPU performance while busy: median 106 % (2 monitor samples)
+16:17:29 [gentle]   cool-down 0 s
+16:17:29 [gentle] run 2/2: H seed 9
+16:19:36 [gentle]   ok: complied S1 at 47.0 s sim, RTF 0.86
+16:19:36 [gentle] session end after 4 min: 2 run(s) ok this session; 0 of 2 still to do; reason: all planned runs done
+16:19:36 [gentle] session start: tag=aware_hold_s1, 4 of 4 runs to do; budget 45 min, cool-down 0 s, stop if CPU performance < 85 % while busy
+16:19:36 [gentle] run 1/4: C seed 0
+16:21:49 [gentle]   ok: target_lost S2 at 52.9 s sim, RTF 0.866
+16:21:49 [gentle]   CPU performance while busy: median 106 % (2 monitor samples)
+16:21:49 [gentle]   cool-down 0 s
+16:21:49 [gentle] run 2/4: C seed 1
+16:24:00 [gentle]   ok: target_lost S2 at 51.7 s sim, RTF 0.871
+16:24:00 [gentle]   cool-down 0 s
+16:24:00 [gentle] run 3/4: C seed 2
+16:26:13 [gentle]   ok: target_lost S2 at 54.0 s sim, RTF 0.867
+16:26:13 [gentle]   cool-down 0 s
+16:26:13 [gentle] run 4/4: C seed 3
+16:28:25 [gentle]   ok: target_lost S2 at 51.8 s sim, RTF 0.868
+16:28:25 [gentle] session end after 9 min: 4 run(s) ok this session; 0 of 4 still to do; reason: all planned runs done
+16:28:25 [gentle] session start: tag=aware_hold_s1, 3 of 3 runs to do; budget 45 min, cool-down 0 s, stop if CPU performance < 85 % while busy
+16:28:25 [gentle] run 1/3: A seed 0
+16:31:52 [watchdog] health OK; H 10/10 complied S1; C 0-3 target_lost S2 (4/4); A/0 attempt 1 nav2_not_ready (retry running). Note: both nav2_not_ready today in this set were the FIRST run of a session started right after another run (H/6, A/0) - 2 cases, not conclusive.
+16:32:38 [gentle]   ok: complied S3 at 75.6 s sim, RTF 0.889
+16:32:38 [gentle]   CPU performance while busy: median 106 % (4 monitor samples)
+16:32:38 [gentle]   cool-down 0 s
+16:32:38 [gentle] run 2/3: A seed 1
+16:35:15 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.879
+16:35:15 [gentle]   CPU performance while busy: median 108 % (3 monitor samples)
+16:35:15 [gentle]   cool-down 0 s
+16:35:15 [gentle] run 3/3: A seed 2
+16:39:26 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.894
+16:39:26 [gentle]   CPU performance while busy: median 107 % (4 monitor samples)
+16:39:26 [gentle] session end after 11 min: 3 run(s) ok this session; 0 of 3 still to do; reason: all planned runs done
+16:39:26 [phaseC] chained sessions finished (H 7-9, C 0-3, A 0-2)
+16:39:42 [phaseC] all 17 runs done (H 0-9, C 0-3, A 0-2 under aware_hold_s1); analysis started
+16:40:35 [phaseC] results: H 10/10 complied S1 (baseline target_lost S2), robot never left base; C 4/4 and A 3/3 unchanged; 3 nav2_not_ready attempts (H/6, A/0, A/2) retried ok
+16:42:04 [tests] system 119 passed in 5.68s | evaluation 70 passed in 0.69s
+16:42:18 [git] Phase C hold_s1 results committed and pushed c6d1722
+16:46:39 [watchdog] health OK; idle after Phase C hold_s1 set; branch in sync with GitHub
+17:01:39 [watchdog] health OK; idle; waiting for user (stop watchdog? merge to main?)
+17:03:23 [end] watchdog stopped; phase-b-human-model fast-forwarded into main (3510334) and pushed; nothing running
+17:13:48 [end] final double-check passed (GitHub in sync, fresh clone 189 tests pass, 171 doc links OK, no secrets committed); closing
+=== 2026-11-23 10:56:33 session resumed: Phase C hold_s1 rest (C 4-9, A 3-9 = 13 runs), gentle defaults (120 s cool-down, 60 min); branch phase-c from main 3510334. Pre-flight: RAM 10.9 GB (11 GB setting active), clock 5 s off internet (Windows synced), no clock steps, no game launchers, thermal 53.9 C idle ===
+10:56:43 [gentle] session start: tag=aware_hold_s1, 13 of 30 runs to do; budget 60 min, cool-down 120 s, stop if CPU performance < 85 % while busy
+10:56:43 [gentle] run 1/13: C seed 4
+10:59:07 [gentle]   ok: target_lost S2 at 52.2 s sim, RTF 0.748
+10:59:07 [gentle]   CPU performance while busy: median 104 % (3 monitor samples)
+10:59:07 [gentle]   cool-down 120 s
+11:01:07 [gentle] run 2/13: C seed 5
+11:05:10 [gentle]   ok: target_lost S2 at 52.5 s sim, RTF 0.794
+11:05:10 [gentle]   CPU performance while busy: median 106 % (4 monitor samples)
+11:05:10 [gentle]   cool-down 120 s
+11:05:22 [watchdog] health OK; C/4 ok, C/5 attempt 1 failed then retry ok (target_lost S2, RTF 0.794); thermal max 84.9 C at 11:03 (no throttling, passive 100 %, perf >= 103 % while busy). NOTE: this Nav2 failure happened WITH a 120 s cool-down, which weakens the no-cool-down explanation of 19 Nov.
+11:07:10 [gentle] run 3/13: C seed 6
+11:09:00 [phaseC] user: don't overpush. Thermal peaked 84.9 C (19 Nov: 77.9). STOP file created: session ends after its current run; laptop rests while gentle_batch gets a temperature-aware cool-down (wait until thermal zone <= 65 C, min 120 s) and a thermal stop (88 C); watchdog alarm lowered to 85 C.
+11:09:28 [gentle]   ok: target_lost S2 at 52.2 s sim, RTF 0.803
+11:09:28 [gentle] session end after 13 min: 3 run(s) ok this session; 10 of 30 still to do; reason: STOP file present (manual stop)
+11:09:58 [phaseC] gentle_batch: temperature-aware cool-down (--cool-to 65, --max-cool-wait 600) + thermal stop (--max-thermal 88); tests: evaluation 79 passed in 0.74s
+11:17:52 [phaseC] user chose: cap turbo. Windows max processor state (AC) 100 % -> 99 % (scheme 'Razer Cortex Power Plan'); RESTORE afterwards with: powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 100 && powercfg /setactive SCHEME_CURRENT
+11:18:30 [phaseC] max processor state 99 % did not stop turbo (perf 109 %, 82.9 C under a 10 s load). Set PERFBOOSTMODE (AC) to 0 = Disabled. Original AC value was NOT captured (hidden setting, read with /q instead of /qh - my mistake); DC is 2 (Aggressive) = Windows default, so AC will be restored to 2.
+11:19:13 [phaseC] boost disabled: 10 s load test perf 79 % (base clock), thermal 56.9 C (was 82.9 C). Restarting the 10 remaining runs: cool-down 120 s + cool-to 65 C, max-thermal 88 C, min-perf 70 % (base clock reads 79 %), 60 min.
+11:19:14 [gentle] session start: tag=aware_hold_s1, 10 of 30 runs to do; budget 60 min, cool-down 120 s, stop if CPU performance < 70 % while busy
+11:19:14 [gentle] run 1/10: C seed 7
+11:21:44 [gentle]   ok: target_lost S2 at 55.8 s sim, RTF 0.739
+11:21:44 [gentle]   thermal zone during the run: peak 56.9 C
+11:21:44 [gentle]   cool-down 120 s
+11:22:02 [phaseC] first run with turbo off (C/7): ok target_lost S2 at 55.8 s (baseline 55.1); thermal peak 56.9 C (turbo runs ~85 C); RTF 0.739; cctv1 YOLO 4.57 Hz (baseline C/7 4.40), confirmation latency 0.9 s (= baseline). Turbo off keeps perception at baseline rate.
+11:22:17 [watchdog] health OK; 1/10 done since restart (C/7 ok); peak 56.9 C; perf 79 % while busy is the turbo-off base clock (by design, not throttling: passive limit 100 %); in cool-down
+11:23:44 [gentle] run 2/10: C seed 8
+11:26:04 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.79
+11:26:04 [gentle]   thermal zone during the run: peak 54.9 C
+11:26:04 [gentle]   cool-down 120 s
+11:28:04 [gentle] run 3/10: C seed 9
+11:30:30 [gentle]   ok: target_lost S2 at 52.9 s sim, RTF 0.742
+11:30:30 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+11:30:30 [gentle]   thermal zone during the run: peak 55.9 C
+11:30:30 [gentle]   cool-down 120 s
+11:30:46 [watchdog] health OK; 3/10 done since restart (C 7-9 all target_lost S2 = baseline); peaks 54.9-56.9 C; passive 100 %; C complete (10/10), A 3-9 next
+11:32:30 [gentle] run 4/10: A seed 3
+11:35:14 [gentle]   ok: complied S3 at 75.3 s sim, RTF 0.822
+11:35:14 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+11:35:14 [gentle]   thermal zone during the run: peak 53.9 C
+11:35:14 [gentle]   cool-down 120 s
+11:37:14 [gentle] run 5/10: A seed 4
+11:40:00 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.807
+11:40:00 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+11:40:00 [gentle]   thermal zone during the run: peak 52.9 C
+11:40:00 [gentle]   cool-down 120 s
+11:42:00 [gentle] run 6/10: A seed 5
+11:44:46 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.813
+11:44:46 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+11:44:46 [gentle]   thermal zone during the run: peak 53.9 C
+11:44:46 [gentle]   cool-down 120 s
+11:45:47 [watchdog] health OK; 6/10 done since restart (A 3-5 complied S3 = baseline); peaks <= 56.9 C; passive 100 %; 4 left (A 6-9), ~20 min
+11:46:46 [gentle] run 7/10: A seed 6
+11:52:31 [gentle]   ok: complied S3 at 75.5 s sim, RTF 0.83
+11:52:31 [gentle]   CPU performance while busy: median 79 % (5 monitor samples)
+11:52:31 [gentle]   thermal zone during the run: peak 53.9 C
+11:52:31 [gentle]   cool-down 120 s
+11:54:31 [gentle] run 8/10: A seed 7
+11:57:18 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.794
+11:57:18 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+11:57:18 [gentle]   thermal zone during the run: peak 53.9 C
+11:57:18 [gentle]   cool-down 120 s
+11:59:18 [gentle] run 9/10: A seed 8
+12:00:50 [watchdog] health OK; 8/10 done since restart (A 3-7 complied S3); A/6 attempt 1 startup_failed (retry ok); peaks <= 56.9 C
+12:01:03 [phaseC] A/6 attempt 1: startup_failed = the runner's monitor never received /clock (sim_s 0.0 after 120 s wall) although the simulation was up (robot spawned, localization active): a DDS discovery failure between the runner's monitor node and the simulation, not a simulation fault; retried ok (complied S3 at 75.5 s). New kind of infrastructure event (first in this project's WSL runs).
+12:02:04 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.808
+12:02:04 [gentle]   thermal zone during the run: peak 51.9 C
+12:02:04 [gentle]   cool-down 120 s
+12:04:04 [gentle] run 10/10: A seed 9
+12:06:53 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.791
+12:06:53 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+12:06:53 [gentle]   thermal zone during the run: peak 55.9 C
+12:06:53 [gentle] session end after 48 min: 10 run(s) ok this session; 0 of 30 still to do; reason: all planned runs done
+12:07:17 [phaseC] hold_s1 set complete: 30/30 ok. Windows restored: max processor state AC 100 %, boost mode AC 2 (Aggressive; original AC value inferred from DC, see 11:1x entry).
