@@ -110,11 +110,44 @@ def throttled(samples, min_perf, busy_util=40.0, min_busy=2):
     return median < min_perf, median
 
 
+def thermal_readings(path, start, end):
+    """(time, thermal zone deg C) readings of host_monitor.log between two
+    datetimes of the same day. Lines without the thermal column (monitor
+    versions before 2026-11-19 16:41) are skipped."""
+    readings = []
+    if not os.path.isfile(path):
+        return readings
+    with open(path, encoding='utf-8', errors='replace') as f:
+        for line in f:
+            parts = [p.strip() for p in line.split('|')]
+            if line.startswith('#') or len(parts) < 9:
+                continue
+            try:
+                t = datetime.datetime.combine(start.date(),
+                                              datetime.time.fromisoformat(parts[0]))
+                value = float(parts[7])
+            except ValueError:
+                continue
+            if start <= t <= end:
+                readings.append((t, value))
+    return readings
+
+
+def cooled(readings_after, cool_to):
+    """True when the latest thermal reading taken after the run is at or below
+    cool_to; False when it is above; None when there is no such reading yet."""
+    if not readings_after:
+        return None
+    return readings_after[-1][1] <= cool_to
+
+
 def stop_reason(*, elapsed_min, max_minutes, failures, max_failures, throttle,
-                stop_file_present):
+                stop_file_present, thermal_peak=None, max_thermal=None):
     """Why the session must stop before the next run, or None to continue."""
     if stop_file_present:
         return 'STOP file present (manual stop)'
+    if thermal_peak is not None and max_thermal is not None and thermal_peak > max_thermal:
+        return f'thermal zone reached {thermal_peak:.1f} C (limit {max_thermal:g} C)'
     if throttle:
         return 'CPU throttling reported by Windows while a run was busy'
     if failures >= max_failures:
@@ -149,6 +182,13 @@ def main():
     ap.add_argument('--cooldown-s', type=float, default=120.0)
     ap.add_argument('--min-perf', type=float, default=85.0)
     ap.add_argument('--max-failures', type=int, default=2)
+    ap.add_argument('--cool-to', type=float, default=65.0,
+                    help='after the fixed cool-down, also wait until the Windows thermal zone '
+                         'is at or below this (deg C); 0 = time only')
+    ap.add_argument('--max-cool-wait', type=float, default=600.0,
+                    help='longest extra wait for --cool-to (s); then the session stops')
+    ap.add_argument('--max-thermal', type=float, default=88.0,
+                    help='stop the session if the thermal zone exceeded this during a run (deg C)')
     ap.add_argument('--dry-run', action='store_true')
     cli = ap.parse_args()
 
@@ -216,11 +256,17 @@ def main():
             if median_perf is not None:
                 live(f'  CPU performance while busy: median {median_perf:.0f} % '
                      f'({len(samples)} monitor samples)')
-            elapsed = (datetime.datetime.now() - session_start).total_seconds() / 60.0
+            run_end = datetime.datetime.now()
+            temps = thermal_readings(MONITOR_LOG, run_start, run_end)
+            peak = max((v for _, v in temps), default=None)
+            if peak is not None:
+                live(f'  thermal zone during the run: peak {peak:.1f} C')
+            elapsed = (run_end - session_start).total_seconds() / 60.0
             reason = stop_reason(elapsed_min=elapsed, max_minutes=cli.max_minutes,
                                  failures=failures, max_failures=cli.max_failures,
                                  throttle=is_throttled,
-                                 stop_file_present=os.path.exists(STOP_FILE))
+                                 stop_file_present=os.path.exists(STOP_FILE),
+                                 thermal_peak=peak, max_thermal=cli.max_thermal)
             if reason or i == len(todo) - 1:
                 break
             live(f'  cool-down {cli.cooldown_s:g} s')
@@ -228,6 +274,33 @@ def main():
             if os.path.exists(STOP_FILE):
                 reason = 'STOP file present (manual stop)'
                 break
+            # Temperature-aware cool-down (user, 2026-11-23: "don't overpush it"):
+            # keep waiting until a reading taken after the run is <= cool_to
+            if cli.cool_to > 0:
+                waited = 0.0
+                while True:
+                    state = cooled(thermal_readings(MONITOR_LOG, run_end,
+                                                    datetime.datetime.now()), cli.cool_to)
+                    if state is None and waited == 0.0 and not temps:
+                        live('  no thermal readings (older monitor?): time-only cool-down')
+                        break
+                    if state:
+                        if waited:
+                            live(f'  cooled to <= {cli.cool_to:g} C after {waited:.0f} s extra')
+                        break
+                    if waited >= cli.max_cool_wait:
+                        reason = (f'thermal zone still above {cli.cool_to:g} C after '
+                                  f'{cli.max_cool_wait:g} s extra cool-down')
+                        break
+                    if waited == 0.0:
+                        live(f'  still warm: waiting until the thermal zone is <= {cli.cool_to:g} C')
+                    time.sleep(30)
+                    waited += 30
+                    if os.path.exists(STOP_FILE):
+                        reason = 'STOP file present (manual stop)'
+                        break
+                if reason:
+                    break
     except KeyboardInterrupt:
         reason = 'interrupted (Ctrl+C)'
     finally:

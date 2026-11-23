@@ -143,3 +143,51 @@ def test_monitor_lines_with_thermal_columns_are_read(tmp_path):
                     '9349 | 134 | 42.9 | 100\n')
     assert [(p, u) for _, p, u in gb.monitor_samples(str(path), at('16:40:00'), at('16:42:00'))] \
         == [(88.0, 8.0)]
+
+
+# ------------------------------------------- temperature (2026-11-23)
+
+THERMAL_LOG = """# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files | thermal_zone_C | passive_limit%
+11:03:27 | 107 | 57 | vmmemwsl=700 | 9.1 | 3600 | 900 | 84.9 | 100
+11:04:34 | 97 | 15 | system=40 | 3.0 | 9000 | 900 | 56.9 | 100
+11:05:39 | 79 | 8 | system=30 | 1.0 | 9100 | 900 | 49.9 | 100
+12:12:40 | 101 | 89 | vmmemwsl=822 | 18.38 | 3712 | 811
+"""
+
+
+@pytest.fixture
+def thermal_log(tmp_path):
+    path = tmp_path / 'host_monitor.log'
+    path.write_text(THERMAL_LOG)
+    return str(path)
+
+
+def test_thermal_readings_in_window(thermal_log):
+    r = gb.thermal_readings(thermal_log, at('11:00:00'), at('11:04:00'))
+    assert [(t.strftime('%H:%M:%S'), v) for t, v in r] == [('11:03:27', 84.9)]
+
+
+def test_lines_without_thermal_column_are_skipped(thermal_log):
+    assert gb.thermal_readings(thermal_log, at('12:00:00'), at('13:00:00')) == []
+
+
+@pytest.mark.parametrize('end, expect', [
+    ('11:04:00', None),     # no reading after the run yet
+    ('11:05:00', False),    # 56.9 C > 55
+    ('11:06:00', True),     # latest 49.9 C <= 55
+])
+def test_cooled_uses_the_latest_reading_after_the_run(thermal_log, end, expect):
+    after = gb.thermal_readings(thermal_log, at('11:04:00'), at(end))
+    assert gb.cooled(after, 55.0) is expect
+
+
+@pytest.mark.parametrize('peak, expect', [(84.9, None), (88.0, None), (88.1, 'thermal zone reached 88.1')])
+def test_thermal_stop(peak, expect):
+    reason = gb.stop_reason(**{**BASE, 'thermal_peak': peak, 'max_thermal': 88.0})
+    assert (reason is None) if expect is None else (expect in reason)
+
+
+def test_manual_stop_still_comes_first():
+    reason = gb.stop_reason(**{**BASE, 'stop_file_present': True, 'thermal_peak': 95.0,
+                               'max_thermal': 88.0})
+    assert 'STOP file' in reason
