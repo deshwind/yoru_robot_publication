@@ -22,7 +22,7 @@ the files listed. Where something has **not** been measured, it says so.
 | 7 Ablation | offline ablation **final** (E6.3); node flags implemented and tested in a pending patch, **not yet applied** (no ablation runs in Gazebo) | [`phase6/`](phase6/) |
 | Offline extensions | **final** (300 runs): [deployment thresholds, sustained rule, outcome vs truth](#final-results-300-runs) | [`evaluation/results/offline_extensions/`](../evaluation/results/offline_extensions/) |
 | Extension A: FSM design variants | implemented, unit-tested, replay-validated on the 300 baseline bags; **not yet run in Gazebo** | [section](#extension-a-fsm-design-variants-2026-10-15), [`evaluation/results/fsm_replay/`](../evaluation/results/fsm_replay/) |
-| Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended. Runner support (23 tests) and gentle sessions (17 tests) done. **Phase C `hold_s1` complete (30 runs): H fixed in 10/10 (complied S1 instead of target_lost S2), C 10/10 and A 10/10 unchanged**; `reset_first` and `both` not run yet | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
+| Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended. Runner support (23 tests) and gentle sessions (17 tests) done. **Phase C `hold_s1` complete (30 runs): H fixed in 10/10 (complied S1 instead of target_lost S2), C 10/10 and A 10/10 unchanged. `reset_first` 14/30 (H 10/10 complied S2, the robot still drives about 1.4 m; C 4/4 unchanged)**; the rest of `reset_first` and all of `both` not run yet | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
 | Same laptop, new OS (after the SSD slot failure) | set up; 2 set-up problems fixed (clock steps, CPU threads); **reproduction: 45 / 45 outcomes match the baseline** (3 seeds × 15 scenarios); speed depends on background load; baseline bags not available | [section](#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties), [`machine_change/`](machine_change/), [`evaluation/results/repro_wsl/`](../evaluation/results/repro_wsl/) |
 
 **Final numbers, in one place:** [E5.3](#e53-final-results-300-valid-runs) (outcomes, timing, proximity),
@@ -1281,6 +1281,68 @@ Perception and results were the same in both groups:
 - `reset_first` and `both` are not run.
 - The 30 runs mix turbo on (20) and turbo off (10); the table above shows no effect on perception or
   outcomes.
+
+
+### Phase C, second variant set: `compliance_aware_approach = reset_first` (2026-11-23, partial)
+
+**What was run.**
+- **Session:** one turbo-off session, 12:31–13:35, ended by its 60 min time budget.
+- **Runs:** **14 of 30 valid: H seeds 0–9 and C seeds 0–3.** C seeds 4–9 and A seeds 0–9 are **not
+  run yet**; the next session resumes them.
+- **Run set:** `aware_reset_first`, code fingerprint `7310e62f04ee1977`.
+- **Launch:** [`run_session_turbo_off.sh`](../evaluation/scripts/run_session_turbo_off.sh), which disabled
+  the CPU boost for the session and restored it (boost mode 2) when the session ended. Restoration checked
+  afterwards: boost mode AC 2, max processor state 100 %.
+- **Cool-down:** 120 s, then until ≤ 65 °C; thermal stop at 88 °C.
+- **Rest before the session:** the session started 26 min after the previous one ended, not 30, because
+  the user asked to start straight away.
+- **Data:** [`evaluation/results/phase_c/aware_reset_first/`](../evaluation/results/phase_c/aware_reset_first/).
+- **Configuration guard:** every run printed `compliance_aware_approach=reset_first, frame_topics=2`.
+
+**Results**
+
+| Scenario | Runs | Baseline | `reset_first` | Changed |
+|---|---|---|---|---|
+| **H** | 10 | target_lost, S2 | **complied, S2 (10/10)** | 10 / 10 |
+| C | 4 | target_lost, S2 | target_lost, S2 (4/4) | 0 / 4 ✓ (outcome time +0.1 to +0.2 s) |
+| A | 0 | – | not run yet | – |
+
+**How the two fixes differ in H** (median or range over seeds 0–9):
+
+| | baseline | `hold_s1` | `reset_first` |
+|---|---|---|---|
+| outcome | target_lost, **S2** | complied, **S1** | complied, **S2** |
+| approach started (S2) | 39.1 s | **never** | 39.1 s |
+| distance driven towards the person | 1.38 m | **0 m** | **1.34–1.44 m** |
+| robot reached the person | no | no | no |
+| outcome time | 45.1 s | 46.9–47.3 s | 46.7–47.5 s |
+| warnings delivered | 1 (PA) | 1 (PA) | 1 (PA) |
+
+**What this means for the design.**
+- Both modes turn H's outcome into *complied*, as the October replay predicted.
+- **`reset_first` still sends the robot towards a person who has already complied.** It drives about
+  1.4 m for about 8 s, the same as at baseline. Only the label at the end changes.
+- **`hold_s1` keeps the robot at its base.** For a person who stops during the PA warning, this avoids an
+  unnecessary approach.
+- Neither mode changed C (person walks away) in the runs made.
+
+**Failures and odd events**
+- **3 failed attempts in 17**, all `nav2_not_ready` and all with the 120 s cool-down. Each was retried
+  automatically and every retry was valid.
+  - H/6 and H/9: no Nav2 lifecycle manager active by 28 s.
+  - C/1: no `map_server` reply logged.
+  - Logs: [`phase_c/failed_attempts/`](phase_c/failed_attempts/) (`reset_first_*`).
+  - This brings Phase C as a whole to 8 failed attempts in 52 (15 %), 7 of them `nav2_not_ready`. Nav2
+    start-up on this WSL set-up is the main source of retries. It costs time, not results: every retry
+    has been valid.
+- **Speed.** RTF 0.671–0.827 (median 0.776), with turbo off. C/2 was the slowest (0.671), but its cctv1
+  frame rate was 4.20 Hz against 4.15 Hz at baseline, and its outcome time was +0.2 s. Across the 14
+  runs, the cctv1 rate was 4.20–5.01 Hz.
+- **Heat.** The thermal zone peaked at **59.9 °C** (13:29) over the whole session, with the passive limit
+  at 100 % throughout.
+
+The batch log for both variant sets is [`phase_c/variants_batch.log`](phase_c/variants_batch.log); the
+day's host monitor is [`phase_c/host_monitor_2026-11-23.log`](phase_c/host_monitor_2026-11-23.log).
 
 ---
 

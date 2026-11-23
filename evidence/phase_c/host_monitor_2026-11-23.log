@@ -55,3 +55,62 @@
 12:03:33 | 72 | 4 | system=36 cefsharp.browsersubprocess=5 vmmemwsl=5 | 1.10 | 9385 | 135 | 38.9 | 100
 12:04:40 | 79 | 54 | vmmemwsl=803 code=22 system=20 | 10.61 | 6966 | 256 | 50.9 | 100
 12:05:47 | 79 | 68 | vmmemwsl=876 system=67 chrome=28 | 10.30 | 6996 | 256 | 55.9 | 100
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files | thermal_zone_C | passive_limit%
+12:31:56 | 78 | 35 | vmmemwsl=1126 system=126 svchost=105 | 0.22 | 8072 | 228 | 50.9 | 100
+12:33:03 | 79 | 50 | vmmemwsl=850 system=41 msrdc=20 | 10.69 | 6886 | 256 | 54.9 | 100
+12:34:09 | 73 | 5 | system=43 code=27 vmmemwsl=27 | 4.05 | 9337 | 129 | 38.9 | 100
+12:35:15 | 72 | 3 | msedgewebview2=13 vmmemwsl=6 svchost=3 | 1.40 | 9365 | 129 | 37.9 | 100
+12:36:21 | 79 | 40 | vmmemwsl=1217 system=68 razer synapse service=37 | 5.20 | 6962 | 256 | 45.9 | 100
+12:37:28 | 78 | 36 | memory compression=59 system=51 vmmemwsl=39 | 8.12 | 9292 | 133 | 43.9 | 100
+12:38:34 | 71 | 3 | cefsharp.browsersubprocess=8 system=5 vmmemwsl=5 | 2.78 | 9368 | 130 | 37.9 | 100
+12:39:40 | 76 | 10 | system=46 code=21 memory compression=12 | 1.04 | 9379 | 130 | 37.9 | 100
+12:40:46 | 79 | 61 | vmmemwsl=881 msrdc=22 system=10 | 5.66 | 6906 | 256 | 50.9 | 100
+12:41:52 | 75 | 9 | memory compression=23 system=11 vmmemwsl=11 | 9.52 | 9258 | 139 | 41.9 | 100
+12:42:58 | 71 | 3 | system=46 cefsharp.browsersubprocess=6 svchost=6 | 3.06 | 9343 | 136 | 37.9 | 100
+12:44:04 | 75 | 7 | system=51 memory compression=44 vmmemwsl=22 | 1.06 | 9372 | 136 | 38.9 | 100
+12:45:11 | 79 | 53 | vmmemwsl=834 msrdc=27 system=18 | 2.64 | 6954 | 254 | 51.9 | 100
+12:46:16 | 72 | 3 | system=41 memory compression=17 cefsharp.browsersubprocess=10 | 4.91 | 9301 | 144 | 41.9 | 100
+12:47:22 | 74 | 5 | system=30 vmmemwsl=9 cefsharp.browsersubprocess=8 | 1.98 | 9334 | 141 | 37.9 | 100
+12:48:28 | 71 | 3 | system=54 cefsharp.browsersubprocess=13 msmpeng=4 | 0.86 | 9373 | 141 | 37.9 | 100
+12:49:35 | 79 | 48 | vmmemwsl=793 system=26 cefsharp.browsersubprocess=15 | 8.41 | 6921 | 254 | 52.9 | 100
+12:50:41 | 74 | 5 | system=57 vmmemwsl=9 svchost=5 | 4.62 | 9328 | 144 | 39.9 | 100
+12:51:47 | 73 | 4 | system=11 cefsharp.browsersubprocess=10 vmmemwsl=8 | 1.71 | 9373 | 141 | 37.9 | 100
+12:52:53 | 74 | 5 | cefsharp.browsersubprocess=6 system=6 vmmemwsl=5 | 0.61 | 9376 | 141 | 37.9 | 100
+12:53:59 | 79 | 48 | vmmemwsl=819 msrdc=12 system=12 | 8.21 | 6825 | 256 | 52.9 | 100
+12:55:05 | 74 | 6 | system=18 vmmemwsl=16 memory compression=14 | 4.39 | 9324 | 150 | 39.9 | 100
+12:56:11 | 72 | 3 | cefsharp.browsersubprocess=16 overwolf=6 vmmemwsl=5 | 1.64 | 9377 | 147 | 37.9 | 100
+12:57:17 | 73 | 4 | cefsharp.browsersubprocess=12 vmmemwsl=7 system=5 | 0.79 | 9381 | 147 | 37.9 | 100
+12:58:23 | 75 | 6 | system=49 memory compression=17 vmmemwsl=9 | 5.43 | 9327 | 134 | 39.9 | 100
+12:59:30 | 79 | 58 | vmmemwsl=875 wmiprvse=60 system=45 | 7.76 | 6913 | 251 | 52.9 | 100
+13:00:36 | 75 | 7 | memory compression=19 vmmemwsl=8 wmiprvse=8 | 5.93 | 9327 | 132 | 41.9 | 100
+13:01:42 | 72 | 3 | cefsharp.browsersubprocess=11 vmmemwsl=6 cefsharp.browsersubprocess=5 | 2.36 | 9358 | 129 | 37.9 | 100
+13:02:48 | 76 | 10 | memory compression=57 system=46 svchost=8 | 0.80 | 9362 | 129 | 38.9 | 100
+13:03:54 | 79 | 51 | vmmemwsl=805 msrdc=21 cefsharp.browsersubprocess=13 | 13.17 | 6889 | 252 | 51.9 | 100
+13:05:01 | 72 | 3 | system=46 vmmemwsl=10 cefsharp.browsersubprocess=7 | 9.34 | 9325 | 137 | 40.9 | 100
+13:06:07 | 74 | 6 | cefsharp.browsersubprocess=11 vmmemwsl=6 system=4 | 3.19 | 9369 | 134 | 38.9 | 100
+13:07:13 | 75 | 9 | system=30 cefsharp.browsersubprocess=11 vmmemwsl=7 | 1.11 | 9375 | 134 | 37.9 | 100
+13:08:19 | 79 | 53 | vmmemwsl=839 system=80 code=19 | 5.01 | 6907 | 254 | 53.9 | 100
+13:09:25 | 71 | 3 | cefsharp.browsersubprocess=11 system=8 vmmemwsl=5 | 3.20 | 9332 | 142 | 39.9 | 100
+13:10:31 | 74 | 6 | vmmemwsl=18 system=9 cefsharp.browsersubprocess=3 | 1.25 | 9328 | 139 | 38.9 | 100
+13:11:38 | 77 | 22 | epicwebhelper=98 system=53 epicgameslauncher=28 | 0.42 | 9347 | 139 | 44.9 | 100
+13:12:44 | 75 | 7 | system=24 epicgameslauncher=6 cefsharp.browsersubprocess=5 | 7.77 | 9326 | 139 | 42.9 | 100
+13:13:50 | 79 | 61 | vmmemwsl=975 msrdc=18 cefsharp.browsersubprocess=15 | 18.55 | 6862 | 260 | 52.9 | 100
+13:14:56 | 75 | 6 | system=30 memory compression=21 cefsharp.browsersubprocess=14 | 11.24 | 9327 | 142 | 42.9 | 100
+13:16:02 | 74 | 6 | vmmemwsl=12 cefsharp.browsersubprocess=8 epicgameslauncher=7 | 3.87 | 9324 | 139 | 38.9 | 100
+13:17:08 | 72 | 4 | system=35 cefsharp.browsersubprocess=10 vmmemwsl=5 | 1.45 | 9347 | 139 | 37.9 | 100
+13:18:15 | 79 | 48 | vmmemwsl=795 msrdc=19 system=18 | 10.84 | 6904 | 257 | 51.9 | 100
+13:19:21 | 71 | 3 | system=30 memory compression=26 cefsharp.browsersubprocess=8 | 10.61 | 9322 | 131 | 41.9 | 100
+13:20:28 | 73 | 4 | system=7 vmmemwsl=5 svchost=5 | 3.61 | 9358 | 128 | 38.9 | 100
+13:21:33 | 73 | 5 | system=26 cefsharp.browsersubprocess=12 overwolf=5 | 1.25 | 9360 | 128 | 37.9 | 100
+13:22:40 | 78 | 45 | vmmemwsl=757 msrdc=13 cefsharp.browsersubprocess=12 | 5.64 | 6898 | 255 | 51.9 | 100
+13:23:46 | 75 | 6 | vmmemwsl=1176 cefsharp.browsersubprocess=16 system=7 | 5.22 | 8054 | 238 | 45.9 | 100
+13:24:52 | 79 | 51 | vmmemwsl=833 msrdc=15 system=13 | 10.60 | 6885 | 264 | 53.9 | 100
+13:25:59 | 76 | 12 | vmmemwsl=38 code=22 code=13 | 3.76 | 9360 | 141 | 40.9 | 100
+13:27:05 | 77 | 25 | system=298 epiconlineservicesinstallhelper=101 epicwebhelper=39 | 1.23 | 9356 | 141 | 46.9 | 100
+13:28:12 | 79 | 79 | vmmemwsl=981 system=258 epiconlineservicesinstallhelper=83 | 16.36 | 7169 | 261 | 52.9 | 100
+13:29:20 | 79 | 74 | vmmemwsl=841 system=331 epiconlineservicesinstallhelper=88 | 18.57 | 6944 | 253 | 59.9 | 100
+13:30:27 | 77 | 24 | system=244 epiconlineservicesinstallhelper=85 epicgameslauncher=29 | 8.19 | 9308 | 141 | 49.9 | 100
+13:31:33 | 77 | 24 | system=155 epiconlineservicesinstallhelper=35 epicgameslauncher=26 | 2.80 | 9331 | 138 | 44.9 | 100
+13:32:40 | 79 | 68 | vmmemwsl=743 system=296 epiconlineservicesinstallhelper=81 | 1.90 | 7959 | 241 | 54.9 | 100
+13:33:48 | 79 | 75 | vmmemwsl=829 system=290 epiconlineservicesinstallhelper=69 | 11.58 | 6942 | 256 | 59.9 | 100
+13:34:54 | 78 | 27 | system=254 epiconlineservicesinstallhelper=106 epicgameslauncher=28 | 6.46 | 9308 | 134 | 49.9 | 100

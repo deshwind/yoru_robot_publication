@@ -180,3 +180,79 @@
 12:06:53 [gentle]   thermal zone during the run: peak 55.9 C
 12:06:53 [gentle] session end after 48 min: 10 run(s) ok this session; 0 of 30 still to do; reason: all planned runs done
 12:07:17 [phaseC] hold_s1 set complete: 30/30 ok. Windows restored: max processor state AC 100 %, boost mode AC 2 (Aggressive; original AC value inferred from DC, see 11:1x entry).
+12:09:08 [git] Phase C hold_s1 (30 runs) write-up committed and pushed 9e09a53 on phase-c
+12:15:42 [watchdog] health OK; idle; hold_s1 30/30 done and pushed; waiting for user (merge phase-c? stop watchdog?)
+12:27:12 [git] phase-c fast-forwarded into main (61708bb) and pushed
+12:27:26 [phaseC] next: reset_first (H,C,A x 0-9) - one turbo-off 1-h session starting ~12:36 (30 min rest after the 12:06 session end, per the laptop rule)
+12:30:42 [watchdog] health OK; resting until the reset_first session at ~12:36
+12:31:48 [phaseC] user: start now - scheduled 12:36 start cancelled; launching reset_first session immediately (rest was 26 min instead of 30)
+12:31:48 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+12:31:50 [gentle] session start: tag=aware_reset_first, 30 of 30 runs to do; budget 60 min, cool-down 120 s, stop if CPU performance < 70 % while busy
+12:31:50 [gentle] run 1/30: H seed 0
+12:32:51 [phaseC] reset_first session running (turbo off); first run passed the guard: 'compliance_aware_approach=reset_first, frame_topics=2', 'comply_s1_fallback=off'. Expected from the Oct replay: H complied in S2 (robot approaches, then waits for the compliance reset), C target_lost S2, A complied S3.
+12:34:07 [gentle]   ok: complied S2 at 46.9 s sim, RTF 0.747
+12:34:07 [gentle]   thermal zone during the run: peak 54.9 C
+12:34:07 [gentle]   cool-down 120 s
+12:36:07 [gentle] run 2/30: H seed 1
+12:38:22 [gentle]   ok: complied S2 at 46.9 s sim, RTF 0.772
+12:38:22 [gentle]   thermal zone during the run: peak 45.9 C
+12:38:22 [gentle]   cool-down 120 s
+12:40:22 [gentle] run 3/30: H seed 2
+12:42:37 [gentle]   ok: complied S2 at 46.9 s sim, RTF 0.775
+12:42:37 [gentle]   thermal zone during the run: peak 50.9 C
+12:42:37 [gentle]   cool-down 120 s
+12:44:37 [gentle] run 4/30: H seed 3
+12:45:46 [watchdog] health OK; reset_first 3 done (H 0-2 complied S2), H/3 running; peak 54.9 C; passive 100 %
+12:46:51 [gentle]   ok: complied S2 at 47.5 s sim, RTF 0.779
+12:46:51 [gentle]   thermal zone during the run: peak 51.9 C
+12:46:51 [gentle]   cool-down 120 s
+12:48:51 [gentle] run 5/30: H seed 4
+12:51:05 [gentle]   ok: complied S2 at 46.7 s sim, RTF 0.776
+12:51:05 [gentle]   thermal zone during the run: peak 52.9 C
+12:51:05 [gentle]   cool-down 120 s
+12:53:05 [gentle] run 6/30: H seed 5
+12:55:19 [gentle]   ok: complied S2 at 46.9 s sim, RTF 0.776
+12:55:19 [gentle]   thermal zone during the run: peak 52.9 C
+12:55:19 [gentle]   cool-down 120 s
+12:57:19 [gentle] run 7/30: H seed 6
+13:00:51 [watchdog] health OK; reset_first 6 done (H 0-5 complied S2); H/6 attempt 1 nav2_not_ready (no lifecycle manager active by 28 s, no map_server timeout logged), retry running; peak 54.9 C, passive 100 %
+13:01:14 [gentle]   ok: complied S2 at 47.5 s sim, RTF 0.805
+13:01:14 [gentle]   thermal zone during the run: peak 52.9 C
+13:01:14 [gentle]   cool-down 120 s
+13:03:14 [gentle] run 8/30: H seed 7
+13:05:28 [gentle]   ok: complied S2 at 46.9 s sim, RTF 0.78
+13:05:28 [gentle]   thermal zone during the run: peak 51.9 C
+13:05:28 [gentle]   cool-down 120 s
+13:07:28 [gentle] run 9/30: H seed 8
+13:09:43 [gentle]   ok: complied S2 at 46.9 s sim, RTF 0.768
+13:09:43 [gentle]   thermal zone during the run: peak 53.9 C
+13:09:43 [gentle]   cool-down 120 s
+13:11:43 [gentle] run 10/30: H seed 9
+13:15:38 [gentle]   ok: complied S2 at 46.9 s sim, RTF 0.8
+13:15:38 [gentle]   thermal zone during the run: peak 52.9 C
+13:15:38 [gentle]   cool-down 120 s
+13:15:43 [watchdog] health OK
+13:15:48 [watchdog] reset_first H complete 10/10 complied S2; H/9 attempt 1 failed (), retry ok; C next; peak 54.9 C
+13:15:56 [watchdog] correction: H/9 attempt 1 status was nav2_not_ready (no lifecycle manager active by 28 s); retry ok complied S2 at 46.9 s, RTF 0.8
+13:17:38 [gentle] run 11/30: C seed 0
+13:19:58 [gentle]   ok: target_lost S2 at 53.0 s sim, RTF 0.787
+13:19:58 [gentle]   thermal zone during the run: peak 51.9 C
+13:19:58 [gentle]   cool-down 120 s
+13:21:58 [gentle] run 12/30: C seed 1
+13:25:57 [gentle]   ok: target_lost S2 at 51.8 s sim, RTF 0.827
+13:25:57 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+13:25:57 [gentle]   thermal zone during the run: peak 53.9 C
+13:25:57 [gentle]   cool-down 120 s
+13:27:57 [gentle] run 13/30: C seed 2
+13:30:33 [gentle]   ok: target_lost S2 at 54.1 s sim, RTF 0.671
+13:30:33 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+13:30:33 [gentle]   thermal zone during the run: peak 59.9 C
+13:30:33 [gentle]   cool-down 120 s
+13:30:50 [watchdog] health OK; reset_first 13 done (H 10/10 complied S2; C 0-2 target_lost S2); C/1 attempt 1 nav2_not_ready, retry ok; C/2 RTF 0.671; peak 59.9 C at 13:29; passive 100 %; last run (C/3) starts ~13:32
+13:32:33 [gentle] run 14/30: C seed 3
+13:35:01 [gentle]   ok: target_lost S2 at 51.9 s sim, RTF 0.703
+13:35:01 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+13:35:01 [gentle]   thermal zone during the run: peak 59.9 C
+13:35:01 [gentle] session end after 63 min: 14 run(s) ok this session; 16 of 30 still to do; reason: session time budget used (60 min)
+13:35:01 [turbo] restored: Current AC Power Setting Index: 0x00000002
+13:35:24 [phaseC] reset_first session 1 ended 13:35 (60 min budget): 14 ok (H 0-9, C 0-3); 16 to do (C 4-9, A 0-9); turbo restored automatically (boost 2, max 100 %)
