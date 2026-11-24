@@ -31,6 +31,7 @@ for i in $(seq 1 "$SESSIONS"); do
     if [ -e "$STOP" ]; then log "STOP file present: campaign ended before session $i"; break; fi
     log "session $i/$SESSIONS: $left runs to do"
     bash evaluation/scripts/run_session_turbo_off.sh "$@"
+    bash evaluation/scripts/backup_to_d.sh > /dev/null 2>&1   # mirror to D:\ after every session
     ending=$(grep '\[gentle\] session end' "$LIVE" | tail -1)
     case "$ending" in
         *"all planned runs done"*) log "all planned runs done"; break ;;
