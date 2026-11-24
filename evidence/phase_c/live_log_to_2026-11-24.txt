@@ -493,3 +493,7 @@
 15:58:55 [campaign] end: 8 runs still to do
 15:59:12 [autosave] process 1499 ended: archiving recordings, committing, pushing, backing up
 28 archives, 10 file(s) written or updated; raw 1657 MB -> 290 MB
+15:59:31 [autosave] committed 13fa24c
+15:59:40 [autosave] pushed phase-c 13fa24c
+15:59:40 [autosave] D:\ backup done
+15:59:47 [backup] D:\ mirror updated in 16 s (2.3G, 13fa24c Auto-save after campaign (2026-11-24 15:59:31): recordings archived, live log copied)

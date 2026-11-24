@@ -22,7 +22,7 @@ the files listed. Where something has **not** been measured, it says so.
 | 7 Ablation | offline ablation **final** (E6.3); node flags implemented and tested in a pending patch, **not yet applied** (no ablation runs in Gazebo) | [`phase6/`](phase6/) |
 | Offline extensions | **final** (300 runs): [deployment thresholds, sustained rule, outcome vs truth](#final-results-300-runs) | [`evaluation/results/offline_extensions/`](../evaluation/results/offline_extensions/) |
 | Extension A: FSM design variants | implemented, unit-tested, replay-validated on the 300 baseline bags; **not yet run in Gazebo** | [section](#extension-a-fsm-design-variants-2026-10-15), [`evaluation/results/fsm_replay/`](../evaluation/results/fsm_replay/) |
-| Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended. Runner support (23 tests) and gentle sessions (17 tests) done. **Phase C `hold_s1` complete (30 runs): H fixed in 10/10 (complied S1 instead of target_lost S2), C 10/10 and A 10/10 unchanged. `reset_first` complete (30 runs): H 10/10 complied S2, but the robot still drives about 1.4 m; C 10/10 and A 10/10 unchanged. `both` 9/30 (H complied S1, like hold_s1)**; rest of `both` not run yet; Nav2 start-up retries traced to DDS-domain reuse (fix from the next session) | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
+| Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended. Runner support (23 tests) and gentle sessions (17 tests) done. **Phase C `hold_s1` complete (30 runs): H fixed in 10/10 (complied S1 instead of target_lost S2), C 10/10 and A 10/10 unchanged. `reset_first` complete (30 runs): H 10/10 complied S2, but the robot still drives about 1.4 m; C 10/10 and A 10/10 unchanged. `both` 22/30 (H complied S1 like hold_s1; C 10/10, A 2/2 unchanged)**; A 2–9 of `both` still to do. Nav2 start-up retries: lost lifecycle replies in localization (stuck, not slow), not the DDS domain | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
 | Same laptop, new OS (after the SSD slot failure) | set up; 2 set-up problems fixed (clock steps, CPU threads); **reproduction: 45 / 45 outcomes match the baseline** (3 seeds × 15 scenarios); speed depends on background load; baseline bags not available | [section](#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties), [`machine_change/`](machine_change/), [`evaluation/results/repro_wsl/`](../evaluation/results/repro_wsl/) |
 
 **Final numbers, in one place:** [E5.3](#e53-final-results-300-valid-runs) (outcomes, timing, proximity),
@@ -1370,55 +1370,100 @@ monitor: [`phase_c/host_monitor_2026-11-23.log`](phase_c/host_monitor_2026-11-23
 [`phase_c/host_monitor_2026-11-24.log`](phase_c/host_monitor_2026-11-24.log).
 
 
-### Phase C, third variant set: `compliance_aware_approach = both` (2026-11-24, partial)
+### Phase C, third variant set: `compliance_aware_approach = both` (2026-11-24, partial: 22 of 30)
 
-**What was run.**
-- **Campaign:** 2 sessions planned, started 11:37 with [`run_campaign.sh`](../evaluation/scripts/run_campaign.sh).
-  Turbo off, 120 s cool-down plus until ≤ 65 °C, thermal stop at 88 °C.
-- **Stopped at the user's request at 12:22**, after the run in progress (STOP file). The laptop was shut
-  down for the day.
-- **Runs:** **9 of 30 valid: H seeds 0–3 and 5–9.** H/4 failed on both attempts and is still to do. All
-  of C and A are still to do. The next campaign resumes them.
+**What was run.** Two turbo-off campaign sessions on 24 Nov, with [`run_campaign.sh`](../evaluation/scripts/run_campaign.sh).
+Cool-down 120 s plus until ≤ 65 °C; thermal stop at 88 °C.
+
+| Session | Runs | Ended |
+|---|---|---|
+| 11:37–12:22 | H 0–3, H 5–9 (H/4 failed twice) | STOP file: the user shut the laptop down for the day |
+| 14:58–15:58, after a reboot (started once Windows had settled) | H 4, C 0–9, A 0–1 | daily limit (3 one-hour sessions a day) |
+
+- **Valid runs:** 22 of 30. A seeds 2–9 are still to do.
 - **Run set and code:** `aware_both`, code fingerprint `7310e62f04ee1977`.
 - **Configuration guard:** every run printed `compliance_aware_approach=both, frame_topics=2`.
 - **Data:** [`evaluation/results/phase_c/aware_both/`](../evaluation/results/phase_c/aware_both/).
+- The second session ended with the first real use of the **safety net**
+  ([`after_campaign.sh`](../evaluation/scripts/after_campaign.sh)). Within a minute, with no one
+  involved, it archived the recordings, committed (`13fa24c`), pushed and backed up to D:\.
 
-**Results so far (H only).**
-- **complied, S1 in 9/9** (baseline: target_lost, S2). This is the same behaviour as `hold_s1`:
-  escalation depth 1, **no approach started**, outcome at 46.9–47.5 s.
-- YOLO rate on cctv1: 4.98–5.01 Hz.
-- As expected, the `hold_s1` part of `both` acts first in H, so the robot stays at its base.
+**Results so far**
 
-**Failures and odd events.**
-- **4 failed attempts in 13, all `nav2_not_ready`:** H/1 #1, H/4 #1 and #2, H/9 #1. Three of the four
-  ran on **DDS domain 61**, the fourth (H/4 #2) on 62.
-- **Cause, as far as the data shows.**
-  - A gentle session calls `run_batch.py` once per run, so every first attempt ran on domain 61,
-    directly after the previous run on the same domain had been shut down.
-  - Across Phase C up to this point: **12 `nav2_not_ready` in 78 attempts, 11 of them in 66 attempts on
-    domain 61 (17 %)**.
-  - The 45-run reproduction, in batch mode, rotated through 40 domains: **2 failures in 47 (4 %)**.
-  - The typical log line is `failed to send response to /map_server/change_state (timeout)`. Nav2's
-    lifecycle start-up lost a service reply, which is more likely with stale Fast DDS state (shared
-    memory of killed processes; 135 files at the time) and under start-up load (turbo off).
-  - Ruled out: temperature (failures at about 50 °C), cool-down length (failures with 0 s and 120 s)
-    and the variant (all three modes).
-- **Fix** (user-approved 12:05, commit `ae49843`), to take effect from the next session:
-  - `run_batch.py --domain-offset`; with the default 0, domains are unchanged.
-  - `gentle_batch.py` passes a rotating offset, so consecutive runs use different domains (60–99), and
-    runs `fastdds shm clean` (zombie segments only) before each run.
-  - Infrastructure only, with no effect on simulated behaviour. The 9 runs above predate it.
-  - Whether it lowers the failure rate is to be checked in the next sessions.
-- **Heat.** The thermal zone peaked at **58.9 °C**, with the passive limit at 100 % and the CPU at
-  ≤ 79 % throughout (turbo off). RTF 0.753–0.812.
-- **Operations on 24 Nov.**
-  - **Phone updates:** the user followed the session on their phone (Claude Code Remote Control), with a
-    push notification every 15 minutes.
-  - **Safety net:** [`after_campaign.sh`](../evaluation/scripts/after_campaign.sh) archives recordings,
-    commits, pushes and backs up to D:\ when a campaign ends, in case the assistant is unavailable. It
-    was disarmed for the manual wrap-up.
-  - **D:\ mirror:** [`backup_to_d.sh`](../evaluation/scripts/backup_to_d.sh) keeps a mirror of the whole
-    project on a separate USB SSD.
+| Scenario | Runs | Baseline | `both` |
+|---|---|---|---|
+| **H** | 10 | target_lost, S2 | **complied, S1 (10/10)**, escalation depth 1, no approach started, outcome at 46.9–47.5 s: the same as `hold_s1` |
+| C | 10 | target_lost, S2 | target_lost, S2 (10/10) ✓ |
+| A | 2 | complied, S3 | complied, S3 (2/2) ✓ |
+
+- **Timing:** outcome-time differences from the baseline have a median of +0.1 s (C) and −0.05 s (A).
+- **C/7 is +0.7 s under every variant** (`hold_s1`, `reset_first` and `both`). It is a property of that
+  seed on the WSL set-up, not of the variants.
+- **YOLO rate on cctv1:** H 4.98–5.01 Hz, C 4.42–4.57 Hz, A 5.00 Hz.
+- **RTF:** 0.753–0.827 (median 0.794).
+- **H:** in `both`, the `hold_s1` part acts first, so the robot stays at its base.
+
+#### Nav2 start-up failures: the DDS-domain explanation was wrong; the actual cause
+
+**What was believed.**
+- **Hypothesis (12:05):** after the first session, I attributed the higher `nav2_not_ready` rate of the
+  gentle sessions to the reuse of DDS domain 61. Evidence:
+  - Phase C: 11 failures in 66 attempts on domain 61 (17 %);
+  - batch mode: 2 failures in 47 over 40 domains.
+- **Fix:** commit `ae49843` rotates the domain per run and cleans stale Fast DDS shared memory.
+
+**What the second session showed.** The fix is in effect: the runs used domains 75, 78, 81, 82, 84, 87
+and so on. **Three failures still occurred in 14 attempts** (C/1, C/4, C/6), with every retry valid. That
+is **no improvement**, so **domain reuse was not the cause**. The 4 % versus 17 % contrast with batch mode
+was most likely chance, given the small counts (2 in 47). The rotation is harmless and stays.
+
+**The actual cause.** [`nav2_startup_failures.py`](../evaluation/scripts/nav2_startup_failures.py)
+analysed all 19 `nav2_not_ready` attempts of 19–24 Nov:
+[`phase_c/nav2_startup_failures.txt`](phase_c/nav2_startup_failures.txt).
+
+- **17 of 19 show the same chain:**
+  1. The localization lifecycle manager is still "Configuring map_server" or "Configuring amcl".
+  2. That node logged `failed to send response to /map_server/change_state` (or `/amcl/change_state`).
+     Its reply to the lifecycle manager was **lost**.
+  3. The manager waits for that reply indefinitely, so localization never activates.
+  4. The navigation manager therefore stays at "Activating planner_server", which needs the map → odom
+    transform from localization.
+- **The other two:** the clock-step incident of 19 Nov, and one lost reply of
+  `/controller_manager/load_controller`.
+- **Stuck, not slow.**
+  - Valid runs (n = 127) had both managers active **22.1 s** after the launch (median; maximum 25.8 s).
+  - The failed attempts were still stuck when the runner gave up, **35–47 s** after the launch.
+  - Extending the runner's 28 s Nav2 deadline would therefore not help.
+- **Why replies get lost.** This matches a known weakness of ROS 2 Humble's default middleware (Fast DDS):
+  a service reply sent before the server's reply writer has matched the client's reader is dropped. With
+  about 40 nodes starting at once, that becomes more likely.
+- **Ruled out:** temperature (failures at about 50–69 °C), cool-down length (0 s and 120 s), turbo on or
+  off, the variant, and the DDS domain.
+
+**Consequence.** No change, for comparability: the 300 baseline runs used Fast DDS, and switching the
+middleware (for example to CycloneDDS) would change the system under test. The cost is time only:
+- about one attempt in six needs a retry of about a minute;
+- every retry so far has been valid;
+- the runner never counts a failed attempt.
+
+**Failed attempts in this set:** 7 in 29.
+- Morning: H/1 #1, H/4 #1 and #2, H/9 #1.
+- Afternoon: C/1 #1, C/4 #1, C/6 #1.
+- All `nav2_not_ready`. Logs: [`phase_c/failed_attempts/`](phase_c/failed_attempts/) (`both_*`).
+
+**Heat.** Thermal-zone peaks from each session's own monitor lines:
+- morning: 58.9 °C;
+- afternoon: **68.9 °C**, during the first run, about 2 minutes after the post-boot start;
+- 60–65 °C afterwards.
+
+The passive limit stayed at 100 % in both sessions, and the CPU at ≤ 79 % (turbo off, restored to
+boost mode 2 after each session).
+
+**Operations.**
+- The user followed both sessions on the phone (Claude Code Remote Control), with a push notification
+  every 15 minutes.
+- [`backup_to_d.sh`](../evaluation/scripts/backup_to_d.sh) mirrors the whole project to a separate
+  USB SSD after every commit and session.
 
 ---
 

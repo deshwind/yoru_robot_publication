@@ -1,0 +1,25 @@
+failed nav2_not_ready attempts found: 19
+('vidia/A/0__20261119T104445__superseded', ['localization', 'navigation'], (('localization', 'map_server'), 294), {}, {}, 184.1)
+('ld_s1/H/6__20261119T161110__superseded', ['localization', 'navigation'], None, {'localization': ('Configuring', 'amcl'), 'navigation': ('Activating', 'planner_server')}, {'/amcl/get_state': 1}, 36.3)
+('ld_s1/C/5__20261123T110252__superseded', ['localization', 'navigation'], None, {'localization': ('Configuring', 'map_server'), 'navigation': ('Activating', 'planner_server')}, {'/map_server/change_state': 1}, 41.5)
+('ld_s1/A/2__20261119T163652__superseded', ['navigation'], None, {'localization': ('Activating', 'amcl'), 'navigation': ('Activating', 'controller_server')}, {'/controller_manager/load_controller': 1}, 35.4)
+('ld_s1/A/0__20261119T163002__superseded', ['localization', 'navigation'], None, {'localization': ('Configuring', 'map_server'), 'navigation': ('Configuring', 'smoother_server')}, {'/map_server/change_state': 1, '/smoother_server/get_state': 1}, 35.4)
+('first/H/6__20261123T125903__superseded', ['localization', 'navigation'], None, {'localization': ('Configuring', 'amcl'), 'navigation': ('Activating', 'planner_server')}, {'/amcl/change_state': 1}, 40.4)
+('first/H/9__20261123T131327__superseded', ['localization', 'navigation'], None, {'localization': ('Configuring', 'amcl'), 'navigation': ('Activating', 'planner_server')}, {'/amcl/change_state': 1}, 41.9)
+('first/C/1__20261123T132342__superseded', ['localization', 'navigation'], None, {'localization': ('Configuring', 'map_server'), 'navigation': ('Activating', 'planner_server')}, {'/map_server/change_state': 1}, 40.3)
+('first/C/5__20261124T095813__superseded', ['localization', 'navigation'], None, {'localization': ('Configuring', 'map_server'), 'navigation': ('Activating', 'planner_server')}, {'/map_server/change_state': 1}, 39.0)
+('first/A/3__20261124T103551__superseded', ['localization', 'navigation'], None, {'localization': ('Configuring', 'amcl'), 'navigation': ('Activating', 'planner_server')}, {'/amcl/change_state': 1}, 40.4)
+('_both/H/9__20261124T121957__superseded', ['localization', 'navigation'], None, {'localization': ('Configuring', 'map_server'), 'navigation': ('Activating', 'planner_server')}, {'/map_server/change_state': 1}, 41.2)
+('_both/H/1__20261124T114312__superseded', ['localization', 'navigation'], None, {'localization': ('Configuring', 'amcl'), 'navigation': ('Activating', 'planner_server')}, {'/amcl/change_state': 1}, 41.3)
+('h/H/4__20261124T145828__nav2_not_ready', ['localization', 'navigation'], None, {'localization': ('Configuring', 'map_server'), 'navigation': ('Activating', 'planner_server')}, {'/map_server/change_state': 1}, 38.0)
+('_both/H/4__20261124T115737__superseded', ['localization', 'navigation'], None, {'localization': ('Configuring', 'map_server'), 'navigation': ('Activating', 'planner_server')}, {'/map_server/change_state': 1}, 41.4)
+('_both/C/6__20261124T153354__superseded', ['localization', 'navigation'], None, {'localization': ('Configuring', 'amcl'), 'navigation': ('Activating', 'planner_server')}, {'/amcl/change_state': 1}, 40.4)
+('_both/C/1__20261124T150852__superseded', ['localization', 'navigation'], None, {'localization': ('Configuring', 'amcl'), 'navigation': ('Activating', 'planner_server')}, {'/amcl/change_state': 1}, 40.8)
+('_both/C/4__20261124T152336__superseded', ['localization', 'navigation'], None, {'localization': ('Configuring', 'amcl'), 'navigation': ('Activating', 'planner_server')}, {'/amcl/change_state': 1}, 41.4)
+('-C7/1__20261119T133416__nav2_not_ready', ['localization', 'navigation'], None, {'localization': ('Configuring', 'map_server'), 'navigation': ('Activating', 'planner_server')}, {'/map_server/change_state': 1}, 47.3)
+('sl/B-C7/1__20261119T114900__superseded', ['localization', 'navigation'], None, {'localization': ('Configuring', 'map_server'), 'navigation': ('Activating', 'planner_server')}, {'/map_server/change_state': 1}, 43.1)
+
+managers not ready at abort: {'localization': 18, 'navigation': 19}
+most-waited-for service (manager, service): [(('localization', 'map_server'), 1)]
+
+successful runs: both managers active after 22.1 s wall (median), p90 23.3 s, max 25.8 s, n=127

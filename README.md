@@ -31,8 +31,8 @@ The baseline bags were lost with the failed drive (confirmed unrecoverable on 20
 - **Second set (complete, 30 runs):** `reset_first` also turns H into complied (S2), but the robot
   still drives about 1.4 m towards the person who has already stopped. C and A are unchanged
   (10 of 10 each). `hold_s1` is therefore the better fix for H.
-- **Third set (partial, 9 of 30):** `both` behaves like `hold_s1` on H (complied in S1, no approach);
-  C and A not run yet.
+- **Third set (partial, 22 of 30):** `both` behaves like `hold_s1` on H (complied in S1, no approach);
+  C unchanged (10 of 10), A unchanged so far (2 of 2).
 
 Details, failures and what is not run yet:
 [`evidence/README.md`](evidence/README.md#phase-b-human-model-under-skip_pa_warning-2026-11-19).
