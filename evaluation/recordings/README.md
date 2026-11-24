@@ -39,12 +39,13 @@ tar -xzf evaluation/recordings/misc/runs_invalid.tar.gz -C evaluation/data
 | aware_reset_first | [`aware_reset_first/A.tar.gz`](aware_reset_first/A.tar.gz) | 10 | 132.8 MB | 23.8 MB |
 | aware_reset_first | [`aware_reset_first/C.tar.gz`](aware_reset_first/C.tar.gz) | 10 | 95.0 MB | 17.0 MB |
 | aware_reset_first | [`aware_reset_first/H.tar.gz`](aware_reset_first/H.tar.gz) | 10 | 86.0 MB | 15.1 MB |
+| aware_both | [`aware_both/H.tar.gz`](aware_both/H.tar.gz) | 10 | 78.9 MB | 13.7 MB |
 | misc | [`misc/pilot.tar.gz`](misc/pilot.tar.gz) | 4 | 48.0 MB | 8.5 MB |
 | misc | [`misc/doc.tar.gz`](misc/doc.tar.gz) | 1 | 14.3 MB | 2.4 MB |
 | misc | [`misc/phase_b.tar.gz`](misc/phase_b.tar.gz) | 1 | 24.4 MB | 4.3 MB |
-| misc | [`misc/runs_invalid.tar.gz`](misc/runs_invalid.tar.gz) | 13 | 46.7 MB | 7.7 MB |
+| misc | [`misc/runs_invalid.tar.gz`](misc/runs_invalid.tar.gz) | 16 | 59.0 MB | 9.8 MB |
 
-Total: 124 run folders, 1423 MB raw, 249 MB compressed.
+Total: 137 run folders, 1515 MB raw, 265 MB compressed.
 
 Run sets: `repro_wsl` = the 45-run reproduction (scenarios × seeds 0–2); `aware_*` = Phase C
 FSM-variant sets; `baseline_wsl` = the baseline re-run (seeds 3–19); `misc` = pilot and

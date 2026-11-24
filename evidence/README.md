@@ -22,7 +22,7 @@ the files listed. Where something has **not** been measured, it says so.
 | 7 Ablation | offline ablation **final** (E6.3); node flags implemented and tested in a pending patch, **not yet applied** (no ablation runs in Gazebo) | [`phase6/`](phase6/) |
 | Offline extensions | **final** (300 runs): [deployment thresholds, sustained rule, outcome vs truth](#final-results-300-runs) | [`evaluation/results/offline_extensions/`](../evaluation/results/offline_extensions/) |
 | Extension A: FSM design variants | implemented, unit-tested, replay-validated on the 300 baseline bags; **not yet run in Gazebo** | [section](#extension-a-fsm-design-variants-2026-10-15), [`evaluation/results/fsm_replay/`](../evaluation/results/fsm_replay/) |
-| Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended. Runner support (23 tests) and gentle sessions (17 tests) done. **Phase C `hold_s1` complete (30 runs): H fixed in 10/10 (complied S1 instead of target_lost S2), C 10/10 and A 10/10 unchanged. `reset_first` complete (30 runs): H 10/10 complied S2, but the robot still drives about 1.4 m; C 10/10 and A 10/10 unchanged**; `both` not run yet | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
+| Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended. Runner support (23 tests) and gentle sessions (17 tests) done. **Phase C `hold_s1` complete (30 runs): H fixed in 10/10 (complied S1 instead of target_lost S2), C 10/10 and A 10/10 unchanged. `reset_first` complete (30 runs): H 10/10 complied S2, but the robot still drives about 1.4 m; C 10/10 and A 10/10 unchanged. `both` 9/30 (H complied S1, like hold_s1)**; rest of `both` not run yet; Nav2 start-up retries traced to DDS-domain reuse (fix from the next session) | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
 | Same laptop, new OS (after the SSD slot failure) | set up; 2 set-up problems fixed (clock steps, CPU threads); **reproduction: 45 / 45 outcomes match the baseline** (3 seeds × 15 scenarios); speed depends on background load; baseline bags not available | [section](#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties), [`machine_change/`](machine_change/), [`evaluation/results/repro_wsl/`](../evaluation/results/repro_wsl/) |
 
 **Final numbers, in one place:** [E5.3](#e53-final-results-300-valid-runs) (outcomes, timing, proximity),
@@ -1368,6 +1368,57 @@ checked after each session.
 Batch log for both variant sets: [`phase_c/variants_batch.log`](phase_c/variants_batch.log). Host
 monitor: [`phase_c/host_monitor_2026-11-23.log`](phase_c/host_monitor_2026-11-23.log) and
 [`phase_c/host_monitor_2026-11-24.log`](phase_c/host_monitor_2026-11-24.log).
+
+
+### Phase C, third variant set: `compliance_aware_approach = both` (2026-11-24, partial)
+
+**What was run.**
+- **Campaign:** 2 sessions planned, started 11:37 with [`run_campaign.sh`](../evaluation/scripts/run_campaign.sh).
+  Turbo off, 120 s cool-down plus until ≤ 65 °C, thermal stop at 88 °C.
+- **Stopped at the user's request at 12:22**, after the run in progress (STOP file). The laptop was shut
+  down for the day.
+- **Runs:** **9 of 30 valid: H seeds 0–3 and 5–9.** H/4 failed on both attempts and is still to do. All
+  of C and A are still to do. The next campaign resumes them.
+- **Run set and code:** `aware_both`, code fingerprint `7310e62f04ee1977`.
+- **Configuration guard:** every run printed `compliance_aware_approach=both, frame_topics=2`.
+- **Data:** [`evaluation/results/phase_c/aware_both/`](../evaluation/results/phase_c/aware_both/).
+
+**Results so far (H only).**
+- **complied, S1 in 9/9** (baseline: target_lost, S2). This is the same behaviour as `hold_s1`:
+  escalation depth 1, **no approach started**, outcome at 46.9–47.5 s.
+- YOLO rate on cctv1: 4.98–5.01 Hz.
+- As expected, the `hold_s1` part of `both` acts first in H, so the robot stays at its base.
+
+**Failures and odd events.**
+- **4 failed attempts in 13, all `nav2_not_ready`:** H/1 #1, H/4 #1 and #2, H/9 #1. Three of the four
+  ran on **DDS domain 61**, the fourth (H/4 #2) on 62.
+- **Cause, as far as the data shows.**
+  - A gentle session calls `run_batch.py` once per run, so every first attempt ran on domain 61,
+    directly after the previous run on the same domain had been shut down.
+  - Across Phase C up to this point: **12 `nav2_not_ready` in 78 attempts, 11 of them in 66 attempts on
+    domain 61 (17 %)**.
+  - The 45-run reproduction, in batch mode, rotated through 40 domains: **2 failures in 47 (4 %)**.
+  - The typical log line is `failed to send response to /map_server/change_state (timeout)`. Nav2's
+    lifecycle start-up lost a service reply, which is more likely with stale Fast DDS state (shared
+    memory of killed processes; 135 files at the time) and under start-up load (turbo off).
+  - Ruled out: temperature (failures at about 50 °C), cool-down length (failures with 0 s and 120 s)
+    and the variant (all three modes).
+- **Fix** (user-approved 12:05, commit `ae49843`), to take effect from the next session:
+  - `run_batch.py --domain-offset`; with the default 0, domains are unchanged.
+  - `gentle_batch.py` passes a rotating offset, so consecutive runs use different domains (60–99), and
+    runs `fastdds shm clean` (zombie segments only) before each run.
+  - Infrastructure only, with no effect on simulated behaviour. The 9 runs above predate it.
+  - Whether it lowers the failure rate is to be checked in the next sessions.
+- **Heat.** The thermal zone peaked at **58.9 °C**, with the passive limit at 100 % and the CPU at
+  ≤ 79 % throughout (turbo off). RTF 0.753–0.812.
+- **Operations on 24 Nov.**
+  - **Phone updates:** the user followed the session on their phone (Claude Code Remote Control), with a
+    push notification every 15 minutes.
+  - **Safety net:** [`after_campaign.sh`](../evaluation/scripts/after_campaign.sh) archives recordings,
+    commits, pushes and backs up to D:\ when a campaign ends, in case the assistant is unavailable. It
+    was disarmed for the manual wrap-up.
+  - **D:\ mirror:** [`backup_to_d.sh`](../evaluation/scripts/backup_to_d.sh) keeps a mirror of the whole
+    project on a separate USB SSD.
 
 ---
 

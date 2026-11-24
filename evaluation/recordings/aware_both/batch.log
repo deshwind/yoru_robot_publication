@@ -1,0 +1,249 @@
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 H seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/H/0
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.4s wall=70.1s rtf=0.819
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 H seed 1 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/H/1
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.2s wall=70.1s rtf=0.816
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 H seed 2 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/H/2
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.2s wall=68.1s rtf=0.84
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 H seed 3 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/H/3
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.8s wall=69.1s rtf=0.837
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 H seed 4 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/H/4
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.0s wall=70.1s rtf=0.813
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 H seed 5 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/H/5
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.5s wall=68.1s rtf=0.845
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 H seed 6 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/H/6
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.3s wall=37.0s rtf=0.764
+[run_batch] 1/1 H seed 6 attempt 2 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/H/6
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/variants/aware_hold_s1/H/6__20261119T161110__superseded
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.3s wall=66.1s rtf=0.867
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 H seed 7 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/H/7
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.4s wall=67.1s rtf=0.856
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 H seed 8 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/H/8
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.8s wall=67.1s rtf=0.862
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 H seed 9 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/H/9
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.7s wall=67.1s rtf=0.86
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 C seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/C/0
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=63.3s wall=73.1s rtf=0.866
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 C seed 1 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/C/1
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=61.9s wall=71.1s rtf=0.871
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 C seed 2 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/C/2
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=64.2s wall=74.1s rtf=0.867
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 C seed 3 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/C/3
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=62.6s wall=72.1s rtf=0.868
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 A seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/A/0
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.3s wall=36.0s rtf=0.785
+[run_batch] 1/1 A seed 0 attempt 2 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/A/0
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/variants/aware_hold_s1/A/0__20261119T163002__superseded
+[run_batch]   status=ok outcome=complied stage=S3 sim=86.3s wall=97.1s rtf=0.889
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 A seed 1 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/A/1
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.4s wall=97.1s rtf=0.879
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 A seed 2 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/A/2
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.5s wall=36.0s rtf=0.791
+[run_batch] 1/1 A seed 2 attempt 2 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/A/2
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/variants/aware_hold_s1/A/2__20261119T163652__superseded
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.0s wall=95.1s rtf=0.894
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 C seed 4 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/C/4
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=62.9s wall=84.1s rtf=0.748
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 C seed 5 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/C/5
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.7s wall=43.1s rtf=0.667
+[run_batch] 1/1 C seed 5 attempt 2 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/C/5
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/variants/aware_hold_s1/C/5__20261123T110252__superseded
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=62.8s wall=79.1s rtf=0.794
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 C seed 6 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/C/6
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=62.7s wall=78.1s rtf=0.803
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 C seed 7 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/C/7
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=65.9s wall=89.1s rtf=0.739
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 C seed 8 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/C/8
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=63.3s wall=80.1s rtf=0.79
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 C seed 9 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/C/9
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=63.2s wall=85.1s rtf=0.742
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 A seed 3 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/A/3
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.6s wall=104.1s rtf=0.822
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 A seed 4 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/A/4
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.6s wall=106.1s rtf=0.807
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 A seed 5 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/A/5
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.5s wall=105.1s rtf=0.813
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 A seed 6 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/A/6
+[run_batch]   status=startup_failed outcome=none stage= sim=0.0s wall=120.1s rtf=0.0
+[run_batch] 1/1 A seed 6 attempt 2 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/A/6
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/variants/aware_hold_s1/A/6__20261123T114947__superseded
+[run_batch]   status=ok outcome=complied stage=S3 sim=86.4s wall=104.1s rtf=0.83
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 A seed 7 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/A/7
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.1s wall=107.1s rtf=0.794
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 A seed 8 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/A/8
+[run_batch]   status=ok outcome=complied stage=S3 sim=84.9s wall=105.1s rtf=0.808
+[run_batch] tag=aware_hold_s1 runs=1 code=7310e62f04ee1977 weights={} variant=aware_hold_s1
+[run_batch] 1/1 A seed 9 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_hold_s1/A/9
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.5s wall=108.1s rtf=0.791
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 H seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/H/0
+[run_batch]   status=ok outcome=complied stage=S2 sim=57.6s wall=77.1s rtf=0.747
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 H seed 1 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/H/1
+[run_batch]   status=ok outcome=complied stage=S2 sim=57.2s wall=74.1s rtf=0.772
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 H seed 2 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/H/2
+[run_batch]   status=ok outcome=complied stage=S2 sim=57.4s wall=74.1s rtf=0.775
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 H seed 3 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/H/3
+[run_batch]   status=ok outcome=complied stage=S2 sim=57.7s wall=74.1s rtf=0.779
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 H seed 4 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/H/4
+[run_batch]   status=ok outcome=complied stage=S2 sim=56.7s wall=73.1s rtf=0.776
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 H seed 5 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/H/5
+[run_batch]   status=ok outcome=complied stage=S2 sim=57.5s wall=74.1s rtf=0.776
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 H seed 6 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/H/6
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.3s wall=42.0s rtf=0.673
+[run_batch] 1/1 H seed 6 attempt 2 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/H/6
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/variants/aware_reset_first/H/6__20261123T125903__superseded
+[run_batch]   status=ok outcome=complied stage=S2 sim=58.0s wall=72.1s rtf=0.805
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 H seed 7 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/H/7
+[run_batch]   status=ok outcome=complied stage=S2 sim=57.0s wall=73.1s rtf=0.78
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 H seed 8 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/H/8
+[run_batch]   status=ok outcome=complied stage=S2 sim=57.7s wall=75.1s rtf=0.768
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 H seed 9 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/H/9
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.5s wall=43.0s rtf=0.662
+[run_batch] 1/1 H seed 9 attempt 2 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/H/9
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/variants/aware_reset_first/H/9__20261123T131327__superseded
+[run_batch]   status=ok outcome=complied stage=S2 sim=56.9s wall=71.1s rtf=0.8
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 C seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/C/0
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=63.0s wall=80.1s rtf=0.787
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 C seed 1 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/C/1
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.5s wall=42.0s rtf=0.678
+[run_batch] 1/1 C seed 1 attempt 2 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/C/1
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/variants/aware_reset_first/C/1__20261123T132342__superseded
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=62.1s wall=75.1s rtf=0.827
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 C seed 2 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/C/2
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=64.5s wall=96.1s rtf=0.671
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 C seed 3 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/C/3
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=62.0s wall=88.2s rtf=0.703
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 C seed 4 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/C/4
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=62.6s wall=85.1s rtf=0.736
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 C seed 5 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/C/5
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.3s wall=40.1s rtf=0.706
+[run_batch] 1/1 C seed 5 attempt 2 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/C/5
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/variants/aware_reset_first/C/5__20261124T095813__superseded
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=62.6s wall=78.1s rtf=0.802
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 C seed 6 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/C/6
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=62.7s wall=80.1s rtf=0.783
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 C seed 7 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/C/7
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=66.2s wall=85.1s rtf=0.778
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 C seed 8 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/C/8
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=62.5s wall=79.1s rtf=0.79
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 C seed 9 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/C/9
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=63.5s wall=81.1s rtf=0.783
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 A seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/A/0
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.3s wall=103.1s rtf=0.827
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 A seed 1 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/A/1
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.1s wall=103.1s rtf=0.825
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 A seed 2 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/A/2
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.3s wall=103.1s rtf=0.827
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 A seed 3 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/A/3
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.5s wall=42.0s rtf=0.678
+[run_batch] 1/1 A seed 3 attempt 2 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/A/3
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/variants/aware_reset_first/A/3__20261124T103551__superseded
+[run_batch]   status=ok outcome=complied stage=S3 sim=86.3s wall=102.1s rtf=0.845
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 A seed 4 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/A/4
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.4s wall=106.1s rtf=0.805
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 A seed 5 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/A/5
+[run_batch]   status=ok outcome=complied stage=S3 sim=84.9s wall=102.1s rtf=0.831
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 A seed 6 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/A/6
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.4s wall=103.1s rtf=0.828
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 A seed 7 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/A/7
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.3s wall=104.1s rtf=0.819
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 A seed 8 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/A/8
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.8s wall=108.1s rtf=0.794
+[run_batch] tag=aware_reset_first runs=1 code=7310e62f04ee1977 weights={} variant=aware_reset_first
+[run_batch] 1/1 A seed 9 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/A/9
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.4s wall=105.1s rtf=0.812
+[run_batch] tag=aware_both runs=1 code=7310e62f04ee1977 weights={} variant=aware_both
+[run_batch] 1/1 H seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_both/H/0
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.3s wall=76.1s rtf=0.753
+[run_batch] tag=aware_both runs=1 code=7310e62f04ee1977 weights={} variant=aware_both
+[run_batch] 1/1 H seed 1 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_both/H/1
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.2s wall=43.0s rtf=0.655
+[run_batch] 1/1 H seed 1 attempt 2 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_both/H/1
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/variants/aware_both/H/1__20261124T114312__superseded
+[run_batch]   status=ok outcome=complied stage=S1 sim=58.0s wall=73.1s rtf=0.794
+[run_batch] tag=aware_both runs=1 code=7310e62f04ee1977 weights={} variant=aware_both
+[run_batch] 1/1 H seed 2 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_both/H/2
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.2s wall=73.1s rtf=0.783
+[run_batch] tag=aware_both runs=1 code=7310e62f04ee1977 weights={} variant=aware_both
+[run_batch] 1/1 H seed 3 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_both/H/3
+[run_batch]   status=ok outcome=complied stage=S1 sim=58.2s wall=74.1s rtf=0.786
+[run_batch] tag=aware_both runs=1 code=7310e62f04ee1977 weights={} variant=aware_both
+[run_batch] 1/1 H seed 4 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_both/H/4
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.6s wall=43.1s rtf=0.664
+[run_batch] 1/1 H seed 4 attempt 2 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_both/H/4
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/variants/aware_both/H/4__20261124T115737__superseded
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.0s wall=39.0s rtf=0.717
+[run_batch] tag=aware_both runs=1 code=7310e62f04ee1977 weights={} variant=aware_both
+[run_batch] 1/1 H seed 5 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_both/H/5
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.3s wall=74.1s rtf=0.773
+[run_batch] tag=aware_both runs=1 code=7310e62f04ee1977 weights={} variant=aware_both
+[run_batch] 1/1 H seed 6 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_both/H/6
+[run_batch]   status=ok outcome=complied stage=S1 sim=58.1s wall=73.1s rtf=0.795
+[run_batch] tag=aware_both runs=1 code=7310e62f04ee1977 weights={} variant=aware_both
+[run_batch] 1/1 H seed 7 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_both/H/7
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.7s wall=71.1s rtf=0.812
+[run_batch] tag=aware_both runs=1 code=7310e62f04ee1977 weights={} variant=aware_both
+[run_batch] 1/1 H seed 8 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_both/H/8
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.2s wall=74.1s rtf=0.772
+[run_batch] tag=aware_both runs=1 code=7310e62f04ee1977 weights={} variant=aware_both
+[run_batch] 1/1 H seed 9 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_both/H/9
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.1s wall=43.0s rtf=0.653
+[run_batch] 1/1 H seed 9 attempt 2 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_both/H/9
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/variants/aware_both/H/9__20261124T121957__superseded
+[run_batch]   status=ok outcome=complied stage=S1 sim=57.5s wall=73.1s rtf=0.787

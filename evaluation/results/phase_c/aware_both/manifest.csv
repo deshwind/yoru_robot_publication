@@ -1,0 +1,11 @@
+run_id,tag,scenario,seed,w_D,w_P,w_T,w_S,confirm_confidence,uncertain_confidence,ablation,status,outcome,outcome_stage,outcome_sim_t,expected_outcome,ground_truth,start_wall,end_wall,wall_s,sim_s,rtf,attempts,bag_ok,died_processes,code_sha256,run_dir,variant
+aware_both/H/0,aware_both,H,0,,,,,,,,ok,complied,S1,46.9,target_lost,violation,2026-11-24T11:37:12,2026-11-24T11:38:28,76.1,57.3,0.753,1,True,,7310e62f04ee1977,evaluation/data/variants/aware_both/H/0,aware_both
+aware_both/H/1,aware_both,H,1,,,,,,,,ok,complied,S1,47.1,target_lost,violation,2026-11-24T11:43:12,2026-11-24T11:44:25,73.1,58.0,0.794,2,True,,7310e62f04ee1977,evaluation/data/variants/aware_both/H/1,aware_both
+aware_both/H/2,aware_both,H,2,,,,,,,,ok,complied,S1,46.9,target_lost,violation,2026-11-24T11:47:25,2026-11-24T11:48:38,73.1,57.2,0.783,1,True,,7310e62f04ee1977,evaluation/data/variants/aware_both/H/2,aware_both
+aware_both/H/3,aware_both,H,3,,,,,,,,ok,complied,S1,47.5,target_lost,violation,2026-11-24T11:51:39,2026-11-24T11:52:53,74.1,58.2,0.786,1,True,,7310e62f04ee1977,evaluation/data/variants/aware_both/H/3,aware_both
+aware_both/H/4,aware_both,H,4,,,,,,,,nav2_not_ready,none,,,target_lost,violation,2026-11-24T11:57:37,2026-11-24T11:58:16,39.0,28.0,0.717,2,True,,7310e62f04ee1977,evaluation/data/variants/aware_both/H/4,aware_both
+aware_both/H/5,aware_both,H,5,,,,,,,,ok,complied,S1,46.9,target_lost,violation,2026-11-24T12:01:21,2026-11-24T12:02:35,74.1,57.3,0.773,1,True,,7310e62f04ee1977,evaluation/data/variants/aware_both/H/5,aware_both
+aware_both/H/6,aware_both,H,6,,,,,,,,ok,complied,S1,47.3,target_lost,violation,2026-11-24T12:05:35,2026-11-24T12:06:48,73.1,58.1,0.795,1,True,,7310e62f04ee1977,evaluation/data/variants/aware_both/H/6,aware_both
+aware_both/H/7,aware_both,H,7,,,,,,,,ok,complied,S1,46.9,target_lost,violation,2026-11-24T12:09:48,2026-11-24T12:10:59,71.1,57.7,0.812,1,True,,7310e62f04ee1977,evaluation/data/variants/aware_both/H/7,aware_both
+aware_both/H/8,aware_both,H,8,,,,,,,,ok,complied,S1,46.9,target_lost,violation,2026-11-24T12:13:59,2026-11-24T12:15:13,74.1,57.2,0.772,1,True,,7310e62f04ee1977,evaluation/data/variants/aware_both/H/8,aware_both
+aware_both/H/9,aware_both,H,9,,,,,,,,ok,complied,S1,46.9,target_lost,violation,2026-11-24T12:19:57,2026-11-24T12:21:10,73.1,57.5,0.787,2,True,,7310e62f04ee1977,evaluation/data/variants/aware_both/H/9,aware_both
