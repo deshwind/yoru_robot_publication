@@ -64,6 +64,14 @@ FRAME_TOPICS = ['/compliance/cctv1/tracked', '/compliance/cctv2/tracked']
 
 # ------------------------------------------------------------------ config
 
+def domain_for(index, attempt, offset=0):
+    """ROS_DOMAIN_ID of one attempt: 60-99, a different one for consecutive runs.
+    offset shifts the sequence; gentle_batch.py (one run per runner call, so index is
+    always 0) passes a rotating offset, because reusing one domain run after run went
+    with 3-4x more nav2_not_ready failures (evidence/README.md, Phase C, 2026-11-24)."""
+    return 60 + ((index + offset) * 3 + attempt) % 40
+
+
 def variant_settings(skip_pa=False, sustained_ratio=0.0, compliance_aware=''):
     """FSM design variants (Extension A) for one run set.
 
@@ -549,6 +557,8 @@ def main():
                     help='wall timeout = startup + max_sim_s / min_rtf')
     ap.add_argument('--nav2-deadline', type=float, default=28.0,
                     help='sim s by which Nav2 must report active (before the 30 s onset)')
+    ap.add_argument('--domain-offset', type=int, default=0,
+                    help='shift the ROS_DOMAIN_ID sequence (gentle_batch.py rotates it per run)')
     ap.add_argument('--max-startup-failures', type=int, default=3,
                     help='stop the batch after this many runs in a row fail to start')
     ap.add_argument('--dry-run', action='store_true')
@@ -612,7 +622,7 @@ def main():
                     print(f'[run_batch]   stale gazebo {stale_gazebo()}: killing before the run',
                           flush=True)
                     kill_stale_gazebo()
-                domain_id = 60 + (index * 3 + attempt) % 40
+                domain_id = domain_for(index, attempt, cli.domain_offset)
                 print(f'[run_batch] {index + 1}/{len(plan)} {scenario["id"]} seed {seed} '
                       f'attempt {attempt} (domain {domain_id}) -> {run_dir}', flush=True)
                 if os.path.isdir(run_dir):

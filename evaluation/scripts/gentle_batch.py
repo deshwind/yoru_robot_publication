@@ -166,6 +166,22 @@ def stop_reason(*, elapsed_min, max_minutes, failures, max_failures, throttle,
     return None
 
 
+def domain_offset(session_start, run_index):
+    """Offset for run_batch --domain-offset: consecutive runs of a session get consecutive
+    offsets (so different domains), and the start point moves with the clock so that the
+    next session does not begin on the domain the previous one ended on."""
+    return (int(session_start.timestamp()) // 60 + run_index) % 40
+
+
+def clean_fastdds_shm():
+    """Remove Fast DDS shared-memory segments and ports no live process holds
+    ('fastdds shm clean' only touches zombie files). Best effort."""
+    try:
+        subprocess.run(['fastdds', 'shm', 'clean'], capture_output=True, timeout=60, check=False)
+    except (OSError, subprocess.TimeoutExpired):
+        pass
+
+
 # ------------------------------------------------------------ the session
 
 def live(message):
@@ -243,9 +259,14 @@ def main():
         for i, (scenario, seed) in enumerate(todo):
             run_start = datetime.datetime.now()
             live(f'run {i + 1}/{len(todo)}: {scenario} seed {seed}')
+            # A fresh DDS domain for every run (rotating through 60-99, as a plain batch
+            # does) and no stale Fast DDS shared memory: reusing domain 61 run after run
+            # went with 3-4x more nav2_not_ready failures (2026-11-24)
+            clean_fastdds_shm()
             cmd = [sys.executable, '-u', os.path.join(rb.EVAL, 'scripts', 'run_batch.py'),
                    '--scenarios', scenario, '--seed-list', str(seed), '--skip-existing',
-                   '--out', cli.out, '--manifest', cli.manifest, *passthrough]
+                   '--out', cli.out, '--manifest', cli.manifest,
+                   '--domain-offset', str(domain_offset(session_start, i)), *passthrough]
             os.makedirs(cli.out, exist_ok=True)
             with open(os.path.join(cli.out, 'batch.log'), 'a', encoding='utf-8') as log:
                 subprocess.run(cmd, cwd=rb.ROOT, check=False, stdout=log,

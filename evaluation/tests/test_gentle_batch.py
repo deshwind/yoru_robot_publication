@@ -212,3 +212,25 @@ def test_only_the_current_monitors_lines_count(tmp_path):
     assert [v for _, v in temps] == [68.9, 43.9]
     samples = gb.monitor_samples(str(path), at('10:54:45'), at('10:59:29'))
     assert [p for _, p, _ in samples] == [79.0, 73.0]
+
+
+# ---------------- DDS domain rotation (2026-11-24: nav2_not_ready on a reused domain)
+
+def test_consecutive_runs_get_different_domains():
+    start = datetime.datetime(2026, 11, 24, 12, 37, 10)
+    domains = [rb.domain_for(0, 1, gb.domain_offset(start, i)) for i in range(40)]
+    assert len(set(domains)) == 40                      # a full cycle, no repeats
+    assert all(a != b for a, b in zip(domains, domains[1:]))
+    assert all(60 <= d <= 99 for d in domains)
+
+
+def test_retry_domain_differs_from_first_attempt():
+    start = datetime.datetime(2026, 11, 24, 12, 37, 10)
+    off = gb.domain_offset(start, 5)
+    assert rb.domain_for(0, 1, off) != rb.domain_for(0, 2, off)
+
+
+def test_batch_mode_domains_are_unchanged():
+    # run_batch without --domain-offset: same sequence as before the change
+    assert [rb.domain_for(i, 1) for i in range(4)] == [61, 64, 67, 70]
+    assert [60 + (i * 3 + 1) % 40 for i in range(4)] == [61, 64, 67, 70]
