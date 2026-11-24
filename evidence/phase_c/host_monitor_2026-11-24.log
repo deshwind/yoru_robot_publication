@@ -1,0 +1,69 @@
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files | thermal_zone_C | passive_limit%
+09:52:13 | 77 | 18 | vmmemwsl=1111 system=110 msedgewebview2=39 | 0.30 | 8139 | 145 | 61.9 | 100
+09:53:20 | 79 | 63 | vmmemwsl=804 system=38 msrdc=26 | 9.10 | 6957 | 186 | 62.9 | 100
+09:54:26 | 74 | 8 | memory compression=33 svchost=19 msrdc=13 | 3.88 | 9282 | 21 | 48.9 | 100
+09:55:32 | 75 | 9 | vmmemwsl=17 servicehost=12 svchost=11 | 1.38 | 9406 | 18 | 45.9 | 100
+09:56:38 | 79 | 39 | vmmemwsl=943 svchost=275 system=34 | 0.58 | 7992 | 156 | 53.9 | 100
+09:57:44 | 71 | 3 | memory compression=43 vmmemwsl=20 system=11 | 2.54 | 9366 | 34 | 46.9 | 100
+09:58:51 | 79 | 50 | vmmemwsl=844 msmpeng=19 system=19 | 8.41 | 6919 | 216 | 60.9 | 100
+09:59:57 | 72 | 3 | system=74 memory compression=13 vmmemwsl=9 | 8.07 | 9375 | 88 | 49.9 | 100
+10:01:03 | 76 | 8 | system=29 vmmemwsl=9 cefsharp.browsersubprocess=6 | 2.77 | 9425 | 85 | 47.9 | 100
+10:02:09 | 74 | 5 | vmmemwsl=11 svchost=9 msmpeng=8 | 1.26 | 9455 | 85 | 45.9 | 100
+10:03:15 | 79 | 48 | vmmemwsl=779 msrdc=22 audiodg=12 | 11.06 | 7083 | 240 | 61.9 | 100
+10:04:21 | 74 | 5 | system=41 vmmemwsl=11 msmpeng=5 | 6.07 | 9417 | 89 | 49.9 | 100
+10:05:28 | 76 | 9 | system=40 msmpeng=11 svchost=5 | 2.16 | 9451 | 86 | 48.9 | 100
+10:06:34 | 72 | 3 | system=33 servicehost=6 overwolf=5 | 0.67 | 9360 | 86 | 45.9 | 100
+10:07:41 | 79 | 49 | vmmemwsl=808 svchost=430 system=73 | 12.46 | 6891 | 240 | 61.9 | 100
+10:08:47 | 71 | 3 | system=40 cefsharp.browsersubprocess=11 vmmemwsl=8 | 7.19 | 9403 | 102 | 49.9 | 100
+10:09:53 | 74 | 6 | vmmemwsl=9 system=6 cefsharp.browsersubprocess=5 | 2.50 | 9441 | 99 | 46.9 | 100
+10:10:59 | 74 | 5 | svchost=36 cefsharp.browsersubprocess=9 servicehost=4 | 1.01 | 9442 | 99 | 44.9 | 100
+10:12:05 | 79 | 55 | vmmemwsl=824 system=27 cefsharp.browsersubprocess=19 | 4.86 | 6943 | 240 | 62.9 | 100
+10:13:11 | 72 | 3 | system=41 vmmemwsl=9 cefsharp.browsersubprocess=6 | 3.24 | 9402 | 109 | 48.9 | 100
+10:14:17 | 73 | 4 | system=26 cefsharp.browsersubprocess=8 vmmemwsl=5 | 1.53 | 9456 | 106 | 46.9 | 100
+10:15:23 | 71 | 3 | system=59 memory compression=32 vmmemwsl=17 | 0.68 | 9457 | 106 | 45.9 | 100
+10:16:30 | 79 | 49 | vmmemwsl=869 system=40 msrdc=18 | 8.51 | 6884 | 244 | 62.9 | 100
+10:17:36 | 73 | 5 | cefsharp.browsersubprocess=10 sdxhelper=8 vmmemwsl=5 | 4.61 | 9425 | 114 | 49.9 | 100
+10:18:42 | 71 | 2 | svchost=10 vmmemwsl=9 cefsharp.browsersubprocess=8 | 1.78 | 9465 | 111 | 47.9 | 100
+10:19:48 | 71 | 2 | system=42 cefsharp.browsersubprocess=9 msmpeng=4 | 0.70 | 9468 | 111 | 44.9 | 100
+10:20:54 | 79 | 49 | vmmemwsl=927 system=38 msrdc=15 | 6.12 | 6888 | 244 | 62.9 | 100
+10:22:00 | 74 | 6 | system=29 memory compression=24 servicehost=9 | 8.88 | 9389 | 126 | 50.9 | 100
+10:23:06 | 73 | 4 | svchost=5 cefsharp.browsersubprocess=5 vmmemwsl=4 | 3.20 | 9441 | 123 | 47.9 | 100
+10:24:12 | 74 | 4 | system=22 servicehost=6 vmmemwsl=5 | 1.26 | 9456 | 123 | 45.9 | 100
+10:25:18 | 79 | 50 | vmmemwsl=841 system=60 code=15 | 4.52 | 6962 | 244 | 61.9 | 100
+10:26:25 | 79 | 49 | vmmemwsl=801 msrdc=20 system=14 | 6.92 | 6962 | 244 | 64.9 | 100
+10:27:31 | 74 | 5 | system=18 msmpeng=6 svchost=5 | 2.40 | 9448 | 121 | 47.9 | 100
+10:28:37 | 75 | 7 | memory compression=61 servicehost=16 vmmemwsl=9 | 1.00 | 9447 | 121 | 45.9 | 100
+10:29:43 | 79 | 54 | vmmemwsl=747 system=34 msrdc=18 | 1.59 | 7006 | 241 | 57.9 | 100
+10:30:49 | 79 | 49 | vmmemwsl=817 msrdc=19 cefsharp.browsersubprocess=10 | 7.45 | 7007 | 244 | 65.9 | 100
+10:31:55 | 72 | 3 | cefsharp.browsersubprocess=5 vmmemwsl=5 svchost=3 | 3.04 | 9413 | 125 | 48.9 | 100
+10:33:01 | 74 | 5 | cefsharp.browsersubprocess=9 svchost=5 svchost=5 | 1.18 | 9453 | 122 | 46.9 | 100
+10:34:07 | 71 | 3 | system=33 vmmemwsl=8 cefsharp.browsersubprocess=7 | 0.44 | 9453 | 122 | 45.9 | 100
+10:35:13 | 72 | 3 | system=44 memory compression=19 cefsharp.browsersubprocess=8 | 4.61 | 9411 | 130 | 48.9 | 100
+10:36:20 | 79 | 56 | vmmemwsl=852 system=44 code=21 | 5.29 | 6976 | 261 | 62.9 | 100
+10:37:26 | 79 | 49 | vmmemwsl=778 code=25 cefsharp.browsersubprocess=17 | 8.03 | 7023 | 261 | 65.9 | 100
+10:38:32 | 72 | 3 | vmmemwsl=42 code=29 cefsharp.browsersubprocess=9 | 3.21 | 9360 | 133 | 48.9 | 100
+10:39:38 | 73 | 4 | system=16 cefsharp.browsersubprocess=9 vmmemwsl=8 | 1.08 | 9443 | 133 | 46.9 | 100
+10:40:45 | 78 | 32 | vmmemwsl=645 code=48 chrome=43 | 3.20 | 7481 | 232 | 55.9 | 100
+10:41:51 | 79 | 54 | vmmemwsl=906 msrdc=21 cefsharp.browsersubprocess=16 | 9.28 | 6958 | 250 | 65.9 | 100
+10:42:57 | 73 | 6 | system=49 vmmemwsl=26 code=11 | 5.32 | 9329 | 130 | 50.9 | 100
+10:44:03 | 74 | 7 | code=28 code=9 svchost=8 | 1.99 | 9363 | 127 | 48.9 | 100
+10:45:09 | 71 | 4 | code=19 code=16 code=16 | 0.75 | 9407 | 127 | 46.9 | 100
+10:46:16 | 79 | 51 | vmmemwsl=843 code=28 msrdc=12 | 9.37 | 6892 | 250 | 65.9 | 100
+10:47:22 | 73 | 4 | memory compression=22 vmmemwsl=11 code=11 | 8.93 | 9344 | 137 | 52.9 | 100
+10:48:28 | 73 | 7 | code=38 system=23 code=13 | 3.07 | 9397 | 134 | 48.9 | 100
+10:49:34 | 75 | 7 | system=30 msmpeng=26 code=9 | 1.20 | 9375 | 134 | 48.9 | 100
+10:50:40 | 79 | 52 | vmmemwsl=872 system=99 code=33 | 4.98 | 6892 | 250 | 64.9 | 100
+10:51:47 | 79 | 68 | vmmemwsl=1005 dllhost=55 code=42 | 9.91 | 9199 | 133 | 62.9 | 100
+10:52:53 | 78 | 18 | dllhost=53 code=33 code=33 | 4.32 | 9385 | 128 | 51.9 | 100
+10:53:59 | 73 | 4 | code=15 system=9 cefsharp.browsersubprocess=7 | 1.92 | 9370 | 128 | 49.9 | 100
+10:55:05 | 79 | 53 | vmmemwsl=1044 nvcontainer=59 msrdc=24 | 11.14 | 6849 | 251 | 64.9 | 100
+10:56:12 | 79 | 55 | vmmemwsl=868 system=67 dllhost=46 | 14.75 | 6804 | 251 | 68.9 | 100
+10:57:18 | 72 | 3 | system=23 cefsharp.browsersubprocess=6 vmmemwsl=5 | 5.87 | 9335 | 124 | 47.9 | 100
+10:58:24 | 73 | 4 | cefsharp.browsersubprocess=9 vmmemwsl=7 system=5 | 2.21 | 9404 | 121 | 43.9 | 100
+10:59:30 | 74 | 5 | msmpeng=44 wmiprvse=37 opushutil=32 | 0.74 | 9360 | 124 | 44.9 | 100
+11:00:36 | 79 | 54 | vmmemwsl=948 msrdc=22 dwm=21 | 9.90 | 6966 | 249 | 57.9 | 100
+11:01:42 | 76 | 12 | code=12 vmmemwsl=11 cefsharp.browsersubprocess=7 | 10.26 | 9366 | 125 | 45.9 | 100
+11:02:48 | 73 | 4 | system=36 cefsharp.browsersubprocess=9 claude=6 | 3.46 | 9416 | 122 | 42.9 | 100
+11:03:54 | 74 | 5 | cefsharp.browsersubprocess=11 msmpeng=9 claude=5 | 1.28 | 9420 | 122 | 40.9 | 100
+11:05:01 | 79 | 51 | vmmemwsl=833 cefsharp.browsersubprocess=24 claude=12 | 7.80 | 6939 | 247 | 54.9 | 100
+11:06:07 | 79 | 60 | vmmemwsl=39 system=15 code=13 | 10.65 | 9349 | 126 | 48.9 | 100

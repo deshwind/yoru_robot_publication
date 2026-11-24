@@ -22,7 +22,7 @@ the files listed. Where something has **not** been measured, it says so.
 | 7 Ablation | offline ablation **final** (E6.3); node flags implemented and tested in a pending patch, **not yet applied** (no ablation runs in Gazebo) | [`phase6/`](phase6/) |
 | Offline extensions | **final** (300 runs): [deployment thresholds, sustained rule, outcome vs truth](#final-results-300-runs) | [`evaluation/results/offline_extensions/`](../evaluation/results/offline_extensions/) |
 | Extension A: FSM design variants | implemented, unit-tested, replay-validated on the 300 baseline bags; **not yet run in Gazebo** | [section](#extension-a-fsm-design-variants-2026-10-15), [`evaluation/results/fsm_replay/`](../evaluation/results/fsm_replay/) |
-| Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended. Runner support (23 tests) and gentle sessions (17 tests) done. **Phase C `hold_s1` complete (30 runs): H fixed in 10/10 (complied S1 instead of target_lost S2), C 10/10 and A 10/10 unchanged. `reset_first` 14/30 (H 10/10 complied S2, the robot still drives about 1.4 m; C 4/4 unchanged)**; the rest of `reset_first` and all of `both` not run yet | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
+| Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended. Runner support (23 tests) and gentle sessions (17 tests) done. **Phase C `hold_s1` complete (30 runs): H fixed in 10/10 (complied S1 instead of target_lost S2), C 10/10 and A 10/10 unchanged. `reset_first` complete (30 runs): H 10/10 complied S2, but the robot still drives about 1.4 m; C 10/10 and A 10/10 unchanged**; `both` not run yet | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
 | Same laptop, new OS (after the SSD slot failure) | set up; 2 set-up problems fixed (clock steps, CPU threads); **reproduction: 45 / 45 outcomes match the baseline** (3 seeds × 15 scenarios); speed depends on background load; baseline bags not available | [section](#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties), [`machine_change/`](machine_change/), [`evaluation/results/repro_wsl/`](../evaluation/results/repro_wsl/) |
 
 **Final numbers, in one place:** [E5.3](#e53-final-results-300-valid-runs) (outcomes, timing, proximity),
@@ -1283,29 +1283,40 @@ Perception and results were the same in both groups:
   outcomes.
 
 
-### Phase C, second variant set: `compliance_aware_approach = reset_first` (2026-11-23, partial)
+### Phase C, second variant set: `compliance_aware_approach = reset_first` (2026-11-23 and 2026-11-24)
 
-**What was run.**
-- **Session:** one turbo-off session, 12:31–13:35, ended by its 60 min time budget.
-- **Runs:** **14 of 30 valid: H seeds 0–9 and C seeds 0–3.** C seeds 4–9 and A seeds 0–9 are **not
-  run yet**; the next session resumes them.
-- **Run set:** `aware_reset_first`, code fingerprint `7310e62f04ee1977`.
-- **Launch:** [`run_session_turbo_off.sh`](../evaluation/scripts/run_session_turbo_off.sh), which disabled
-  the CPU boost for the session and restored it (boost mode 2) when the session ended. Restoration checked
-  afterwards: boost mode AC 2, max processor state 100 %.
+**What was run.** H, C and A × seeds 0–9: **30 of 30 runs valid**, in two turbo-off sessions. Both were
+launched with [`run_session_turbo_off.sh`](../evaluation/scripts/run_session_turbo_off.sh), which
+disables the CPU boost for the session and restores it (boost mode 2) at the end. The restoration was
+checked after each session.
+
+| Date | Session | Runs | Notes |
+|---|---|---|---|
+| 23 Nov | 12:31–13:35 (60 min budget) | H 0–9, C 0–3 (14) | started after 26 min of rest instead of 30, at the user's request |
+| 24 Nov | 09:52–11:07 (75 min budget, to finish the set) | C 4–9, A 0–9 (16) | started on a fresh boot only once Windows had settled (CPU < 30 % and thermal zone ≤ 65 °C for a minute; at boot: 99 % and 82.9 °C from start-up work: `System`, VS Code, Defender) |
+
+- **Run set and code:** `aware_reset_first`, code fingerprint `7310e62f04ee1977`.
 - **Cool-down:** 120 s, then until ≤ 65 °C; thermal stop at 88 °C.
-- **Rest before the session:** the session started 26 min after the previous one ended, not 30, because
-  the user asked to start straight away.
-- **Data:** [`evaluation/results/phase_c/aware_reset_first/`](../evaluation/results/phase_c/aware_reset_first/).
 - **Configuration guard:** every run printed `compliance_aware_approach=reset_first, frame_topics=2`.
+- **Data:** [`evaluation/results/phase_c/aware_reset_first/`](../evaluation/results/phase_c/aware_reset_first/).
 
 **Results**
 
 | Scenario | Runs | Baseline | `reset_first` | Changed |
 |---|---|---|---|---|
 | **H** | 10 | target_lost, S2 | **complied, S2 (10/10)** | 10 / 10 |
-| C | 4 | target_lost, S2 | target_lost, S2 (4/4) | 0 / 4 ✓ (outcome time +0.1 to +0.2 s) |
-| A | 0 | – | not run yet | – |
+| C | 10 | target_lost, S2 | target_lost, S2 (10/10) | 0 / 10 ✓ |
+| A | 10 | complied, S3 | complied, S3 (10/10) | 0 / 10 ✓ |
+
+**Timing.**
+- **Median outcome-time difference** from the baseline: C +0.1 s, A −0.15 s. Three runs differ by
+  0.5 s or more:
+  - A/3: +0.6 s;
+  - **A/8: −0.9 s**, with confirmation 1.3 s earlier;
+  - C/7: +0.7 s, from target-loss timing.
+- **A/8 was also confirmed about 1.3 s earlier under `hold_s1`** (−1.1 s there). So this is a property
+  of that seed on the WSL set-up (detection timing), not of either variant.
+- **YOLO rate on cctv1:** A 4.91–5.01 Hz, C 4.20–4.56 Hz.
 
 **How the two fixes differ in H** (median or range over seeds 0–9):
 
@@ -1317,32 +1328,46 @@ Perception and results were the same in both groups:
 | robot reached the person | no | no | no |
 | outcome time | 45.1 s | 46.9–47.3 s | 46.7–47.5 s |
 | warnings delivered | 1 (PA) | 1 (PA) | 1 (PA) |
+| C (walks away) and A (full escalation) | – | unchanged (10/10 each) | unchanged (10/10 each) |
 
 **What this means for the design.**
-- Both modes turn H's outcome into *complied*, as the October replay predicted.
+- Both modes turn H's outcome into *complied*, as the October replay predicted, and leave C and A
+  unchanged.
 - **`reset_first` still sends the robot towards a person who has already complied.** It drives about
   1.4 m for about 8 s, the same as at baseline. Only the label at the end changes.
-- **`hold_s1` keeps the robot at its base.** For a person who stops during the PA warning, this avoids an
-  unnecessary approach.
-- Neither mode changed C (person walks away) in the runs made.
+- **`hold_s1` keeps the robot at its base.** For a person who stops during the PA warning, it avoids an
+  unnecessary approach at no measured cost to C or A.
 
 **Failures and odd events**
-- **3 failed attempts in 17**, all `nav2_not_ready` and all with the 120 s cool-down. Each was retried
-  automatically and every retry was valid.
-  - H/6 and H/9: no Nav2 lifecycle manager active by 28 s.
-  - C/1: no `map_server` reply logged.
+- **5 failed attempts in 35, all `nav2_not_ready`.** Each was retried automatically, and every retry
+  was valid.
+  - 23 Nov: H/6, H/9 (no lifecycle manager active by 28 s) and C/1.
+  - 24 Nov: C/5 (`map_server` reply lost) and A/3.
   - Logs: [`phase_c/failed_attempts/`](phase_c/failed_attempts/) (`reset_first_*`).
-  - This brings Phase C as a whole to 8 failed attempts in 52 (15 %), 7 of them `nav2_not_ready`. Nav2
-    start-up on this WSL set-up is the main source of retries. It costs time, not results: every retry
-    has been valid.
-- **Speed.** RTF 0.671–0.827 (median 0.776), with turbo off. C/2 was the slowest (0.671), but its cctv1
-  frame rate was 4.20 Hz against 4.15 Hz at baseline, and its outcome time was +0.2 s. Across the 14
-  runs, the cctv1 rate was 4.20–5.01 Hz.
-- **Heat.** The thermal zone peaked at **59.9 °C** (13:29) over the whole session, with the passive limit
-  at 100 % throughout.
+  - Phase C as a whole: 10 failed attempts in 70, 9 of them `nav2_not_ready`. Nav2 start-up on this WSL
+    set-up is the main source of retries. It costs time, not results.
+- **Logging bug in `gentle_batch.py`, found and fixed on 24 Nov.**
+  - **The bug:** `host_monitor.log` keeps earlier days' lines and stores times without dates. A run's time
+    window therefore also matched another day's lines.
+  - **Effect on this set:** the session's own per-run lines for A/7, A/8 and A/9 showed 23 Nov's
+    turbo-on readings: "peak 76.9 / 74.9 / 56.9 °C" and "median 92 % performance".
+  - **Correct values**, from 24 Nov's lines only: peaks **68.9, 57.9 and 54.9 °C**, and performance never
+    above 79 %.
+  - **No session decision was affected,** because the mixed-in lines only looked hotter or faster than
+    reality.
+  - **Fix:** each session now reads only the lines of its own monitor. A regression test was added
+    (evaluation tests 80).
+  - The same mistake had made me tell the user that a backup had warmed A/7. That was wrong: it came from
+    the mixed-in lines.
+- **Speed and heat.**
+  - RTF 0.671–0.845 (median 0.788), with turbo off throughout.
+  - **Thermal-zone peaks per run:** 45.9–59.9 °C on 23 Nov and **54.9–68.9 °C on 24 Nov**, from each
+    day's own monitor lines.
+  - The passive limit stayed at 100 % on both days.
 
-The batch log for both variant sets is [`phase_c/variants_batch.log`](phase_c/variants_batch.log); the
-day's host monitor is [`phase_c/host_monitor_2026-11-23.log`](phase_c/host_monitor_2026-11-23.log).
+Batch log for both variant sets: [`phase_c/variants_batch.log`](phase_c/variants_batch.log). Host
+monitor: [`phase_c/host_monitor_2026-11-23.log`](phase_c/host_monitor_2026-11-23.log) and
+[`phase_c/host_monitor_2026-11-24.log`](phase_c/host_monitor_2026-11-24.log).
 
 ---
 
@@ -1364,7 +1389,7 @@ snapshots are on branch `wsl-progress` (`evaluation/progress/`).
 | Item | Status on 2026-11-19 |
 |---|---|
 | Everything committed up to `f350fb4`: code, configs, manifests, `metrics.csv`, results, figures, this evidence | **safe** (GitHub) |
-| The 300 baseline bags (about 4 GB) and per-run launch logs (`evaluation/data/runs/`, git-ignored) | **Permanently lost.** On 2026-11-24 the user confirmed that the drive cannot be recovered. Consequences: `replay_fsm.py`, `sensitivity_offline.py`, `offline_extensions.py` and `extract_metrics.py` can **never** be re-run on the 300 baseline runs, and the planned DOI archive of the baseline bags (a limitation above) **cannot be made**. The published baseline numbers are unaffected, because every table, CSV and figure was committed before the failure. Every run recorded since (the 45-run reproduction, the Phase B check run and the Phase C runs, about 1.4 GB, 100 bags on 2026-11-24) is kept and can be archived instead. The reproduction matched the baseline in 45/45 outcomes, so these recordings are the nearest available stand-in. |
+| The 300 baseline bags (about 4 GB) and per-run launch logs (`evaluation/data/runs/`, git-ignored) | **Permanently lost.** On 2026-11-24 the user confirmed that the drive cannot be recovered. Consequences: `replay_fsm.py`, `sensitivity_offline.py`, `offline_extensions.py` and `extract_metrics.py` can **never** be re-run on the 300 baseline runs, and the planned DOI archive of the baseline bags (a limitation above) **cannot be made**. The published baseline numbers are unaffected, because every table, CSV and figure was committed before the failure. Every run recorded since (the 45-run reproduction, the Phase B check run, the Phase C runs and every failed attempt) is **committed to the repository as compressed archives** in [`evaluation/recordings/`](../evaluation/recordings/) (from 2026-11-24: 1,423 MB raw → 249 MB, with checksums). The reproduction matched the baseline in 45/45 outcomes, so these recordings are the nearest available stand-in. The 255-run baseline re-run (decided 2026-11-24) will be archived the same way. |
 | Work after `f350fb4` that was never pushed (for example Phase C variant runs, if any were started) | **unknown**. The pushed runner has no FSM-variant options, so any such runs would have used unpushed code. |
 | `secrets.env`, dashboard password, `yolov8n.pt` | not needed for the evaluation; the weights were re-downloaded (below) |
 
@@ -1616,7 +1641,8 @@ Suggested points, to adapt to the manuscript; every number is from this section:
    them (FSM replay, the offline sensitivity) cannot be repeated. Their published results come from
    files committed before the failure.
    - **Archived instead:** the recordings of the 45-run reproduction (which matched the baseline in 45/45
-     outcomes) and of the Phase C runs.
+     outcomes) and of the Phase C runs, in [`evaluation/recordings/`](../evaluation/recordings/); a
+     255-run re-run of the baseline is planned to complete a recorded 300-run baseline.
    - **Suggested wording:** "the raw recordings of the original 300 runs were lost in a hardware failure
      after analysis; all derived data were preserved, and a reproduction sample on the same hardware is
      archived".

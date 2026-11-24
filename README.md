@@ -28,8 +28,9 @@ The baseline bags were lost with the failed drive (confirmed unrecoverable on 20
 - **Gentle sessions:** `gentle_batch.py` runs them in laptop-safe sessions.
 - **First set (complete, 30 runs):** `compliance_aware_approach = hold_s1` fixed scenario H in 10 of 10
   runs (complied in S1 instead of target lost in S2), and left C and A unchanged (10 of 10 each).
-- **Second set (partial, 14 of 30):** `reset_first` also turns H into complied (S2), but the robot
-  still drives about 1.4 m towards the person who has already stopped. C is unchanged so far.
+- **Second set (complete, 30 runs):** `reset_first` also turns H into complied (S2), but the robot
+  still drives about 1.4 m towards the person who has already stopped. C and A are unchanged
+  (10 of 10 each). `hold_s1` is therefore the better fix for H.
 
 Details, failures and what is not run yet:
 [`evidence/README.md`](evidence/README.md#phase-b-human-model-under-skip_pa_warning-2026-11-19).

@@ -36,7 +36,7 @@ voices/
 maps/cameras.json
 
 # demo recordings (large video files)
-recordings/
+/recordings/
 # The simulation map + camera spots (maps/sim/) ARE committed in this
 # repository: the evaluation depends on them.
 maps/real_room_backup/

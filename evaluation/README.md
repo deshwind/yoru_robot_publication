@@ -136,6 +136,8 @@ python3 -m pytest evaluation/tests -q                                           
 |---|---|
 | `run_batch.py` | batch runner (Phase 4); FSM-variant options (Phase C) |
 | `gentle_batch.py` | laptop-safe sessions of `run_batch.py` runs (time budget, cool-downs, throttling stop, resume) |
+| `archive_recordings.py` | packs every run set's recordings into deterministic `.tar.gz` archives in `evaluation/recordings/` (committed), with checksums; `--verify` checks them |
+| `backup_to_d.sh`, `run_campaign.sh`, `run_session_turbo_off.sh`, `show_progress.py` | mirror to D:\\, daily campaigns of turbo-off gentle sessions, one turbo-off session, live progress view |
 | `host_monitor.sh` | Windows CPU performance, busiest Windows processes, thermal-zone temperature and passive (throttling) limit, every minute, during a batch |
 | `bag_summary.py` | human-readable summary of one bag |
 | `check_run.sh` | one run with a hand-written overlay (Phase 3 checks) |

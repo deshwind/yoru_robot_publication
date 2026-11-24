@@ -1,0 +1,45 @@
+{
+  "scenario": "A",
+  "seed": 3,
+  "status": "nav2_not_ready",
+  "outcome": "none",
+  "outcome_stage": "",
+  "outcome_sim_t": "",
+  "start_wall": "2026-11-24T10:34:09",
+  "end_wall": "2026-11-24T10:34:51",
+  "wall_s": 42.0,
+  "sim_s": 28.5,
+  "rtf": 0.678,
+  "bag_ok": true,
+  "died_processes": "",
+  "command": [
+    "ros2",
+    "launch",
+    "yoru_bringup",
+    "sim_full.launch.py",
+    "spawn_x:=-4.0",
+    "spawn_y:=1.5",
+    "spawn_yaw:=0.0",
+    "use_actors:=true",
+    "use_ros_clock:=true",
+    "gui:=false",
+    "rviz:=false",
+    "open_browser:=false",
+    "use_joystick:=false",
+    "world:=/home/desh/yoru_ws/yoru_robot_publication/install/yoru_bringup/share/yoru_bringup/worlds/eval_two_room.world",
+    "overlay_params:=/home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/A/3/overlay.yaml",
+    "bag_path:=/home/desh/yoru_ws/yoru_robot_publication/evaluation/data/variants/aware_reset_first/A/3/bag"
+  ],
+  "domain_id": 61,
+  "variant": {
+    "fsm": {
+      "compliance_aware_approach": "reset_first",
+      "frame_topics": [
+        "/compliance/cctv1/tracked",
+        "/compliance/cctv2/tracked"
+      ]
+    },
+    "human": {},
+    "tag": "aware_reset_first"
+  }
+}
