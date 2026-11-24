@@ -54,7 +54,7 @@ def main():
             runs.append(current)
         elif peak and runs:
             runs[-1]['peak'] = peak.group(1)
-        if 'session end' in line:
+        if '[gentle] session end' in line:
             ended = line
     now = datetime.datetime.now()
     print(f'Yoru Phase C  |  run set {tag}  |  {now:%H:%M:%S}')
