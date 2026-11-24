@@ -1364,7 +1364,7 @@ snapshots are on branch `wsl-progress` (`evaluation/progress/`).
 | Item | Status on 2026-11-19 |
 |---|---|
 | Everything committed up to `f350fb4`: code, configs, manifests, `metrics.csv`, results, figures, this evidence | **safe** (GitHub) |
-| The 300 baseline bags (about 4 GB) and per-run launch logs (`evaluation/data/runs/`, git-ignored) | **not available now.** They exist only on the drive in the failed slot, unless it can be read in an external (USB) enclosure. Until then: `replay_fsm.py`, `sensitivity_offline.py`, `offline_extensions.py` and `extract_metrics.py` cannot be re-run on the baseline, and the DOI archive of the bags (a limitation above) cannot be made. The published numbers are unaffected: they are in committed files. |
+| The 300 baseline bags (about 4 GB) and per-run launch logs (`evaluation/data/runs/`, git-ignored) | **Permanently lost.** On 2026-11-24 the user confirmed that the drive cannot be recovered. Consequences: `replay_fsm.py`, `sensitivity_offline.py`, `offline_extensions.py` and `extract_metrics.py` can **never** be re-run on the 300 baseline runs, and the planned DOI archive of the baseline bags (a limitation above) **cannot be made**. The published baseline numbers are unaffected, because every table, CSV and figure was committed before the failure. Every run recorded since (the 45-run reproduction, the Phase B check run and the Phase C runs, about 1.4 GB, 100 bags on 2026-11-24) is kept and can be archived instead. The reproduction matched the baseline in 45/45 outcomes, so these recordings are the nearest available stand-in. |
 | Work after `f350fb4` that was never pushed (for example Phase C variant runs, if any were started) | **unknown**. The pushed runner has no FSM-variant options, so any such runs would have used unpushed code. |
 | `secrets.env`, dashboard password, `yolov8n.pt` | not needed for the evaluation; the weights were re-downloaded (below) |
 
@@ -1611,9 +1611,16 @@ Suggested points, to adapt to the manuscript; every number is from this section:
    with fractions-of-a-second timing differences, a lower detector rate (down to 4.3 Hz against 4.95)
    and Nav2 recovery behaviours, though not with any change of outcome. Decision logic runs on simulation
    time.
-5. **Limitation: no run-level replay of the baseline.** The baseline's rosbags are on the failed drive.
-   Run-level analyses that need them (FSM replay, the offline sensitivity) cannot be repeated until it is
-   recovered; their published results come from files committed before the failure.
+5. **Limitation: the baseline's raw recordings are lost.** The 300 baseline rosbags were on the system
+   drive that failed, and they cannot be recovered (confirmed 2026-11-24). Run-level analyses that need
+   them (FSM replay, the offline sensitivity) cannot be repeated. Their published results come from
+   files committed before the failure.
+   - **Archived instead:** the recordings of the 45-run reproduction (which matched the baseline in 45/45
+     outcomes) and of the Phase C runs.
+   - **Suggested wording:** "the raw recordings of the original 300 runs were lost in a hardware failure
+     after analysis; all derived data were preserved, and a reproduction sample on the same hardware is
+     archived".
+
 6. **Limitation: inference device and rendering path differ** (GPU then, CPU now; native OpenGL then,
    D3D12 translation now). The agreement above was measured under these differences.
 

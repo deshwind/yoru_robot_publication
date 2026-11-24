@@ -18,7 +18,7 @@ Ubuntu, from the drive in an SSD slot that failed after `f350fb4`. Work continue
 Windows + WSL2. The set-up, every failure met on it (wall-clock steps, CPU-thread oversubscription in the
 detectors, background load), the fixes, the reproduction check and the remaining uncertainties are in
 [`evidence/README.md`](evidence/README.md#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties).
-The baseline bags are on the failed drive and are not available.
+The baseline bags were lost with the failed drive (confirmed unrecoverable on 2026-11-24). All derived results were committed before the failure; the recordings made since are kept.
 
 **FSM design variants: Phase B and the first Phase C set (2026-11-19 and 2026-11-23).**
 - **Phase B (human model):** a person scripted to comply after the PA warning complies after the first
