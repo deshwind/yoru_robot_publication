@@ -1,0 +1,142 @@
+[run_batch] tag=repro_wsl runs=45 code=f7bb8f4bdff9a649 weights={}
+[run_batch] 1/45 A seed 0 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A/0
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.5s wall=110.1s rtf=0.776
+[run_batch] 2/45 A seed 1 attempt 1 (domain 64) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A/1
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.2s wall=102.1s rtf=0.834
+[run_batch] 3/45 A seed 2 attempt 1 (domain 67) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A/2
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.2s wall=103.1s rtf=0.826
+[run_batch] 4/45 A-V seed 0 attempt 1 (domain 70) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A-V/0
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.4s wall=105.1s rtf=0.812
+[run_batch] 5/45 A-V seed 1 attempt 1 (domain 73) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A-V/1
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.6s wall=105.1s rtf=0.814
+[run_batch] 6/45 A-V seed 2 attempt 1 (domain 76) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/A-V/2
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.5s wall=104.1s rtf=0.821
+[run_batch] 7/45 B seed 0 attempt 1 (domain 79) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B/0
+[run_batch]   status=ok outcome=none stage= sim=120.0s wall=142.2s rtf=0.844
+[run_batch] 8/45 B seed 1 attempt 1 (domain 82) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B/1
+[run_batch]   status=ok outcome=none stage= sim=120.0s wall=168.3s rtf=0.713
+[run_batch] 9/45 B seed 2 attempt 1 (domain 85) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B/2
+[run_batch]   status=ok outcome=none stage= sim=120.5s wall=156.3s rtf=0.771
+[run_batch] 10/45 B-C7 seed 0 attempt 1 (domain 88) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/0
+[run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=99.7s wall=140.2s rtf=0.711
+[run_batch] 11/45 B-C7 seed 1 attempt 1 (domain 91) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/1
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.0s wall=44.1s rtf=0.635
+[run_batch] 11/45 B-C7 seed 1 attempt 2 (domain 92) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/1
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/repro/repro_wsl/B-C7/1__20261119T114900__superseded
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.6s wall=48.1s rtf=0.595
+[run_batch] 12/45 B-C7 seed 2 attempt 1 (domain 94) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/2
+[run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=101.2s wall=156.3s rtf=0.648
+[run_batch] 13/45 C seed 0 attempt 1 (domain 97) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/C/0
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=62.3s wall=92.2s rtf=0.676
+[run_batch] 14/45 C seed 1 attempt 1 (domain 60) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/C/1
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=62.4s wall=92.2s rtf=0.677
+[run_batch] 15/45 C seed 2 attempt 1 (domain 63) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/C/2
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=64.2s wall=90.1s rtf=0.712
+[run_batch] 16/45 D seed 0 attempt 1 (domain 66) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/D/0
+[run_batch]   status=ok outcome=none stage= sim=120.6s wall=154.2s rtf=0.782
+[run_batch] 17/45 D seed 1 attempt 1 (domain 69) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/D/1
+[run_batch]   status=ok outcome=none stage= sim=120.6s wall=146.2s rtf=0.825
+[run_batch] 18/45 D seed 2 attempt 1 (domain 72) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/D/2
+[run_batch]   status=ok outcome=none stage= sim=120.1s wall=147.2s rtf=0.816
+[run_batch] 19/45 E seed 0 attempt 1 (domain 75) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/E/0
+[run_batch]   status=ok outcome=none stage= sim=120.2s wall=147.2s rtf=0.817
+[run_batch] 20/45 E seed 1 attempt 1 (domain 78) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/E/1
+[run_batch]   status=ok outcome=none stage= sim=120.3s wall=146.2s rtf=0.823
+[run_batch] 21/45 E seed 2 attempt 1 (domain 81) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/E/2
+[run_batch]   status=ok outcome=none stage= sim=120.8s wall=137.1s rtf=0.881
+[run_batch] 22/45 F-pen seed 0 attempt 1 (domain 84) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-pen/0
+[run_batch]   status=ok outcome=none stage= sim=120.3s wall=138.1s rtf=0.871
+[run_batch] 23/45 F-pen seed 1 attempt 1 (domain 87) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-pen/1
+[run_batch]   status=ok outcome=none stage= sim=120.1s wall=132.1s rtf=0.909
+[run_batch] 24/45 F-pen seed 2 attempt 1 (domain 90) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-pen/2
+[run_batch]   status=ok outcome=none stage= sim=120.7s wall=134.2s rtf=0.9
+[run_batch] 25/45 F-straw seed 0 attempt 1 (domain 93) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-straw/0
+[run_batch]   status=ok outcome=none stage= sim=120.3s wall=136.1s rtf=0.884
+[run_batch] 26/45 F-straw seed 1 attempt 1 (domain 96) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-straw/1
+[run_batch]   status=ok outcome=none stage= sim=120.4s wall=135.1s rtf=0.891
+[run_batch] 27/45 F-straw seed 2 attempt 1 (domain 99) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/F-straw/2
+[run_batch]   status=ok outcome=none stage= sim=120.5s wall=133.1s rtf=0.905
+[run_batch] 28/45 G seed 0 attempt 1 (domain 62) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/G/0
+[run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=98.8s wall=110.1s rtf=0.897
+[run_batch] 29/45 G seed 1 attempt 1 (domain 65) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/G/1
+[run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=99.8s wall=111.1s rtf=0.898
+[run_batch] 30/45 G seed 2 attempt 1 (domain 68) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/G/2
+[run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=99.1s wall=110.1s rtf=0.9
+[run_batch] 31/45 H seed 0 attempt 1 (domain 71) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/H/0
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=55.9s wall=65.1s rtf=0.859
+[run_batch] 32/45 H seed 1 attempt 1 (domain 74) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/H/1
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=55.4s wall=75.1s rtf=0.738
+[run_batch] 33/45 H seed 2 attempt 1 (domain 77) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/H/2
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=55.3s wall=68.1s rtf=0.812
+[run_batch] 34/45 I seed 0 attempt 1 (domain 80) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/I/0
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.5s wall=97.1s rtf=0.881
+[run_batch] 35/45 I seed 1 attempt 1 (domain 83) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/I/1
+[run_batch]   status=ok outcome=complied stage=S3 sim=87.8s wall=99.1s rtf=0.886
+[run_batch] 36/45 I seed 2 attempt 1 (domain 86) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/I/2
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.3s wall=96.1s rtf=0.888
+[run_batch] 37/45 J seed 0 attempt 1 (domain 89) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/J/0
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.4s wall=96.1s rtf=0.889
+[run_batch] 38/45 J seed 1 attempt 1 (domain 92) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/J/1
+[run_batch]   status=ok outcome=none stage= sim=190.7s wall=214.3s rtf=0.89
+[run_batch] 39/45 J seed 2 attempt 1 (domain 95) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/J/2
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.7s wall=102.1s rtf=0.839
+[run_batch] 40/45 K seed 0 attempt 1 (domain 98) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/K/0
+[run_batch]   status=ok outcome=safety_stop stage=S2 sim=74.3s wall=89.1s rtf=0.834
+[run_batch] 41/45 K seed 1 attempt 1 (domain 61) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/K/1
+[run_batch]   status=ok outcome=safety_stop stage=S2 sim=73.8s wall=89.1s rtf=0.828
+[run_batch] 42/45 K seed 2 attempt 1 (domain 64) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/K/2
+[run_batch]   status=ok outcome=safety_stop stage=S2 sim=74.0s wall=89.1s rtf=0.83
+[run_batch] 43/45 L seed 0 attempt 1 (domain 67) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/L/0
+[run_batch]   status=ok outcome=admin_override stage=S2 sim=54.3s wall=71.1s rtf=0.764
+[run_batch] 44/45 L seed 1 attempt 1 (domain 70) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/L/1
+[run_batch]   status=ok outcome=admin_override stage=S2 sim=55.1s wall=65.1s rtf=0.847
+[run_batch] 45/45 L seed 2 attempt 1 (domain 73) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/L/2
+[run_batch]   status=ok outcome=admin_override stage=S2 sim=54.6s wall=64.1s rtf=0.852
+[run_batch] tag=repro_wsl runs=45 code=f7bb8f4bdff9a649 weights={}
+[run_batch] skip A seed 0 (already ok)
+[run_batch] skip A seed 1 (already ok)
+[run_batch] skip A seed 2 (already ok)
+[run_batch] skip A-V seed 0 (already ok)
+[run_batch] skip A-V seed 1 (already ok)
+[run_batch] skip A-V seed 2 (already ok)
+[run_batch] skip B seed 0 (already ok)
+[run_batch] skip B seed 1 (already ok)
+[run_batch] skip B seed 2 (already ok)
+[run_batch] skip B-C7 seed 0 (already ok)
+[run_batch] 11/45 B-C7 seed 1 attempt 1 (domain 91) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/repro/repro_wsl/B-C7/1
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/repro/repro_wsl/B-C7/1__20261119T133416__nav2_not_ready
+[run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=99.7s wall=115.1s rtf=0.866
+[run_batch] skip B-C7 seed 2 (already ok)
+[run_batch] skip C seed 0 (already ok)
+[run_batch] skip C seed 1 (already ok)
+[run_batch] skip C seed 2 (already ok)
+[run_batch] skip D seed 0 (already ok)
+[run_batch] skip D seed 1 (already ok)
+[run_batch] skip D seed 2 (already ok)
+[run_batch] skip E seed 0 (already ok)
+[run_batch] skip E seed 1 (already ok)
+[run_batch] skip E seed 2 (already ok)
+[run_batch] skip F-pen seed 0 (already ok)
+[run_batch] skip F-pen seed 1 (already ok)
+[run_batch] skip F-pen seed 2 (already ok)
+[run_batch] skip F-straw seed 0 (already ok)
+[run_batch] skip F-straw seed 1 (already ok)
+[run_batch] skip F-straw seed 2 (already ok)
+[run_batch] skip G seed 0 (already ok)
+[run_batch] skip G seed 1 (already ok)
+[run_batch] skip G seed 2 (already ok)
+[run_batch] skip H seed 0 (already ok)
+[run_batch] skip H seed 1 (already ok)
+[run_batch] skip H seed 2 (already ok)
+[run_batch] skip I seed 0 (already ok)
+[run_batch] skip I seed 1 (already ok)
+[run_batch] skip I seed 2 (already ok)
+[run_batch] skip J seed 0 (already ok)
+[run_batch] skip J seed 1 (already ok)
+[run_batch] skip J seed 2 (already ok)
+[run_batch] skip K seed 0 (already ok)
+[run_batch] skip K seed 1 (already ok)
+[run_batch] skip K seed 2 (already ok)
+[run_batch] skip L seed 0 (already ok)
+[run_batch] skip L seed 1 (already ok)
+[run_batch] skip L seed 2 (already ok)
