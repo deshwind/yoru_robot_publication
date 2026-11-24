@@ -1,0 +1,10 @@
+mode,scenario,pairs,baseline_outcome,variant_outcome,variant_outcome_n,wilson_lo,wilson_hi,depth_variant,changed_pairs,p_exact_paired,driven_variant_min,driven_variant_max,driven_baseline_median,driven_p_sign,outcome_time_diff_median,outcome_time_diff_maxabs
+hold_s1,H,10,target_lost,complied,10,0.7224598312333834,1.0,1,10,0.001953125,0.0,0.0,1.38165,0.001953125,,
+hold_s1,C,10,target_lost,target_lost,10,0.7224598312333834,1.0,2,0,1.0,,,,,0.0,0.6999999999999957
+hold_s1,A,10,complied,complied,10,0.7224598312333834,1.0,3,0,1.0,,,,,0.0,1.0999999999999943
+reset_first,H,10,target_lost,complied,10,0.7224598312333834,1.0,2,10,0.001953125,1.3438,1.4382,1.38165,1.0,,
+reset_first,C,10,target_lost,target_lost,10,0.7224598312333834,1.0,2,0,1.0,,,,,0.10000000000000142,0.6999999999999957
+reset_first,A,10,complied,complied,10,0.7224598312333834,1.0,3,0,1.0,,,,,-0.14999999999999147,0.8999999999999915
+both,H,10,target_lost,complied,10,0.7224598312333834,1.0,1,10,0.001953125,0.0,0.0,1.38165,0.001953125,,
+both,C,10,target_lost,target_lost,10,0.7224598312333834,1.0,2,0,1.0,,,,,0.09999999999999787,0.6999999999999957
+both,A,2,complied,complied,2,0.34237195288961925,1.0,3,0,1.0,,,,,-0.04999999999999005,0.19999999999998863

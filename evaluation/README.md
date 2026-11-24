@@ -136,6 +136,7 @@ python3 -m pytest evaluation/tests -q                                           
 |---|---|
 | `run_batch.py` | batch runner (Phase 4); FSM-variant options (Phase C) |
 | `gentle_batch.py` | laptop-safe sessions of `run_batch.py` runs (time budget, cool-downs, throttling stop, resume) |
+| `phase_c_summary.py` | Phase C statistics (paired exact tests, Wilson CIs), Markdown/LaTeX tables and the two Phase C paper figures, from the committed metrics |
 | `compare_repro.py` | run-by-run comparison of a run set with the baseline (same scenario and seed) → `runs.csv`, `summary.md`; used for the reproduction and the Phase C variant sets |
 | `replay_fsm.py` | drives the real FSM node over recorded inputs of baseline bags (Extension A validation) |
 | `capture_pictures.py`, `make_storyboard.py`, `plot_run_topdown.py` | pictures of a documentation run, the storyboard figure, a top-down figure of a run from its bag |

@@ -1469,6 +1469,50 @@ Infrastructure: one attempt in about six needed a retry because Nav2 failed to s
 replies, [explained below](#nav2-start-up-failures-the-dds-domain-explanation-was-wrong-the-actual-cause)).
 Every retry was valid.
 
+### Phase C: statistics, tables and figures for the paper (2026-11-24, provisional until `both` is complete)
+
+Made by [`phase_c_summary.py`](../evaluation/scripts/phase_c_summary.py) from the committed metrics. It
+needs no simulation, and re-running it after the last `both` runs updates everything:
+- [`stats.csv`](../evaluation/results/phase_c/stats.csv);
+- [`summary.md`](../evaluation/results/phase_c/summary.md);
+- [`summary.tex`](../evaluation/results/phase_c/summary.tex), LaTeX with booktabs, in the style of the
+  baseline's `tables.tex`.
+
+**Method.**
+- **Design:** each variant run is paired with the baseline run of the same scenario and seed.
+- **Outcome share:** reported with a Wilson 95 % CI.
+- **Test on changes:** an exact two-sided paired test on changes of outcome or escalation depth (McNemar;
+  binomial on the discordant pairs). Every change goes in the same direction.
+- **Distance driven in H:** the path length between the start of the approach and the outcome
+  (`extract_metrics.py`'s `path_length`; 0 m when no approach was started), compared with an exact sign
+  test on the paired differences (|difference| > 0.05 m).
+
+| Mode | H: outcome (changed pairs, p) | H: distance driven (baseline median 1.38 m) | C: changed | A: changed |
+|---|---|---|---|---|
+| `hold_s1` | complied, S1, 10/10 [72, 100] % (10 of 10, p = 0.002) | **0.00 m in all runs** (p = 0.002) | 0 of 10 (p = 1) | 0 of 10 (p = 1) |
+| `reset_first` | complied, S2, 10/10 [72, 100] % (10 of 10, p = 0.002) | 1.34–1.44 m (p = 1, no difference) | 0 of 10 | 0 of 10 |
+| `both` | complied, S1, 10/10 [72, 100] % (10 of 10, p = 0.002) | **0.00 m in all runs** (p = 0.002) | 0 of 10 | 0 of 2 (provisional) |
+
+With 10 seeds, p = 0.002 is the smallest attainable value (all 10 paired runs changed). The Wilson
+intervals show what 10 runs can and cannot exclude: a 100 % result is compatible with a true rate down to
+72 %.
+
+![Scenario H under each mode](../evaluation/results/phase_c/figures/fig_phase_c_H_paths.png)
+
+*Scenario H, seed 0. Top-down robot paths from the recordings. The baseline-configuration panel uses the
+reproduction run `repro_wsl/H/0`, because the original baseline recordings are lost.*
+- *Baseline: the robot starts its approach (S2) and drives 1.39 m before the outcome `target_lost`.*
+- *`hold_s1` and `both`: the robot never leaves its base, and the outcome is `complied` in S1.*
+- *`reset_first`: the robot still drives 1.35 m, and the outcome is `complied` in S2.*
+
+*Diamonds mark stage changes. [PDF](../evaluation/results/phase_c/figures/fig_phase_c_H_paths.pdf)*
+
+![Outcomes and robot approach per mode](../evaluation/results/phase_c/figures/fig_phase_c_outcomes.png)
+
+*Left: outcome shares for H, C and A per mode, with n per bar. Right: distance driven towards the
+person in H, one dot per seed. `both` is provisional (22 of 30 runs).
+[PDF](../evaluation/results/phase_c/figures/fig_phase_c_outcomes.pdf)*
+
 ### Phase C preparation: runner support for the variants (2026-11-19)
 
 [`run_batch.py`](../evaluation/scripts/run_batch.py) can now run the FSM design variants (usage:
