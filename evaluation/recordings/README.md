@@ -1,0 +1,52 @@
+# Run recordings (compressed)
+
+The rosbag2 recordings and run folders of every run made on the laptop since the
+original baseline recordings were lost (see `evidence/README.md`, "Same laptop, new operating
+system"). One deterministic `.tar.gz` per run set and scenario, made by
+[`archive_recordings.py`](../scripts/archive_recordings.py); each holds the run folders
+(`bag/`, `launch.log`, `overlay.yaml`, `run_info.json`, `incident_logs/`) exactly as the runner
+wrote them under `evaluation/data/`. Checksums: [`CHECKSUMS.sha256`](CHECKSUMS.sha256)
+(`cd evaluation/recordings && sha256sum -c CHECKSUMS.sha256`).
+
+**Restore** (for example to re-run `extract_metrics.py` on them):
+
+```bash
+tar -xzf evaluation/recordings/repro_wsl/A.tar.gz -C evaluation/data/repro/repro_wsl
+tar -xzf evaluation/recordings/aware_hold_s1/H.tar.gz -C evaluation/data/variants/aware_hold_s1
+tar -xzf evaluation/recordings/misc/runs_invalid.tar.gz -C evaluation/data
+```
+
+| Run set | Archive | Runs (valid + failed attempts) | Raw | Compressed |
+|---|---|---|---|---|
+| repro_wsl | [`repro_wsl/A.tar.gz`](repro_wsl/A.tar.gz) | 3 | 40.6 MB | 7.2 MB |
+| repro_wsl | [`repro_wsl/A-V.tar.gz`](repro_wsl/A-V.tar.gz) | 3 | 40.3 MB | 7.2 MB |
+| repro_wsl | [`repro_wsl/B.tar.gz`](repro_wsl/B.tar.gz) | 3 | 53.6 MB | 9.1 MB |
+| repro_wsl | [`repro_wsl/B-C7.tar.gz`](repro_wsl/B-C7.tar.gz) | 3 | 47.9 MB | 8.5 MB |
+| repro_wsl | [`repro_wsl/C.tar.gz`](repro_wsl/C.tar.gz) | 3 | 29.0 MB | 5.2 MB |
+| repro_wsl | [`repro_wsl/D.tar.gz`](repro_wsl/D.tar.gz) | 3 | 51.9 MB | 9.1 MB |
+| repro_wsl | [`repro_wsl/E.tar.gz`](repro_wsl/E.tar.gz) | 3 | 52.3 MB | 9.0 MB |
+| repro_wsl | [`repro_wsl/F-pen.tar.gz`](repro_wsl/F-pen.tar.gz) | 3 | 53.2 MB | 9.1 MB |
+| repro_wsl | [`repro_wsl/F-straw.tar.gz`](repro_wsl/F-straw.tar.gz) | 3 | 53.1 MB | 9.1 MB |
+| repro_wsl | [`repro_wsl/G.tar.gz`](repro_wsl/G.tar.gz) | 3 | 47.9 MB | 8.3 MB |
+| repro_wsl | [`repro_wsl/H.tar.gz`](repro_wsl/H.tar.gz) | 3 | 25.2 MB | 4.4 MB |
+| repro_wsl | [`repro_wsl/I.tar.gz`](repro_wsl/I.tar.gz) | 3 | 40.7 MB | 7.2 MB |
+| repro_wsl | [`repro_wsl/J.tar.gz`](repro_wsl/J.tar.gz) | 3 | 64.6 MB | 10.6 MB |
+| repro_wsl | [`repro_wsl/K.tar.gz`](repro_wsl/K.tar.gz) | 3 | 36.8 MB | 6.5 MB |
+| repro_wsl | [`repro_wsl/L.tar.gz`](repro_wsl/L.tar.gz) | 3 | 25.6 MB | 4.4 MB |
+| aware_hold_s1 | [`aware_hold_s1/A.tar.gz`](aware_hold_s1/A.tar.gz) | 10 | 134.1 MB | 23.9 MB |
+| aware_hold_s1 | [`aware_hold_s1/C.tar.gz`](aware_hold_s1/C.tar.gz) | 10 | 95.1 MB | 17.1 MB |
+| aware_hold_s1 | [`aware_hold_s1/H.tar.gz`](aware_hold_s1/H.tar.gz) | 10 | 83.7 MB | 14.4 MB |
+| aware_reset_first | [`aware_reset_first/A.tar.gz`](aware_reset_first/A.tar.gz) | 10 | 132.8 MB | 23.8 MB |
+| aware_reset_first | [`aware_reset_first/C.tar.gz`](aware_reset_first/C.tar.gz) | 10 | 95.0 MB | 17.0 MB |
+| aware_reset_first | [`aware_reset_first/H.tar.gz`](aware_reset_first/H.tar.gz) | 10 | 86.0 MB | 15.1 MB |
+| misc | [`misc/pilot.tar.gz`](misc/pilot.tar.gz) | 4 | 48.0 MB | 8.5 MB |
+| misc | [`misc/doc.tar.gz`](misc/doc.tar.gz) | 1 | 14.3 MB | 2.4 MB |
+| misc | [`misc/phase_b.tar.gz`](misc/phase_b.tar.gz) | 1 | 24.4 MB | 4.3 MB |
+| misc | [`misc/runs_invalid.tar.gz`](misc/runs_invalid.tar.gz) | 13 | 46.7 MB | 7.7 MB |
+
+Total: 124 run folders, 1423 MB raw, 249 MB compressed.
+
+Run sets: `repro_wsl` = the 45-run reproduction (scenarios × seeds 0–2); `aware_*` = Phase C
+FSM-variant sets; `baseline_wsl` = the baseline re-run (seeds 3–19); `misc` = pilot and
+diagnostic runs (`pilot`), the documentation run (`doc`), the Phase B check run (`phase_b`)
+and every failed attempt set aside by the runner (`runs_invalid`).
