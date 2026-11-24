@@ -127,7 +127,7 @@ Batch progress while it runs: `grep -c status= evaluation/data/baseline_batch.lo
 
 ```bash
 PYTHONPATH=src/yoru_core:$PYTHONPATH python3 -m pytest src/yoru_core/test -q   # system (119)
-python3 -m pytest evaluation/tests -q                                           # evaluation scripts (52)
+python3 -m pytest evaluation/tests -q                                           # evaluation scripts (83)
 ```
 
 ## 6. Scripts
@@ -136,6 +136,11 @@ python3 -m pytest evaluation/tests -q                                           
 |---|---|
 | `run_batch.py` | batch runner (Phase 4); FSM-variant options (Phase C) |
 | `gentle_batch.py` | laptop-safe sessions of `run_batch.py` runs (time budget, cool-downs, throttling stop, resume) |
+| `compare_repro.py` | run-by-run comparison of a run set with the baseline (same scenario and seed) → `runs.csv`, `summary.md`; used for the reproduction and the Phase C variant sets |
+| `replay_fsm.py` | drives the real FSM node over recorded inputs of baseline bags (Extension A validation) |
+| `capture_pictures.py`, `make_storyboard.py`, `plot_run_topdown.py` | pictures of a documentation run, the storyboard figure, a top-down figure of a run from its bag |
+| `clock_probe.py`, `nav2_startup_failures.py` | diagnostics: wall-clock steps and stalls; why Nav2 did not come up in `nav2_not_ready` attempts |
+| `progress_status.py`, `after_campaign.sh`, `run_phase_c_session.sh`, `run_repro_wsl.sh` | watchdog snapshot; safety net that archives, commits, pushes and backs up when a campaign ends; one detached gentle session; the 45-run reproduction batch |
 | `archive_recordings.py` | packs every run set's recordings into deterministic `.tar.gz` archives in `evaluation/recordings/` (committed), with checksums; `--verify` checks them |
 | `backup_to_d.sh`, `run_campaign.sh`, `run_session_turbo_off.sh`, `show_progress.py` | mirror to D:\\, daily campaigns of turbo-off gentle sessions, one turbo-off session, live progress view |
 | `host_monitor.sh` | Windows CPU performance, busiest Windows processes, thermal-zone temperature and passive (throttling) limit, every minute, during a batch |

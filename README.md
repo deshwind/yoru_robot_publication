@@ -12,6 +12,8 @@ Robotics*.
 | [`evaluation/README.md`](evaluation/README.md) | how to reproduce every run, metric and table |
 | `evaluation/scenarios/` | scenario definitions A–L (+ B-C7, F-pen, F-straw) |
 | `src/yoru_sim_plugins/` | Gazebo plugin: ROS-driven human actors visible to the lidar |
+| [`evaluation/results/phase_c/`](evaluation/results/phase_c/) | FSM-variant results (Phase C), run by run against the baseline |
+| [`evaluation/recordings/`](evaluation/recordings/) | compressed, checksummed recordings of every run since November 2026 (reproduction, Phase B/C, failed attempts) |
 
 **Operating-system change (2026-11-19).** The 300 baseline runs were made on this laptop under native
 Ubuntu, from the drive in an SSD slot that failed after `f350fb4`. Work continues on the same laptop under
@@ -20,7 +22,7 @@ detectors, background load), the fixes, the reproduction check and the remaining
 [`evidence/README.md`](evidence/README.md#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties).
 The baseline bags were lost with the failed drive (confirmed unrecoverable on 2026-11-24). All derived results were committed before the failure; the recordings made since are kept.
 
-**FSM design variants: Phase B and the first Phase C set (2026-11-19 and 2026-11-23).**
+**FSM design variants: Phase B and Phase C (2026-11-19 to 2026-11-24).**
 - **Phase B (human model):** a person scripted to comply after the PA warning complies after the first
   warning they actually hear when no PA warning is played (`comply_s1_fallback`, default off).
 - **Runner support:** `run_batch.py` can run the variants (`--skip-pa`, `--sustained-ratio`,
@@ -34,14 +36,17 @@ The baseline bags were lost with the failed drive (confirmed unrecoverable on 20
 - **Third set (partial, 22 of 30):** `both` behaves like `hold_s1` on H (complied in S1, no approach);
   C unchanged (10 of 10), A unchanged so far (2 of 2).
 
-Details, failures and what is not run yet:
-[`evidence/README.md`](evidence/README.md#phase-b-human-model-under-skip_pa_warning-2026-11-19).
+- **Next:** the last 8 `both` runs, then a 255-run re-run of the baseline to replace its lost recordings.
+
+Details, failures and what is not run yet: [Phase B](evidence/README.md#phase-b-human-model-under-skip_pa_warning-2026-11-19)
+and [Phase C](evidence/README.md#phase-c-fsm-design-variants-in-gazebo-2026-11-19-to-2026-11-24) in the evidence.
 
 Changes to the system under test are additive and default-off: with no new launch arguments,
 every node receives exactly the parameters it had in V2 (verified; see evidence E1.3/E2.3).
 
-**Not in this repository:** run recordings (rosbag2, several GB) and model weights
-(`yolov8n.pt`, see `evaluation/README.md`). After cloning anywhere other than
+**Not in this repository:** the recordings of the original 300 baseline runs (lost with the failed drive) and
+the model weights (`yolov8n.pt`, see `evaluation/README.md`). The recordings of every run since November 2026 *are*
+in the repository, compressed: [`evaluation/recordings/`](evaluation/recordings/). After cloning anywhere other than
 `~/Yoru_bot_publication`, run `bash evaluation/scripts/configure_paths.sh` once: a few inherited
 configuration files hold absolute paths.
 
