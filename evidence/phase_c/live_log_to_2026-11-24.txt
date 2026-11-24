@@ -415,3 +415,81 @@
 12:22:27 [backup] D:\ mirror updated in 16 s (2.0G, 016823d after_campaign.sh: safety net that archives recordings, commits, pushes and backs up when a campaign ends)
 12:22:27 [campaign] campaign ended: last session stopped for another reason (STOP file present (manual stop))
 12:22:27 [campaign] end: 21 runs still to do
+12:24:08 [backup] D:\ mirror updated in 17 s (2.1G, 5a101c1 Phase C 'both' partial (9/30): H complied S1 9/9 like hold_s1; recordings archived; day wrap-up)
+12:24:23 [backup] D:\ mirror updated in 15 s (2.1G, 5a101c1 Phase C 'both' partial (9/30): H complied S1 9/9 like hold_s1; recordings archived; day wrap-up)
+=== 2026-11-24 14:56:20 continue 'both' (21 runs left): fresh boot (cpu 35 %, thermal 72.9 C); 1 session left today (3/day: reset_first 09:52 + both 11:37 used) -> run_campaign.sh 1 after Windows settles; safety net armed on the campaign; DDS-domain fix (ae49843) first test ===
+14:56:23 [settle] windows cpu 4 %, thermal 60.9 C (calm checks in a row: 1)
+14:58:26 [settle] windows cpu 13 %, thermal 62.9 C (calm checks in a row: 3)
+14:58:26 [settle] settled (cpu 13 %, thermal 62.9 C): starting the 'both' campaign (1 session)
+14:58:26 [campaign] start: up to 1 sessions, 30 min rest between them; args: --scenarios H,C,A --seeds 10 --compliance-aware both --out evaluation/data/variants --manifest evaluation/data/variants/manifest.csv
+14:58:27 [campaign] session 1/1: 21 runs to do
+14:58:27 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+14:58:28 [gentle] session start: tag=aware_both, 21 of 30 runs to do; budget 60 min, cool-down 120 s, stop if CPU performance < 70 % while busy
+14:58:28 [gentle] run 1/21: H seed 4
+14:58:31 [phaseC] campaign pid 1499; safety net armed on it
+14:58:56 [phaseC] 'both' session started 14:58 (campaign 1499, safety net armed); first run H/4 on domain 75 (DDS fix active)
+15:00:43 [gentle]   ok: complied S1 at 46.9 s sim, RTF 0.763
+15:00:43 [gentle]   thermal zone during the run: peak 68.9 C
+15:00:43 [gentle]   cool-down 120 s
+15:02:43 [gentle] run 2/21: C seed 0
+15:05:08 [gentle]   ok: target_lost S2 at 53.0 s sim, RTF 0.757
+15:05:08 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+15:05:08 [gentle]   thermal zone during the run: peak 67.9 C
+15:05:08 [gentle]   cool-down 120 s
+15:06:13 [watchdog] health OK; both 11/30 (session: H/4 complied S1, C/0 target_lost S2); domains 75, 78; 0 nav2_not_ready since the DDS fix; peak 68.9 C; push sent
+15:07:08 [gentle] run 3/21: C seed 1
+15:11:08 [gentle]   ok: target_lost S2 at 51.8 s sim, RTF 0.812
+15:11:08 [gentle]   CPU performance while busy: median 79 % (4 monitor samples)
+15:11:08 [gentle]   thermal zone during the run: peak 64.9 C
+15:11:08 [gentle]   cool-down 120 s
+15:13:08 [gentle] run 4/21: C seed 2
+15:15:32 [gentle]   ok: target_lost S2 at 54.0 s sim, RTF 0.78
+15:15:32 [gentle]   thermal zone during the run: peak 63.9 C
+15:15:32 [gentle]   cool-down 120 s
+15:17:32 [gentle] run 5/21: C seed 3
+15:19:51 [gentle]   ok: target_lost S2 at 51.8 s sim, RTF 0.789
+15:19:51 [gentle]   thermal zone during the run: peak 63.9 C
+15:19:51 [gentle]   cool-down 120 s
+15:21:19 [watchdog] health OK; both 14/30 (session 5 ok: H/4, C/0-3); C/1 attempt 1 nav2_not_ready on domain 81 (no lifecycle manager active), retry on 82 ok; since the DDS fix 1 nav2_not_ready in 6 attempts (domains 75,78,81,82,84,87); peak 68.9 C; push sent
+15:21:51 [gentle] run 6/21: C seed 4
+15:25:51 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.825
+15:25:51 [gentle]   thermal zone during the run: peak 61.9 C
+15:25:51 [gentle]   cool-down 120 s
+15:27:51 [gentle] run 7/21: C seed 5
+15:30:11 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.798
+15:30:11 [gentle]   thermal zone during the run: peak 60.9 C
+15:30:11 [gentle]   cool-down 120 s
+15:32:11 [gentle] run 8/21: C seed 6
+15:36:10 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.827
+15:36:10 [gentle]   CPU performance while busy: median 78 % (4 monitor samples)
+15:36:10 [gentle]   thermal zone during the run: peak 64.9 C
+15:36:10 [gentle]   cool-down 120 s
+15:36:33 [watchdog] health OK; both 15/30 (session: H/4, C/0-5 ok, C/6 running); DDS-fix check: 3 nav2_not_ready in 11 attempts since the fix (27 %) vs 11/66 (17 %) on domain 61 before -> domain reuse was NOT the (main) cause; my earlier conclusion was overstated; rotation stays (harmless). Peak 68.9 C; push sent
+15:38:10 [gentle] run 9/21: C seed 7
+15:40:31 [gentle]   ok: target_lost S2 at 55.8 s sim, RTF 0.821
+15:40:31 [gentle]   thermal zone during the run: peak 63.9 C
+15:40:31 [gentle]   cool-down 120 s
+15:42:31 [gentle] run 10/21: C seed 8
+15:44:50 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.794
+15:44:50 [gentle]   thermal zone during the run: peak 63.9 C
+15:44:50 [gentle]   cool-down 120 s
+15:46:50 [gentle] run 11/21: C seed 9
+15:49:10 [gentle]   ok: target_lost S2 at 53.0 s sim, RTF 0.799
+15:49:10 [gentle]   thermal zone during the run: peak 62.9 C
+15:49:10 [gentle]   cool-down 120 s
+15:51:10 [gentle] run 12/21: A seed 0
+15:51:16 [watchdog] health OK; both 20/30 (session: H/4, C/0-9 ok; C complete 10/10 target_lost); since fix 3 nav2_not_ready in 14 attempts; peak 68.9 C; push sent; session ends ~16:00 (A/0, A/1 left in budget)
+15:53:54 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.821
+15:53:54 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+15:53:54 [gentle]   thermal zone during the run: peak 64.9 C
+15:53:54 [gentle]   cool-down 120 s
+15:55:54 [gentle] run 13/21: A seed 1
+15:58:39 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.821
+15:58:39 [gentle]   thermal zone during the run: peak 62.9 C
+15:58:39 [gentle] session end after 60 min: 13 run(s) ok this session; 8 of 30 still to do; reason: session time budget used (60 min)
+15:58:39 [turbo] restored: Current AC Power Setting Index: 0x00000002
+15:58:55 [backup] D:\ mirror updated in 16 s (2.2G, 5a101c1 Phase C 'both' partial (9/30): H complied S1 9/9 like hold_s1; recordings archived; day wrap-up)
+15:58:55 [campaign] daily session limit reached (1)
+15:58:55 [campaign] end: 8 runs still to do
+15:59:12 [autosave] process 1499 ended: archiving recordings, committing, pushing, backing up
+28 archives, 10 file(s) written or updated; raw 1657 MB -> 290 MB
