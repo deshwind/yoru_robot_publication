@@ -191,3 +191,24 @@ def test_manual_stop_still_comes_first():
     reason = gb.stop_reason(**{**BASE, 'stop_file_present': True, 'thermal_peak': 95.0,
                                'max_thermal': 88.0})
     assert 'STOP file' in reason
+
+
+# ------------------- earlier days' lines are ignored (bug found 2026-11-24)
+
+TWO_DAYS = """# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files | thermal_zone_C | passive_limit%
+10:57:57 | 105 | 60 | vmmemwsl=693 | 9.0 | 3600 | 900 | 81.9 | 100
+10:59:03 | 103 | 72 | vmmemwsl=700 | 9.0 | 3600 | 900 | 76.9 | 100
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files | thermal_zone_C | passive_limit%
+10:56:12 | 79 | 55 | vmmemwsl=868 | 8.0 | 3600 | 900 | 68.9 | 100
+10:58:24 | 73 | 4 | system=5 | 1.0 | 9000 | 900 | 43.9 | 100
+"""
+
+
+def test_only_the_current_monitors_lines_count(tmp_path):
+    # first block: yesterday's turbo-on lines (times overlap today's run); second: today's
+    path = tmp_path / 'host_monitor.log'
+    path.write_text(TWO_DAYS)
+    temps = gb.thermal_readings(str(path), at('10:54:45'), at('10:59:29'))
+    assert [v for _, v in temps] == [68.9, 43.9]
+    samples = gb.monitor_samples(str(path), at('10:54:45'), at('10:59:29'))
+    assert [p for _, p, _ in samples] == [79.0, 73.0]

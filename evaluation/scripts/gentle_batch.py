@@ -76,25 +76,35 @@ def last_row(manifest, run_id):
     return row
 
 
+def current_monitor_lines(path):
+    """Lines written by the most recent host monitor: those after the last '# time'
+    header. The log keeps earlier days' lines and stores times only (no dates), so a
+    time window alone would also match another day's lines (found 2026-11-24: A/7-A/9
+    of reset_first were reported with 23 Nov's turbo-on readings)."""
+    with open(path, encoding='utf-8', errors='replace') as f:
+        lines = f.readlines()
+    last_header = max((i for i, l in enumerate(lines) if l.startswith('# time')), default=-1)
+    return lines[last_header + 1:]
+
+
 def monitor_samples(path, start, end):
     """(time, performance %, utility %) samples of host_monitor.log taken
     between two datetimes of the same day (the log has times only)."""
     samples = []
     if not os.path.isfile(path):
         return samples
-    with open(path, encoding='utf-8', errors='replace') as f:
-        for line in f:
-            parts = [p.strip() for p in line.split('|')]
-            if line.startswith('#') or len(parts) < 3:
-                continue
-            try:
-                t = datetime.datetime.combine(start.date(),
-                                              datetime.time.fromisoformat(parts[0]))
-                perf, util = float(parts[1]), float(parts[2])
-            except ValueError:
-                continue
-            if start <= t <= end:
-                samples.append((t, perf, util))
+    for line in current_monitor_lines(path):
+        parts = [p.strip() for p in line.split('|')]
+        if line.startswith('#') or len(parts) < 3:
+            continue
+        try:
+            t = datetime.datetime.combine(start.date(),
+                                          datetime.time.fromisoformat(parts[0]))
+            perf, util = float(parts[1]), float(parts[2])
+        except ValueError:
+            continue
+        if start <= t <= end:
+            samples.append((t, perf, util))
     return samples
 
 
@@ -117,19 +127,18 @@ def thermal_readings(path, start, end):
     readings = []
     if not os.path.isfile(path):
         return readings
-    with open(path, encoding='utf-8', errors='replace') as f:
-        for line in f:
-            parts = [p.strip() for p in line.split('|')]
-            if line.startswith('#') or len(parts) < 9:
-                continue
-            try:
-                t = datetime.datetime.combine(start.date(),
-                                              datetime.time.fromisoformat(parts[0]))
-                value = float(parts[7])
-            except ValueError:
-                continue
-            if start <= t <= end:
-                readings.append((t, value))
+    for line in current_monitor_lines(path):
+        parts = [p.strip() for p in line.split('|')]
+        if line.startswith('#') or len(parts) < 9:
+            continue
+        try:
+            t = datetime.datetime.combine(start.date(),
+                                          datetime.time.fromisoformat(parts[0]))
+            value = float(parts[7])
+        except ValueError:
+            continue
+        if start <= t <= end:
+            readings.append((t, value))
     return readings
 
 
