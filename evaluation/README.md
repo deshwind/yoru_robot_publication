@@ -90,6 +90,17 @@ python3 evaluation/scripts/gentle_batch.py --scenarios H,C,A --seeds 10 --compli
 touch evaluation/progress/STOP        # stop after the current run
 ```
 
+The baseline re-run (from 2026-11-25) is started after a boot like this: wait until Windows is quiet,
+then start a campaign of turbo-off sessions with the safety net armed. `--order seed` runs every
+scenario of a seed before the next seed, so a partly done set stays balanced across scenarios.
+
+```bash
+bash evaluation/scripts/wait_for_settle.sh &&
+bash evaluation/scripts/start_campaign.sh 2 30 --scenarios all \
+    --seed-list 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 --order seed --cooldown-s 60 \
+    --tag baseline_wsl --out evaluation/data/baseline_wsl --manifest evaluation/data/baseline_wsl/manifest.csv
+```
+
 Each run writes `<out>/<tag>/<scenario>/<seed>/` containing `overlay.yaml`, `launch.log`,
 `bag/` (rosbag2, sqlite3), `incident_logs/incidents.jsonl` and `run_info.json`, plus one row in
 the manifest CSV: scenario, seed, weights, status, outcome, stage, sim time of the outcome, expected
@@ -127,7 +138,7 @@ Batch progress while it runs: `grep -c status= evaluation/data/baseline_batch.lo
 
 ```bash
 PYTHONPATH=src/yoru_core:$PYTHONPATH python3 -m pytest src/yoru_core/test -q   # system (119)
-python3 -m pytest evaluation/tests -q                                           # evaluation scripts (83)
+python3 -m pytest evaluation/tests -q                                           # evaluation scripts (87)
 ```
 
 ## 6. Scripts
@@ -144,6 +155,7 @@ python3 -m pytest evaluation/tests -q                                           
 | `progress_status.py`, `after_campaign.sh`, `run_phase_c_session.sh`, `run_repro_wsl.sh` | watchdog snapshot; safety net that archives, commits, pushes and backs up when a campaign ends; one detached gentle session; the 45-run reproduction batch |
 | `archive_recordings.py` | packs every run set's recordings into deterministic `.tar.gz` archives in `evaluation/recordings/` (committed), with checksums; `--verify` checks them |
 | `backup_to_d.sh`, `run_campaign.sh`, `run_session_turbo_off.sh`, `show_progress.py` | mirror to D:\\, daily campaigns of turbo-off gentle sessions, one turbo-off session, live progress view |
+| `wait_for_settle.sh` | waits until Windows is quiet (CPU < 30 %, thermal zone ≤ 65 °C, three checks in a row) before simulation work, e.g. after a boot; logs `[settle]` lines |
 | `start_campaign.sh` | starts a detached campaign and arms `after_campaign.sh` on the campaign's own pid (added 2026-11-25 after a false start: `setsid` forks, so `$!` was the launcher's pid and the safety net fired at once) |
 | `host_monitor.sh` | Windows CPU performance, busiest Windows processes, thermal-zone temperature and passive (throttling) limit, every minute, during a batch |
 | `bag_summary.py` | human-readable summary of one bag |

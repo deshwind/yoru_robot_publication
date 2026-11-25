@@ -25,7 +25,7 @@ the files listed. Where something has **not** been measured, it says so.
 | Same laptop, new OS (after the SSD slot failure) | set up; 2 set-up problems fixed (clock steps, CPU threads); **reproduction: 45 / 45 outcomes match the baseline** (3 seeds × 15 scenarios); speed depends on background load; baseline bags **permanently lost**, post-failure recordings archived in the repo | [section](#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties), [`machine_change/`](machine_change/), [`evaluation/results/repro_wsl/`](../evaluation/results/repro_wsl/) |
 | Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
 | Phase C: FSM design variants in Gazebo | **complete** (2026-11-25): `hold_s1`, `reset_first` and `both` 30/30 each. H fixed by every mode (p = 0.002), C and A unchanged (p = 1); only `hold_s1` and `both` also avoid the approach (0.00 m vs 1.38 m). Recommendation: `hold_s1` | [section](#phase-c-fsm-design-variants-in-gazebo-2026-11-19-to-2026-11-25), [`evaluation/results/phase_c/`](../evaluation/results/phase_c/), [`phase_c/`](phase_c/) |
-| Baseline re-run (to replace the lost recordings) | **decided 2026-11-24, not started**: 255 runs (seeds 3–19), which together with the 45 reproduction runs give a recorded 300-run baseline | [why](#what-may-have-been-lost-with-the-failed-drive) |
+| Baseline re-run (to replace the lost recordings) | **running since 2026-11-25** (decided 2026-11-24): 255 runs (seeds 3–19), which together with the 45 reproduction runs give a recorded 300-run baseline; about 6 days at 3 sessions a day | [section](#baseline-re-run-on-the-wsl2-set-up-from-2026-11-25), [why](#what-may-have-been-lost-with-the-failed-drive) |
 
 **Final numbers, in one place:** [E5.3](#e53-final-results-300-valid-runs) (outcomes, timing, proximity),
 [E6.3](#e63-final-results-300-runs-600-events) (sensitivity and ablation), the
@@ -1931,3 +1931,55 @@ boost mode 2 after each session).
 
 Host monitor: [`phase_c/host_monitor_2026-11-25.log`](phase_c/host_monitor_2026-11-25.log). Live log:
 [`phase_c/live_log_to_2026-11-25.txt`](phase_c/live_log_to_2026-11-25.txt).
+
+
+
+---
+
+## Baseline re-run on the WSL2 set-up (from 2026-11-25)
+
+**Why.** The 300 baseline recordings (rosbag2) were lost with the failed drive
+([what was lost](#what-may-have-been-lost-with-the-failed-drive)). The baseline's results are in the
+repository, but no bag-based analysis can be re-run without the recordings. This re-run gives a recorded
+300-run baseline on the current set-up:
+- the 45 reproduction runs (seeds 0–2, `repro_wsl`, 19 Nov), which matched the baseline in 45 of 45
+  outcomes;
+- **255 new runs** (seeds 3–19 of all 15 scenarios, `baseline_wsl`).
+
+The recordings go into the repository as compressed archives
+([`evaluation/recordings/baseline_wsl/`](../evaluation/recordings/)). The user decided this on 24 Nov,
+to run after Phase C.
+
+**How it is run.**
+- **Configuration:** the baseline configuration, with no variant option. The runner's configuration guard
+  requires every run's FSM and human-model start-up lines to show every variant switched off.
+- **Set-up:** the same laptop under WSL2 as the reproduction and Phase C: 2 YOLO threads per detector,
+  rendering on the NVIDIA GPU.
+- **Pace:** three one-hour turbo-off sessions a day with 30-minute rests, chosen for the laptop
+  ([`run_campaign.sh`](../evaluation/scripts/run_campaign.sh)).
+  - Cool-down: 60 s after each run, then until the thermal zone is ≤ 65 °C; stop at 88 °C.
+  - Start-up: [`wait_for_settle.sh`](../evaluation/scripts/wait_for_settle.sh) after a boot, then
+    [`start_campaign.sh`](../evaluation/scripts/start_campaign.sh), which also arms the safety net.
+  - **Seed order** (`--order seed`, new): every scenario of a seed before the next seed. Each day then adds
+    complete seeds, so a partly done set is balanced across scenarios, and heavy and light scenarios
+    alternate.
+- **Expected duration:** about 18 hours of sessions, about 4.2 min per run including cool-down and retries
+  (from the reproduction's run times). That is about 6 days at three sessions a day.
+
+**Differences from the 45 reproduction runs it will be pooled with (to report).**
+1. **Code fingerprint:** `repro_wsl` has `f7bb8f4bdff9a649`; these runs have `7310e62f04ee1977`. The
+   difference is the Phase B human-model option (default off), the runner's variant support and the
+   gentle-session tools. All of it is off in the baseline configuration, which the guard checks in every
+   run.
+2. **Run mode:** the reproduction ran as one continuous batch, with no cool-down and consecutive DDS
+   domains. These runs are made in gentle sessions: cool-downs, a rotating DDS domain, and stale Fast DDS
+   shared memory cleaned before each run. Each run is a fresh launch either way.
+3. **The original baseline** ran under native Ubuntu (code fingerprint `e76b171d83faafe5`). As for the
+   reproduction, every new run will be compared with the original baseline run of the same scenario and
+   seed ([`compare_repro.py`](../evaluation/scripts/compare_repro.py)).
+
+**Progress.**
+
+| Date | Session | Runs | Ended |
+|---|---|---|---|
+| 25 Nov | 1 and 2, from about 21:00 (after a boot; Windows settled in about a minute) | running | |

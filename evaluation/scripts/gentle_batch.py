@@ -191,12 +191,27 @@ def live(message):
     print(f'[gentle] {message}', flush=True)
 
 
+def run_plan(scenario_ids, seeds, order='scenario'):
+    """(scenario, seed) pairs in run order. 'seed' order (added 2026-11-25 for the
+    255-run baseline re-run, about six days): each seed's scenarios run together, so
+    every finished day adds complete seeds, and heavy and light scenarios alternate."""
+    if order == 'seed':
+        return [(sid, seed) for seed in seeds for sid in scenario_ids]
+    if order == 'scenario':
+        return [(sid, seed) for sid in scenario_ids for seed in seeds]
+    raise ValueError(f'unknown order {order!r}')
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--scenarios', default='all')
     ap.add_argument('--seeds', type=int, default=10, help='seeds 0..N-1')
     ap.add_argument('--seed-list')
+    ap.add_argument('--order', choices=('scenario', 'seed'), default='scenario',
+                    help="'scenario' (default): every seed of a scenario, then the next "
+                         "scenario; 'seed': every scenario of a seed, then the next seed, so "
+                         "that a partly done set is still balanced across scenarios")
     ap.add_argument('--skip-pa', action='store_true')
     ap.add_argument('--sustained-ratio', type=float, default=0.0)
     ap.add_argument('--compliance-aware', choices=('hold_s1', 'reset_first', 'both'), default='')
@@ -225,7 +240,7 @@ def main():
     tag = run_tag(cli.tag, variant)
     seeds = ([int(s) for s in cli.seed_list.split(',')] if cli.seed_list
              else list(range(cli.seeds)))
-    plan = [(s['id'], seed) for s in rb.load_scenarios(cli.scenarios) for seed in seeds]
+    plan = run_plan([s['id'] for s in rb.load_scenarios(cli.scenarios)], seeds, cli.order)
     todo = pending_runs(plan, cli.manifest, tag)
     print(f'[gentle] tag={tag}: {len(plan)} runs planned, {len(plan) - len(todo)} already ok, '
           f'{len(todo)} to do; session <= {cli.max_minutes:g} min, cool-down {cli.cooldown_s:g} s')

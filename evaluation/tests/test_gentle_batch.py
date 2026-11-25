@@ -234,3 +234,21 @@ def test_batch_mode_domains_are_unchanged():
     # run_batch without --domain-offset: same sequence as before the change
     assert [rb.domain_for(i, 1) for i in range(4)] == [61, 64, 67, 70]
     assert [60 + (i * 3 + 1) % 40 for i in range(4)] == [61, 64, 67, 70]
+
+
+def test_run_plan_scenario_order_is_the_default():
+    assert gb.run_plan(['A', 'B'], [3, 4]) == [('A', 3), ('A', 4), ('B', 3), ('B', 4)]
+
+
+def test_run_plan_seed_order_completes_each_seed_first():
+    assert gb.run_plan(['A', 'B'], [3, 4], 'seed') == [('A', 3), ('B', 3), ('A', 4), ('B', 4)]
+
+
+def test_run_plan_same_runs_in_either_order():
+    ids, seeds = ['A', 'H', 'L'], list(range(3, 20))
+    assert sorted(gb.run_plan(ids, seeds, 'seed')) == sorted(gb.run_plan(ids, seeds))
+
+
+def test_run_plan_rejects_unknown_order():
+    with pytest.raises(ValueError):
+        gb.run_plan(['A'], [0], 'random')
