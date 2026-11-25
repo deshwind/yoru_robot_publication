@@ -25,3 +25,9 @@ setsid bash -c 'exec bash evaluation/scripts/after_campaign.sh "$1"' safety "$PI
 sleep 1
 echo "$(date +%T) [campaign] started as pid $PID; safety net armed on it" >> evaluation/progress/live.log
 echo "campaign pid $PID; safety net armed"
+# SAVE_EVERY_MIN=30 [SAVE_GROUP=baseline_wsl]: also save every N minutes during the campaign
+if [ -n "$SAVE_EVERY_MIN" ]; then
+    setsid bash -c 'exec bash evaluation/scripts/periodic_save.sh "$1" "$2" "$3"' save "$PID" \
+        "$SAVE_EVERY_MIN" "${SAVE_GROUP:-baseline_wsl}" > /dev/null 2>&1 < /dev/null &
+    echo "periodic save every $SAVE_EVERY_MIN min armed"
+fi

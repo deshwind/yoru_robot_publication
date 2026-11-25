@@ -1994,4 +1994,15 @@ to run after Phase C.
 
 | Date | Session | Runs | Ended |
 |---|---|---|---|
-| 25 Nov | 1 and 2, from about 21:00 (after a boot; Windows settled in about a minute) | running | |
+| 25 Nov | 1 and 2, from 20:58 (after a boot; Windows settled in about a minute) | running | |
+| 25–26 Nov, night | 3–7, chained after a 30-min rest, until about 07:15 | planned | |
+
+**Overnight running (decided by the user on 25 Nov, about 21:20).**
+- After tonight's two sessions, [`chain_campaign.sh`](../evaluation/scripts/chain_campaign.sh) waits for
+  the final save, rests 30 minutes, checks that Windows has settled, and starts a 5-session campaign.
+- This relaxes the user's own limit of three sessions a day, for this night. Each hour still has the
+  same pattern (1 hour of runs, then a 30-minute rest), turbo stays off and the thermal limits stay.
+- Checked first: Windows updates paused, no restart pending, on mains power.
+- At about 21:20 the user switched NitroSense (the laptop maker's fan and power tool) to its
+  performance mode. The Windows power plan before the switch: Razer Cortex Power Plan, turbo (boost)
+  off. The watchdog checks every 10 minutes that turbo stays off.

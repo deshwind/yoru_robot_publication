@@ -158,7 +158,8 @@ python3 -m pytest evaluation/tests -q                                           
 | `periodic_save.sh` | during a campaign, every 30 min and only in a gap between runs: archives the run set, commits on the work branch, pushes, backs up to D:\\ (shares a lock with `after_campaign.sh`) |
 | `backup_to_d.sh`, `run_campaign.sh`, `run_session_turbo_off.sh`, `show_progress.py` | mirror to D:\\, daily campaigns of turbo-off gentle sessions, one turbo-off session, live progress view |
 | `wait_for_settle.sh` | waits until Windows is quiet (CPU < 30 %, thermal zone ≤ 65 °C, three checks in a row) before simulation work, e.g. after a boot; logs `[settle]` lines |
-| `start_campaign.sh` | starts a detached campaign and arms `after_campaign.sh` on the campaign's own pid (added 2026-11-25 after a false start: `setsid` forks, so `$!` was the launcher's pid and the safety net fired at once) |
+| `chain_campaign.sh` | after a campaign has ended and been saved: rests, checks that Windows has settled, then starts the next campaign (used for overnight running from 2026-11-25); a STOP file cancels it |
+| `start_campaign.sh` | starts a detached campaign and arms `after_campaign.sh` on the campaign's own pid (and `periodic_save.sh` when `SAVE_EVERY_MIN` is set) (added 2026-11-25 after a false start: `setsid` forks, so `$!` was the launcher's pid and the safety net fired at once) |
 | `host_monitor.sh` | Windows CPU performance, busiest Windows processes, thermal-zone temperature and passive (throttling) limit, every minute, during a batch |
 | `bag_summary.py` | human-readable summary of one bag |
 | `check_run.sh` | one run with a hand-written overlay (Phase 3 checks) |
