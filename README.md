@@ -33,13 +33,17 @@ The baseline bags were lost with the failed drive (confirmed unrecoverable on 20
 - **Second set (complete, 30 runs):** `reset_first` also turns H into complied (S2), but the robot
   still drives about 1.4 m towards the person who has already stopped. C and A are unchanged
   (10 of 10 each). `hold_s1` is therefore the better fix for H.
-- **Third set (partial, 22 of 30):** `both` behaves like `hold_s1` on H (complied in S1, no approach);
-  C unchanged (10 of 10), A unchanged so far (2 of 2).
+- **Third set (complete, 30 runs):** `both` behaves like `hold_s1` on H (complied in S1, no approach);
+  C and A unchanged (10 of 10 each).
+- **Summary:** every mode fixes H (10 of 10 seed-paired runs changed, exact p = 0.002) and leaves C and
+  A unchanged (p = 1). Only `hold_s1` and `both` also stop the robot driving towards the person
+  (0.00 m against 1.38 m, p = 0.002). **Recommendation: `hold_s1`.** Statistics, LaTeX tables and
+  figures: [`evaluation/results/phase_c/`](evaluation/results/phase_c/).
 
-- **Next:** the last 8 `both` runs, then a 255-run re-run of the baseline to replace its lost recordings.
+- **Next:** a 255-run re-run of the baseline to replace its lost recordings.
 
 Details, failures and what is not run yet: [Phase B](evidence/README.md#phase-b-human-model-under-skip_pa_warning-2026-11-19)
-and [Phase C](evidence/README.md#phase-c-fsm-design-variants-in-gazebo-2026-11-19-to-2026-11-24) in the evidence.
+and [Phase C](evidence/README.md#phase-c-fsm-design-variants-in-gazebo-2026-11-19-to-2026-11-25) in the evidence.
 
 Changes to the system under test are additive and default-off: with no new launch arguments,
 every node receives exactly the parameters it had in V2 (verified; see evidence E1.3/E2.3).

@@ -144,6 +144,7 @@ python3 -m pytest evaluation/tests -q                                           
 | `progress_status.py`, `after_campaign.sh`, `run_phase_c_session.sh`, `run_repro_wsl.sh` | watchdog snapshot; safety net that archives, commits, pushes and backs up when a campaign ends; one detached gentle session; the 45-run reproduction batch |
 | `archive_recordings.py` | packs every run set's recordings into deterministic `.tar.gz` archives in `evaluation/recordings/` (committed), with checksums; `--verify` checks them |
 | `backup_to_d.sh`, `run_campaign.sh`, `run_session_turbo_off.sh`, `show_progress.py` | mirror to D:\\, daily campaigns of turbo-off gentle sessions, one turbo-off session, live progress view |
+| `start_campaign.sh` | starts a detached campaign and arms `after_campaign.sh` on the campaign's own pid (added 2026-11-25 after a false start: `setsid` forks, so `$!` was the launcher's pid and the safety net fired at once) |
 | `host_monitor.sh` | Windows CPU performance, busiest Windows processes, thermal-zone temperature and passive (throttling) limit, every minute, during a batch |
 | `bag_summary.py` | human-readable summary of one bag |
 | `check_run.sh` | one run with a hand-written overlay (Phase 3 checks) |

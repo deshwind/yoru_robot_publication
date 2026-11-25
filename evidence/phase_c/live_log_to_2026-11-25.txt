@@ -567,3 +567,8 @@
 14:30:26 [campaign] end: 0 runs still to do
 14:30:30 [autosave] process 11492 ended: archiving recordings, committing, pushing, backing up
 28 archives, 8 file(s) written or updated; raw 1764 MB -> 309 MB
+14:30:51 [autosave] committed f9f7ab7
+14:31:00 [autosave] pushed phase-c f9f7ab7
+14:31:00 [autosave] D:\ backup done
+14:31:26 [backup] D:\ mirror updated in 35 s (2.5G, f9f7ab7 Auto-save after campaign (2026-11-25 14:30:51): recordings archived, live log copied)
+14:47:54 [wrapup] aware_both complete 30/30: results rebuilt (metrics, comparison), phase_c_summary.py re-run (final, no longer provisional), evidence/README updated; tests system 119, evaluation 83; 246 doc links OK
