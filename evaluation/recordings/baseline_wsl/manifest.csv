@@ -1,0 +1,4 @@
+run_id,tag,scenario,seed,w_D,w_P,w_T,w_S,confirm_confidence,uncertain_confidence,ablation,status,outcome,outcome_stage,outcome_sim_t,expected_outcome,ground_truth,start_wall,end_wall,wall_s,sim_s,rtf,attempts,bag_ok,died_processes,code_sha256,run_dir,variant
+baseline_wsl/A/3,baseline_wsl,A,3,,,,,,,,ok,complied,S3,75.5,complied,violation,2026-11-25T21:00:30,2026-11-25T21:02:11,101.1,85.8,0.848,2,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/A/3,
+baseline_wsl/A-V/3,baseline_wsl,A-V,3,,,,,,,,ok,complied,S3,74.7,complied,violation,2026-11-25T21:04:11,2026-11-25T21:05:51,100.1,85.5,0.854,1,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/A-V/3,
+baseline_wsl/B/3,baseline_wsl,B,3,,,,,,,,ok,none,,,none,no_violation,2026-11-25T21:07:51,2026-11-25T21:10:09,138.1,120.6,0.873,1,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/B/3,

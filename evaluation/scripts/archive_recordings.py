@@ -7,10 +7,19 @@ compressed archives (decision of the user), one archive per run set and scenario
 
   evaluation/data/repro/repro_wsl/<S>/          -> evaluation/recordings/repro_wsl/<S>.tar.gz
   evaluation/data/variants/<tag>/<S>/           -> evaluation/recordings/<tag>/<S>.tar.gz
-  evaluation/data/baseline_wsl/baseline_wsl/<S>/-> evaluation/recordings/baseline_wsl/<S>.tar.gz
+  evaluation/data/baseline_wsl/baseline_wsl/<S>/<seed>/ -> evaluation/recordings/baseline_wsl/<S>/<seed>.tar.gz
+  evaluation/data/runs_invalid/baseline_wsl/baseline_wsl/<S>/<attempt>/
+                                     -> evaluation/recordings/baseline_wsl/failed_attempts/<S>/<attempt>.tar.gz
   evaluation/data/{pilot,doc,phase_b,runs_invalid}/ -> evaluation/recordings/misc/<name>.tar.gz
 
-plus each run set's manifest.csv and batch.log as plain files. Archives are deterministic
+plus each run set's manifest.csv and batch.log as plain files.
+
+The baseline re-run (255 runs over about six days) gets ONE ARCHIVE PER RUN instead (decided
+2026-11-25): a per-scenario archive would be rewritten after every new seed, and git keeps every
+version in full (about 5.9 GB of history over the re-run, against about 650 MB per run). A per-run
+archive is written once, when the run has finished (its run_info.json exists), and is repacked only
+if the run is redone (run_info.json newer than the archive). Its failed attempts are archived the
+same way and kept out of misc/runs_invalid.tar.gz, which therefore stays as it was. Archives are deterministic
 (sorted entries, fixed times and owners, gzip without a timestamp), so packing unchanged data
 again gives byte-identical files and git stores nothing new. An archive is rewritten only when
 its content changed. Writes evaluation/recordings/CHECKSUMS.sha256 and the table in
@@ -18,6 +27,12 @@ evaluation/recordings/README.md.
 
   python3 evaluation/scripts/archive_recordings.py            # pack / update
   python3 evaluation/scripts/archive_recordings.py --verify   # check archives against CHECKSUMS
+  python3 evaluation/scripts/archive_recordings.py --only baseline_wsl   # repack one group only
+
+--only (added 2026-11-25 for the 30-minute saves during the baseline re-run): repack only the
+named groups (comma-separated; `misc` for the misc archives). Other existing archives are left
+as they are, unread, so a save takes seconds instead of about 20 s of compression; a group whose
+archive does not exist yet is still packed.
 
 Restore one archive:  tar -xzf evaluation/recordings/repro_wsl/A.tar.gz -C evaluation/data/repro/repro_wsl
 """
@@ -42,18 +57,28 @@ SCENARIO_SETS = [
     ('aware_hold_s1', 'variants/aware_hold_s1', 'variants'),
     ('aware_reset_first', 'variants/aware_reset_first', 'variants'),
     ('aware_both', 'variants/aware_both', 'variants'),
-    ('baseline_wsl', 'baseline_wsl/baseline_wsl', 'baseline_wsl'),
 ]
 MISC = ['pilot', 'doc', 'phase_b', 'runs_invalid']
+# (group, runs directory, folder with manifest.csv / batch.log, failed-attempts directory)
+PER_RUN_SETS = [
+    ('baseline_wsl', 'baseline_wsl/baseline_wsl', 'baseline_wsl',
+     'runs_invalid/baseline_wsl/baseline_wsl'),
+]
+# kept out of the misc archive of the same name (archived per attempt instead)
+MISC_EXCLUDE = {'runs_invalid': [os.path.relpath(s[3], 'runs_invalid').split(os.sep)[0]
+                                 for s in PER_RUN_SETS]}
 
 
-def deterministic_tar_gz(src_parent, name):
-    """Bytes of a .tar.gz of src_parent/name that depend only on the content."""
+def deterministic_tar_gz(src_parent, name, exclude=()):
+    """Bytes of a .tar.gz of src_parent/name that depend only on the content.
+    exclude: subdirectories of src_parent/name (relative to it) left out."""
     raw = io.BytesIO()
+    top = os.path.join(src_parent, name)
     with tarfile.open(fileobj=raw, mode='w', format=tarfile.GNU_FORMAT) as tar:
         paths = []
-        for dirpath, dirnames, filenames in os.walk(os.path.join(src_parent, name)):
-            dirnames.sort()
+        for dirpath, dirnames, filenames in os.walk(top):
+            dirnames[:] = sorted(d for d in dirnames
+                                 if os.path.relpath(os.path.join(dirpath, d), top) not in exclude)
             paths.append(dirpath)
             paths += [os.path.join(dirpath, f) for f in sorted(filenames)]
         for path in sorted(paths):
@@ -93,7 +118,50 @@ def write_if_changed(path, data):
     return True
 
 
-def pack():
+def _existing(target, only, group):
+    """True when this archive is to be left as it is (not selected by --only, and present)."""
+    return only is not None and group not in only and os.path.isfile(target)
+
+
+def pack_per_run(group, rel, meta, invalid_rel, only=None):
+    """One archive per finished run (and per failed attempt); README rows per scenario."""
+    selected = only is None or group in only
+    changed, rows = 0, []
+    for src_rel, sub in ((rel, ''), (invalid_rel, 'failed_attempts')):
+        base = os.path.join(DATA, src_rel)
+        if not os.path.isdir(base):
+            continue
+        for scenario in sorted(os.listdir(base)):
+            sdir = os.path.join(base, scenario)
+            if not os.path.isdir(sdir):
+                continue
+            runs = raw = comp = 0
+            for run in sorted(os.listdir(sdir)):
+                info = os.path.join(sdir, run, 'run_info.json')
+                if not os.path.isfile(info):          # not a run, or not finished yet
+                    continue
+                target = os.path.join(OUT, group, sub, scenario, f'{run}.tar.gz')
+                if os.path.isfile(target) and (not selected or
+                                               os.path.getmtime(target) >= os.path.getmtime(info)):
+                    size = os.path.getsize(target)
+                else:
+                    data = deterministic_tar_gz(base, os.path.join(scenario, run))
+                    changed += write_if_changed(target, data)
+                    size = len(data)
+                runs, raw, comp = runs + 1, raw + du(os.path.join(sdir, run)), comp + size
+            if runs:
+                rows.append((group, os.path.join(sub, scenario) if sub else scenario, runs, raw,
+                             comp, os.path.join(OUT, group, sub, scenario)))
+    if selected:
+        for name in ('manifest.csv', 'batch.log'):
+            src = os.path.join(DATA, meta, name)
+            if os.path.isfile(src):
+                with open(src, 'rb') as f:
+                    changed += write_if_changed(os.path.join(OUT, group, name), f.read())
+    return changed, rows
+
+
+def pack(only=None):
     rows, changed = [], 0
     for group, rel, meta in SCENARIO_SETS:
         base = os.path.join(DATA, rel)
@@ -102,11 +170,15 @@ def pack():
         for scenario in sorted(os.listdir(base)):
             if not os.path.isdir(os.path.join(base, scenario)):
                 continue
-            data = deterministic_tar_gz(base, scenario)
             target = os.path.join(OUT, group, f'{scenario}.tar.gz')
-            changed += write_if_changed(target, data)
+            if _existing(target, only, group):
+                size = os.path.getsize(target)
+            else:
+                data = deterministic_tar_gz(base, scenario)
+                changed += write_if_changed(target, data)
+                size = len(data)
             rows.append((group, scenario, count_runs(os.path.join(base, scenario)),
-                         du(os.path.join(base, scenario)), len(data), target))
+                         du(os.path.join(base, scenario)), size, target))
         for name in ('manifest.csv', 'batch.log'):
             src = os.path.join(DATA, meta, name)
             if os.path.isfile(src):
@@ -115,10 +187,20 @@ def pack():
     for name in MISC:
         src = os.path.join(DATA, name)
         if os.path.isdir(src):
-            data = deterministic_tar_gz(DATA, name)
             target = os.path.join(OUT, 'misc', f'{name}.tar.gz')
-            changed += write_if_changed(target, data)
-            rows.append(('misc', name, count_runs(src), du(src), len(data), target))
+            if _existing(target, only, 'misc'):
+                size = os.path.getsize(target)
+            else:
+                data = deterministic_tar_gz(DATA, name, MISC_EXCLUDE.get(name, ()))
+                changed += write_if_changed(target, data)
+                size = len(data)
+            excluded = [os.path.join(src, e) for e in MISC_EXCLUDE.get(name, ())]
+            rows.append(('misc', name, count_runs(src) - sum(count_runs(e) for e in excluded),
+                         du(src) - sum(du(e) for e in excluded), size, target))
+    for group, rel, meta, invalid_rel in PER_RUN_SETS:
+        n, new_rows = pack_per_run(group, rel, meta, invalid_rel, only)
+        changed += n
+        rows += new_rows
     sums = []
     for dirpath, _, filenames in os.walk(OUT):
         for f in sorted(filenames):
@@ -146,7 +228,11 @@ def write_readme(rows):
              'tar -xzf evaluation/recordings/repro_wsl/A.tar.gz -C evaluation/data/repro/repro_wsl',
              'tar -xzf evaluation/recordings/aware_hold_s1/H.tar.gz -C evaluation/data/variants/aware_hold_s1',
              'tar -xzf evaluation/recordings/misc/runs_invalid.tar.gz -C evaluation/data',
+             'tar -xzf evaluation/recordings/baseline_wsl/A/3.tar.gz -C evaluation/data/baseline_wsl/baseline_wsl',
              '```', '',
+             'The baseline re-run (`baseline_wsl`) has **one archive per run** (`baseline_wsl/<scenario>/<seed>.tar.gz`,',
+             'failed attempts in `baseline_wsl/failed_attempts/`): each is written once, so git does not keep a new',
+             'copy of a growing archive after every seed. The table counts them per scenario.', '',
              '| Run set | Archive | Runs (valid + failed attempts) | Raw | Compressed |',
              '|---|---|---|---|---|']
     for group, name, runs, raw, comp, target in rows:
@@ -175,5 +261,15 @@ def verify():
     return bad
 
 
+def main(argv):
+    if '--verify' in argv:
+        return 1 if verify() else 0
+    only = None
+    if '--only' in argv:
+        only = set(argv[argv.index('--only') + 1].split(','))
+    pack(only)
+    return 0
+
+
 if __name__ == '__main__':
-    sys.exit(1 if '--verify' in sys.argv and verify() else (0 if '--verify' in sys.argv else pack()))
+    sys.exit(main(sys.argv[1:]))

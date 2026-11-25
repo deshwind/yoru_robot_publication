@@ -14,7 +14,12 @@ wrote them under `evaluation/data/`. Checksums: [`CHECKSUMS.sha256`](CHECKSUMS.s
 tar -xzf evaluation/recordings/repro_wsl/A.tar.gz -C evaluation/data/repro/repro_wsl
 tar -xzf evaluation/recordings/aware_hold_s1/H.tar.gz -C evaluation/data/variants/aware_hold_s1
 tar -xzf evaluation/recordings/misc/runs_invalid.tar.gz -C evaluation/data
+tar -xzf evaluation/recordings/baseline_wsl/A/3.tar.gz -C evaluation/data/baseline_wsl/baseline_wsl
 ```
+
+The baseline re-run (`baseline_wsl`) has **one archive per run** (`baseline_wsl/<scenario>/<seed>.tar.gz`,
+failed attempts in `baseline_wsl/failed_attempts/`): each is written once, so git does not keep a new
+copy of a growing archive after every seed. The table counts them per scenario.
 
 | Run set | Archive | Runs (valid + failed attempts) | Raw | Compressed |
 |---|---|---|---|---|
@@ -46,8 +51,12 @@ tar -xzf evaluation/recordings/misc/runs_invalid.tar.gz -C evaluation/data
 | misc | [`misc/doc.tar.gz`](misc/doc.tar.gz) | 1 | 14.3 MB | 2.4 MB |
 | misc | [`misc/phase_b.tar.gz`](misc/phase_b.tar.gz) | 1 | 24.4 MB | 4.3 MB |
 | misc | [`misc/runs_invalid.tar.gz`](misc/runs_invalid.tar.gz) | 21 | 75.6 MB | 12.6 MB |
+| baseline_wsl | [`baseline_wsl/A`](baseline_wsl/A) | 1 | 13.5 MB | 2.4 MB |
+| baseline_wsl | [`baseline_wsl/A-V`](baseline_wsl/A-V) | 1 | 13.5 MB | 2.4 MB |
+| baseline_wsl | [`baseline_wsl/B`](baseline_wsl/B) | 1 | 17.9 MB | 3.1 MB |
+| baseline_wsl | [`baseline_wsl/failed_attempts/A`](baseline_wsl/failed_attempts/A) | 1 | 4.1 MB | 0.7 MB |
 
-Total: 162 run folders, 1764 MB raw, 309 MB compressed.
+Total: 166 run folders, 1813 MB raw, 318 MB compressed.
 
 Run sets: `repro_wsl` = the 45-run reproduction (scenarios × seeds 0–2); `aware_*` = Phase C
 FSM-variant sets; `baseline_wsl` = the baseline re-run (seeds 3–19); `misc` = pilot and

@@ -1963,6 +1963,18 @@ to run after Phase C.
   - **Seed order** (`--order seed`, new): every scenario of a seed before the next seed. Each day then adds
     complete seeds, so a partly done set is balanced across scenarios, and heavy and light scenarios
     alternate.
+- **Saving (from 2026-11-25, requested by the user for overnight running):**
+  - Every 30 minutes, in a gap between runs: [`periodic_save.sh`](../evaluation/scripts/periodic_save.sh)
+    archives the new recordings, commits, pushes to GitHub and mirrors the project to D:\.
+  - At the end of each campaign: the safety net, as before. The two share a lock.
+  - At most about 30 minutes of runs (about 7) can be lost.
+  - A watchdog checks every 10 minutes and notifies the user of any problem and of the end.
+- **One archive per run.** Before the first baseline archive was committed, I found that the
+  per-scenario archives used so far would have been rewritten after every new seed. Git keeps each
+  version in full, which over the re-run adds up to about 5.9 GB of history, beyond what GitHub accepts
+  for a repository. The baseline re-run therefore gets one archive per run, written once
+  (`evaluation/recordings/baseline_wsl/<scenario>/<seed>.tar.gz`; failed attempts in `failed_attempts/`):
+  about 650 MB in total.
 - **Expected duration:** about 18 hours of sessions, about 4.2 min per run including cool-down and retries
   (from the reproduction's run times). That is about 6 days at three sessions a day.
 

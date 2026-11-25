@@ -99,6 +99,7 @@ bash evaluation/scripts/wait_for_settle.sh &&
 bash evaluation/scripts/start_campaign.sh 2 30 --scenarios all \
     --seed-list 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 --order seed --cooldown-s 60 \
     --tag baseline_wsl --out evaluation/data/baseline_wsl --manifest evaluation/data/baseline_wsl/manifest.csv
+setsid bash evaluation/scripts/periodic_save.sh "$(cat evaluation/progress/campaign.pid)" 30 baseline_wsl &
 ```
 
 Each run writes `<out>/<tag>/<scenario>/<seed>/` containing `overlay.yaml`, `launch.log`,
@@ -138,7 +139,7 @@ Batch progress while it runs: `grep -c status= evaluation/data/baseline_batch.lo
 
 ```bash
 PYTHONPATH=src/yoru_core:$PYTHONPATH python3 -m pytest src/yoru_core/test -q   # system (119)
-python3 -m pytest evaluation/tests -q                                           # evaluation scripts (87)
+python3 -m pytest evaluation/tests -q                                           # evaluation scripts (96)
 ```
 
 ## 6. Scripts
@@ -153,7 +154,8 @@ python3 -m pytest evaluation/tests -q                                           
 | `capture_pictures.py`, `make_storyboard.py`, `plot_run_topdown.py` | pictures of a documentation run, the storyboard figure, a top-down figure of a run from its bag |
 | `clock_probe.py`, `nav2_startup_failures.py` | diagnostics: wall-clock steps and stalls; why Nav2 did not come up in `nav2_not_ready` attempts |
 | `progress_status.py`, `after_campaign.sh`, `run_phase_c_session.sh`, `run_repro_wsl.sh` | watchdog snapshot; safety net that archives, commits, pushes and backs up when a campaign ends; one detached gentle session; the 45-run reproduction batch |
-| `archive_recordings.py` | packs every run set's recordings into deterministic `.tar.gz` archives in `evaluation/recordings/` (committed), with checksums; `--verify` checks them |
+| `archive_recordings.py` | packs every run set's recordings into deterministic `.tar.gz` archives in `evaluation/recordings/` (committed), with checksums; `--verify` checks them; `--only GROUP` repacks one group. The baseline re-run gets one archive per run (written once), so git history does not grow by a copy of every scenario archive after each seed (about 5.9 GB → 650 MB) |
+| `periodic_save.sh` | during a campaign, every 30 min and only in a gap between runs: archives the run set, commits on the work branch, pushes, backs up to D:\\ (shares a lock with `after_campaign.sh`) |
 | `backup_to_d.sh`, `run_campaign.sh`, `run_session_turbo_off.sh`, `show_progress.py` | mirror to D:\\, daily campaigns of turbo-off gentle sessions, one turbo-off session, live progress view |
 | `wait_for_settle.sh` | waits until Windows is quiet (CPU < 30 %, thermal zone ≤ 65 °C, three checks in a row) before simulation work, e.g. after a boot; logs `[settle]` lines |
 | `start_campaign.sh` | starts a detached campaign and arms `after_campaign.sh` on the campaign's own pid (added 2026-11-25 after a false start: `setsid` forks, so `$!` was the launcher's pid and the safety net fired at once) |

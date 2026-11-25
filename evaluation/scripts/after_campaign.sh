@@ -18,6 +18,9 @@ log() { echo "$(date +%T) [autosave] $*" >> "$LIVE"; }
 
 [ -n "$PID" ] && while kill -0 "$PID" 2>/dev/null; do sleep 20; done
 log "process $PID ended: archiving recordings, committing, pushing, backing up"
+# the same lock as periodic_save.sh (2026-11-25), so the two never commit at the same time
+exec 9> evaluation/progress/.save.lock
+flock 9
 
 branch=$(git branch --show-current)
 if [ "$branch" = "main" ] || [ -z "$branch" ]; then
