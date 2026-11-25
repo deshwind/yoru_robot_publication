@@ -56,19 +56,19 @@ copy of a growing archive after every seed. The table counts them per scenario.
 | baseline_wsl | [`baseline_wsl/B`](baseline_wsl/B) | 2 | 35.8 MB | 6.1 MB |
 | baseline_wsl | [`baseline_wsl/B-C7`](baseline_wsl/B-C7) | 2 | 31.7 MB | 5.6 MB |
 | baseline_wsl | [`baseline_wsl/C`](baseline_wsl/C) | 2 | 18.8 MB | 3.4 MB |
-| baseline_wsl | [`baseline_wsl/D`](baseline_wsl/D) | 1 | 17.1 MB | 3.0 MB |
-| baseline_wsl | [`baseline_wsl/E`](baseline_wsl/E) | 1 | 17.1 MB | 3.0 MB |
-| baseline_wsl | [`baseline_wsl/F-pen`](baseline_wsl/F-pen) | 1 | 17.8 MB | 3.0 MB |
-| baseline_wsl | [`baseline_wsl/F-straw`](baseline_wsl/F-straw) | 1 | 17.8 MB | 3.0 MB |
-| baseline_wsl | [`baseline_wsl/G`](baseline_wsl/G) | 1 | 16.2 MB | 2.9 MB |
-| baseline_wsl | [`baseline_wsl/H`](baseline_wsl/H) | 1 | 8.5 MB | 1.5 MB |
-| baseline_wsl | [`baseline_wsl/I`](baseline_wsl/I) | 1 | 13.7 MB | 2.4 MB |
-| baseline_wsl | [`baseline_wsl/J`](baseline_wsl/J) | 1 | 33.9 MB | 5.5 MB |
+| baseline_wsl | [`baseline_wsl/D`](baseline_wsl/D) | 2 | 34.5 MB | 6.1 MB |
+| baseline_wsl | [`baseline_wsl/E`](baseline_wsl/E) | 2 | 34.3 MB | 6.0 MB |
+| baseline_wsl | [`baseline_wsl/F-pen`](baseline_wsl/F-pen) | 2 | 35.5 MB | 6.1 MB |
+| baseline_wsl | [`baseline_wsl/F-straw`](baseline_wsl/F-straw) | 2 | 35.6 MB | 6.1 MB |
+| baseline_wsl | [`baseline_wsl/G`](baseline_wsl/G) | 2 | 32.2 MB | 5.7 MB |
+| baseline_wsl | [`baseline_wsl/H`](baseline_wsl/H) | 2 | 16.7 MB | 2.9 MB |
+| baseline_wsl | [`baseline_wsl/I`](baseline_wsl/I) | 2 | 27.1 MB | 4.8 MB |
+| baseline_wsl | [`baseline_wsl/J`](baseline_wsl/J) | 2 | 49.1 MB | 8.0 MB |
 | baseline_wsl | [`baseline_wsl/K`](baseline_wsl/K) | 1 | 12.2 MB | 2.2 MB |
 | baseline_wsl | [`baseline_wsl/L`](baseline_wsl/L) | 1 | 8.7 MB | 1.5 MB |
 | baseline_wsl | [`baseline_wsl/failed_attempts/A`](baseline_wsl/failed_attempts/A) | 1 | 4.1 MB | 0.7 MB |
 
-Total: 183 run folders, 2071 MB raw, 363 MB compressed.
+Total: 191 run folders, 2194 MB raw, 384 MB compressed.
 
 Run sets: `repro_wsl` = the 45-run reproduction (scenarios × seeds 0–2); `aware_*` = Phase C
 FSM-variant sets; `baseline_wsl` = the baseline re-run (seeds 3–19); `misc` = pilot and
