@@ -202,3 +202,33 @@
 [run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
 [run_batch] 1/1 B seed 7 attempt 1 (domain 74) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/B/7
 [run_batch]   status=ok outcome=none stage= sim=120.1s wall=137.1s rtf=0.876
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 B-C7 seed 7 attempt 1 (domain 68) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/B-C7/7
+[run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=100.3s wall=118.1s rtf=0.849
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 C seed 7 attempt 1 (domain 71) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/C/7
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=66.4s wall=80.1s rtf=0.829
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 D seed 7 attempt 1 (domain 74) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/D/7
+[run_batch]   status=ok outcome=none stage= sim=120.7s wall=137.1s rtf=0.88
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 E seed 7 attempt 1 (domain 77) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/E/7
+[run_batch]   status=ok outcome=none stage= sim=120.8s wall=137.2s rtf=0.881
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 F-pen seed 7 attempt 1 (domain 80) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/F-pen/7
+[run_batch]   status=ok outcome=none stage= sim=120.5s wall=137.1s rtf=0.879
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 F-straw seed 7 attempt 1 (domain 83) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/F-straw/7
+[run_batch]   status=ok outcome=none stage= sim=120.0s wall=136.1s rtf=0.881
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 G seed 7 attempt 1 (domain 86) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/G/7
+[run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=99.8s wall=115.1s rtf=0.867
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 H seed 7 attempt 1 (domain 89) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/H/7
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=55.2s wall=67.1s rtf=0.823
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 I seed 7 attempt 1 (domain 92) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/I/7
+[run_batch]   status=nav2_not_ready outcome=none stage= sim=28.2s wall=38.0s rtf=0.741
+[run_batch] 1/1 I seed 7 attempt 2 (domain 93) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/I/7
+[run_batch]   previous attempt moved to /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/runs_invalid/baseline_wsl/baseline_wsl/I/7__20261126T034237__superseded
+[run_batch]   status=ok outcome=complied stage=S3 sim=85.8s wall=100.1s rtf=0.857
