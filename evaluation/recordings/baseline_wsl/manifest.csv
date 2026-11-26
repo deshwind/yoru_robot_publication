@@ -92,3 +92,4 @@ baseline_wsl/L/8,baseline_wsl,L,8,,,,,,,,ok,admin_override,S2,44.2,admin_overrid
 baseline_wsl/A/9,baseline_wsl,A,9,,,,,,,,ok,complied,S3,74.9,complied,violation,2026-11-26T05:32:52,2026-11-26T05:34:31,99.1,85.0,0.858,2,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/A/9,
 baseline_wsl/A-V/9,baseline_wsl,A-V,9,,,,,,,,ok,complied,S3,74.9,complied,violation,2026-11-26T05:36:31,2026-11-26T05:38:10,99.1,85.2,0.86,1,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/A-V/9,
 baseline_wsl/B/9,baseline_wsl,B,9,,,,,,,,ok,none,,,none,no_violation,2026-11-26T05:40:10,2026-11-26T05:42:26,136.1,120.2,0.883,1,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/B/9,
+baseline_wsl/B-C7/9,baseline_wsl,B-C7,9,,,,,,,,ok,logged_no_compliance,S4,90.5,none,violation,2026-11-26T06:13:57,2026-11-26T06:15:56,119.1,101.2,0.85,1,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/B-C7/9,

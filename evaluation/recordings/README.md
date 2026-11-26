@@ -54,7 +54,7 @@ copy of a growing archive after every seed. The table counts them per scenario.
 | baseline_wsl | [`baseline_wsl/A`](baseline_wsl/A) | 7 | 93.4 MB | 16.7 MB |
 | baseline_wsl | [`baseline_wsl/A-V`](baseline_wsl/A-V) | 7 | 93.0 MB | 16.6 MB |
 | baseline_wsl | [`baseline_wsl/B`](baseline_wsl/B) | 7 | 122.6 MB | 21.1 MB |
-| baseline_wsl | [`baseline_wsl/B-C7`](baseline_wsl/B-C7) | 6 | 94.0 MB | 16.8 MB |
+| baseline_wsl | [`baseline_wsl/B-C7`](baseline_wsl/B-C7) | 7 | 109.8 MB | 19.6 MB |
 | baseline_wsl | [`baseline_wsl/C`](baseline_wsl/C) | 6 | 56.8 MB | 10.2 MB |
 | baseline_wsl | [`baseline_wsl/D`](baseline_wsl/D) | 6 | 102.9 MB | 18.1 MB |
 | baseline_wsl | [`baseline_wsl/E`](baseline_wsl/E) | 6 | 102.5 MB | 17.8 MB |
@@ -74,7 +74,7 @@ copy of a growing archive after every seed. The table counts them per scenario.
 | baseline_wsl | [`baseline_wsl/failed_attempts/J`](baseline_wsl/failed_attempts/J) | 2 | 9.4 MB | 1.5 MB |
 | baseline_wsl | [`baseline_wsl/failed_attempts/L`](baseline_wsl/failed_attempts/L) | 2 | 8.2 MB | 1.4 MB |
 
-Total: 265 run folders, 3134 MB raw, 549 MB compressed.
+Total: 266 run folders, 3149 MB raw, 552 MB compressed.
 
 Run sets: `repro_wsl` = the 45-run reproduction (scenarios × seeds 0–2); `aware_*` = Phase C
 FSM-variant sets; `baseline_wsl` = the baseline re-run (seeds 3–19); `misc` = pilot and

@@ -307,3 +307,6 @@
 [run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
 [run_batch] 1/1 B seed 9 attempt 1 (domain 69) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/B/9
 [run_batch]   status=ok outcome=none stage= sim=120.2s wall=136.1s rtf=0.883
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 B-C7 seed 9 attempt 1 (domain 60) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/B-C7/9
+[run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=101.2s wall=119.1s rtf=0.85
