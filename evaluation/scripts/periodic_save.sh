@@ -36,8 +36,10 @@ while alive; do
         nice -n 19 python3 evaluation/scripts/archive_recordings.py --only "$GROUP" >> "$LIVE" 2>&1
         git add evaluation/recordings
         if git diff --cached --quiet; then
-            log "no new recordings since the last save"
-            bash evaluation/scripts/backup_to_d.sh > /dev/null 2>&1 && log "D:\\ backup done" || log "D:\\ BACKUP FAILED"
+            # nothing new since the last save, which already mirrored to D:\ (post-commit hook).
+            # No backup here (2026-11-26): the save that ends a 30-min rest found nothing new, and
+            # its 25-50 s mirror overlapped the start-up of the next session's first run.
+            log "no new recordings since the last save; backup skipped (D:\\ already has them)"
         else
             runs=$(awk -F, 'NR > 1 && $12 == "ok"' "evaluation/recordings/$GROUP/manifest.csv" 2>/dev/null | wc -l)
             git commit -q -m "Periodic save ($(date '+%F %H:%M')): $GROUP recordings, $runs valid runs so far

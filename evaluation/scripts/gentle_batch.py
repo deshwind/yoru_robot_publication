@@ -30,6 +30,7 @@ own output is appended to <out>/batch.log.
 import argparse
 import csv
 import datetime
+import fcntl
 import os
 import statistics
 import subprocess
@@ -140,6 +141,32 @@ def thermal_readings(path, start, end):
         if start <= t <= end:
             readings.append((t, value))
     return readings
+
+
+# Locks held by a save in progress (periodic_save.sh / after_campaign.sh) and by the D:\ mirror
+# (backup_to_d.sh, started by the post-commit hook). Added 2026-11-26: on the overnight run a
+# 25-53 s mirror sometimes ran into the start of the next run.
+SAVE_LOCKS = [os.path.join(PROGRESS, '.save.lock'), '/tmp/yoru_backup_to_d.lock']
+
+
+def wait_for_saves(lock_paths=None, max_wait_s=300.0, poll_s=2.0):
+    """Wait until no save or backup holds one of the lock files (flock), at most max_wait_s.
+    Returns the seconds waited. A missing lock file means nothing holds it."""
+    start = time.monotonic()
+    for path in (SAVE_LOCKS if lock_paths is None else lock_paths):
+        while os.path.exists(path):
+            with open(path, 'a') as f:
+                try:
+                    fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    fcntl.flock(f, fcntl.LOCK_UN)
+                    break
+                except OSError:
+                    pass
+            if time.monotonic() - start >= max_wait_s:
+                break
+            time.sleep(poll_s)
+    waited = time.monotonic() - start
+    return waited
 
 
 def cooled(readings_after, cool_to):
@@ -272,6 +299,9 @@ def main():
     reason = None
     try:
         for i, (scenario, seed) in enumerate(todo):
+            held = wait_for_saves()
+            if held >= 1.0:
+                live(f'  waited {held:.0f} s for a save/backup to finish before the run')
             run_start = datetime.datetime.now()
             live(f'run {i + 1}/{len(todo)}: {scenario} seed {seed}')
             # A fresh DDS domain for every run (rotating through 60-99, as a plain batch
@@ -338,7 +368,10 @@ def main():
                                   f'{cli.max_cool_wait:g} s extra cool-down')
                         break
                     if waited == 0.0:
-                        live(f'  still warm: waiting until the thermal zone is <= {cli.cool_to:g} C')
+                        live(f'  still warm: waiting until the thermal zone is <= {cli.cool_to:g} C'
+                             if state is False else
+                             '  no thermal reading since the run yet (the monitor samples about once '
+                             'a minute): waiting for one')
                     time.sleep(30)
                     waited += 30
                     if os.path.exists(STOP_FILE):

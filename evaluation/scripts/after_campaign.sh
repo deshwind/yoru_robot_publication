@@ -44,4 +44,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" && log "committed $(git
         fi
     fi
 fi
+# wait for a mirror already running (e.g. started by the post-commit hook), then make the final one;
+# without the wait, backup_to_d.sh returned at once ("already running") and this logged "done" early
+flock -w 900 /tmp/yoru_backup_to_d.lock true
 bash evaluation/scripts/backup_to_d.sh > /dev/null 2>&1 && log "D:\\ backup done" || log "D:\\ BACKUP FAILED"

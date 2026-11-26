@@ -40,7 +40,9 @@ The baseline bags were lost with the failed drive (confirmed unrecoverable on 20
   (0.00 m against 1.38 m, p = 0.002). **Recommendation: `hold_s1`.** Statistics, LaTeX tables and
   figures: [`evaluation/results/phase_c/`](evaluation/results/phase_c/).
 
-- **Next:** a 255-run re-run of the baseline to replace its lost recordings.
+- **Baseline re-run (running since 25 Nov):** 255 new runs (seeds 3–19) to replace the lost baseline
+  recordings. After the first night: 110 of 255, and all 110 have the same outcome as the original
+  baseline run of the same scenario and seed (timing within a median 0.1 s).
 
 Details, failures and what is not run yet: [Phase B](evidence/README.md#phase-b-human-model-under-skip_pa_warning-2026-11-19)
 and [Phase C](evidence/README.md#phase-c-fsm-design-variants-in-gazebo-2026-11-19-to-2026-11-25) in the evidence.

@@ -252,3 +252,29 @@ def test_run_plan_same_runs_in_either_order():
 def test_run_plan_rejects_unknown_order():
     with pytest.raises(ValueError):
         gb.run_plan(['A'], [0], 'random')
+
+
+def test_wait_for_saves_returns_at_once_when_nothing_holds_a_lock(tmp_path):
+    free = tmp_path / 'free.lock'
+    free.write_text('')
+    assert gb.wait_for_saves([str(free), str(tmp_path / 'missing.lock')], max_wait_s=5) < 1.0
+
+
+def test_wait_for_saves_waits_while_a_lock_is_held(tmp_path):
+    import fcntl
+    import threading
+    path = tmp_path / 'held.lock'
+    holder = open(path, 'w')
+    fcntl.flock(holder, fcntl.LOCK_EX)
+    threading.Timer(0.5, lambda: (fcntl.flock(holder, fcntl.LOCK_UN), holder.close())).start()
+    waited = gb.wait_for_saves([str(path)], max_wait_s=5, poll_s=0.1)
+    assert 0.4 <= waited < 3.0
+
+
+def test_wait_for_saves_gives_up_after_max_wait(tmp_path):
+    import fcntl
+    path = tmp_path / 'stuck.lock'
+    with open(path, 'w') as holder:
+        fcntl.flock(holder, fcntl.LOCK_EX)
+        waited = gb.wait_for_saves([str(path)], max_wait_s=0.3, poll_s=0.1)
+    assert 0.3 <= waited < 2.0

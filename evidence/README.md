@@ -25,7 +25,7 @@ the files listed. Where something has **not** been measured, it says so.
 | Same laptop, new OS (after the SSD slot failure) | set up; 2 set-up problems fixed (clock steps, CPU threads); **reproduction: 45 / 45 outcomes match the baseline** (3 seeds × 15 scenarios); speed depends on background load; baseline bags **permanently lost**, post-failure recordings archived in the repo | [section](#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties), [`machine_change/`](machine_change/), [`evaluation/results/repro_wsl/`](../evaluation/results/repro_wsl/) |
 | Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
 | Phase C: FSM design variants in Gazebo | **complete** (2026-11-25): `hold_s1`, `reset_first` and `both` 30/30 each. H fixed by every mode (p = 0.002), C and A unchanged (p = 1); only `hold_s1` and `both` also avoid the approach (0.00 m vs 1.38 m). Recommendation: `hold_s1` | [section](#phase-c-fsm-design-variants-in-gazebo-2026-11-19-to-2026-11-25), [`evaluation/results/phase_c/`](../evaluation/results/phase_c/), [`phase_c/`](phase_c/) |
-| Baseline re-run (to replace the lost recordings) | **running since 2026-11-25** (decided 2026-11-24): 255 runs (seeds 3–19), which together with the 45 reproduction runs give a recorded 300-run baseline; about 6 days at 3 sessions a day | [section](#baseline-re-run-on-the-wsl2-set-up-from-2026-11-25), [why](#what-may-have-been-lost-with-the-failed-drive) |
+| Baseline re-run (to replace the lost recordings) | **running since 2026-11-25** (decided 2026-11-24): 255 runs (seeds 3–19), which together with the 45 reproduction runs give a recorded 300-run baseline. **110 of 255 done after the first night (seeds 3–9 complete); all 110 match the original baseline** | [section](#baseline-re-run-on-the-wsl2-set-up-from-2026-11-25), [why](#what-may-have-been-lost-with-the-failed-drive) |
 
 **Final numbers, in one place:** [E5.3](#e53-final-results-300-valid-runs) (outcomes, timing, proximity),
 [E6.3](#e63-final-results-300-runs-600-events) (sensitivity and ablation), the
@@ -1994,8 +1994,9 @@ to run after Phase C.
 
 | Date | Session | Runs | Ended |
 |---|---|---|---|
-| 25 Nov | 1 and 2, from 20:58 (after a boot; Windows settled in about a minute) | running | |
-| 25–26 Nov, night | 3–7, chained after a 30-min rest, until about 07:15 | planned | |
+| 25 Nov | campaign A, sessions 1–2, 20:58–23:32 (after a boot; Windows settled in about a minute) | 32 valid: seeds 3 and 4, A/5, A-V/5 | 2 sessions done |
+| 26 Nov, night | campaign B, sessions 3–7, 00:04–07:17, chained after a 30-min rest | 78 valid: rest of seed 5, seeds 6–9, seed 10 A to C | 5 sessions done |
+| **total** | 7 one-hour sessions | **110 of 255 valid** (seeds 3–9 complete); 120 attempts | |
 
 **Overnight running (decided by the user on 25 Nov, about 21:20).**
 - After tonight's two sessions, [`chain_campaign.sh`](../evaluation/scripts/chain_campaign.sh) waits for
@@ -2006,3 +2007,61 @@ to run after Phase C.
 - At about 21:20 the user switched NitroSense (the laptop maker's fan and power tool) to its
   performance mode. The Windows power plan before the switch: Razer Cortex Power Plan, turbo (boost)
   off. The watchdog checks every 10 minutes that turbo stays off.
+
+**Results after the first night (110 runs, seeds 3–9 complete plus seed 10 A–C).**
+- **Outcomes: 110 of 110 match the original baseline run of the same scenario and seed.** That covers
+  the outcome, the escalation depth, false interventions and misses (Wilson 95 % CI for 110/110:
+  96.6–100 %). It includes J/3, the one J seed where the original also ended with no intervention.
+- **Timing:** confirmation and outcome times differ from the original by a median of +0.1 s. Four runs
+  differ by 1 s or more: A/8 (−1.1 s, as in every Phase C variant, so a property of that seed), A/10
+  (−1.3 s), A-V/5 (+1.0 s) and I/3 (+1.3 s).
+- **Distances:** path length within 0.17 m and minimum robot–person distance within 0.09 m of the original.
+- **Camera:** YOLO on cctv1 at a median 5.0 Hz (4.42–5.05 Hz).
+- **Speed:** RTF median 0.859, against 0.907 for the original under native Ubuntu. This affects only
+  wall-clock time.
+- **Files:** [`evaluation/results/baseline_wsl/`](../evaluation/results/baseline_wsl/) (`summary.md`,
+  `runs.csv`, `metrics.csv`, made with `extract_metrics.py` and `compare_repro.py`).
+
+**Failed attempts: 10 in 120 (8 %). Every retry was valid.**
+- 9 were `nav2_not_ready`, the known lost Nav2 lifecycle reply.
+- 1 was `startup_failed`: A/9 #1 at 05:31. Its mechanism was the same as A/9 in Phase C `both` on 25 Nov:
+  - `gazebo_ros2_control` connected to `robot_state_publisher` but never received the robot description;
+  - the recording holds no `/clock` (4 messages in total);
+  - the spawners logged 30 times that they could not contact the controller manager;
+  - the launch group was still alive after SIGKILL.
+- **Both failures of this kind so far were on scenario A, seed 9**, in different run sets and on DDS
+  domains 66 and 63. With two cases this may be a coincidence. It is noted as an open observation.
+
+**The laptop overnight.**
+- **Temperature:**
+  - the first runs peaked at 66–70 °C;
+  - after the user switched NitroSense to its performance mode (about 21:20), the peaks were 49–54 °C at
+    the same speed;
+  - between runs it cooled to 35–40 °C;
+  - the passive (throttling) limit stayed at 100 % all night.
+- **Turbo:** off in every session (checked every 10 minutes); the power plan stayed the Razer Cortex Power
+  Plan.
+- **Screen:** at the user's request, it switched off after 5 minutes idle from 21:25 and was set back to
+  "never" at 07:19. Sleep and hibernate stayed at "never". Runs after the switch-off kept the same speed
+  and camera rate, because Gazebo renders off-screen.
+
+**Odd events and fixes during the night.** None changed a result.
+1. **Mirror after an empty save.** At 01:37 and 03:09, the 30-minute save at the end of a rest found
+   nothing new but still mirrored to D:\ (40–50 s). The mirror overlapped the start-up of the session's
+   first run (B-C7/6 and B-C7/7). Both runs were valid, at RTF 0.849, with the baseline outcome. Fix
+   (03:13): a save that finds nothing new skips the mirror. The saver was swapped while idle.
+2. **Mirror growing into the next run.** The mirror grew to about 53 s with 4.4 GB of data. At 06:49 it
+   finished 1 s after the next run (J/9, valid) had started. Fix (morning): before each run,
+   `gentle_batch.py` now waits for a save or mirror in progress (`wait_for_saves`, 3 tests).
+3. **"Still warm" at about 37 °C.** With the 60 s cool-down, the host monitor (one sample about every
+   66 s) sometimes had no reading from after the run yet, so the runner waited 30 s more. Harmless; the
+   message now says that no reading has been taken yet.
+4. **"Backup done" reported early.** The safety net logged `D:\ backup done` at 07:18:02, but the mirror
+   started by the commit hook finished only at 07:18:28: `backup_to_d.sh` returns at once while another
+   mirror runs. Fix: `after_campaign.sh` waits for a running mirror, then makes its own.
+5. **Saving worked as planned.** Every 30 minutes the new recordings were committed and pushed (13
+   saves), and the end of each campaign was saved by the safety net (`486fcbd`, `96f6fa9`). The D:   mirror was 4.6 GB at the end.
+
+Host monitor (every minute: CPU performance, busiest Windows processes, thermal zone, passive limit) and
+live log of the night: [`baseline_wsl/host_monitor_2026-11-25_26.log`](baseline_wsl/host_monitor_2026-11-25_26.log),
+[`baseline_wsl/live_log_to_2026-11-26.txt`](baseline_wsl/live_log_to_2026-11-26.txt).
