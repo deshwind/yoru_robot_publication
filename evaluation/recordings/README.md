@@ -51,11 +51,11 @@ copy of a growing archive after every seed. The table counts them per scenario.
 | misc | [`misc/doc.tar.gz`](misc/doc.tar.gz) | 1 | 14.3 MB | 2.4 MB |
 | misc | [`misc/phase_b.tar.gz`](misc/phase_b.tar.gz) | 1 | 24.4 MB | 4.3 MB |
 | misc | [`misc/runs_invalid.tar.gz`](misc/runs_invalid.tar.gz) | 21 | 75.6 MB | 12.6 MB |
-| baseline_wsl | [`baseline_wsl/A`](baseline_wsl/A) | 8 | 106.3 MB | 19.0 MB |
-| baseline_wsl | [`baseline_wsl/A-V`](baseline_wsl/A-V) | 8 | 106.1 MB | 18.9 MB |
-| baseline_wsl | [`baseline_wsl/B`](baseline_wsl/B) | 8 | 139.7 MB | 24.1 MB |
-| baseline_wsl | [`baseline_wsl/B-C7`](baseline_wsl/B-C7) | 8 | 125.1 MB | 22.3 MB |
-| baseline_wsl | [`baseline_wsl/C`](baseline_wsl/C) | 8 | 75.6 MB | 13.6 MB |
+| baseline_wsl | [`baseline_wsl/A`](baseline_wsl/A) | 9 | 119.6 MB | 21.4 MB |
+| baseline_wsl | [`baseline_wsl/A-V`](baseline_wsl/A-V) | 9 | 119.3 MB | 21.3 MB |
+| baseline_wsl | [`baseline_wsl/B`](baseline_wsl/B) | 9 | 157.8 MB | 27.1 MB |
+| baseline_wsl | [`baseline_wsl/B-C7`](baseline_wsl/B-C7) | 9 | 141.1 MB | 25.2 MB |
+| baseline_wsl | [`baseline_wsl/C`](baseline_wsl/C) | 9 | 85.2 MB | 15.3 MB |
 | baseline_wsl | [`baseline_wsl/D`](baseline_wsl/D) | 8 | 136.8 MB | 24.1 MB |
 | baseline_wsl | [`baseline_wsl/E`](baseline_wsl/E) | 8 | 136.6 MB | 23.7 MB |
 | baseline_wsl | [`baseline_wsl/F-pen`](baseline_wsl/F-pen) | 8 | 138.9 MB | 23.9 MB |
@@ -63,18 +63,18 @@ copy of a growing archive after every seed. The table counts them per scenario.
 | baseline_wsl | [`baseline_wsl/G`](baseline_wsl/G) | 8 | 127.2 MB | 22.5 MB |
 | baseline_wsl | [`baseline_wsl/H`](baseline_wsl/H) | 8 | 66.1 MB | 11.5 MB |
 | baseline_wsl | [`baseline_wsl/I`](baseline_wsl/I) | 8 | 106.9 MB | 19.1 MB |
-| baseline_wsl | [`baseline_wsl/J`](baseline_wsl/J) | 7 | 123.7 MB | 20.7 MB |
-| baseline_wsl | [`baseline_wsl/K`](baseline_wsl/K) | 7 | 83.8 MB | 14.9 MB |
-| baseline_wsl | [`baseline_wsl/L`](baseline_wsl/L) | 7 | 59.4 MB | 10.3 MB |
+| baseline_wsl | [`baseline_wsl/J`](baseline_wsl/J) | 8 | 138.9 MB | 23.2 MB |
+| baseline_wsl | [`baseline_wsl/K`](baseline_wsl/K) | 8 | 95.5 MB | 17.0 MB |
+| baseline_wsl | [`baseline_wsl/L`](baseline_wsl/L) | 8 | 67.7 MB | 11.7 MB |
 | baseline_wsl | [`baseline_wsl/failed_attempts/A`](baseline_wsl/failed_attempts/A) | 2 | 4.3 MB | 0.7 MB |
 | baseline_wsl | [`baseline_wsl/failed_attempts/E`](baseline_wsl/failed_attempts/E) | 2 | 8.2 MB | 1.4 MB |
 | baseline_wsl | [`baseline_wsl/failed_attempts/F-straw`](baseline_wsl/failed_attempts/F-straw) | 1 | 4.2 MB | 0.7 MB |
 | baseline_wsl | [`baseline_wsl/failed_attempts/G`](baseline_wsl/failed_attempts/G) | 2 | 8.2 MB | 1.4 MB |
 | baseline_wsl | [`baseline_wsl/failed_attempts/I`](baseline_wsl/failed_attempts/I) | 1 | 4.0 MB | 0.7 MB |
-| baseline_wsl | [`baseline_wsl/failed_attempts/J`](baseline_wsl/failed_attempts/J) | 2 | 9.4 MB | 1.5 MB |
+| baseline_wsl | [`baseline_wsl/failed_attempts/J`](baseline_wsl/failed_attempts/J) | 3 | 14.3 MB | 2.3 MB |
 | baseline_wsl | [`baseline_wsl/failed_attempts/L`](baseline_wsl/failed_attempts/L) | 2 | 8.2 MB | 1.4 MB |
 
-Total: 291 run folders, 3482 MB raw, 610 MB compressed.
+Total: 300 run folders, 3593 MB raw, 629 MB compressed.
 
 Run sets: `repro_wsl` = the 45-run reproduction (scenarios × seeds 0–2); `aware_*` = Phase C
 FSM-variant sets; `baseline_wsl` = the baseline re-run (seeds 3–19); `misc` = pilot and
