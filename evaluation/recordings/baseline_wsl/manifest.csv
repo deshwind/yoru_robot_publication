@@ -249,3 +249,5 @@ baseline_wsl/E/19,baseline_wsl,E,19,,,,,,,,nav2_not_ready,none,,,none,no_violati
 baseline_wsl/F-pen/19,baseline_wsl,F-pen,19,,,,,,,,ok,none,,,none,no_violation,2026-11-27T23:00:56,2026-11-27T23:03:15,138.1,120.7,0.874,1,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/F-pen/19,
 baseline_wsl/F-straw/19,baseline_wsl,F-straw,19,,,,,,,,ok,none,,,none,no_violation,2026-11-27T23:05:14,2026-11-27T23:07:32,137.1,120.6,0.879,1,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/F-straw/19,
 baseline_wsl/G/19,baseline_wsl,G,19,,,,,,,,ok,logged_no_compliance,S4,88.9,logged_no_compliance,violation,2026-11-27T23:09:31,2026-11-27T23:11:26,115.1,98.9,0.859,1,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/G/19,
+baseline_wsl/E/19,baseline_wsl,E,19,,,,,,,,ok,none,,,none,no_violation,2026-11-27T23:43:10,2026-11-27T23:45:31,141.2,120.8,0.856,1,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/E/19,
+baseline_wsl/H/19,baseline_wsl,H,19,,,,,,,,ok,target_lost,S2,45.0,target_lost,violation,2026-11-27T23:47:31,2026-11-27T23:48:39,68.1,55.3,0.812,1,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/H/19,
