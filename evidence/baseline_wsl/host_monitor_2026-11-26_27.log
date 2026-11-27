@@ -1,0 +1,409 @@
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files | thermal_zone_C | passive_limit%
+20:52:08 | 78 | 38 | vmmemwsl=1065 memory compression=109 system=60 | 1.54 | 8115 | 145 | 52.9 | 100
+20:53:14 | 79 | 52 | vmmemwsl=850 msrdc=19 system=14 | 8.93 | 6933 | 186 | 62.9 | 100
+20:54:21 | 79 | 50 | vmmemwsl=862 msrdc=21 cefsharp.browsersubprocess=16 | 11.80 | 6951 | 186 | 65.9 | 100
+20:55:27 | 73 | 6 | vmmemwsl=43 code=33 system=16 | 5.95 | 9418 | 2 | 46.9 | 100
+20:56:34 | 79 | 76 | vmmemwsl=606 system=59 nitrosense=58 | 2.40 | 7731 | 162 | 56.9 | 100
+20:57:40 | 70 | 3 | vmmemwsl=9 code=9 servicehost=5 | 4.80 | 9272 | 80 | 43.9 | 100
+20:58:46 | 79 | 48 | vmmemwsl=844 msrdc=12 cefsharp.browsersubprocess=9 | 8.67 | 6964 | 254 | 58.9 | 100
+20:59:53 | 79 | 49 | vmmemwsl=846 msrdc=19 svchost=12 | 9.49 | 6969 | 254 | 58.9 | 100
+21:00:59 | 71 | 4 | vmmemwsl=10 code=7 system=5 | 7.40 | 9367 | 74 | 43.9 | 100
+21:02:05 | 68 | 3 | vmmemwsl=13 system=12 svchost=3 | 2.66 | 9404 | 69 | 39.9 | 100
+21:03:11 | 79 | 49 | vmmemwsl=826 system=17 msrdc=15 | 10.87 | 6950 | 254 | 54.9 | 100
+21:04:17 | 79 | 49 | vmmemwsl=795 msrdc=19 system=19 | 12.85 | 6943 | 254 | 56.9 | 100
+21:05:23 | 69 | 3 | vmmemwsl=12 system=11 msmpeng=11 | 6.44 | 9378 | 74 | 40.9 | 100
+21:06:29 | 70 | 3 | system=5 vmmemwsl=4 steelseriesprism=4 | 2.21 | 9418 | 69 | 38.9 | 100
+21:07:36 | 79 | 49 | vmmemwsl=808 msrdc=19 system=15 | 8.25 | 6975 | 254 | 54.9 | 100
+21:08:42 | 78 | 47 | vmmemwsl=821 msrdc=25 system=16 | 11.05 | 6962 | 254 | 55.9 | 100
+21:09:48 | 68 | 2 | vmmemwsl=8 system=8 steelseriesengine=4 | 5.58 | 9374 | 74 | 39.9 | 100
+21:10:54 | 69 | 2 | vmmemwsl=5 steelseriessonar=5 system=5 | 1.95 | 9415 | 69 | 37.9 | 100
+21:11:59 | 70 | 3 | memory compression=13 system=8 vmmemwsl=6 | 6.33 | 9328 | 138 | 40.9 | 100
+21:13:06 | 78 | 43 | vmmemwsl=933 msrdc=17 system=14 | 9.43 | 7024 | 315 | 52.9 | 100
+21:14:12 | 79 | 48 | vmmemwsl=820 msrdc=16 system=13 | 8.47 | 6964 | 315 | 55.9 | 100
+21:15:18 | 70 | 2 | vmmemwsl=4 system=3 svchost=2 | 4.74 | 9371 | 135 | 39.9 | 100
+21:16:24 | 68 | 2 | vmmemwsl=5 steelseriesprism=4 system=3 | 1.92 | 9413 | 130 | 38.9 | 100
+21:17:30 | 79 | 50 | vmmemwsl=792 system=16 msrdc=13 | 8.68 | 6915 | 315 | 53.9 | 100
+21:18:36 | 70 | 3 | steelseriessonar=4 svchost=3 vmmemwsl=3 | 5.36 | 9362 | 135 | 37.9 | 100
+21:19:42 | 69 | 2 | vmmemwsl=8 system=5 msmpeng=2 | 1.95 | 9404 | 130 | 36.9 | 100
+21:20:48 | 79 | 53 | vmmemwsl=916 msrdc=19 audiodg=10 | 11.78 | 6939 | 315 | 54.9 | 100
+21:21:54 | 68 | 2 | steelseriesprism=6 system=5 steelseriesengine=4 | 6.34 | 9289 | 201 | 39.9 | 100
+21:23:00 | 77 | 8 | vmmemwsl=64 dllhost=44 system=15 | 2.65 | 9387 | 195 | 37.9 | 100
+21:24:06 | 78 | 44 | vmmemwsl=750 system=16 msrdc=14 | 7.20 | 6969 | 380 | 52.9 | 100
+21:25:12 | 70 | 3 | vmmemwsl=9 system=6 msmpeng=3 | 3.04 | 9351 | 269 | 38.9 | 100
+21:26:19 | 79 | 53 | vmmemwsl=875 msrdc=16 system=16 | 11.48 | 6904 | 448 | 54.9 | 100
+21:27:25 | 70 | 3 | system=12 memory compression=8 vmmemwsl=5 | 8.66 | 9279 | 273 | 39.9 | 100
+21:28:31 | 68 | 2 | system=9 steelseriesprism=5 svchost=3 | 3.07 | 9394 | 263 | 38.9 | 100
+21:29:37 | 79 | 48 | vmmemwsl=888 system=19 msrdc=12 | 6.95 | 6861 | 448 | 52.9 | 100
+21:30:43 | 70 | 3 | system=9 vmmemwsl=5 memory compression=5 | 6.42 | 9317 | 271 | 39.9 | 100
+21:31:49 | 69 | 2 | system=9 steelseriesengine=4 vmmemwsl=3 | 2.31 | 9389 | 266 | 37.9 | 100
+21:32:55 | 79 | 47 | vmmemwsl=824 system=18 msrdc=13 | 4.94 | 6898 | 451 | 51.9 | 100
+21:34:01 | 70 | 3 | vmmemwsl=9 system=8 steelseriesprism=3 | 4.48 | 9341 | 271 | 38.9 | 100
+21:35:07 | 69 | 3 | system=9 vmmemwsl=5 steelseriesprism=5 | 1.63 | 9389 | 266 | 37.9 | 100
+21:36:13 | 79 | 48 | vmmemwsl=819 system=19 msrdc=18 | 13.78 | 6923 | 451 | 51.9 | 100
+21:37:19 | 74 | 6 | vmmemwsl=31 code=19 code=9 | 10.09 | 9273 | 271 | 42.9 | 100
+21:38:25 | 69 | 2 | vmmemwsl=5 system=5 svchost=5 | 3.44 | 9389 | 266 | 37.9 | 100
+21:39:31 | 78 | 43 | vmmemwsl=1007 system=13 msrdc=12 | 8.06 | 6995 | 451 | 51.9 | 100
+21:40:38 | 79 | 48 | vmmemwsl=813 system=26 msrdc=17 | 9.66 | 6974 | 451 | 53.9 | 100
+21:41:44 | 70 | 3 | system=7 vmmemwsl=6 steelseriesengine=4 | 4.49 | 9343 | 271 | 37.9 | 100
+21:42:49 | 69 | 2 | system=4 steelseriesengine=3 vmmemwsl=3 | 1.60 | 9387 | 266 | 36.9 | 100
+21:43:56 | 79 | 48 | vmmemwsl=821 msrdc=21 audiodg=11 | 7.77 | 6912 | 451 | 53.9 | 100
+21:45:02 | 79 | 48 | vmmemwsl=803 svchost=72 msrdc=19 | 10.21 | 6912 | 451 | 54.9 | 100
+21:46:08 | 68 | 2 | vmmemwsl=31 system=7 steelseriesprism=5 | 3.87 | 9308 | 331 | 37.9 | 100
+21:47:14 | 70 | 3 | vmmemwsl=6 steelseriesprism=5 system=5 | 1.25 | 9386 | 331 | 36.9 | 100
+21:48:20 | 78 | 47 | vmmemwsl=786 system=18 msrdc=18 | 7.24 | 7041 | 516 | 52.9 | 100
+21:49:27 | 79 | 47 | vmmemwsl=799 msrdc=19 system=19 | 8.78 | 7061 | 516 | 54.9 | 100
+21:50:32 | 68 | 2 | vmmemwsl=10 system=9 overwolf=4 | 4.04 | 9371 | 337 | 37.9 | 100
+21:51:38 | 68 | 2 | system=5 vmmemwsl=5 overwolf=3 | 1.54 | 9407 | 332 | 36.9 | 100
+21:52:45 | 79 | 52 | vmmemwsl=791 system=21 msrdc=16 | 11.47 | 6978 | 517 | 52.9 | 100
+21:53:51 | 69 | 2 | system=9 vmmemwsl=7 steelseriesprism=5 | 4.72 | 9356 | 339 | 37.9 | 100
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files | thermal_zone_C | passive_limit%
+22:24:40 | 78 | 22 | vmmemwsl=1100 system=25 dllhost=9 | 0.20 | 8054 | 430 | 41.9 | 100
+22:25:46 | 79 | 48 | vmmemwsl=819 msrdc=19 system=14 | 6.50 | 6923 | 456 | 50.9 | 100
+22:26:52 | 79 | 48 | vmmemwsl=810 msrdc=25 system=22 | 8.14 | 6897 | 456 | 51.9 | 100
+22:27:58 | 73 | 7 | vmmemwsl=13 code=10 code=7 | 3.12 | 9393 | 327 | 38.9 | 100
+22:29:05 | 78 | 43 | vmmemwsl=697 razer synapse service=30 system=15 | 5.00 | 7021 | 506 | 45.9 | 100
+22:30:11 | 79 | 48 | vmmemwsl=810 system=16 msrdc=15 | 7.77 | 6917 | 511 | 51.9 | 100
+22:31:17 | 78 | 31 | memory compression=50 vmmemwsl=31 razer synapse service=26 | 8.97 | 9323 | 333 | 43.9 | 100
+22:32:23 | 68 | 2 | system=8 vmmemwsl=3 overwolf=3 | 3.11 | 9396 | 328 | 38.9 | 100
+22:33:29 | 78 | 43 | vmmemwsl=709 msrdc=15 system=12 | 2.24 | 6992 | 511 | 47.9 | 100
+22:34:35 | 71 | 3 | system=9 vmmemwsl=6 svchost=3 | 5.60 | 9352 | 396 | 37.9 | 100
+22:35:41 | 79 | 48 | vmmemwsl=833 system=21 msrdc=16 | 9.84 | 6910 | 515 | 50.9 | 100
+22:36:48 | 79 | 49 | vmmemwsl=803 msrdc=25 system=12 | 13.44 | 6917 | 515 | 52.9 | 100
+22:37:54 | 70 | 3 | system=11 vmmemwsl=5 steelseriesprism=3 | 6.01 | 9351 | 404 | 38.9 | 100
+22:39:00 | 69 | 3 | steelseriessonar=4 system=4 vmmemwsl=3 | 2.16 | 9394 | 401 | 36.9 | 100
+22:40:05 | 70 | 3 | memory compression=15 vmmemwsl=9 system=6 | 7.47 | 9224 | 482 | 39.9 | 100
+22:41:12 | 79 | 58 | vmmemwsl=934 msrdc=16 system=14 | 9.85 | 6883 | 656 | 49.9 | 100
+22:42:18 | 78 | 47 | vmmemwsl=843 system=13 msrdc=13 | 10.12 | 6894 | 656 | 51.9 | 100
+22:43:24 | 71 | 3 | memory compression=15 vmmemwsl=6 system=5 | 8.20 | 9330 | 476 | 41.9 | 100
+22:44:30 | 69 | 2 | system=9 vmmemwsl=7 overwolf=4 | 3.00 | 9386 | 471 | 38.9 | 100
+22:45:36 | 78 | 48 | vmmemwsl=849 msrdc=20 system=19 | 5.00 | 6893 | 656 | 49.9 | 100
+22:46:43 | 79 | 48 | vmmemwsl=798 system=21 memory compression=21 | 10.73 | 6901 | 656 | 53.9 | 100
+22:47:49 | 69 | 2 | vmmemwsl=6 system=5 steelseriesengine=5 | 6.07 | 9346 | 526 | 38.9 | 100
+22:48:54 | 68 | 2 | system=10 vmmemwsl=6 steelseriesengine=4 | 2.48 | 9388 | 523 | 36.9 | 100
+22:50:01 | 79 | 52 | vmmemwsl=918 system=12 msrdc=12 | 8.43 | 6924 | 708 | 52.9 | 100
+22:51:07 | 69 | 3 | system=8 vmmemwsl=4 svchost=4 | 3.57 | 9320 | 524 | 37.9 | 100
+22:52:13 | 68 | 2 | vmmemwsl=10 system=10 steelseriesengine=3 | 1.70 | 9383 | 524 | 35.9 | 100
+22:53:19 | 79 | 47 | vmmemwsl=819 msrdc=17 system=13 | 9.00 | 6899 | 709 | 49.9 | 100
+22:54:25 | 78 | 47 | vmmemwsl=806 msrdc=20 system=14 | 12.69 | 6829 | 677 | 52.9 | 100
+22:55:31 | 74 | 8 | vmmemwsl=128 code=18 system=12 | 4.40 | 9300 | 524 | 38.9 | 100
+22:56:37 | 76 | 10 | dllhost=33 vmmemwsl=26 system=12 | 2.17 | 9381 | 524 | 37.9 | 100
+22:57:44 | 78 | 47 | vmmemwsl=835 system=15 msrdc=15 | 4.90 | 6891 | 709 | 50.9 | 100
+22:58:50 | 79 | 48 | vmmemwsl=813 msrdc=22 system=20 | 7.94 | 6960 | 709 | 53.9 | 100
+22:59:56 | 74 | 8 | vmmemwsl=23 system=7 steelseriesprism=4 | 3.09 | 9368 | 524 | 38.9 | 100
+23:01:02 | 79 | 56 | vmmemwsl=980 system=107 razer synapse service=32 | 5.17 | 7077 | 714 | 45.9 | 100
+23:02:09 | 79 | 53 | vmmemwsl=882 msrdc=19 system=16 | 9.22 | 6883 | 709 | 52.9 | 100
+23:03:15 | 68 | 3 | system=7 vmmemwsl=5 razer synapse service=5 | 3.89 | 9348 | 529 | 37.9 | 100
+23:04:20 | 69 | 3 | system=20 vmmemwsl=6 steelseriesengine=4 | 1.39 | 9382 | 524 | 37.9 | 100
+23:05:27 | 79 | 48 | vmmemwsl=898 system=67 msrdc=18 | 10.79 | 6902 | 709 | 51.9 | 100
+23:06:33 | 74 | 7 | vmmemwsl=16 system=5 code=3 | 4.24 | 9383 | 524 | 38.9 | 100
+23:07:39 | 79 | 55 | vmmemwsl=740 razer synapse service=30 code=23 | 4.50 | 7062 | 704 | 46.9 | 100
+23:08:45 | 79 | 52 | vmmemwsl=892 msrdc=13 audiodg=10 | 8.30 | 6859 | 709 | 52.9 | 100
+23:09:51 | 69 | 2 | vmmemwsl=9 system=5 steelseriesengine=3 | 4.71 | 9344 | 530 | 37.9 | 100
+23:10:57 | 69 | 2 | system=5 steelseriesprism=4 svchost=2 | 1.68 | 9383 | 525 | 36.9 | 100
+23:12:04 | 79 | 49 | vmmemwsl=856 system=15 msrdc=14 | 7.75 | 6886 | 710 | 51.9 | 100
+23:13:09 | 71 | 3 | vmmemwsl=11 system=5 steelseriesengine=5 | 7.80 | 9335 | 530 | 40.9 | 100
+23:14:15 | 68 | 2 | steelseriesengine=5 system=5 steelseriesprism=3 | 2.63 | 9370 | 525 | 36.9 | 100
+23:15:22 | 78 | 48 | vmmemwsl=799 code=26 msrdc=15 | 10.97 | 6887 | 710 | 49.9 | 100
+23:16:28 | 79 | 48 | vmmemwsl=796 system=16 msrdc=13 | 8.03 | 6925 | 710 | 52.9 | 100
+23:17:34 | 71 | 3 | memory compression=30 vmmemwsl=19 system=15 | 8.51 | 9370 | 530 | 39.9 | 100
+23:18:40 | 70 | 2 | system=9 vmmemwsl=4 steelseriessonar=3 | 2.97 | 9413 | 525 | 37.9 | 100
+23:19:46 | 79 | 48 | vmmemwsl=811 msrdc=23 code=23 | 4.95 | 7006 | 710 | 50.9 | 100
+23:20:52 | 79 | 51 | vmmemwsl=829 msrdc=24 system=17 | 7.90 | 6994 | 710 | 53.9 | 100
+23:21:58 | 70 | 3 | system=9 steelseriesprism=4 vmmemwsl=4 | 4.29 | 9382 | 530 | 37.9 | 100
+23:23:04 | 71 | 3 | system=7 vmmemwsl=5 steelseriesprism=2 | 1.48 | 9422 | 525 | 36.9 | 100
+23:24:10 | 79 | 47 | vmmemwsl=794 msrdc=18 system=12 | 6.44 | 6897 | 710 | 49.9 | 100
+23:25:16 | 72 | 4 | memory compression=17 system=10 steelseriesprism=6 | 5.80 | 9274 | 535 | 39.9 | 100
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files | thermal_zone_C | passive_limit%
+23:56:36 | 78 | 24 | vmmemwsl=1091 system=34 memory compression=22 | 0.80 | 8094 | 670 | 44.9 | 100
+23:57:42 | 79 | 48 | vmmemwsl=823 msrdc=19 system=12 | 9.07 | 6943 | 710 | 50.9 | 100
+23:58:49 | 79 | 48 | vmmemwsl=821 msrdc=16 system=15 | 10.28 | 6975 | 710 | 52.9 | 100
+23:59:55 | 73 | 7 | vmmemwsl=14 code=12 system=12 | 3.68 | 9427 | 525 | 37.9 | 100
+00:01:01 | 78 | 33 | vmmemwsl=977 system=62 razer synapse service=30 | 3.98 | 7173 | 680 | 41.9 | 100
+00:02:07 | 78 | 47 | vmmemwsl=842 msrdc=18 system=10 | 7.82 | 6964 | 710 | 51.9 | 100
+00:03:13 | 79 | 51 | vmmemwsl=269 memory compression=42 system=26 | 12.30 | 9251 | 536 | 43.9 | 100
+00:04:19 | 68 | 2 | system=9 vmmemwsl=4 steelseriesprism=3 | 4.22 | 9386 | 526 | 37.9 | 100
+00:05:26 | 79 | 57 | vmmemwsl=743 msrdc=21 system=19 | 3.74 | 6955 | 706 | 47.9 | 100
+00:06:32 | 79 | 47 | vmmemwsl=876 msrdc=23 system=10 | 8.01 | 6955 | 711 | 52.9 | 100
+00:07:38 | 73 | 5 | memory compression=16 system=9 vmmemwsl=9 | 7.52 | 9350 | 601 | 42.9 | 100
+00:08:44 | 69 | 2 | system=10 steelseriesprism=5 vmmemwsl=5 | 2.58 | 9406 | 598 | 38.9 | 100
+00:09:50 | 79 | 64 | vmmemwsl=877 system=20 code=18 | 4.34 | 6906 | 783 | 49.9 | 100
+00:10:57 | 79 | 47 | vmmemwsl=831 msrdc=16 system=14 | 8.63 | 6967 | 783 | 51.9 | 100
+00:12:03 | 72 | 4 | memory compression=19 system=8 steelseriesengine=6 | 6.91 | 9372 | 603 | 41.9 | 100
+00:13:09 | 69 | 2 | vmmemwsl=5 system=3 steelseriesprism=3 | 2.49 | 9429 | 598 | 37.9 | 100
+00:14:15 | 79 | 49 | vmmemwsl=791 msrdc=19 system=16 | 8.50 | 6894 | 783 | 48.9 | 100
+00:15:21 | 79 | 47 | vmmemwsl=795 system=14 msrdc=12 | 8.46 | 6905 | 783 | 52.9 | 100
+00:16:27 | 69 | 2 | nvcontainer=5 vmmemwsl=5 steelseriesprism=5 | 7.26 | 9379 | 603 | 37.9 | 100
+00:17:33 | 68 | 2 | steelseriesengine=7 system=7 vmmemwsl=6 | 2.67 | 9417 | 598 | 36.9 | 100
+00:18:39 | 79 | 52 | vmmemwsl=884 msrdc=20 system=19 | 8.65 | 6981 | 783 | 51.9 | 100
+00:19:45 | 69 | 2 | system=7 vmmemwsl=6 steelseriesprism=3 | 3.63 | 9339 | 661 | 37.9 | 100
+00:20:51 | 71 | 3 | vmmemwsl=9 system=7 svchost=2 | 1.28 | 9420 | 661 | 35.9 | 100
+00:21:57 | 79 | 46 | vmmemwsl=862 msrdc=26 system=14 | 9.40 | 6948 | 846 | 50.9 | 100
+00:23:04 | 79 | 51 | vmmemwsl=823 msrdc=22 system=12 | 11.23 | 7335 | 681 | 52.9 | 100
+00:24:10 | 69 | 3 | vmmemwsl=23 system=9 code=5 | 3.86 | 9380 | 661 | 37.9 | 100
+00:25:16 | 79 | 45 | vmmemwsl=1234 system=118 msrdc=29 | 2.61 | 7033 | 841 | 48.9 | 100
+00:26:22 | 79 | 52 | vmmemwsl=818 system=19 msrdc=14 | 7.23 | 7011 | 846 | 51.9 | 100
+00:27:28 | 70 | 3 | system=9 vmmemwsl=7 nvcontainer=5 | 3.63 | 9375 | 666 | 37.9 | 100
+00:28:34 | 77 | 8 | dllhost=53 vmmemwsl=36 system=14 | 2.03 | 9413 | 661 | 37.9 | 100
+00:29:41 | 79 | 48 | vmmemwsl=790 system=23 msrdc=20 | 6.26 | 6899 | 846 | 52.9 | 100
+00:30:47 | 69 | 3 | memory compression=24 system=12 vmmemwsl=6 | 8.05 | 9375 | 668 | 39.9 | 100
+00:31:52 | 69 | 2 | system=5 steelseriesengine=4 steelseriessonar=4 | 2.72 | 9417 | 663 | 36.9 | 100
+00:32:59 | 79 | 49 | vmmemwsl=768 system=18 msrdc=16 | 11.45 | 6835 | 848 | 50.9 | 100
+00:34:05 | 69 | 3 | system=9 vmmemwsl=5 servicehost=4 | 7.30 | 9336 | 668 | 37.9 | 100
+00:35:10 | 69 | 2 | system=9 steelseriesengine=5 vmmemwsl=5 | 2.57 | 9380 | 663 | 35.9 | 100
+00:36:17 | 79 | 48 | vmmemwsl=889 system=15 msrdc=13 | 16.21 | 6882 | 848 | 50.9 | 100
+00:37:23 | 72 | 4 | memory compression=21 system=12 vmmemwsl=7 | 11.52 | 9352 | 668 | 40.9 | 100
+00:38:28 | 70 | 3 | system=8 nvcontainer=5 svchost=3 | 3.92 | 9419 | 663 | 36.9 | 100
+00:39:35 | 79 | 52 | vmmemwsl=847 code=26 system=18 | 4.52 | 6870 | 848 | 48.9 | 100
+00:40:41 | 79 | 48 | vmmemwsl=863 code=23 system=15 | 9.08 | 6874 | 848 | 51.9 | 100
+00:41:47 | 70 | 3 | vmmemwsl=34 system=8 steelseriesprism=7 | 4.52 | 9333 | 728 | 37.9 | 100
+00:42:53 | 70 | 3 | system=6 vmmemwsl=4 svchost=3 | 1.60 | 9416 | 728 | 35.9 | 100
+00:43:59 | 79 | 47 | vmmemwsl=899 msrdc=23 system=11 | 8.27 | 6905 | 913 | 52.9 | 100
+00:45:06 | 79 | 51 | vmmemwsl=877 msrdc=14 system=9 | 11.75 | 6877 | 913 | 53.9 | 100
+00:46:11 | 70 | 3 | system=6 vmmemwsl=5 razer synapse service=5 | 5.72 | 9367 | 734 | 38.9 | 100
+00:47:17 | 69 | 2 | system=9 svchost=5 steelseriesprism=3 | 2.02 | 9407 | 729 | 36.9 | 100
+00:48:24 | 79 | 49 | vmmemwsl=831 msrdc=18 steelseriesprism=10 | 6.38 | 6959 | 914 | 50.9 | 100
+00:49:30 | 78 | 47 | vmmemwsl=824 code=23 system=15 | 11.94 | 6950 | 914 | 53.9 | 100
+00:50:36 | 72 | 3 | vmmemwsl=28 code=12 system=5 | 4.38 | 9421 | 729 | 37.9 | 100
+00:51:42 | 70 | 3 | memory compression=68 system=15 vmmemwsl=12 | 1.74 | 9414 | 729 | 35.9 | 100
+00:52:48 | 79 | 47 | vmmemwsl=786 system=20 msrdc=17 | 6.26 | 6893 | 914 | 50.9 | 100
+00:53:54 | 70 | 2 | system=8 vmmemwsl=7 steelseriesprism=5 | 4.99 | 9324 | 735 | 38.9 | 100
+00:55:00 | 69 | 2 | vmmemwsl=8 steelseriesprism=5 system=5 | 1.68 | 9377 | 730 | 36.9 | 100
+00:56:06 | 79 | 49 | vmmemwsl=837 msrdc=22 system=16 | 7.95 | 6929 | 915 | 50.9 | 100
+00:57:12 | 79 | 48 | vmmemwsl=836 msrdc=17 system=15 | 10.74 | 6972 | 915 | 52.9 | 100
+00:58:18 | 71 | 3 | vmmemwsl=13 system=10 svchost=5 | 5.96 | 9371 | 735 | 40.9 | 100
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files | thermal_zone_C | passive_limit%
+01:29:30 | 78 | 24 | vmmemwsl=1154 system=43 dllhost=9 | 0.45 | 8063 | 875 | 44.9 | 100
+01:30:36 | 79 | 47 | vmmemwsl=837 system=21 code=12 | 10.39 | 6860 | 915 | 51.9 | 100
+01:31:42 | 79 | 47 | vmmemwsl=808 msrdc=18 system=12 | 9.50 | 6926 | 915 | 52.9 | 100
+01:32:48 | 74 | 8 | vmmemwsl=20 system=7 code=5 | 3.48 | 9398 | 761 | 37.9 | 100
+01:33:54 | 79 | 46 | vmmemwsl=1032 system=113 razer synapse service=31 | 4.04 | 7027 | 950 | 45.9 | 100
+01:35:01 | 78 | 47 | vmmemwsl=840 msrdc=19 system=15 | 9.26 | 7013 | 945 | 51.9 | 100
+01:36:07 | 78 | 49 | vmmemwsl=330 system=17 steelseriesengine=6 | 9.45 | 9348 | 765 | 43.9 | 100
+01:37:13 | 69 | 3 | system=10 steelseriesengine=4 vmmemwsl=4 | 3.32 | 9405 | 760 | 38.9 | 100
+01:38:19 | 79 | 61 | vmmemwsl=737 msrdc=12 steelseriesprism=10 | 13.36 | 6946 | 940 | 48.9 | 100
+01:39:26 | 79 | 48 | vmmemwsl=807 msrdc=22 system=9 | 9.43 | 6995 | 945 | 51.9 | 100
+01:40:32 | 75 | 8 | memory compression=28 system=11 vmmemwsl=9 | 8.43 | 9358 | 766 | 42.9 | 100
+01:41:38 | 70 | 2 | system=10 vmmemwsl=4 overwolf=3 | 3.09 | 9416 | 761 | 37.9 | 100
+01:42:44 | 79 | 55 | vmmemwsl=1037 msrdc=19 system=13 | 8.41 | 6925 | 945 | 49.9 | 100
+01:43:50 | 78 | 46 | vmmemwsl=816 msrdc=23 system=22 | 10.00 | 6888 | 945 | 52.9 | 100
+01:44:56 | 69 | 2 | memory compression=21 vmmemwsl=18 system=16 | 4.62 | 9333 | 765 | 38.9 | 100
+01:46:02 | 68 | 2 | system=5 vmmemwsl=5 code=3 | 1.60 | 9402 | 760 | 36.9 | 100
+01:47:08 | 79 | 48 | vmmemwsl=808 msrdc=17 system=14 | 5.62 | 6912 | 874 | 51.9 | 100
+01:48:14 | 69 | 2 | system=7 vmmemwsl=5 overwolf=4 | 2.85 | 9370 | 754 | 37.9 | 100
+01:49:20 | 68 | 2 | system=6 steelseriesprism=4 vmmemwsl=3 | 1.10 | 9407 | 751 | 35.9 | 100
+01:50:26 | 79 | 52 | vmmemwsl=933 msrdc=21 system=17 | 6.94 | 7001 | 936 | 51.9 | 100
+01:51:32 | 71 | 3 | system=9 vmmemwsl=7 overwolf=5 | 5.68 | 9371 | 756 | 38.9 | 100
+01:52:38 | 69 | 3 | system=9 vmmemwsl=5 steelseriesprism=4 | 2.28 | 9411 | 751 | 36.9 | 100
+01:53:44 | 79 | 50 | vmmemwsl=823 msrdc=14 system=13 | 11.04 | 6833 | 936 | 51.9 | 100
+01:54:51 | 78 | 35 | vmmemwsl=34 razer synapse service=24 code=11 | 15.14 | 9286 | 756 | 43.9 | 100
+01:55:57 | 70 | 3 | vmmemwsl=6 system=6 overwolf=5 | 5.20 | 9410 | 751 | 38.9 | 100
+01:57:03 | 78 | 45 | vmmemwsl=726 system=60 code=28 | 7.56 | 6985 | 875 | 47.9 | 100
+01:58:09 | 79 | 49 | vmmemwsl=827 msrdc=21 system=16 | 9.27 | 6931 | 875 | 51.9 | 100
+01:59:15 | 73 | 4 | vmmemwsl=42 code=20 system=12 | 4.11 | 9413 | 744 | 37.9 | 100
+02:00:21 | 76 | 8 | dllhost=52 vmmemwsl=32 system=12 | 2.02 | 9410 | 744 | 37.9 | 100
+02:01:27 | 79 | 52 | vmmemwsl=881 msrdc=16 system=16 | 5.83 | 6963 | 929 | 52.9 | 100
+02:02:33 | 73 | 6 | system=10 vmmemwsl=8 overwolf=5 | 2.60 | 9326 | 746 | 37.9 | 100
+02:03:39 | 75 | 9 | system=8 vmmemwsl=3 overwolf=3 | 1.01 | 9325 | 746 | 37.9 | 100
+02:04:46 | 79 | 47 | vmmemwsl=814 msrdc=19 system=15 | 6.12 | 6836 | 866 | 52.9 | 100
+02:05:52 | 79 | 49 | vmmemwsl=33 razer synapse service=16 code=12 | 7.73 | 9292 | 738 | 43.9 | 100
+02:06:58 | 70 | 2 | system=6 vmmemwsl=5 overwolf=3 | 2.77 | 9398 | 735 | 38.9 | 100
+02:08:04 | 78 | 42 | vmmemwsl=731 msrdc=18 system=11 | 2.85 | 6989 | 849 | 47.9 | 100
+02:09:10 | 79 | 47 | vmmemwsl=807 msrdc=19 system=12 | 7.43 | 6862 | 852 | 52.9 | 100
+02:10:16 | 68 | 2 | vmmemwsl=5 system=4 overwolf=4 | 3.11 | 9370 | 735 | 37.9 | 100
+02:11:22 | 68 | 2 | overwolf=5 vmmemwsl=5 system=4 | 1.08 | 9409 | 732 | 35.9 | 100
+02:12:28 | 71 | 3 | msedgewebview2=40 msedgewebview2=23 system=17 | 5.86 | 9354 | 805 | 37.9 | 100
+02:13:35 | 79 | 53 | vmmemwsl=770 msrdc=17 system=15 | 6.00 | 6899 | 922 | 49.9 | 100
+02:14:41 | 79 | 48 | vmmemwsl=772 code=35 msrdc=19 | 7.74 | 6822 | 922 | 52.9 | 100
+02:15:47 | 69 | 2 | vmmemwsl=9 svchost=9 system=7 | 6.58 | 9314 | 802 | 40.9 | 100
+02:16:53 | 67 | 2 | vmmemwsl=6 overwolf=3 steelseriesengine=3 | 2.26 | 9394 | 799 | 37.9 | 100
+02:17:59 | 79 | 48 | vmmemwsl=840 msrdc=19 system=11 | 10.23 | 6937 | 984 | 50.9 | 100
+02:19:05 | 79 | 49 | vmmemwsl=824 system=15 msrdc=14 | 10.90 | 6965 | 984 | 52.9 | 100
+02:20:11 | 69 | 2 | system=9 steelseriesprism=5 vmmemwsl=5 | 4.62 | 9367 | 804 | 37.9 | 100
+02:21:17 | 68 | 2 | vmmemwsl=6 system=6 razer synapse service=4 | 1.58 | 9407 | 799 | 36.9 | 100
+02:22:23 | 79 | 52 | vmmemwsl=758 msrdc=14 system=12 | 11.80 | 7017 | 984 | 50.9 | 100
+02:23:29 | 69 | 2 | system=8 svchost=6 vmmemwsl=6 | 5.75 | 9366 | 842 | 38.9 | 100
+02:24:35 | 69 | 2 | system=6 overwolf=4 svchost=4 | 2.16 | 9363 | 839 | 35.9 | 100
+02:25:41 | 78 | 47 | vmmemwsl=811 system=21 msrdc=17 | 13.44 | 6883 | 1024 | 51.9 | 100
+02:26:48 | 79 | 48 | vmmemwsl=837 msrdc=17 system=14 | 11.81 | 6936 | 1024 | 53.9 | 100
+02:27:54 | 69 | 2 | vmmemwsl=33 system=9 overwolf=3 | 4.33 | 9317 | 839 | 37.9 | 100
+02:29:00 | 70 | 2 | vmmemwsl=18 system=6 razer synapse 3=4 | 1.46 | 9417 | 839 | 35.9 | 100
+02:30:06 | 0 | 47 | vmmemwsl=789 system=17 audiodg=10 | 8.62 | 6949 | 970 | 50.9 | 100
+02:31:12 | 79 | 47 | vmmemwsl=793 msrdc=18 system=14 | 9.85 | 7010 | 970 | 51.9 | 100
+02:32:18 | 70 | 3 | system=10 vmmemwsl=7 steelseriesprism=5 | 7.36 | 9372 | 842 | 38.9 | 100
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files | thermal_zone_C | passive_limit%
+03:06:25 | 77 | 23 | vmmemwsl=1085 code=27 memory compression=27 | 7.01 | 8038 | 931 | 48.9 | 100
+03:07:32 | 79 | 49 | vmmemwsl=766 system=19 msrdc=16 | 10.98 | 6874 | 961 | 53.9 | 100
+03:08:38 | 79 | 48 | vmmemwsl=759 system=21 msrdc=18 | 9.54 | 6933 | 961 | 53.9 | 100
+03:09:44 | 74 | 7 | system=10 vmmemwsl=9 nvcontainer=5 | 3.55 | 9356 | 824 | 37.9 | 100
+03:10:50 | 79 | 49 | vmmemwsl=713 razer synapse service=31 system=23 | 2.20 | 6967 | 934 | 44.9 | 100
+03:11:57 | 79 | 48 | vmmemwsl=809 msrdc=19 system=15 | 10.53 | 6916 | 939 | 51.9 | 100
+03:13:03 | 78 | 47 | memory compression=54 vmmemwsl=31 razer synapse service=30 | 7.84 | 9286 | 823 | 43.9 | 100
+03:14:09 | 70 | 2 | vmmemwsl=17 steelseriesprism=7 steelseriesengine=5 | 2.85 | 9360 | 820 | 38.9 | 100
+03:15:15 | 79 | 45 | vmmemwsl=738 msrdc=17 audiodg=11 | 11.37 | 6938 | 950 | 46.9 | 100
+03:16:21 | 79 | 48 | vmmemwsl=795 msrdc=16 system=15 | 10.88 | 6842 | 953 | 52.9 | 100
+03:17:27 | 68 | 2 | vmmemwsl=5 system=3 servicehost=2 | 5.53 | 9308 | 836 | 38.9 | 100
+03:18:33 | 69 | 3 | system=6 vmmemwsl=5 servicehost=2 | 1.95 | 9350 | 833 | 36.9 | 100
+03:19:39 | 79 | 49 | vmmemwsl=835 msrdc=18 system=13 | 12.13 | 6816 | 1017 | 50.9 | 100
+03:20:45 | 70 | 3 | system=9 vmmemwsl=7 nvcontainer=6 | 6.53 | 9313 | 837 | 38.9 | 100
+03:21:51 | 69 | 3 | system=10 steelseriesengine=2 svchost=2 | 2.32 | 9352 | 832 | 35.9 | 100
+03:22:57 | 79 | 52 | vmmemwsl=939 system=18 msrdc=13 | 5.59 | 6982 | 1017 | 51.9 | 100
+03:24:03 | 71 | 3 | memory compression=12 system=9 vmmemwsl=9 | 5.95 | 9314 | 837 | 39.9 | 100
+03:25:09 | 69 | 2 | system=9 vmmemwsl=6 steelseriesprism=5 | 2.22 | 9351 | 832 | 36.9 | 100
+03:26:15 | 79 | 48 | vmmemwsl=825 system=19 msrdc=18 | 9.84 | 6915 | 1017 | 50.9 | 100
+03:27:22 | 79 | 49 | vmmemwsl=806 msrdc=22 system=19 | 11.72 | 6938 | 1017 | 51.9 | 100
+03:28:28 | 79 | 48 | vmmemwsl=803 msrdc=18 system=15 | 12.49 | 6919 | 1017 | 53.9 | 100
+03:29:34 | 71 | 3 | memory compression=14 system=9 vmmemwsl=8 | 8.17 | 9295 | 837 | 40.9 | 100
+03:30:40 | 68 | 2 | system=9 vmmemwsl=5 overwolf=3 | 2.90 | 9350 | 832 | 38.9 | 100
+03:31:46 | 79 | 47 | vmmemwsl=818 msrdc=22 system=15 | 11.77 | 6901 | 1017 | 50.9 | 100
+03:32:52 | 73 | 6 | memory compression=19 system=11 steelseriesprism=6 | 10.14 | 9252 | 899 | 42.9 | 100
+03:33:58 | 69 | 2 | system=11 vmmemwsl=7 overwolf=4 | 3.53 | 9348 | 896 | 37.9 | 100
+03:35:05 | 79 | 54 | vmmemwsl=986 msrdc=24 system=14 | 3.70 | 6880 | 1081 | 48.9 | 100
+03:36:11 | 72 | 4 | vmmemwsl=8 system=5 code=5 | 4.47 | 9155 | 911 | 39.9 | 100
+03:37:16 | 77 | 10 | dllhost=67 vmmemwsl=47 system=19 | 2.30 | 9328 | 896 | 37.9 | 100
+03:38:23 | 78 | 44 | vmmemwsl=700 msrdc=20 system=13 | 8.60 | 6856 | 1080 | 48.9 | 100
+03:39:29 | 79 | 49 | vmmemwsl=839 msrdc=19 system=10 | 12.08 | 6826 | 1080 | 52.9 | 100
+03:40:35 | 69 | 2 | system=6 vmmemwsl=5 svchost=3 | 5.63 | 9298 | 900 | 37.9 | 100
+03:41:41 | 68 | 2 | system=7 vmmemwsl=3 steelseriessonar=2 | 1.96 | 9332 | 895 | 35.9 | 100
+03:42:47 | 79 | 52 | vmmemwsl=899 msrdc=14 system=13 | 9.26 | 6844 | 1080 | 52.9 | 100
+03:43:53 | 74 | 5 | system=9 vmmemwsl=6 overwolf=5 | 6.84 | 9289 | 949 | 38.9 | 100
+03:44:59 | 69 | 2 | vmmemwsl=5 overwolf=4 system=3 | 2.47 | 9333 | 946 | 36.9 | 100
+03:46:06 | 79 | 50 | vmmemwsl=832 msrdc=23 system=18 | 7.43 | 6863 | 1131 | 50.9 | 100
+03:47:12 | 78 | 48 | vmmemwsl=845 system=18 msrdc=15 | 9.47 | 6902 | 1131 | 51.9 | 100
+03:48:18 | 71 | 3 | system=12 vmmemwsl=8 steelseriesprism=4 | 5.83 | 9290 | 984 | 38.9 | 100
+03:49:24 | 68 | 2 | system=9 vmmemwsl=5 overwolf=4 | 2.10 | 9331 | 981 | 36.9 | 100
+03:50:30 | 79 | 48 | vmmemwsl=835 msrdc=22 system=17 | 8.66 | 6908 | 1165 | 50.9 | 100
+03:51:36 | 79 | 48 | vmmemwsl=819 msrdc=22 system=15 | 9.04 | 6935 | 1165 | 53.9 | 100
+03:52:42 | 72 | 4 | code=39 vmmemwsl=38 code=13 | 3.47 | 9331 | 980 | 37.9 | 100
+03:53:49 | 79 | 55 | vmmemwsl=440 system=34 code=22 | 1.58 | 7296 | 1078 | 44.9 | 100
+03:54:55 | 79 | 49 | vmmemwsl=658 system=22 msrdc=15 | 8.71 | 6868 | 1093 | 50.9 | 100
+03:56:01 | 75 | 11 | vmmemwsl=115 code=15 code=15 | 4.16 | 9281 | 977 | 37.9 | 100
+03:57:07 | 78 | 42 | vmmemwsl=618 system=78 code=35 | 3.67 | 7006 | 1157 | 43.9 | 100
+03:58:14 | 79 | 47 | vmmemwsl=863 msrdc=23 code=14 | 8.52 | 6874 | 1162 | 51.9 | 100
+03:59:20 | 79 | 55 | vmmemwsl=38 razer synapse service=23 memory compression=9 | 8.20 | 9217 | 1037 | 43.9 | 100
+04:00:26 | 70 | 3 | system=7 vmmemwsl=5 steelseriesengine=3 | 2.91 | 9327 | 1034 | 37.9 | 100
+04:01:32 | 78 | 48 | vmmemwsl=743 system=23 msrdc=17 | 10.94 | 6961 | 1214 | 47.9 | 100
+04:02:39 | 79 | 50 | vmmemwsl=784 system=15 msrdc=15 | 9.90 | 6822 | 1219 | 51.9 | 100
+04:03:45 | 72 | 5 | memory compression=8 system=6 vmmemwsl=5 | 10.74 | 9250 | 1039 | 42.9 | 100
+04:04:51 | 68 | 2 | system=9 vmmemwsl=5 nvcontainer=4 | 3.73 | 9315 | 1034 | 37.9 | 100
+04:05:57 | 79 | 67 | vmmemwsl=958 msrdc=17 system=15 | 4.82 | 6860 | 1156 | 49.9 | 100
+04:07:03 | 69 | 3 | code=13 system=9 vmmemwsl=7 | 2.68 | 9279 | 1038 | 37.9 | 100
+04:08:09 | 79 | 48 | vmmemwsl=839 msrdc=16 system=12 | 5.66 | 6886 | 1150 | 51.9 | 100
+04:09:16 | 79 | 48 | vmmemwsl=766 msrdc=17 audiodg=11 | 8.06 | 6829 | 1150 | 52.9 | 100
+04:10:22 | 70 | 3 | vmmemwsl=8 steelseriesprism=6 system=4 | 3.84 | 9277 | 1030 | 37.9 | 100
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files | thermal_zone_C | passive_limit%
+04:41:16 | 78 | 24 | vmmemwsl=1162 system=74 dllhost=9 | 5.15 | 8016 | 1125 | 44.9 | 100
+04:42:22 | 78 | 48 | vmmemwsl=798 system=15 msrdc=14 | 9.12 | 6798 | 1157 | 49.9 | 100
+04:43:28 | 78 | 47 | vmmemwsl=778 system=16 msrdc=15 | 10.04 | 6862 | 1157 | 51.9 | 100
+04:44:34 | 74 | 7 | code=22 vmmemwsl=16 code=8 | 3.48 | 9335 | 1026 | 37.9 | 100
+04:45:40 | 79 | 47 | vmmemwsl=778 code=36 razer synapse service=23 | 1.47 | 7008 | 1206 | 45.9 | 100
+04:46:47 | 79 | 51 | vmmemwsl=915 system=16 msrdc=15 | 8.49 | 6894 | 1211 | 51.9 | 100
+04:47:53 | 69 | 3 | system=14 memory compression=8 vmmemwsl=8 | 5.95 | 9294 | 1096 | 39.9 | 100
+04:48:59 | 68 | 2 | system=12 vmmemwsl=6 svchost=3 | 2.23 | 9332 | 1093 | 36.9 | 100
+04:50:05 | 79 | 47 | vmmemwsl=816 system=17 msrdc=16 | 4.75 | 6780 | 1278 | 49.9 | 100
+04:51:11 | 70 | 3 | vmmemwsl=9 system=6 steelseriesprism=3 | 4.86 | 9284 | 1145 | 37.9 | 100
+04:52:17 | 70 | 3 | system=7 vmmemwsl=5 razer synapse 3=3 | 1.69 | 9329 | 1142 | 36.9 | 100
+04:53:23 | 74 | 9 | memory compression=25 vmmemwsl=11 system=10 | 4.54 | 9233 | 1150 | 39.9 | 100
+04:54:29 | 79 | 67 | vmmemwsl=755 msrdc=26 system=19 | 9.42 | 6851 | 1322 | 47.9 | 100
+04:55:36 | 79 | 50 | vmmemwsl=844 system=18 msrdc=12 | 10.61 | 6877 | 1327 | 51.9 | 100
+04:56:41 | 70 | 3 | steelseriesprism=5 system=5 vmmemwsl=4 | 5.08 | 9286 | 1147 | 37.9 | 100
+04:57:47 | 70 | 3 | system=8 steelseriesprism=7 svchost=5 | 1.92 | 9326 | 1142 | 35.9 | 100
+04:58:53 | 70 | 3 | msedgewebview2=59 msedgewebview2=20 system=12 | 6.05 | 9274 | 1190 | 38.9 | 100
+05:00:00 | 79 | 55 | vmmemwsl=922 code=17 msrdc=16 | 8.78 | 6814 | 1308 | 48.9 | 100
+05:01:06 | 79 | 49 | vmmemwsl=785 msrdc=23 system=20 | 13.81 | 6851 | 1308 | 51.9 | 100
+05:02:12 | 68 | 2 | vmmemwsl=5 razer synapse 3=5 system=5 | 5.50 | 9238 | 1181 | 38.9 | 100
+05:03:18 | 69 | 2 | system=7 vmmemwsl=5 steelseriesprism=5 | 1.98 | 9324 | 1181 | 35.9 | 100
+05:04:24 | 78 | 42 | vmmemwsl=737 msrdc=22 system=10 | 7.04 | 6921 | 1366 | 48.9 | 100
+05:05:30 | 73 | 7 | vmmemwsl=53 code=17 code=8 | 4.40 | 8651 | 1257 | 46.9 | 100
+05:06:37 | 79 | 55 | vmmemwsl=933 msrdc=21 code=19 | 9.26 | 6868 | 1402 | 51.9 | 100
+05:07:43 | 70 | 5 | code=16 vmmemwsl=12 code=5 | 4.76 | 9280 | 1223 | 38.9 | 100
+05:08:49 | 69 | 3 | system=9 steelseriesprism=4 vmmemwsl=3 | 1.78 | 9317 | 1218 | 36.9 | 100
+05:09:55 | 79 | 53 | vmmemwsl=888 system=16 msrdc=14 | 12.67 | 6886 | 1341 | 50.9 | 100
+05:11:01 | 69 | 3 | vmmemwsl=33 svchost=19 msmpeng=11 | 4.55 | 9237 | 1210 | 38.9 | 100
+05:12:07 | 76 | 8 | dllhost=47 vmmemwsl=40 system=21 | 2.28 | 9310 | 1210 | 36.9 | 100
+05:13:13 | 79 | 48 | vmmemwsl=798 msrdc=19 code=18 | 11.66 | 6725 | 1394 | 49.9 | 100
+05:14:19 | 79 | 51 | memory compression=91 razer synapse service=29 code=28 | 11.23 | 9237 | 1215 | 43.9 | 100
+05:15:25 | 70 | 3 | vmmemwsl=6 system=6 steelseriesengine=4 | 3.79 | 9318 | 1210 | 37.9 | 100
+05:16:31 | 79 | 52 | vmmemwsl=702 msrdc=15 system=13 | 5.87 | 6927 | 1366 | 46.9 | 100
+05:17:38 | 79 | 49 | vmmemwsl=811 msrdc=22 system=11 | 10.08 | 6823 | 1369 | 51.9 | 100
+05:18:44 | 68 | 3 | system=12 vmmemwsl=6 steelseriesprism=3 | 4.82 | 9280 | 1214 | 37.9 | 100
+05:19:49 | 69 | 3 | system=10 steelseriesprism=5 steelseriesengine=4 | 1.82 | 9315 | 1211 | 35.9 | 100
+05:20:56 | 79 | 47 | vmmemwsl=756 msrdc=13 system=11 | 12.94 | 6815 | 1396 | 50.9 | 100
+05:22:02 | 79 | 49 | vmmemwsl=784 msrdc=18 code=17 | 9.09 | 6825 | 1396 | 52.9 | 100
+05:23:08 | 68 | 2 | vmmemwsl=7 system=5 memory compression=3 | 4.39 | 9277 | 1216 | 37.9 | 100
+05:24:14 | 68 | 2 | steelseriesprism=4 vmmemwsl=4 svchost=3 | 1.64 | 9318 | 1211 | 35.9 | 100
+05:25:20 | 79 | 48 | vmmemwsl=823 system=15 msrdc=12 | 4.95 | 6888 | 1395 | 48.9 | 100
+05:26:27 | 79 | 48 | vmmemwsl=853 msrdc=18 audiodg=9 | 8.62 | 6864 | 1395 | 51.9 | 100
+05:27:33 | 70 | 3 | vmmemwsl=9 system=9 steelseriesprism=2 | 3.69 | 9282 | 1215 | 37.9 | 100
+05:28:38 | 77 | 12 | cleanmgr=84 taskhostw=78 system=15 | 1.32 | 9324 | 1210 | 38.9 | 100
+05:29:45 | 79 | 52 | vmmemwsl=943 msrdc=19 system=15 | 6.68 | 6788 | 1395 | 51.9 | 100
+05:30:51 | 68 | 2 | svchost=15 gamingservices=8 system=7 | 4.39 | 9279 | 1268 | 37.9 | 100
+05:31:57 | 69 | 3 | system=13 vmmemwsl=7 steelseriesprism=5 | 1.55 | 9320 | 1265 | 36.9 | 100
+05:33:03 | 79 | 48 | vmmemwsl=820 system=24 msrdc=20 | 11.00 | 6893 | 1388 | 50.9 | 100
+05:34:09 | 79 | 49 | vmmemwsl=781 system=21 msrdc=18 | 11.90 | 6880 | 1388 | 53.9 | 100
+05:35:15 | 72 | 4 | system=9 vmmemwsl=6 svchost=3 | 5.22 | 9277 | 1260 | 37.9 | 100
+05:36:21 | 71 | 3 | system=10 vmmemwsl=9 steelseriesengine=6 | 1.73 | 9305 | 1257 | 36.9 | 100
+05:37:27 | 79 | 49 | vmmemwsl=786 msrdc=20 system=13 | 6.28 | 6864 | 1442 | 50.9 | 100
+05:38:34 | 79 | 48 | vmmemwsl=773 msrdc=12 audiodg=11 | 7.55 | 6854 | 1442 | 52.9 | 100
+05:39:40 | 72 | 4 | vmmemwsl=26 code=21 system=9 | 2.81 | 9312 | 1258 | 37.9 | 100
+05:40:46 | 79 | 68 | vmmemwsl=457 system=48 steelseriesengine=7 | 5.49 | 7515 | 1403 | 42.9 | 100
+05:41:52 | 79 | 49 | vmmemwsl=785 msrdc=19 system=19 | 9.01 | 6804 | 1443 | 51.9 | 100
+05:42:58 | 79 | 47 | vmmemwsl=813 msrdc=20 system=18 | 10.18 | 6941 | 1285 | 52.9 | 100
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files | thermal_zone_C | passive_limit%
+06:14:45 | 78 | 21 | vmmemwsl=1102 system=9 dllhost=8 | 4.96 | 7974 | 1402 | 46.9 | 100
+06:15:51 | 79 | 54 | vmmemwsl=865 msmpeng=74 svchost=19 | 9.97 | 6877 | 1442 | 52.9 | 100
+06:16:58 | 79 | 47 | vmmemwsl=829 msrdc=21 system=19 | 9.45 | 6849 | 1442 | 52.9 | 100
+06:18:04 | 74 | 7 | vmmemwsl=10 code=9 system=5 | 4.02 | 9303 | 1257 | 37.9 | 100
+06:19:10 | 79 | 49 | vmmemwsl=529 system=106 razer synapse service=30 | 2.31 | 6903 | 1437 | 47.9 | 100
+06:20:16 | 79 | 52 | vmmemwsl=905 system=16 msrdc=13 | 8.46 | 6799 | 1442 | 52.9 | 100
+06:21:22 | 69 | 3 | system=11 vmmemwsl=8 svchost=4 | 5.81 | 9216 | 1267 | 39.9 | 100
+06:22:28 | 69 | 2 | system=8 vmmemwsl=5 steelseriesengine=5 | 2.01 | 9323 | 1257 | 37.9 | 100
+06:23:35 | 79 | 48 | vmmemwsl=820 msrdc=17 system=13 | 3.63 | 6851 | 1388 | 49.9 | 100
+06:24:40 | 69 | 2 | system=6 vmmemwsl=5 steelseriesprism=3 | 2.87 | 9215 | 1263 | 37.9 | 100
+06:25:46 | 70 | 3 | system=10 vmmemwsl=4 svchost=3 | 1.09 | 9324 | 1257 | 35.9 | 100
+06:26:52 | 74 | 9 | vmmemwsl=35 code=29 memory compression=18 | 5.98 | 9214 | 1295 | 39.9 | 100
+06:27:59 | 79 | 56 | vmmemwsl=722 system=20 msrdc=19 | 12.14 | 6881 | 1465 | 47.9 | 100
+06:29:05 | 79 | 47 | vmmemwsl=739 msrdc=19 system=13 | 10.12 | 6849 | 1470 | 50.9 | 100
+06:30:11 | 69 | 3 | system=10 vmmemwsl=7 steelseriesengine=4 | 4.01 | 9281 | 1291 | 37.9 | 100
+06:31:17 | 69 | 3 | system=10 steelseriesprism=4 vmmemwsl=3 | 1.46 | 9320 | 1288 | 35.9 | 100
+06:32:23 | 79 | 55 | vmmemwsl=906 msrdc=16 system=16 | 10.95 | 6880 | 1419 | 51.9 | 100
+06:33:29 | 71 | 3 | system=8 vmmemwsl=6 steelseriesprism=4 | 6.07 | 9219 | 1294 | 39.9 | 100
+06:34:35 | 69 | 2 | system=8 vmmemwsl=6 steelseriesengine=3 | 2.14 | 9322 | 1288 | 36.9 | 100
+06:35:41 | 79 | 49 | vmmemwsl=774 msrdc=17 system=16 | 9.02 | 6848 | 1408 | 49.9 | 100
+06:36:47 | 71 | 3 | memory compression=11 system=9 vmmemwsl=5 | 7.50 | 9269 | 1280 | 40.9 | 100
+06:37:53 | 69 | 3 | system=7 vmmemwsl=5 steelseriesengine=4 | 2.59 | 9313 | 1277 | 37.9 | 100
+06:38:59 | 79 | 48 | vmmemwsl=815 msrdc=15 system=14 | 5.04 | 6799 | 1391 | 49.9 | 100
+06:40:05 | 69 | 3 | memory compression=13 system=11 vmmemwsl=8 | 4.91 | 9268 | 1274 | 38.9 | 100
+06:41:11 | 68 | 2 | system=11 steelseriesprism=5 vmmemwsl=5 | 1.69 | 9313 | 1271 | 35.9 | 100
+06:42:18 | 79 | 48 | vmmemwsl=805 system=19 msrdc=17 | 16.22 | 6858 | 1456 | 50.9 | 100
+06:43:24 | 76 | 13 | vmmemwsl=30 razer synapse service=28 code=23 | 12.94 | 9220 | 1276 | 42.9 | 100
+06:44:30 | 78 | 18 | vmmemwsl=104 dllhost=57 system=19 | 4.34 | 9254 | 1271 | 38.9 | 100
+06:45:36 | 76 | 8 | dllhost=49 vmmemwsl=45 system=15 | 2.39 | 9310 | 1271 | 36.9 | 100
+06:46:42 | 79 | 52 | vmmemwsl=840 msrdc=20 system=14 | 9.52 | 6819 | 1416 | 50.9 | 100
+06:47:48 | 69 | 3 | memory compression=8 system=8 vmmemwsl=5 | 5.48 | 9211 | 1271 | 38.9 | 100
+06:48:54 | 75 | 7 | vmmemwsl=101 system=8 overwolfhelper64=2 | 2.00 | 9258 | 1263 | 37.9 | 100
+06:50:00 | 79 | 48 | vmmemwsl=800 system=25 msrdc=18 | 5.67 | 6786 | 1448 | 49.9 | 100
+06:51:07 | 79 | 49 | vmmemwsl=815 system=19 msrdc=19 | 8.58 | 6851 | 1448 | 51.9 | 100
+06:52:13 | 72 | 4 | system=9 svchost=4 vmmemwsl=3 | 5.70 | 9201 | 1273 | 38.9 | 100
+06:53:18 | 70 | 3 | system=6 vmmemwsl=3 steelseriesengine=3 | 2.05 | 9300 | 1263 | 36.9 | 100
+06:54:25 | 79 | 48 | vmmemwsl=808 msrdc=18 system=15 | 6.83 | 6779 | 1390 | 49.9 | 100
+06:55:31 | 79 | 48 | vmmemwsl=857 system=22 msrdc=21 | 7.99 | 6828 | 1390 | 52.9 | 100
+06:56:37 | 71 | 3 | code=22 vmmemwsl=19 system=8 | 3.22 | 9213 | 1261 | 37.9 | 100
+06:57:43 | 69 | 3 | system=8 razer synapse service=5 vmmemwsl=4 | 1.25 | 9292 | 1261 | 35.9 | 100
+06:58:49 | 79 | 48 | vmmemwsl=763 code=26 msrdc=16 | 5.75 | 6845 | 1444 | 50.9 | 100
+06:59:55 | 71 | 3 | system=10 svchost=7 vmmemwsl=5 | 10.24 | 9256 | 1264 | 38.9 | 100
+07:01:01 | 69 | 3 | system=8 vmmemwsl=5 servicehost=3 | 3.57 | 9293 | 1259 | 36.9 | 100
+07:02:07 | 79 | 49 | vmmemwsl=846 msrdc=19 system=12 | 6.70 | 6856 | 1392 | 49.9 | 100
+07:03:14 | 79 | 49 | vmmemwsl=817 system=16 msrdc=16 | 7.72 | 6867 | 1392 | 50.9 | 100
+07:04:20 | 69 | 3 | system=9 vmmemwsl=7 steelseriesprism=3 | 4.58 | 9260 | 1256 | 38.9 | 100
+07:05:25 | 70 | 3 | system=9 vmmemwsl=5 steelseriesprism=2 | 1.46 | 9294 | 1253 | 36.9 | 100
+07:06:32 | 79 | 49 | vmmemwsl=828 system=15 msrdc=13 | 8.24 | 6873 | 1372 | 50.9 | 100
+07:07:38 | 78 | 48 | vmmemwsl=834 msrdc=12 system=12 | 11.80 | 6863 | 1372 | 51.9 | 100
+07:08:44 | 69 | 3 | system=11 vmmemwsl=6 svchost=3 | 5.77 | 9251 | 1256 | 37.9 | 100
+07:09:50 | 69 | 2 | system=7 vmmemwsl=4 razer synapse 3=4 | 1.95 | 9293 | 1253 | 36.9 | 100
+07:10:56 | 79 | 48 | vmmemwsl=833 code=23 msrdc=18 | 7.09 | 6865 | 1376 | 49.9 | 100
+07:12:03 | 78 | 48 | vmmemwsl=839 system=14 msrdc=13 | 7.38 | 6872 | 1376 | 51.9 | 100
+07:13:08 | 68 | 2 | nvcontainer=6 vmmemwsl=5 system=5 | 3.64 | 9248 | 1256 | 37.9 | 100
+07:14:14 | 69 | 2 | vmmemwsl=5 steelseriesprism=2 system=2 | 1.37 | 9285 | 1253 | 36.9 | 100
+07:15:21 | 79 | 49 | vmmemwsl=870 msrdc=19 system=12 | 8.33 | 6867 | 1438 | 50.9 | 100
+07:16:27 | 79 | 49 | vmmemwsl=862 system=22 msrdc=18 | 9.44 | 6883 | 1438 | 52.9 | 100
+07:17:33 | 69 | 2 | vmmemwsl=35 system=5 steelseriesprism=5 | 6.28 | 9198 | 1253 | 37.9 | 100

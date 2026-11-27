@@ -71,6 +71,21 @@ def test_one_low_sample_is_not_enough():
     assert gb.throttled([(at('14:00:00'), 60.0, 90.0)], 85.0) == (False, None)
 
 
+def test_zero_percent_reading_is_a_counter_glitch_not_throttling():
+    # 2026-11-27 02:30:06: one busy sample read 0 % between readings of 79 %;
+    # the median of (0, 79) = 39.5 stopped the session although nothing throttled
+    s = [(at('02:30:06'), 0.0, 47.0), (at('02:31:12'), 79.0, 47.0), (at('02:32:18'), 70.0, 3.0)]
+    assert gb.counter_glitches(s) == 1
+    assert gb.throttled(s, 70.0) == (False, None)          # one valid busy sample left
+    s.append((at('02:33:20'), 78.0, 45.0))
+    assert gb.throttled(s, 70.0) == (False, 78.5)
+
+
+def test_real_throttling_is_still_caught_next_to_a_glitch():
+    s = [(at('03:00:00'), 0.0, 60.0), (at('03:01:00'), 55.0, 60.0), (at('03:02:00'), 60.0, 70.0)]
+    assert gb.throttled(s, 70.0) == (True, 57.5)
+
+
 # ------------------------------------------------------------ stopping
 
 BASE = dict(elapsed_min=10, max_minutes=60, failures=0, max_failures=2, throttle=False,

@@ -10,7 +10,8 @@ kept short and supervised (decision of 2026-11-19):
   - the host monitor (host_monitor.sh) runs for the whole session, and the
     session stops if Windows reports the CPU throttled while a run was busy
     (median '% processor performance' below --min-perf, default 85; it is
-    98-108 % in normal runs);
+    98-108 % in normal runs; a busy sample that reads 0 % is a counter glitch
+    and is left out);
   - the session stops after --max-failures (default 2) failed runs in a row;
   - creating evaluation/progress/STOP stops it after the current run;
   - each session resumes where the last one stopped: runs already 'ok' in the
@@ -113,12 +114,20 @@ def throttled(samples, min_perf, busy_util=40.0, min_busy=2):
     """True if the CPU ran below min_perf % of its nominal performance while
     busy (utility >= busy_util): median over the busy samples, at least
     min_busy of them. Idle samples are ignored (low performance is normal
-    when idle)."""
-    busy = [perf for _, perf, util in samples if util >= busy_util]
+    when idle). A busy sample reading 0 % performance is a counter glitch, not
+    throttling, and is left out too (2026-11-27 02:30: one 0 % reading at 47 %
+    utility and 51 C, between readings of 79 %, stopped the session; a
+    throttled CPU still runs)."""
+    busy = [perf for _, perf, util in samples if util >= busy_util and perf > 0]
     if len(busy) < min_busy:
         return False, None
     median = statistics.median(busy)
     return median < min_perf, median
+
+
+def counter_glitches(samples, busy_util=40.0):
+    """Busy samples reading 0 % CPU performance (ignored by throttled())."""
+    return sum(1 for _, perf, util in samples if util >= busy_util and perf <= 0)
 
 
 def thermal_readings(path, start, end):
@@ -328,6 +337,10 @@ def main():
                 live(f'  NOT ok: {status} ({failures} in a row)')
             samples = monitor_samples(MONITOR_LOG, run_start, datetime.datetime.now())
             is_throttled, median_perf = throttled(samples, cli.min_perf)
+            glitches = counter_glitches(samples)
+            if glitches:
+                live(f'  ignored {glitches} monitor sample(s) reading 0 % CPU performance '
+                     f'while busy (a Windows counter glitch, not throttling)')
             if median_perf is not None:
                 live(f'  CPU performance while busy: median {median_perf:.0f} % '
                      f'({len(samples)} monitor samples)')

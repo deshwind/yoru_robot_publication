@@ -139,7 +139,7 @@ Batch progress while it runs: `grep -c status= evaluation/data/baseline_batch.lo
 
 ```bash
 PYTHONPATH=src/yoru_core:$PYTHONPATH python3 -m pytest src/yoru_core/test -q   # system (119)
-python3 -m pytest evaluation/tests -q                                           # evaluation scripts (99)
+python3 -m pytest evaluation/tests -q                                           # evaluation scripts (101)
 ```
 
 ## 6. Scripts
