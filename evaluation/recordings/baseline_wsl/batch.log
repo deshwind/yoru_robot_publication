@@ -772,3 +772,6 @@
 [run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
 [run_batch] 1/1 F-straw seed 18 attempt 1 (domain 97) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/F-straw/18
 [run_batch]   status=ok outcome=none stage= sim=120.6s wall=138.1s rtf=0.873
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 G seed 18 attempt 1 (domain 94) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/G/18
+[run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=99.8s wall=118.1s rtf=0.845

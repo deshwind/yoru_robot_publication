@@ -233,3 +233,4 @@ baseline_wsl/D/18,baseline_wsl,D,18,,,,,,,,ok,none,,,none,no_violation,2026-11-2
 baseline_wsl/E/18,baseline_wsl,E,18,,,,,,,,ok,none,,,none,no_violation,2026-11-27T21:28:28,2026-11-27T21:30:46,138.1,120.1,0.869,1,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/E/18,
 baseline_wsl/F-pen/18,baseline_wsl,F-pen,18,,,,,,,,ok,none,,,none,no_violation,2026-11-27T21:33:17,2026-11-27T21:35:38,141.1,120.2,0.852,1,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/F-pen/18,
 baseline_wsl/F-straw/18,baseline_wsl,F-straw,18,,,,,,,,ok,none,,,none,no_violation,2026-11-27T21:37:38,2026-11-27T21:39:56,138.1,120.6,0.873,1,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/F-straw/18,
+baseline_wsl/G/18,baseline_wsl,G,18,,,,,,,,ok,logged_no_compliance,S4,89.1,logged_no_compliance,violation,2026-11-27T22:11:39,2026-11-27T22:13:37,118.1,99.8,0.845,1,True,,7310e62f04ee1977,evaluation/data/baseline_wsl/baseline_wsl/G/18,
