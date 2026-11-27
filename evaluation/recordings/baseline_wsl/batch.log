@@ -751,3 +751,24 @@
 [run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
 [run_batch] 1/1 A-V seed 18 attempt 1 (domain 76) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/A-V/18
 [run_batch]   status=ok outcome=complied stage=S3 sim=84.9s wall=99.1s rtf=0.857
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 B seed 18 attempt 1 (domain 79) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/B/18
+[run_batch]   status=ok outcome=none stage= sim=120.3s wall=137.1s rtf=0.877
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 B-C7 seed 18 attempt 1 (domain 82) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/B-C7/18
+[run_batch]   status=ok outcome=logged_no_compliance stage=S4 sim=100.2s wall=116.1s rtf=0.863
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 C seed 18 attempt 1 (domain 85) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/C/18
+[run_batch]   status=ok outcome=target_lost stage=S2 sim=62.6s wall=75.1s rtf=0.834
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 D seed 18 attempt 1 (domain 88) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/D/18
+[run_batch]   status=ok outcome=none stage= sim=120.9s wall=138.1s rtf=0.875
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 E seed 18 attempt 1 (domain 91) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/E/18
+[run_batch]   status=ok outcome=none stage= sim=120.1s wall=138.1s rtf=0.869
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 F-pen seed 18 attempt 1 (domain 94) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/F-pen/18
+[run_batch]   status=ok outcome=none stage= sim=120.2s wall=141.1s rtf=0.852
+[run_batch] tag=baseline_wsl runs=1 code=7310e62f04ee1977 weights={} variant=none
+[run_batch] 1/1 F-straw seed 18 attempt 1 (domain 97) -> /home/desh/yoru_ws/yoru_robot_publication/evaluation/data/baseline_wsl/baseline_wsl/F-straw/18
+[run_batch]   status=ok outcome=none stage= sim=120.6s wall=138.1s rtf=0.873
