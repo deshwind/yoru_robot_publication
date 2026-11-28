@@ -1,0 +1,2157 @@
+=== 2026-11-19 14:33:00 Phase B started (branch phase-b-human-model from main 413ae7c): under skip_pa_warning, a person scripted to comply after the PA warning complies after the first warning actually heard ===
+14:34:01 [phase-b] scenario_publisher_node: parameter comply_s1_fallback ('' default | first_heard) implemented; recorded in ground truth
+14:34:44 [phase-b] tests: system 119 passed in 5.75s (105 before + 14 new) | evaluation 29 passed in 0.83s
+14:35:05 [phase-b] committed locally 918c753 (push waits for the token)
+14:35:20 [phase-b] starting the single Gazebo check run: H seed 0, skip_pa_warning + comply_s1_fallback first_heard (expect: no PA, approach, direct warning, complied ~1 s later, outcome complied S3)
+14:38:54 [phase-b] check run so far: MONITORING -> APPROACH directly (no PA warning) at 36.1 s sim; APPROACH -> DIRECT_WARNING after 24.0 s; person complied ~1 s after the first direct warning; compliance detected -> outcome complied S3 (as expected). Run winding down (fixed 180 s window).
+14:39:00 [phase-b] check run finished; gzserver left: 0
+14:39:29 [phase-b] check run verified (ground truth: comply_trigger warning=S3 direct_count=1 s1_fallback=True; no PA audio event; FSM variants line skip_pa_warning=True); archived to evidence/phase_b/ with a top-down figure
+14:40:25 [phase-b] step 1 DONE: evidence section 'Phase B' written (decision, implementation, 14 tests, check run table + figure); committed locally 2bab9ae; push waits for the token
+14:46:45 [watchdog] health OK; idle (no Gazebo, 9.4 GB free); Phase B step 1 done, 2 commits local (918c753, 2bab9ae); push waits for the token
+15:01:41 [watchdog] health OK; idle; Phase B step 1 done (2 local commits); waiting for go-ahead on step 2 and the token to push
+15:16:41 [watchdog] health OK; idle; waiting for go-ahead on step 2 and the token
+15:21:47 [step2] started: run_batch.py support for the FSM variants (+ Phase B rule for skip-PA runs, + config guard on the 'FSM variants:' line)
+15:24:13 [step2] tests: system 119 passed in 6.07s | evaluation 52 passed in 0.90s (29 before + 23 new)
+15:25:00 [step2] docs: evaluation/README.md (usage, test counts) + evidence 'Phase C preparation: runner support'
+15:25:08 [step2] DONE: committed locally 55fa73c; push waits for the token
+15:31:26 [stepB] started: gentle_batch.py (1 h sessions, 2 min cool-downs, stop on CPU throttling / repeated failures / STOP file, resumable)
+15:32:47 [stepB] tests: system 119 passed in 6.08s | evaluation 69 passed in 0.97s (52 before + 17 new)
+15:33:12 [stepB] DONE: committed locally 5081700; Phase C ready to start (needs: scope decision, you around, token to push)
+15:33:25 [watchdog] health OK; idle; steps 1, A, B done (4 local commits, latest 5081700); waiting for Phase C scope + token
+15:46:42 [watchdog] health OK; idle; waiting for Phase C scope + token
+15:47:16 [phaseC] user: go. First gentle session: compliance_aware hold_s1, H,C,A x seeds 0-9 (30 runs, ~13 this session); out evaluation/data/variants. Epic Games Launcher open (idle) at start.
+15:47:16 [gentle] session start: tag=aware_hold_s1, 30 of 30 runs to do; budget 60 min, cool-down 120 s, stop if CPU performance < 85 % while busy
+15:47:16 [gentle] run 1/30: H seed 0
+15:48:22 [phaseC] first variant run passed the new configuration guard: 'FSM variants: ... compliance_aware_approach=hold_s1, frame_topics=2' and 'Human model: ... comply_s1_fallback=off' as expected
+15:49:26 [gentle]   ok: complied S1 at 47.0 s sim, RTF 0.819
+15:49:26 [gentle]   CPU performance while busy: median 106 % (2 monitor samples)
+15:49:26 [gentle]   cool-down 120 s
+15:51:27 [gentle] run 2/30: H seed 1
+15:53:37 [gentle]   ok: complied S1 at 47.0 s sim, RTF 0.816
+15:53:37 [gentle]   cool-down 120 s
+15:53:51 [phaseC] estimate: ~4 min 10 s per H cycle (2:10 run + 2:00 cool-down), ~4:15 C, ~4:45 A; this session ~15 runs (10 H + ~5 C), ends ~16:49; remaining ~15 runs = 1 more full session + a short one
+15:55:37 [gentle] run 3/30: H seed 2
+15:57:45 [gentle]   ok: complied S1 at 46.9 s sim, RTF 0.84
+15:57:45 [gentle]   cool-down 120 s
+15:59:45 [gentle] run 4/30: H seed 3
+16:01:54 [gentle]   ok: complied S1 at 47.3 s sim, RTF 0.837
+16:01:54 [gentle]   cool-down 120 s
+16:03:13 [phaseC] user chose option B (speed up): STOP file created so the session ends after its current run; it will be restarted with --cooldown-s 60 (throttling stop and 60 min budget unchanged)
+16:03:54 [gentle] session end after 17 min: 4 run(s) ok this session; 26 of 30 still to do; reason: STOP file present (manual stop)
+16:04:06 [phaseC] restarting with 1-min cool-down (option B); 26 of 30 runs to do
+16:04:07 [gentle] session start: tag=aware_hold_s1, 26 of 30 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 85 % while busy
+16:04:07 [gentle] run 1/26: H seed 4
+16:04:56 [git] token stored in git's credential store (~/.git-credentials, 600); branch phase-b-human-model pushed (5 commits)
+16:06:17 [gentle]   ok: complied S1 at 46.9 s sim, RTF 0.813
+16:06:17 [gentle]   CPU performance while busy: median 104 % (2 monitor samples)
+16:06:17 [gentle]   cool-down 60 s
+16:07:17 [gentle] run 2/26: H seed 5
+16:08:15 [phaseC] user chose MAX: no cool-down, one session for the remaining runs (throttling + failure stops kept); STOP file created to end the current session after its current run
+16:09:25 [gentle]   ok: complied S1 at 46.9 s sim, RTF 0.845
+16:09:25 [gentle] session end after 5 min: 2 run(s) ok this session; 24 of 30 still to do; reason: STOP file present (manual stop)
+16:09:31 [phaseC] restart at MAX: --cooldown-s 0 --max-minutes 120; 24 of 30 to do
+16:09:32 [gentle] session start: tag=aware_hold_s1, 24 of 30 runs to do; budget 120 min, cool-down 0 s, stop if CPU performance < 85 % while busy
+16:09:32 [gentle] run 1/24: H seed 6
+16:13:15 [gentle]   ok: complied S1 at 47.2 s sim, RTF 0.867
+16:13:15 [gentle]   CPU performance while busy: median 104 % (4 monitor samples)
+16:13:15 [gentle]   cool-down 0 s
+16:13:15 [gentle] run 2/24: H seed 7
+16:13:25 [phaseC] H/6: attempt 1 nav2_not_ready (Nav2 start-up, retried automatically; 1st run with no cool-down, started ~8 s after the previous run ended); attempt 2 ok complied S1, RTF 0.867. robot_state_publisher segfaulted (exit -11) DURING shutdown (log line 468, after the first SIGINT at 422): not a run failure (died_processes empty), recorded as an odd event.
+16:14:37 [phaseC] user: must finish by 17:00 -> reduce to 10 more runs: H 7-9, C 0-3, A 0-2 (balanced; rest of C and A later). STOP file to end the current session after H/7, then three chained sessions, no cool-down.
+16:15:22 [gentle]   ok: complied S1 at 47.0 s sim, RTF 0.856
+16:15:22 [gentle] session end after 6 min: 2 run(s) ok this session; 22 of 30 still to do; reason: STOP file present (manual stop)
+16:15:23 [gentle] session start: tag=aware_hold_s1, 2 of 2 runs to do; budget 45 min, cool-down 0 s, stop if CPU performance < 85 % while busy
+16:15:23 [gentle] run 1/2: H seed 8
+16:16:55 [watchdog] health OK; H 9/10 done (all complied S1); chain running; pushed 58f11df
+16:17:29 [gentle]   ok: complied S1 at 47.0 s sim, RTF 0.862
+16:17:29 [gentle]   CPU performance while busy: median 106 % (2 monitor samples)
+16:17:29 [gentle]   cool-down 0 s
+16:17:29 [gentle] run 2/2: H seed 9
+16:19:36 [gentle]   ok: complied S1 at 47.0 s sim, RTF 0.86
+16:19:36 [gentle] session end after 4 min: 2 run(s) ok this session; 0 of 2 still to do; reason: all planned runs done
+16:19:36 [gentle] session start: tag=aware_hold_s1, 4 of 4 runs to do; budget 45 min, cool-down 0 s, stop if CPU performance < 85 % while busy
+16:19:36 [gentle] run 1/4: C seed 0
+16:21:49 [gentle]   ok: target_lost S2 at 52.9 s sim, RTF 0.866
+16:21:49 [gentle]   CPU performance while busy: median 106 % (2 monitor samples)
+16:21:49 [gentle]   cool-down 0 s
+16:21:49 [gentle] run 2/4: C seed 1
+16:24:00 [gentle]   ok: target_lost S2 at 51.7 s sim, RTF 0.871
+16:24:00 [gentle]   cool-down 0 s
+16:24:00 [gentle] run 3/4: C seed 2
+16:26:13 [gentle]   ok: target_lost S2 at 54.0 s sim, RTF 0.867
+16:26:13 [gentle]   cool-down 0 s
+16:26:13 [gentle] run 4/4: C seed 3
+16:28:25 [gentle]   ok: target_lost S2 at 51.8 s sim, RTF 0.868
+16:28:25 [gentle] session end after 9 min: 4 run(s) ok this session; 0 of 4 still to do; reason: all planned runs done
+16:28:25 [gentle] session start: tag=aware_hold_s1, 3 of 3 runs to do; budget 45 min, cool-down 0 s, stop if CPU performance < 85 % while busy
+16:28:25 [gentle] run 1/3: A seed 0
+16:31:52 [watchdog] health OK; H 10/10 complied S1; C 0-3 target_lost S2 (4/4); A/0 attempt 1 nav2_not_ready (retry running). Note: both nav2_not_ready today in this set were the FIRST run of a session started right after another run (H/6, A/0) - 2 cases, not conclusive.
+16:32:38 [gentle]   ok: complied S3 at 75.6 s sim, RTF 0.889
+16:32:38 [gentle]   CPU performance while busy: median 106 % (4 monitor samples)
+16:32:38 [gentle]   cool-down 0 s
+16:32:38 [gentle] run 2/3: A seed 1
+16:35:15 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.879
+16:35:15 [gentle]   CPU performance while busy: median 108 % (3 monitor samples)
+16:35:15 [gentle]   cool-down 0 s
+16:35:15 [gentle] run 3/3: A seed 2
+16:39:26 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.894
+16:39:26 [gentle]   CPU performance while busy: median 107 % (4 monitor samples)
+16:39:26 [gentle] session end after 11 min: 3 run(s) ok this session; 0 of 3 still to do; reason: all planned runs done
+16:39:26 [phaseC] chained sessions finished (H 7-9, C 0-3, A 0-2)
+16:39:42 [phaseC] all 17 runs done (H 0-9, C 0-3, A 0-2 under aware_hold_s1); analysis started
+16:40:35 [phaseC] results: H 10/10 complied S1 (baseline target_lost S2), robot never left base; C 4/4 and A 3/3 unchanged; 3 nav2_not_ready attempts (H/6, A/0, A/2) retried ok
+16:42:04 [tests] system 119 passed in 5.68s | evaluation 70 passed in 0.69s
+16:42:18 [git] Phase C hold_s1 results committed and pushed c6d1722
+16:46:39 [watchdog] health OK; idle after Phase C hold_s1 set; branch in sync with GitHub
+17:01:39 [watchdog] health OK; idle; waiting for user (stop watchdog? merge to main?)
+17:03:23 [end] watchdog stopped; phase-b-human-model fast-forwarded into main (3510334) and pushed; nothing running
+17:13:48 [end] final double-check passed (GitHub in sync, fresh clone 189 tests pass, 171 doc links OK, no secrets committed); closing
+=== 2026-11-23 10:56:33 session resumed: Phase C hold_s1 rest (C 4-9, A 3-9 = 13 runs), gentle defaults (120 s cool-down, 60 min); branch phase-c from main 3510334. Pre-flight: RAM 10.9 GB (11 GB setting active), clock 5 s off internet (Windows synced), no clock steps, no game launchers, thermal 53.9 C idle ===
+10:56:43 [gentle] session start: tag=aware_hold_s1, 13 of 30 runs to do; budget 60 min, cool-down 120 s, stop if CPU performance < 85 % while busy
+10:56:43 [gentle] run 1/13: C seed 4
+10:59:07 [gentle]   ok: target_lost S2 at 52.2 s sim, RTF 0.748
+10:59:07 [gentle]   CPU performance while busy: median 104 % (3 monitor samples)
+10:59:07 [gentle]   cool-down 120 s
+11:01:07 [gentle] run 2/13: C seed 5
+11:05:10 [gentle]   ok: target_lost S2 at 52.5 s sim, RTF 0.794
+11:05:10 [gentle]   CPU performance while busy: median 106 % (4 monitor samples)
+11:05:10 [gentle]   cool-down 120 s
+11:05:22 [watchdog] health OK; C/4 ok, C/5 attempt 1 failed then retry ok (target_lost S2, RTF 0.794); thermal max 84.9 C at 11:03 (no throttling, passive 100 %, perf >= 103 % while busy). NOTE: this Nav2 failure happened WITH a 120 s cool-down, which weakens the no-cool-down explanation of 19 Nov.
+11:07:10 [gentle] run 3/13: C seed 6
+11:09:00 [phaseC] user: don't overpush. Thermal peaked 84.9 C (19 Nov: 77.9). STOP file created: session ends after its current run; laptop rests while gentle_batch gets a temperature-aware cool-down (wait until thermal zone <= 65 C, min 120 s) and a thermal stop (88 C); watchdog alarm lowered to 85 C.
+11:09:28 [gentle]   ok: target_lost S2 at 52.2 s sim, RTF 0.803
+11:09:28 [gentle] session end after 13 min: 3 run(s) ok this session; 10 of 30 still to do; reason: STOP file present (manual stop)
+11:09:58 [phaseC] gentle_batch: temperature-aware cool-down (--cool-to 65, --max-cool-wait 600) + thermal stop (--max-thermal 88); tests: evaluation 79 passed in 0.74s
+11:17:52 [phaseC] user chose: cap turbo. Windows max processor state (AC) 100 % -> 99 % (scheme 'Razer Cortex Power Plan'); RESTORE afterwards with: powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 100 && powercfg /setactive SCHEME_CURRENT
+11:18:30 [phaseC] max processor state 99 % did not stop turbo (perf 109 %, 82.9 C under a 10 s load). Set PERFBOOSTMODE (AC) to 0 = Disabled. Original AC value was NOT captured (hidden setting, read with /q instead of /qh - my mistake); DC is 2 (Aggressive) = Windows default, so AC will be restored to 2.
+11:19:13 [phaseC] boost disabled: 10 s load test perf 79 % (base clock), thermal 56.9 C (was 82.9 C). Restarting the 10 remaining runs: cool-down 120 s + cool-to 65 C, max-thermal 88 C, min-perf 70 % (base clock reads 79 %), 60 min.
+11:19:14 [gentle] session start: tag=aware_hold_s1, 10 of 30 runs to do; budget 60 min, cool-down 120 s, stop if CPU performance < 70 % while busy
+11:19:14 [gentle] run 1/10: C seed 7
+11:21:44 [gentle]   ok: target_lost S2 at 55.8 s sim, RTF 0.739
+11:21:44 [gentle]   thermal zone during the run: peak 56.9 C
+11:21:44 [gentle]   cool-down 120 s
+11:22:02 [phaseC] first run with turbo off (C/7): ok target_lost S2 at 55.8 s (baseline 55.1); thermal peak 56.9 C (turbo runs ~85 C); RTF 0.739; cctv1 YOLO 4.57 Hz (baseline C/7 4.40), confirmation latency 0.9 s (= baseline). Turbo off keeps perception at baseline rate.
+11:22:17 [watchdog] health OK; 1/10 done since restart (C/7 ok); peak 56.9 C; perf 79 % while busy is the turbo-off base clock (by design, not throttling: passive limit 100 %); in cool-down
+11:23:44 [gentle] run 2/10: C seed 8
+11:26:04 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.79
+11:26:04 [gentle]   thermal zone during the run: peak 54.9 C
+11:26:04 [gentle]   cool-down 120 s
+11:28:04 [gentle] run 3/10: C seed 9
+11:30:30 [gentle]   ok: target_lost S2 at 52.9 s sim, RTF 0.742
+11:30:30 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+11:30:30 [gentle]   thermal zone during the run: peak 55.9 C
+11:30:30 [gentle]   cool-down 120 s
+11:30:46 [watchdog] health OK; 3/10 done since restart (C 7-9 all target_lost S2 = baseline); peaks 54.9-56.9 C; passive 100 %; C complete (10/10), A 3-9 next
+11:32:30 [gentle] run 4/10: A seed 3
+11:35:14 [gentle]   ok: complied S3 at 75.3 s sim, RTF 0.822
+11:35:14 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+11:35:14 [gentle]   thermal zone during the run: peak 53.9 C
+11:35:14 [gentle]   cool-down 120 s
+11:37:14 [gentle] run 5/10: A seed 4
+11:40:00 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.807
+11:40:00 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+11:40:00 [gentle]   thermal zone during the run: peak 52.9 C
+11:40:00 [gentle]   cool-down 120 s
+11:42:00 [gentle] run 6/10: A seed 5
+11:44:46 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.813
+11:44:46 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+11:44:46 [gentle]   thermal zone during the run: peak 53.9 C
+11:44:46 [gentle]   cool-down 120 s
+11:45:47 [watchdog] health OK; 6/10 done since restart (A 3-5 complied S3 = baseline); peaks <= 56.9 C; passive 100 %; 4 left (A 6-9), ~20 min
+11:46:46 [gentle] run 7/10: A seed 6
+11:52:31 [gentle]   ok: complied S3 at 75.5 s sim, RTF 0.83
+11:52:31 [gentle]   CPU performance while busy: median 79 % (5 monitor samples)
+11:52:31 [gentle]   thermal zone during the run: peak 53.9 C
+11:52:31 [gentle]   cool-down 120 s
+11:54:31 [gentle] run 8/10: A seed 7
+11:57:18 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.794
+11:57:18 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+11:57:18 [gentle]   thermal zone during the run: peak 53.9 C
+11:57:18 [gentle]   cool-down 120 s
+11:59:18 [gentle] run 9/10: A seed 8
+12:00:50 [watchdog] health OK; 8/10 done since restart (A 3-7 complied S3); A/6 attempt 1 startup_failed (retry ok); peaks <= 56.9 C
+12:01:03 [phaseC] A/6 attempt 1: startup_failed = the runner's monitor never received /clock (sim_s 0.0 after 120 s wall) although the simulation was up (robot spawned, localization active): a DDS discovery failure between the runner's monitor node and the simulation, not a simulation fault; retried ok (complied S3 at 75.5 s). New kind of infrastructure event (first in this project's WSL runs).
+12:02:04 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.808
+12:02:04 [gentle]   thermal zone during the run: peak 51.9 C
+12:02:04 [gentle]   cool-down 120 s
+12:04:04 [gentle] run 10/10: A seed 9
+12:06:53 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.791
+12:06:53 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+12:06:53 [gentle]   thermal zone during the run: peak 55.9 C
+12:06:53 [gentle] session end after 48 min: 10 run(s) ok this session; 0 of 30 still to do; reason: all planned runs done
+12:07:17 [phaseC] hold_s1 set complete: 30/30 ok. Windows restored: max processor state AC 100 %, boost mode AC 2 (Aggressive; original AC value inferred from DC, see 11:1x entry).
+12:09:08 [git] Phase C hold_s1 (30 runs) write-up committed and pushed 9e09a53 on phase-c
+12:15:42 [watchdog] health OK; idle; hold_s1 30/30 done and pushed; waiting for user (merge phase-c? stop watchdog?)
+12:27:12 [git] phase-c fast-forwarded into main (61708bb) and pushed
+12:27:26 [phaseC] next: reset_first (H,C,A x 0-9) - one turbo-off 1-h session starting ~12:36 (30 min rest after the 12:06 session end, per the laptop rule)
+12:30:42 [watchdog] health OK; resting until the reset_first session at ~12:36
+12:31:48 [phaseC] user: start now - scheduled 12:36 start cancelled; launching reset_first session immediately (rest was 26 min instead of 30)
+12:31:48 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+12:31:50 [gentle] session start: tag=aware_reset_first, 30 of 30 runs to do; budget 60 min, cool-down 120 s, stop if CPU performance < 70 % while busy
+12:31:50 [gentle] run 1/30: H seed 0
+12:32:51 [phaseC] reset_first session running (turbo off); first run passed the guard: 'compliance_aware_approach=reset_first, frame_topics=2', 'comply_s1_fallback=off'. Expected from the Oct replay: H complied in S2 (robot approaches, then waits for the compliance reset), C target_lost S2, A complied S3.
+12:34:07 [gentle]   ok: complied S2 at 46.9 s sim, RTF 0.747
+12:34:07 [gentle]   thermal zone during the run: peak 54.9 C
+12:34:07 [gentle]   cool-down 120 s
+12:36:07 [gentle] run 2/30: H seed 1
+12:38:22 [gentle]   ok: complied S2 at 46.9 s sim, RTF 0.772
+12:38:22 [gentle]   thermal zone during the run: peak 45.9 C
+12:38:22 [gentle]   cool-down 120 s
+12:40:22 [gentle] run 3/30: H seed 2
+12:42:37 [gentle]   ok: complied S2 at 46.9 s sim, RTF 0.775
+12:42:37 [gentle]   thermal zone during the run: peak 50.9 C
+12:42:37 [gentle]   cool-down 120 s
+12:44:37 [gentle] run 4/30: H seed 3
+12:45:46 [watchdog] health OK; reset_first 3 done (H 0-2 complied S2), H/3 running; peak 54.9 C; passive 100 %
+12:46:51 [gentle]   ok: complied S2 at 47.5 s sim, RTF 0.779
+12:46:51 [gentle]   thermal zone during the run: peak 51.9 C
+12:46:51 [gentle]   cool-down 120 s
+12:48:51 [gentle] run 5/30: H seed 4
+12:51:05 [gentle]   ok: complied S2 at 46.7 s sim, RTF 0.776
+12:51:05 [gentle]   thermal zone during the run: peak 52.9 C
+12:51:05 [gentle]   cool-down 120 s
+12:53:05 [gentle] run 6/30: H seed 5
+12:55:19 [gentle]   ok: complied S2 at 46.9 s sim, RTF 0.776
+12:55:19 [gentle]   thermal zone during the run: peak 52.9 C
+12:55:19 [gentle]   cool-down 120 s
+12:57:19 [gentle] run 7/30: H seed 6
+13:00:51 [watchdog] health OK; reset_first 6 done (H 0-5 complied S2); H/6 attempt 1 nav2_not_ready (no lifecycle manager active by 28 s, no map_server timeout logged), retry running; peak 54.9 C, passive 100 %
+13:01:14 [gentle]   ok: complied S2 at 47.5 s sim, RTF 0.805
+13:01:14 [gentle]   thermal zone during the run: peak 52.9 C
+13:01:14 [gentle]   cool-down 120 s
+13:03:14 [gentle] run 8/30: H seed 7
+13:05:28 [gentle]   ok: complied S2 at 46.9 s sim, RTF 0.78
+13:05:28 [gentle]   thermal zone during the run: peak 51.9 C
+13:05:28 [gentle]   cool-down 120 s
+13:07:28 [gentle] run 9/30: H seed 8
+13:09:43 [gentle]   ok: complied S2 at 46.9 s sim, RTF 0.768
+13:09:43 [gentle]   thermal zone during the run: peak 53.9 C
+13:09:43 [gentle]   cool-down 120 s
+13:11:43 [gentle] run 10/30: H seed 9
+13:15:38 [gentle]   ok: complied S2 at 46.9 s sim, RTF 0.8
+13:15:38 [gentle]   thermal zone during the run: peak 52.9 C
+13:15:38 [gentle]   cool-down 120 s
+13:15:43 [watchdog] health OK
+13:15:48 [watchdog] reset_first H complete 10/10 complied S2; H/9 attempt 1 failed (), retry ok; C next; peak 54.9 C
+13:15:56 [watchdog] correction: H/9 attempt 1 status was nav2_not_ready (no lifecycle manager active by 28 s); retry ok complied S2 at 46.9 s, RTF 0.8
+13:17:38 [gentle] run 11/30: C seed 0
+13:19:58 [gentle]   ok: target_lost S2 at 53.0 s sim, RTF 0.787
+13:19:58 [gentle]   thermal zone during the run: peak 51.9 C
+13:19:58 [gentle]   cool-down 120 s
+13:21:58 [gentle] run 12/30: C seed 1
+13:25:57 [gentle]   ok: target_lost S2 at 51.8 s sim, RTF 0.827
+13:25:57 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+13:25:57 [gentle]   thermal zone during the run: peak 53.9 C
+13:25:57 [gentle]   cool-down 120 s
+13:27:57 [gentle] run 13/30: C seed 2
+13:30:33 [gentle]   ok: target_lost S2 at 54.1 s sim, RTF 0.671
+13:30:33 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+13:30:33 [gentle]   thermal zone during the run: peak 59.9 C
+13:30:33 [gentle]   cool-down 120 s
+13:30:50 [watchdog] health OK; reset_first 13 done (H 10/10 complied S2; C 0-2 target_lost S2); C/1 attempt 1 nav2_not_ready, retry ok; C/2 RTF 0.671; peak 59.9 C at 13:29; passive 100 %; last run (C/3) starts ~13:32
+13:32:33 [gentle] run 14/30: C seed 3
+13:35:01 [gentle]   ok: target_lost S2 at 51.9 s sim, RTF 0.703
+13:35:01 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+13:35:01 [gentle]   thermal zone during the run: peak 59.9 C
+13:35:01 [gentle] session end after 63 min: 14 run(s) ok this session; 16 of 30 still to do; reason: session time budget used (60 min)
+13:35:01 [turbo] restored: Current AC Power Setting Index: 0x00000002
+13:35:24 [phaseC] reset_first session 1 ended 13:35 (60 min budget): 14 ok (H 0-9, C 0-3); 16 to do (C 4-9, A 0-9); turbo restored automatically (boost 2, max 100 %)
+13:37:02 [end] reset_first partial written up; main = phase-c = 69ad0fc pushed; watchdog stopped; nothing running
+13:42:34 [phaseC] user: stop for now and push. No session started. reset_first remains 14/30 (C 4-9, A 0-9 to do).
+=== 2026-11-24 09:51:12 continue reset_first (C 4-9, A 0-9 = 16 runs). Laptop just booted: Windows CPU 99 %, thermal 82.9 C (System 240 %, VS Code ~200 %, Defender 87 %). Waiting for it to settle (utility < 30 % and thermal <= 65 C for 1 min, max 30 min), then a turbo-off session with a 75 min budget so all 16 finish. ===
+09:51:24 [settle] windows cpu 13 %, thermal 52.9 C (calm checks in a row: 1)
+09:52:06 [settle] laptop settled (cpu 9 %, thermal 50.9 C): starting the turbo-off reset_first session
+09:52:06 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+09:52:07 [gentle] session start: tag=aware_reset_first, 16 of 30 runs to do; budget 75 min, cool-down 120 s, stop if CPU performance < 70 % while busy
+09:52:07 [gentle] run 1/16: C seed 4
+09:54:32 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.736
+09:54:32 [gentle]   thermal zone during the run: peak 62.9 C
+09:54:32 [gentle]   cool-down 120 s
+09:56:32 [gentle] run 2/16: C seed 5
+10:00:31 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.802
+10:00:31 [gentle]   thermal zone during the run: peak 60.9 C
+10:00:31 [gentle]   cool-down 120 s
+10:02:31 [gentle] run 3/16: C seed 6
+10:04:51 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.783
+10:04:51 [gentle]   thermal zone during the run: peak 61.9 C
+10:04:51 [gentle]   cool-down 120 s
+10:06:25 [watchdog] health OK; 3/16 done (C 4-6 target_lost S2); C/5 attempt 1 nav2_not_ready (map_server reply lost), retry ok; peak 62.9 C, passive 100 %; ETA ~11:07
+10:06:51 [gentle] run 4/16: C seed 7
+10:09:17 [gentle]   ok: target_lost S2 at 55.8 s sim, RTF 0.778
+10:09:17 [gentle]   thermal zone during the run: peak 61.9 C
+10:09:17 [gentle]   cool-down 120 s
+10:11:17 [gentle] run 5/16: C seed 8
+10:13:36 [gentle]   ok: target_lost S2 at 52.2 s sim, RTF 0.79
+10:13:36 [gentle]   thermal zone during the run: peak 62.9 C
+10:13:36 [gentle]   cool-down 120 s
+10:15:36 [gentle] run 6/16: C seed 9
+10:17:58 [gentle]   ok: target_lost S2 at 53.0 s sim, RTF 0.783
+10:17:58 [gentle]   thermal zone during the run: peak 62.9 C
+10:17:58 [gentle]   cool-down 120 s
+10:19:58 [gentle] run 7/16: A seed 0
+10:21:20 [watchdog] health OK; 6/16 done (C 4-9 all target_lost S2: reset_first C complete 10/10); A/0 running; peak 62.9 C, passive 100 %; ETA ~11:09
+10:22:41 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.827
+10:22:41 [gentle]   thermal zone during the run: peak 62.9 C
+10:22:41 [gentle]   cool-down 120 s
+10:24:41 [gentle] run 8/16: A seed 1
+10:27:25 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.825
+10:27:25 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+10:27:25 [gentle]   thermal zone during the run: peak 64.9 C
+10:27:25 [gentle]   cool-down 120 s
+10:29:25 [gentle] run 9/16: A seed 2
+10:32:08 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.827
+10:32:08 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+10:32:08 [gentle]   thermal zone during the run: peak 65.9 C
+10:32:08 [gentle]   cool-down 120 s
+10:34:08 [gentle] run 10/16: A seed 3
+10:36:24 [watchdog] health OK; 9/16 done (C 4-9 target_lost; A 0-2 complied S3); A/3 attempt 1 nav2_not_ready (no manager active by 28 s), retry running; peak 65.9 C, passive 100 %; ETA ~11:10
+10:38:33 [gentle]   ok: complied S3 at 75.5 s sim, RTF 0.845
+10:38:33 [gentle]   CPU performance while busy: median 79 % (4 monitor samples)
+10:38:33 [gentle]   thermal zone during the run: peak 65.9 C
+10:38:33 [gentle]   cool-down 120 s
+10:40:33 [gentle] run 11/16: A seed 4
+10:43:20 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.805
+10:43:20 [gentle]   thermal zone during the run: peak 65.9 C
+10:43:20 [gentle]   cool-down 120 s
+10:44:24 [docs] user: the old SSD is gone (not recoverable). Docs updated: baseline bags permanently lost; derived results safe; post-failure recordings (1.4 GB, 100 bags) to be archived instead and backed up off the laptop
+10:45:20 [gentle] run 12/16: A seed 5
+10:46:16 [decision] user: back up the post-failure recordings by committing them into the repo (not a release). Do after the session ends (CPU), push in chunks, add evaluation/data/README.md + checksums; future runs committed the same way.
+10:48:02 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.831
+10:48:02 [gentle]   thermal zone during the run: peak 65.9 C
+10:48:02 [gentle]   cool-down 120 s
+10:49:24 [decision] baseline re-run: reuse the 45 reproduction runs (seeds 0-2) + run 255 (seeds 3-19, all scenarios); 3 one-hour turbo-off sessions a day with 30-min rests; recordings as compressed archives committed into the repo (also today's 1.4 GB, for consistency); order: 'both' first, then the baseline re-run
+10:50:02 [gentle] run 13/16: A seed 6
+10:52:45 [gentle]   ok: complied S3 at 75.3 s sim, RTF 0.828
+10:52:45 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+10:52:45 [gentle]   thermal zone during the run: peak 64.9 C
+10:52:45 [gentle]   cool-down 120 s
+10:53:19 [backup] D:\ mirror updated in 115 s (1.4G, 618a5cd run_campaign.sh: up to N turbo-off gentle sessions a day with rests (3 x 1 h, 30 min rest))
+10:53:50 [backup] D:\ mirror updated in 25 s (1.4G, 618a5cd run_campaign.sh: up to N turbo-off gentle sessions a day with rests (3 x 1 h, 30 min rest))
+10:54:27 [backup] D:\ mirror updated in 27 s (1.4G, 630b7ac backup_to_d.sh: always-current mirror of the project on D:\ (separate USB SSD))
+10:54:45 [gentle] run 14/16: A seed 7
+10:55:31 [watchdog] health OK; 13/16 done; peak 65.9 C; committed+pushed the 'baseline recordings lost' docs
+10:56:25 [backup] D:\ mirror updated in 55 s (1.4G, 6f2dff0 Docs: the old drive is unrecoverable - baseline recordings permanently lost)
+10:57:28 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.819
+10:57:28 [gentle]   CPU performance while busy: median 79 % (4 monitor samples)
+10:57:28 [gentle]   thermal zone during the run: peak 76.9 C
+10:57:28 [gentle]   cool-down 120 s
+10:59:29 [gentle] run 15/16: A seed 8
+11:02:17 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.794
+11:02:17 [gentle]   CPU performance while busy: median 92 % (5 monitor samples)
+11:02:17 [gentle]   thermal zone during the run: peak 74.9 C
+11:02:17 [gentle]   cool-down 120 s
+11:04:17 [gentle] run 16/16: A seed 9
+11:07:03 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.812
+11:07:03 [gentle]   CPU performance while busy: median 79 % (5 monitor samples)
+11:07:03 [gentle]   thermal zone during the run: peak 56.9 C
+11:07:03 [gentle] session end after 75 min: 16 run(s) ok this session; 0 of 30 still to do; reason: all planned runs done
+11:07:03 [turbo] restored: Current AC Power Setting Index: 0x00000002
+11:07:28 [phaseC] reset_first complete 30/30 (session ended 11:07, turbo restored). BUG fixed in gentle_batch: thermal/perf readings for A/7-A/9 had mixed in 23 Nov lines (time-only log); true peaks from today's lines are used in the write-up.
+11:07:40 [backup] D:\ mirror updated in 13 s (1.5G, d423a74 gentle_batch: read only the current host monitor's lines (bug: earlier days' lines matched by time))
+11:11:03 [backup] D:\ mirror updated in 18 s (1.7G, e245243 Recordings: 45-run reproduction (repro_wsl), compressed, per scenario)
+11:11:39 [backup] D:\ mirror updated in 18 s (2.0G, e15d699 Recordings: Phase C variant sets (hold_s1, reset_first), pilot/doc/Phase B runs and all failed attempts; index + checksums)
+11:12:12 [backup] D:\ mirror updated in 15 s (2.0G, e15d699 Recordings: Phase C variant sets (hold_s1, reset_first), pilot/doc/Phase B runs and all failed attempts; index + checksums)
+11:12:37 [phaseC] next: 'both' campaign (2 sessions today, 30-min rest, turbo off) starting 11:37 after the 30-min rest
+11:21:18 [watchdog] health OK; resting until the 'both' campaign at 11:37; turbo normal (2); main = phase-c = e15d699; D: backup current
+11:24:46 [phone] user: updates every 15 min on the phone (push), notify when finished and ask whether to continue; watchdog 6a5694ef replaces d34fb14d; test push sent
+11:33:18 [watchdog] health OK; pre-campaign rest (no session); 'both' starts 11:37; no push (nothing new since the 11:30 test push)
+11:37:10 [campaign] start: up to 2 sessions, 30 min rest between them; args: --scenarios H,C,A --seeds 10 --compliance-aware both --out evaluation/data/variants --manifest evaluation/data/variants/manifest.csv
+11:37:10 [campaign] session 1/2: 30 runs to do
+11:37:10 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+11:37:11 [gentle] session start: tag=aware_both, 30 of 30 runs to do; budget 60 min, cool-down 120 s, stop if CPU performance < 70 % while busy
+11:37:11 [gentle] run 1/30: H seed 0
+11:38:13 [phaseC] 'both' campaign running (pid 60690); first run passed the guard: 'compliance_aware_approach=both, frame_topics=2', 'comply_s1_fallback=off'. Expected (Oct replay): H complied S1 (like hold_s1), C target_lost S2, A complied S3.
+11:39:28 [gentle]   ok: complied S1 at 46.9 s sim, RTF 0.753
+11:39:28 [gentle]   thermal zone during the run: peak 58.9 C
+11:39:28 [gentle]   cool-down 120 s
+11:41:28 [gentle] run 2/30: H seed 1
+11:45:25 [gentle]   ok: complied S1 at 47.1 s sim, RTF 0.794
+11:45:25 [gentle]   CPU performance while busy: median 79 % (4 monitor samples)
+11:45:25 [gentle]   thermal zone during the run: peak 55.9 C
+11:45:25 [gentle]   cool-down 120 s
+11:47:25 [gentle] run 3/30: H seed 2
+11:48:23 [watchdog] health OK; both 2/30 (H 0-1 complied S1); H/1 attempt 1 nav2_not_ready, retry ok; peak 58.9 C; push sent
+11:49:38 [gentle]   ok: complied S1 at 46.9 s sim, RTF 0.783
+11:49:38 [gentle]   thermal zone during the run: peak 55.9 C
+11:49:38 [gentle]   cool-down 120 s
+11:51:38 [gentle] run 4/30: H seed 3
+11:53:52 [gentle]   ok: complied S1 at 47.5 s sim, RTF 0.786
+11:53:52 [gentle]   thermal zone during the run: peak 55.9 C
+11:53:52 [gentle]   cool-down 120 s
+11:55:53 [gentle] run 5/30: H seed 4
+11:59:20 [gentle]   NOT ok: nav2_not_ready (1 in a row)
+11:59:20 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+11:59:20 [gentle]   thermal zone during the run: peak 53.9 C
+11:59:20 [gentle]   cool-down 120 s
+12:01:20 [gentle] run 6/30: H seed 5
+12:03:18 [watchdog] health OK; both 4/30 ok (H 0-3 complied S1); H/4 failed on both attempts (nav2_not_ready) -> 'NOT ok' in the manifest, redone in a later session; H/5 running; peak 58.9 C; push sent
+12:03:34 [gentle]   ok: complied S1 at 46.9 s sim, RTF 0.773
+12:03:34 [gentle]   thermal zone during the run: peak 48.9 C
+12:03:34 [gentle]   cool-down 120 s
+12:05:34 [gentle] run 7/30: H seed 6
+12:05:47 [phaseC] user approved: DDS domain rotation + fastdds shm clean in gentle sessions (commit ae49843); takes effect from session 2 of the 'both' campaign (after the ~12:37 rest). Session 1 unchanged (domain 61). Evidence: Phase C 12/78 nav2_not_ready, 11/66 on domain 61; repro batch 2/47 over 40 domains.
+12:06:49 [backup] D:\ mirror updated in 64 s (2.0G, ae49843 Gentle sessions: rotate the DDS domain per run and clean stale Fast DDS shared memory)
+12:07:28 [backup] D:\ mirror updated in 39 s (2.0G, ae49843 Gentle sessions: rotate the DDS domain per run and clean stale Fast DDS shared memory)
+12:07:46 [phaseC] safety net armed: after_campaign.sh waits for the 'both' campaign (pid 60690) to end, then archives recordings, commits, pushes phase-c and backs up to D:
+12:07:47 [gentle]   ok: complied S1 at 47.3 s sim, RTF 0.795
+12:07:47 [gentle]   thermal zone during the run: peak 53.9 C
+12:07:47 [gentle]   cool-down 120 s
+12:08:14 [backup] D:\ mirror updated in 32 s (2.0G, 016823d after_campaign.sh: safety net that archives recordings, commits, pushes and backs up when a campaign ends)
+12:09:47 [gentle] run 8/30: H seed 7
+12:11:58 [gentle]   ok: complied S1 at 46.9 s sim, RTF 0.812
+12:11:58 [gentle]   thermal zone during the run: peak 53.9 C
+12:11:58 [gentle]   cool-down 120 s
+12:13:58 [gentle] run 9/30: H seed 8
+12:16:13 [gentle]   ok: complied S1 at 46.9 s sim, RTF 0.772
+12:16:13 [gentle]   thermal zone during the run: peak 53.9 C
+12:16:13 [gentle]   cool-down 120 s
+12:18:13 [gentle] run 10/30: H seed 9
+12:18:17 [watchdog] health OK; both 8/30 ok (H 0-3,5-8 complied S1; H/4 to redo); peak 58.9 C; push sent
+12:19:42 [phaseC] user: shut down everything; STOP file created (session ends after its current run), then wrap-up, push, backup, verify, then Windows shutdown
+12:22:10 [gentle]   ok: complied S1 at 46.9 s sim, RTF 0.787
+12:22:10 [gentle]   thermal zone during the run: peak 54.9 C
+12:22:10 [gentle] session end after 45 min: 9 run(s) ok this session; 21 of 30 still to do; reason: STOP file present (manual stop)
+12:22:10 [turbo] restored: Current AC Power Setting Index: 0x00000002
+12:22:27 [backup] D:\ mirror updated in 16 s (2.0G, 016823d after_campaign.sh: safety net that archives recordings, commits, pushes and backs up when a campaign ends)
+12:22:27 [campaign] campaign ended: last session stopped for another reason (STOP file present (manual stop))
+12:22:27 [campaign] end: 21 runs still to do
+12:24:08 [backup] D:\ mirror updated in 17 s (2.1G, 5a101c1 Phase C 'both' partial (9/30): H complied S1 9/9 like hold_s1; recordings archived; day wrap-up)
+12:24:23 [backup] D:\ mirror updated in 15 s (2.1G, 5a101c1 Phase C 'both' partial (9/30): H complied S1 9/9 like hold_s1; recordings archived; day wrap-up)
+=== 2026-11-24 14:56:20 continue 'both' (21 runs left): fresh boot (cpu 35 %, thermal 72.9 C); 1 session left today (3/day: reset_first 09:52 + both 11:37 used) -> run_campaign.sh 1 after Windows settles; safety net armed on the campaign; DDS-domain fix (ae49843) first test ===
+14:56:23 [settle] windows cpu 4 %, thermal 60.9 C (calm checks in a row: 1)
+14:58:26 [settle] windows cpu 13 %, thermal 62.9 C (calm checks in a row: 3)
+14:58:26 [settle] settled (cpu 13 %, thermal 62.9 C): starting the 'both' campaign (1 session)
+14:58:26 [campaign] start: up to 1 sessions, 30 min rest between them; args: --scenarios H,C,A --seeds 10 --compliance-aware both --out evaluation/data/variants --manifest evaluation/data/variants/manifest.csv
+14:58:27 [campaign] session 1/1: 21 runs to do
+14:58:27 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+14:58:28 [gentle] session start: tag=aware_both, 21 of 30 runs to do; budget 60 min, cool-down 120 s, stop if CPU performance < 70 % while busy
+14:58:28 [gentle] run 1/21: H seed 4
+14:58:31 [phaseC] campaign pid 1499; safety net armed on it
+14:58:56 [phaseC] 'both' session started 14:58 (campaign 1499, safety net armed); first run H/4 on domain 75 (DDS fix active)
+15:00:43 [gentle]   ok: complied S1 at 46.9 s sim, RTF 0.763
+15:00:43 [gentle]   thermal zone during the run: peak 68.9 C
+15:00:43 [gentle]   cool-down 120 s
+15:02:43 [gentle] run 2/21: C seed 0
+15:05:08 [gentle]   ok: target_lost S2 at 53.0 s sim, RTF 0.757
+15:05:08 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+15:05:08 [gentle]   thermal zone during the run: peak 67.9 C
+15:05:08 [gentle]   cool-down 120 s
+15:06:13 [watchdog] health OK; both 11/30 (session: H/4 complied S1, C/0 target_lost S2); domains 75, 78; 0 nav2_not_ready since the DDS fix; peak 68.9 C; push sent
+15:07:08 [gentle] run 3/21: C seed 1
+15:11:08 [gentle]   ok: target_lost S2 at 51.8 s sim, RTF 0.812
+15:11:08 [gentle]   CPU performance while busy: median 79 % (4 monitor samples)
+15:11:08 [gentle]   thermal zone during the run: peak 64.9 C
+15:11:08 [gentle]   cool-down 120 s
+15:13:08 [gentle] run 4/21: C seed 2
+15:15:32 [gentle]   ok: target_lost S2 at 54.0 s sim, RTF 0.78
+15:15:32 [gentle]   thermal zone during the run: peak 63.9 C
+15:15:32 [gentle]   cool-down 120 s
+15:17:32 [gentle] run 5/21: C seed 3
+15:19:51 [gentle]   ok: target_lost S2 at 51.8 s sim, RTF 0.789
+15:19:51 [gentle]   thermal zone during the run: peak 63.9 C
+15:19:51 [gentle]   cool-down 120 s
+15:21:19 [watchdog] health OK; both 14/30 (session 5 ok: H/4, C/0-3); C/1 attempt 1 nav2_not_ready on domain 81 (no lifecycle manager active), retry on 82 ok; since the DDS fix 1 nav2_not_ready in 6 attempts (domains 75,78,81,82,84,87); peak 68.9 C; push sent
+15:21:51 [gentle] run 6/21: C seed 4
+15:25:51 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.825
+15:25:51 [gentle]   thermal zone during the run: peak 61.9 C
+15:25:51 [gentle]   cool-down 120 s
+15:27:51 [gentle] run 7/21: C seed 5
+15:30:11 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.798
+15:30:11 [gentle]   thermal zone during the run: peak 60.9 C
+15:30:11 [gentle]   cool-down 120 s
+15:32:11 [gentle] run 8/21: C seed 6
+15:36:10 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.827
+15:36:10 [gentle]   CPU performance while busy: median 78 % (4 monitor samples)
+15:36:10 [gentle]   thermal zone during the run: peak 64.9 C
+15:36:10 [gentle]   cool-down 120 s
+15:36:33 [watchdog] health OK; both 15/30 (session: H/4, C/0-5 ok, C/6 running); DDS-fix check: 3 nav2_not_ready in 11 attempts since the fix (27 %) vs 11/66 (17 %) on domain 61 before -> domain reuse was NOT the (main) cause; my earlier conclusion was overstated; rotation stays (harmless). Peak 68.9 C; push sent
+15:38:10 [gentle] run 9/21: C seed 7
+15:40:31 [gentle]   ok: target_lost S2 at 55.8 s sim, RTF 0.821
+15:40:31 [gentle]   thermal zone during the run: peak 63.9 C
+15:40:31 [gentle]   cool-down 120 s
+15:42:31 [gentle] run 10/21: C seed 8
+15:44:50 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.794
+15:44:50 [gentle]   thermal zone during the run: peak 63.9 C
+15:44:50 [gentle]   cool-down 120 s
+15:46:50 [gentle] run 11/21: C seed 9
+15:49:10 [gentle]   ok: target_lost S2 at 53.0 s sim, RTF 0.799
+15:49:10 [gentle]   thermal zone during the run: peak 62.9 C
+15:49:10 [gentle]   cool-down 120 s
+15:51:10 [gentle] run 12/21: A seed 0
+15:51:16 [watchdog] health OK; both 20/30 (session: H/4, C/0-9 ok; C complete 10/10 target_lost); since fix 3 nav2_not_ready in 14 attempts; peak 68.9 C; push sent; session ends ~16:00 (A/0, A/1 left in budget)
+15:53:54 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.821
+15:53:54 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+15:53:54 [gentle]   thermal zone during the run: peak 64.9 C
+15:53:54 [gentle]   cool-down 120 s
+15:55:54 [gentle] run 13/21: A seed 1
+15:58:39 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.821
+15:58:39 [gentle]   thermal zone during the run: peak 62.9 C
+15:58:39 [gentle] session end after 60 min: 13 run(s) ok this session; 8 of 30 still to do; reason: session time budget used (60 min)
+15:58:39 [turbo] restored: Current AC Power Setting Index: 0x00000002
+15:58:55 [backup] D:\ mirror updated in 16 s (2.2G, 5a101c1 Phase C 'both' partial (9/30): H complied S1 9/9 like hold_s1; recordings archived; day wrap-up)
+15:58:55 [campaign] daily session limit reached (1)
+15:58:55 [campaign] end: 8 runs still to do
+15:59:12 [autosave] process 1499 ended: archiving recordings, committing, pushing, backing up
+28 archives, 10 file(s) written or updated; raw 1657 MB -> 290 MB
+15:59:31 [autosave] committed 13fa24c
+15:59:40 [autosave] pushed phase-c 13fa24c
+15:59:40 [autosave] D:\ backup done
+15:59:47 [backup] D:\ mirror updated in 16 s (2.3G, 13fa24c Auto-save after campaign (2026-11-24 15:59:31): recordings archived, live log copied)
+16:08:36 [backup] D:\ mirror updated in 18 s (2.3G, 5acdd00 Phase C 'both' 22/30 (H complied S1 10/10, C 10/10 and A 2/2 unchanged); Nav2 failure root cause; DDS-domain explanation corrected)
+16:08:53 [backup] D:\ mirror updated in 17 s (2.3G, 5acdd00 Phase C 'both' 22/30 (H complied S1 10/10, C 10/10 and A 2/2 unchanged); Nav2 failure root cause; DDS-domain explanation corrected)
+16:08:53 [wrapup] aware_both 22 (written up, pushed main=phase-c=5acdd00, backed up)
+16:09:26 [decision] user: tomorrow = session 1: last 8 'both' runs (A 2-9) + Phase C summary/recommendation; sessions 2-3: start the 255-run baseline re-run (3 x 1 h/day). Watchdog stopped for tonight (nothing running).
+16:13:16 [backup] D:\ mirror updated in 15 s (2.3G, efb124f Docs review: chronological order, Phase C heading and summary, stale statements fixed)
+16:13:32 [backup] D:\ mirror updated in 16 s (2.3G, efb124f Docs review: chronological order, Phase C heading and summary, stale statements fixed)
+16:18:48 [backup] D:\ mirror updated in 16 s (2.3G, 97f3af2 Phase C statistics, LaTeX tables and paper figures (provisional until 'both' is complete))
+16:19:05 [backup] D:\ mirror updated in 17 s (2.3G, 97f3af2 Phase C statistics, LaTeX tables and paper figures (provisional until 'both' is complete))
+16:23:26 [end] user: close VS Code, refresh the screen, start Genshin. Everything pushed (97f3af2) and backed up; nothing running.
+13:52:26 [campaign] start: up to 1 sessions, 30 min rest between them; args: --scenarios H,C,A --seeds 10 --compliance-aware both --out evaluation/data/variants --manifest evaluation/data/variants/manifest.csv
+13:52:27 [campaign] session 1/1: 8 runs to do
+13:52:27 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+13:52:28 [autosave] process 1881 ended: archiving recordings, committing, pushing, backing up
+13:52:29 [gentle] session start: tag=aware_both, 8 of 30 runs to do; budget 60 min, cool-down 120 s, stop if CPU performance < 70 % while busy
+13:52:29 [gentle] run 1/8: A seed 2
+13:53:32 [note] the [autosave] at 13:52:28 was a false start: it was given the pid of the setsid launcher (1881), which exits at once, instead of the campaign (1883). It was stopped at 13:53:00 during the archiving step (nothing written, committed or pushed) and re-armed on 1883. It ran alongside the start-up of run A/2 for about 30 s.
+13:55:30 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.702
+13:55:30 [gentle]   thermal zone during the run: peak 67.9 C
+13:55:30 [gentle]   cool-down 120 s
+13:57:30 [gentle] run 2/8: A seed 3
+14:00:17 [gentle]   ok: complied S3 at 75.3 s sim, RTF 0.809
+14:00:17 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+14:00:17 [gentle]   thermal zone during the run: peak 66.9 C
+14:00:17 [gentle]   cool-down 120 s
+14:02:17 [gentle] run 3/8: A seed 4
+14:05:04 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.805
+14:05:04 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+14:05:04 [gentle]   thermal zone during the run: peak 69.9 C
+14:05:04 [gentle]   cool-down 120 s
+14:07:04 [gentle] run 4/8: A seed 5
+14:09:52 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.791
+14:09:52 [gentle]   thermal zone during the run: peak 66.9 C
+14:09:52 [gentle]   cool-down 120 s
+14:11:09 [note] speed-up requested by the user: stopping the session before A/6 (STOP file) to relaunch with a 60 s fixed cool-down instead of 120 s (turbo stays off; the <= 65 C gate and the 88 C stop stay). The safety net on 1883 was disarmed for this planned stop; the relaunch arms a new one.
+14:11:52 [gentle] session end after 19 min: 4 run(s) ok this session; 4 of 30 still to do; reason: STOP file present (manual stop)
+14:11:52 [turbo] restored: Current AC Power Setting Index: 0x00000002
+14:12:13 [backup] D:\ mirror updated in 20 s (2.4G, 97f3af2 Phase C statistics, LaTeX tables and paper figures (provisional until 'both' is complete))
+14:12:13 [campaign] campaign ended: last session stopped for another reason (STOP file present (manual stop))
+14:12:14 [campaign] end: 4 runs still to do
+14:12:50 [campaign] start: up to 1 sessions, 30 min rest between them; args: --scenarios H,C,A --seeds 10 --compliance-aware both --out evaluation/data/variants --manifest evaluation/data/variants/manifest.csv --cooldown-s 60
+14:12:50 [campaign] session 1/1: 4 runs to do
+14:12:50 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+14:12:51 [campaign] started as pid 11492; safety net armed on it
+14:12:51 [gentle] session start: tag=aware_both, 4 of 30 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+14:12:51 [gentle] run 1/4: A seed 6
+14:15:37 [gentle]   ok: complied S3 at 75.5 s sim, RTF 0.811
+14:15:37 [gentle]   thermal zone during the run: peak 68.9 C
+14:15:37 [gentle]   cool-down 60 s
+14:16:37 [gentle] run 2/4: A seed 7
+14:19:19 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.837
+14:19:19 [gentle]   thermal zone during the run: peak 65.9 C
+14:19:19 [gentle]   cool-down 60 s
+14:20:19 [gentle] run 3/4: A seed 8
+14:23:00 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.844
+14:23:00 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+14:23:00 [gentle]   thermal zone during the run: peak 67.9 C
+14:23:00 [gentle]   cool-down 60 s
+14:24:00 [gentle] run 4/4: A seed 9
+14:29:25 [note] A/9: attempt 1 startup_failed (controller_manager services never reachable; launch group 17878 still alive after SIGKILL), attempt 2 died at start-up (nodes exit code 1, gzserver finished). User: no re-run for now; STOP set, A/9 left to do, push and back up.
+14:29:51 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.775
+14:29:51 [gentle]   CPU performance while busy: median 79 % (5 monitor samples)
+14:29:51 [gentle]   thermal zone during the run: peak 69.9 C
+14:29:51 [gentle] session end after 17 min: 4 run(s) ok this session; 0 of 30 still to do; reason: STOP file present (manual stop)
+14:29:51 [turbo] restored: Current AC Power Setting Index: 0x00000002
+14:30:01 [note] CORRECTION to the 14:29:25 note: attempt 2 of A/9 did NOT die at start-up. It ran normally (complied S3 at 74.9 s sim, RTF 0.775, valid). The 'process has died, exit code 1' lines read at 14:29:12 were the normal shutdown after the run. Only attempt 1 failed (startup_failed). STOP had no effect on the result: A/9 was the last run. both: 30 of 30.
+14:30:26 [backup] D:\ mirror FAILED (rsync exit 24)
+14:30:26 [campaign] campaign ended: last session stopped for another reason (STOP file present (manual stop))
+14:30:26 [campaign] end: 0 runs still to do
+14:30:30 [autosave] process 11492 ended: archiving recordings, committing, pushing, backing up
+28 archives, 8 file(s) written or updated; raw 1764 MB -> 309 MB
+14:30:51 [autosave] committed f9f7ab7
+14:31:00 [autosave] pushed phase-c f9f7ab7
+14:31:00 [autosave] D:\ backup done
+14:31:26 [backup] D:\ mirror updated in 35 s (2.5G, f9f7ab7 Auto-save after campaign (2026-11-25 14:30:51): recordings archived, live log copied)
+14:47:54 [wrapup] aware_both complete 30/30: results rebuilt (metrics, comparison), phase_c_summary.py re-run (final, no longer provisional), evidence/README updated; tests system 119, evaluation 83; 246 doc links OK
+14:48:55 [backup] D:\ mirror updated in 31 s (2.5G, 3c0da37 Phase C complete: 'both' 30/30; final statistics, tables and figures (no longer provisional))
+20:57:09 === 2026-11-25 20:56 continue: start the 255-run baseline re-run (tag baseline_wsl, seeds 3-19, seed-major order, 60 s cool-down, turbo off); fresh boot (cpu 26 %, thermal 64.9 C); 2 sessions tonight (today used ~37 min) ===
+20:57:18 [settle] windows cpu 5 %, thermal 54.9 C (calm checks in a row: 1)
+20:57:39 [settle] windows cpu 5 %, thermal 51.9 C (calm checks in a row: 2)
+20:58:00 [settle] windows cpu 11 %, thermal 52.9 C (calm checks in a row: 3)
+20:58:00 [settle] settled after 49 s
+20:58:45 [backup] D:\ mirror updated in 22 s (2.5G, 630b842 Baseline re-run: seed-major run order, settle-wait script, docs; starting tonight)
+20:58:45 [campaign] start: up to 2 sessions, 30 min rest between them; args: --scenarios all --seed-list 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 --order seed --cooldown-s 60 --tag baseline_wsl --out evaluation/data/baseline_wsl --manifest evaluation/data/baseline_wsl/manifest.csv
+20:58:45 [campaign] session 1/2: 255 runs to do
+20:58:45 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+20:58:46 [campaign] started as pid 2799; safety net armed on it
+20:58:46 [gentle] session start: tag=baseline_wsl, 255 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+20:58:46 [gentle] run 1/255: A seed 3
+21:03:11 [gentle]   ok: complied S3 at 75.5 s sim, RTF 0.848
+21:03:11 [gentle]   CPU performance while busy: median 79 % (4 monitor samples)
+21:03:11 [gentle]   thermal zone during the run: peak 67.9 C
+21:03:11 [gentle]   cool-down 60 s
+21:04:11 [gentle] run 2/255: A-V seed 3
+21:06:50 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.854
+21:06:50 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+21:06:50 [gentle]   thermal zone during the run: peak 67.9 C
+21:06:50 [gentle]   cool-down 60 s
+21:07:50 [gentle] run 3/255: B seed 3
+21:09:40 [note] safety net re-armed on campaign 2799 with the new after_campaign.sh (shared save lock with periodic_save.sh); the old copy (2816) was only waiting and was stopped
+21:11:08 [gentle]   ok: none  at  s sim, RTF 0.873
+21:11:08 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+21:11:08 [gentle]   thermal zone during the run: peak 68.9 C
+21:11:08 [gentle]   cool-down 60 s
+21:12:08 [gentle] run 4/255: B-C7 seed 3
+21:15:06 [gentle]   ok: logged_no_compliance S4 at 90.6 s sim, RTF 0.857
+21:15:06 [gentle]   thermal zone during the run: peak 68.9 C
+21:15:06 [gentle]   cool-down 60 s
+21:15:12 [save] every 30 min while process 2799 runs: archive 'baseline_wsl', commit, push, back up (in gaps between runs)
+21:15:48 [backup] D:\ mirror updated in 40 s (2.5G, 4cf63dd Baseline re-run: one archive per run, 30-minute saves, locked safety net; first 3 runs)
+21:16:06 [gentle] run 5/255: C seed 3
+21:18:22 [gentle]   ok: target_lost S2 at 52.0 s sim, RTF 0.824
+21:18:22 [gentle]   thermal zone during the run: peak 64.9 C
+21:18:22 [gentle]   cool-down 60 s
+21:19:22 [gentle] run 6/255: D seed 3
+21:19:44 [chain] waiting for campaign 2799 and its final save; then 30 min rest, settle check, start_campaign.sh 5 30 --scenarios all --seed-list 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 --order seed --cooldown-s 60 --tag baseline_wsl --out evaluation/data/baseline_wsl --manifest evaluation/data/baseline_wsl/manifest.csv
+21:19:46 [note] user: run overnight (yes at about 21:20). After tonight's 2 sessions: 30 min rest, then 5 more one-hour sessions with 30 min rests (until about 07:15), same turbo-off, thermal and save settings. The user is switching NitroSense to its performance mode (fan profile); power plan before the switch: Razer Cortex Power Plan, boost 0.
+21:22:41 [gentle]   ok: none  at  s sim, RTF 0.868
+21:22:41 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+21:22:41 [gentle]   thermal zone during the run: peak 61.9 C
+21:22:41 [gentle]   cool-down 60 s
+21:23:23 [backup] D:\ mirror updated in 39 s (2.6G, 9f7dbf6 Overnight running: chain_campaign.sh, periodic saves armed by start_campaign.sh)
+21:23:41 [gentle] run 7/255: E seed 3
+21:24:13 [note] user asked to turn the screen off overnight: display timeout on AC set from never to 5 min (powercfg /change monitor-timeout-ac 5); sleep and hibernate stay never; lid close = sleep, so the lid stays open. Restore with: powercfg /change monitor-timeout-ac 0
+21:26:58 [gentle]   ok: none  at  s sim, RTF 0.876
+21:26:58 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+21:26:58 [gentle]   thermal zone during the run: peak 58.9 C
+21:26:58 [gentle]   cool-down 60 s
+21:27:58 [gentle] run 8/255: F-pen seed 3
+21:31:15 [gentle]   ok: none  at  s sim, RTF 0.879
+21:31:15 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+21:31:15 [gentle]   thermal zone during the run: peak 56.9 C
+21:31:15 [gentle]   cool-down 60 s
+21:32:15 [gentle] run 9/255: F-straw seed 3
+21:35:33 [gentle]   ok: none  at  s sim, RTF 0.875
+21:35:33 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+21:35:33 [gentle]   thermal zone during the run: peak 54.9 C
+21:35:33 [gentle]   cool-down 60 s
+21:36:33 [gentle] run 10/255: G seed 3
+21:39:28 [gentle]   ok: logged_no_compliance S4 at 89.6 s sim, RTF 0.87
+21:39:28 [gentle]   thermal zone during the run: peak 53.9 C
+21:39:28 [gentle]   cool-down 60 s
+21:40:28 [gentle] run 11/255: H seed 3
+21:42:36 [gentle]   ok: target_lost S2 at 45.6 s sim, RTF 0.82
+21:42:36 [gentle]   thermal zone during the run: peak 48.9 C
+21:42:36 [gentle]   cool-down 60 s
+21:43:36 [gentle] run 12/255: I seed 3
+21:46:17 [gentle]   ok: complied S3 at 76.1 s sim, RTF 0.859
+21:46:17 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+21:46:17 [gentle]   thermal zone during the run: peak 53.9 C
+21:46:17 [gentle]   cool-down 60 s
+41 archives, 11 file(s) written or updated; raw 1947 MB -> 341 MB
+21:46:22 [save] committed 80d600b (12 valid runs)
+21:46:28 [save] pushed phase-c 80d600b
+21:47:00 [backup] D:\ mirror updated in 38 s (2.7G, 80d600b Periodic save (2026-11-25 21:46): baseline_wsl recordings, 12 valid runs so far)
+21:47:17 [gentle]   still warm: waiting until the thermal zone is <= 65 C
+21:47:47 [gentle]   cooled to <= 65 C after 30 s extra
+21:47:47 [gentle] run 13/255: J seed 3
+21:52:18 [gentle]   ok: none  at  s sim, RTF 0.9
+21:52:18 [gentle]   CPU performance while busy: median 78 % (4 monitor samples)
+21:52:18 [gentle]   thermal zone during the run: peak 54.9 C
+21:52:18 [gentle]   cool-down 60 s
+21:53:18 [gentle] run 14/255: K seed 3
+21:55:46 [gentle]   ok: safety_stop S2 at 64.1 s sim, RTF 0.842
+21:55:46 [gentle]   thermal zone during the run: peak 51.9 C
+21:55:46 [gentle]   cool-down 60 s
+21:56:46 [gentle] run 15/255: L seed 3
+21:58:53 [gentle]   ok: admin_override S2 at 44.7 s sim, RTF 0.815
+21:58:53 [gentle]   thermal zone during the run: peak 49.9 C
+21:58:53 [gentle] session end after 60 min: 15 run(s) ok this session; 240 of 255 still to do; reason: session time budget used (60 min)
+21:58:53 [turbo] restored: Current AC Power Setting Index: 0x00000002
+21:59:14 [backup] D:\ mirror updated in 20 s (2.8G, 80d600b Periodic save (2026-11-25 21:46): baseline_wsl recordings, 12 valid runs so far)
+21:59:14 [campaign] rest 30 min (laptop idle)
+44 archives, 5 file(s) written or updated; raw 2001 MB -> 350 MB
+22:16:30 [save] committed f564c93 (15 valid runs)
+22:16:33 [save] pushed phase-c f564c93
+22:16:50 [backup] D:\ mirror updated in 20 s (2.8G, f564c93 Periodic save (2026-11-25 22:16): baseline_wsl recordings, 15 valid runs so far)
+22:29:14 [campaign] session 2/2: 240 runs to do
+22:29:14 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+22:29:15 [gentle] session start: tag=baseline_wsl, 240 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+22:29:15 [gentle] run 1/240: A seed 4
+22:31:58 [gentle]   ok: complied S3 at 75.1 s sim, RTF 0.832
+22:31:58 [gentle]   thermal zone during the run: peak 54.9 C
+22:31:58 [gentle]   cool-down 60 s
+22:32:58 [gentle] run 2/240: A-V seed 4
+22:35:38 [gentle]   ok: complied S3 at 75.3 s sim, RTF 0.857
+22:35:38 [gentle]   thermal zone during the run: peak 51.9 C
+22:35:38 [gentle]   cool-down 60 s
+22:36:38 [gentle] run 3/240: B seed 4
+22:39:54 [gentle]   ok: none  at  s sim, RTF 0.881
+22:39:54 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+22:39:54 [gentle]   thermal zone during the run: peak 52.9 C
+22:39:54 [gentle]   cool-down 60 s
+22:40:54 [gentle] run 4/240: B-C7 seed 4
+22:43:49 [gentle]   ok: logged_no_compliance S4 at 89.7 s sim, RTF 0.869
+22:43:49 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+22:43:49 [gentle]   thermal zone during the run: peak 52.9 C
+22:43:49 [gentle]   cool-down 60 s
+22:44:49 [gentle] run 5/240: C seed 4
+22:47:04 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.832
+22:47:04 [gentle]   thermal zone during the run: peak 51.9 C
+22:47:04 [gentle]   cool-down 60 s
+44 archives, 7 file(s) written or updated; raw 2071 MB -> 363 MB
+22:47:11 [save] committed 143c2b8 (20 valid runs)
+22:47:15 [save] pushed phase-c 143c2b8
+22:47:50 [backup] D:\ mirror updated in 39 s (2.9G, 143c2b8 Periodic save (2026-11-25 22:47): baseline_wsl recordings, 20 valid runs so far)
+22:48:04 [gentle] run 6/240: D seed 4
+22:51:21 [gentle]   ok: none  at  s sim, RTF 0.88
+22:51:21 [gentle]   CPU performance while busy: median 78 % (2 monitor samples)
+22:51:21 [gentle]   thermal zone during the run: peak 52.9 C
+22:51:21 [gentle]   cool-down 60 s
+22:52:21 [gentle] run 7/240: E seed 4
+22:55:38 [gentle]   ok: none  at  s sim, RTF 0.877
+22:55:38 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+22:55:38 [gentle]   thermal zone during the run: peak 51.9 C
+22:55:38 [gentle]   cool-down 60 s
+22:56:38 [gentle] run 8/240: F-pen seed 4
+22:59:55 [gentle]   ok: none  at  s sim, RTF 0.877
+22:59:55 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+22:59:55 [gentle]   thermal zone during the run: peak 52.9 C
+22:59:55 [gentle]   cool-down 60 s
+23:00:55 [gentle] run 9/240: F-straw seed 4
+23:04:11 [gentle]   ok: none  at  s sim, RTF 0.883
+23:04:11 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+23:04:11 [gentle]   thermal zone during the run: peak 52.9 C
+23:04:11 [gentle]   cool-down 60 s
+23:05:11 [gentle] run 10/240: G seed 4
+23:08:05 [gentle]   ok: logged_no_compliance S4 at 89.1 s sim, RTF 0.871
+23:08:05 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+23:08:05 [gentle]   thermal zone during the run: peak 51.9 C
+23:08:05 [gentle]   cool-down 60 s
+23:09:05 [gentle] run 11/240: H seed 4
+23:11:11 [gentle]   ok: target_lost S2 at 45.0 s sim, RTF 0.823
+23:11:11 [gentle]   thermal zone during the run: peak 51.9 C
+23:11:11 [gentle]   cool-down 60 s
+23:12:11 [gentle] run 12/240: I seed 4
+23:14:50 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.856
+23:14:50 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+23:14:50 [gentle]   thermal zone during the run: peak 53.9 C
+23:14:50 [gentle]   cool-down 60 s
+23:15:50 [gentle] run 13/240: J seed 4
+23:18:29 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.859
+23:18:29 [gentle]   thermal zone during the run: peak 50.9 C
+23:18:29 [gentle]   cool-down 60 s
+44 archives, 10 file(s) written or updated; raw 2194 MB -> 384 MB
+23:18:35 [save] committed 7455b0b (28 valid runs)
+23:18:40 [save] pushed phase-c 7455b0b
+23:19:16 [backup] D:\ mirror updated in 41 s (3.0G, 7455b0b Periodic save (2026-11-25 23:18): baseline_wsl recordings, 28 valid runs so far)
+23:19:29 [gentle] run 14/240: K seed 4
+23:21:57 [gentle]   ok: safety_stop S2 at 63.5 s sim, RTF 0.841
+23:21:57 [gentle]   thermal zone during the run: peak 49.9 C
+23:21:57 [gentle]   cool-down 60 s
+23:22:57 [gentle] run 15/240: L seed 4
+23:25:03 [gentle]   ok: admin_override S2 at 44.2 s sim, RTF 0.829
+23:25:03 [gentle]   thermal zone during the run: peak 51.9 C
+23:25:03 [gentle]   cool-down 60 s
+23:26:03 [gentle] run 16/240: A seed 5
+23:28:42 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.861
+23:28:42 [gentle]   CPU performance while busy: median 78 % (2 monitor samples)
+23:28:42 [gentle]   thermal zone during the run: peak 52.9 C
+23:28:42 [gentle]   cool-down 60 s
+23:29:42 [gentle] run 17/240: A-V seed 5
+23:32:22 [gentle]   ok: complied S3 at 75.3 s sim, RTF 0.858
+23:32:22 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+23:32:22 [gentle]   thermal zone during the run: peak 52.9 C
+23:32:22 [gentle] session end after 63 min: 17 run(s) ok this session; 223 of 255 still to do; reason: session time budget used (60 min)
+23:32:22 [turbo] restored: Current AC Power Setting Index: 0x00000002
+23:32:43 [backup] D:\ mirror updated in 21 s (3.1G, 7455b0b Periodic save (2026-11-25 23:18): baseline_wsl recordings, 28 valid runs so far)
+23:32:43 [campaign] daily session limit reached (2)
+23:32:44 [campaign] end: 223 runs still to do
+23:32:59 [autosave] process 2799 ended: archiving recordings, committing, pushing, backing up
+23:33:00 [save] process 2799 ended; periodic saves stop (after_campaign.sh makes the final save)
+44 archives, 6 file(s) written or updated; raw 2241 MB -> 392 MB
+23:33:19 [autosave] committed 486fcbd
+23:33:22 [autosave] pushed phase-c 486fcbd
+23:33:22 [autosave] D:\ backup done
+23:33:25 [chain] campaign 2799 ended and saved; resting 30 min
+23:33:41 [backup] D:\ mirror updated in 22 s (3.1G, 486fcbd Auto-save after campaign (2026-11-25 23:33:19): recordings archived, live log copied)
+00:03:31 [settle] windows cpu 7 %, thermal 37.9 C (calm checks in a row: 1)
+00:03:53 [settle] windows cpu 2 %, thermal 36.9 C (calm checks in a row: 2)
+00:04:14 [settle] windows cpu 2 %, thermal 36.9 C (calm checks in a row: 3)
+00:04:14 [settle] settled after 49 s
+00:04:14 [campaign] start: up to 5 sessions, 30 min rest between them; args: --scenarios all --seed-list 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 --order seed --cooldown-s 60 --tag baseline_wsl --out evaluation/data/baseline_wsl --manifest evaluation/data/baseline_wsl/manifest.csv
+00:04:15 [campaign] session 1/5: 223 runs to do
+00:04:15 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+00:04:15 [campaign] started as pid 87598; safety net armed on it
+campaign pid 87598; safety net armed
+periodic save every 30 min armed
+00:04:15 [save] every 30 min while process 87598 runs: archive 'baseline_wsl', commit, push, back up (in gaps between runs)
+00:04:16 [gentle] session start: tag=baseline_wsl, 223 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+00:04:16 [gentle] run 1/223: B seed 5
+00:07:35 [gentle]   ok: none  at  s sim, RTF 0.862
+00:07:35 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+00:07:35 [gentle]   thermal zone during the run: peak 52.9 C
+00:07:35 [gentle]   cool-down 60 s
+00:08:35 [gentle] run 2/223: B-C7 seed 5
+00:11:30 [gentle]   ok: logged_no_compliance S4 at 90.2 s sim, RTF 0.875
+00:11:30 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+00:11:30 [gentle]   thermal zone during the run: peak 52.9 C
+00:11:30 [gentle]   cool-down 60 s
+00:12:30 [gentle] run 3/223: C seed 5
+00:14:44 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.839
+00:14:44 [gentle]   thermal zone during the run: peak 50.9 C
+00:14:44 [gentle]   cool-down 60 s
+00:15:44 [gentle] run 4/223: D seed 5
+00:19:01 [gentle]   ok: none  at  s sim, RTF 0.88
+00:19:01 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+00:19:01 [gentle]   thermal zone during the run: peak 52.9 C
+00:19:01 [gentle]   cool-down 60 s
+00:20:01 [gentle] run 5/223: E seed 5
+00:23:17 [gentle]   ok: none  at  s sim, RTF 0.884
+00:23:17 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+00:23:17 [gentle]   thermal zone during the run: peak 52.9 C
+00:23:17 [gentle]   cool-down 60 s
+00:24:17 [gentle] run 6/223: F-pen seed 5
+00:27:34 [gentle]   ok: none  at  s sim, RTF 0.879
+00:27:34 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+00:27:34 [gentle]   thermal zone during the run: peak 53.9 C
+00:27:34 [gentle]   cool-down 60 s
+00:28:34 [gentle]   still warm: waiting until the thermal zone is <= 65 C
+00:29:04 [gentle]   cooled to <= 65 C after 30 s extra
+00:29:04 [gentle] run 7/223: F-straw seed 5
+00:32:24 [gentle]   ok: none  at  s sim, RTF 0.863
+00:32:24 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+00:32:24 [gentle]   thermal zone during the run: peak 53.9 C
+00:32:24 [gentle]   cool-down 60 s
+00:33:24 [gentle] run 8/223: G seed 5
+00:36:18 [gentle]   ok: logged_no_compliance S4 at 89.1 s sim, RTF 0.863
+00:36:18 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+00:36:18 [gentle]   thermal zone during the run: peak 52.9 C
+00:36:18 [gentle]   cool-down 60 s
+44 archives, 10 file(s) written or updated; raw 2367 MB -> 414 MB
+00:36:25 [save] committed 41a73f0 (40 valid runs)
+00:36:30 [save] pushed phase-c 41a73f0
+00:37:07 [backup] D:\ mirror updated in 42 s (3.3G, 41a73f0 Periodic save (2026-11-26 00:36): baseline_wsl recordings, 40 valid runs so far)
+00:37:19 [gentle]   still warm: waiting until the thermal zone is <= 65 C
+00:37:49 [gentle]   cooled to <= 65 C after 30 s extra
+00:37:49 [gentle] run 9/223: H seed 5
+00:39:55 [gentle]   ok: target_lost S2 at 45.0 s sim, RTF 0.821
+00:39:55 [gentle]   thermal zone during the run: peak 51.9 C
+00:39:55 [gentle]   cool-down 60 s
+00:40:55 [gentle] run 10/223: I seed 5
+00:43:35 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.856
+00:43:35 [gentle]   thermal zone during the run: peak 51.9 C
+00:43:35 [gentle]   cool-down 60 s
+00:44:35 [gentle] run 11/223: J seed 5
+00:48:54 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.856
+00:48:54 [gentle]   thermal zone during the run: peak 52.9 C
+00:48:54 [gentle]   cool-down 60 s
+00:49:54 [gentle] run 12/223: K seed 5
+00:52:22 [gentle]   ok: safety_stop S2 at 63.5 s sim, RTF 0.845
+00:52:22 [gentle]   thermal zone during the run: peak 50.9 C
+00:52:22 [gentle]   cool-down 60 s
+00:53:22 [gentle] run 13/223: L seed 5
+00:55:28 [gentle]   ok: admin_override S2 at 44.2 s sim, RTF 0.816
+00:55:28 [gentle]   thermal zone during the run: peak 51.9 C
+00:55:28 [gentle]   cool-down 60 s
+00:56:28 [gentle] run 14/223: A seed 6
+00:59:08 [gentle]   ok: complied S3 at 75.3 s sim, RTF 0.859
+00:59:08 [gentle]   thermal zone during the run: peak 51.9 C
+00:59:08 [gentle]   cool-down 60 s
+01:00:08 [gentle] run 15/223: A-V seed 6
+01:02:48 [gentle]   ok: complied S3 at 75.3 s sim, RTF 0.854
+01:02:48 [gentle]   thermal zone during the run: peak 53.9 C
+01:02:48 [gentle]   cool-down 60 s
+01:03:48 [gentle] run 16/223: B seed 6
+01:07:05 [gentle]   ok: none  at  s sim, RTF 0.879
+01:07:05 [gentle]   CPU performance while busy: median 78 % (2 monitor samples)
+01:07:05 [gentle]   thermal zone during the run: peak 52.9 C
+01:07:05 [gentle] session end after 63 min: 16 run(s) ok this session; 207 of 255 still to do; reason: session time budget used (60 min)
+01:07:05 [turbo] restored: Current AC Power Setting Index: 0x00000002
+45 archives, 11 file(s) written or updated; raw 2471 MB -> 433 MB
+01:07:08 [save] committed f80be7d (48 valid runs)
+01:07:12 [save] pushed phase-c f80be7d
+01:07:29 [backup] D:\ mirror updated in 23 s (3.4G, f80be7d Periodic save (2026-11-26 01:07): baseline_wsl recordings, 48 valid runs so far)
+01:07:29 [campaign] rest 30 min (laptop idle)
+45 archives, 0 file(s) written or updated; raw 2471 MB -> 433 MB
+01:37:13 [save] no new recordings since the last save
+01:37:30 [campaign] session 2/5: 207 runs to do
+01:37:30 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+01:37:31 [gentle] session start: tag=baseline_wsl, 207 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+01:37:31 [gentle] run 1/207: B-C7 seed 6
+01:37:53 [backup] D:\ mirror updated in 40 s (3.4G, f80be7d Periodic save (2026-11-26 01:07): baseline_wsl recordings, 48 valid runs so far)
+01:37:53 [save] D:\ backup done
+01:40:31 [gentle]   ok: logged_no_compliance S4 at 91.6 s sim, RTF 0.849
+01:40:31 [gentle]   thermal zone during the run: peak 53.9 C
+01:40:31 [gentle]   cool-down 60 s
+01:41:31 [gentle] run 2/207: C seed 6
+01:43:47 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.827
+01:43:47 [gentle]   thermal zone during the run: peak 51.9 C
+01:43:47 [gentle]   cool-down 60 s
+01:44:47 [gentle] run 3/207: D seed 6
+01:48:04 [gentle]   ok: none  at  s sim, RTF 0.879
+01:48:04 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+01:48:04 [gentle]   thermal zone during the run: peak 52.9 C
+01:48:04 [gentle]   cool-down 60 s
+01:49:04 [gentle] run 4/207: E seed 6
+01:54:00 [gentle]   ok: none  at  s sim, RTF 0.879
+01:54:00 [gentle]   CPU performance while busy: median 78 % (4 monitor samples)
+01:54:00 [gentle]   thermal zone during the run: peak 52.9 C
+01:54:00 [gentle]   cool-down 60 s
+01:55:00 [gentle] run 5/207: F-pen seed 6
+01:58:17 [gentle]   ok: none  at  s sim, RTF 0.876
+01:58:17 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+01:58:17 [gentle]   thermal zone during the run: peak 52.9 C
+01:58:17 [gentle]   cool-down 60 s
+01:59:17 [gentle] run 6/207: F-straw seed 6
+02:02:34 [gentle]   ok: none  at  s sim, RTF 0.879
+02:02:34 [gentle]   thermal zone during the run: peak 52.9 C
+02:02:34 [gentle]   cool-down 60 s
+02:03:34 [gentle] run 7/207: G seed 6
+02:08:09 [gentle]   ok: logged_no_compliance S4 at 89.6 s sim, RTF 0.864
+02:08:09 [gentle]   thermal zone during the run: peak 52.9 C
+02:08:09 [gentle]   cool-down 60 s
+47 archives, 11 file(s) written or updated; raw 2588 MB -> 453 MB
+02:08:17 [save] committed 6424c79 (55 valid runs)
+02:08:22 [save] pushed phase-c 6424c79
+02:09:01 [backup] D:\ mirror updated in 44 s (3.5G, 6424c79 Periodic save (2026-11-26 02:08): baseline_wsl recordings, 55 valid runs so far)
+02:09:09 [gentle] run 8/207: H seed 6
+02:11:18 [gentle]   ok: target_lost S2 at 45.6 s sim, RTF 0.817
+02:11:18 [gentle]   thermal zone during the run: peak 49.9 C
+02:11:18 [gentle]   cool-down 60 s
+02:12:18 [gentle] run 9/207: I seed 6
+02:14:58 [gentle]   ok: complied S3 at 75.5 s sim, RTF 0.862
+02:14:58 [gentle]   CPU performance while busy: median 78 % (2 monitor samples)
+02:14:58 [gentle]   thermal zone during the run: peak 52.9 C
+02:14:58 [gentle]   cool-down 60 s
+02:15:58 [gentle] run 10/207: J seed 6
+02:18:38 [gentle]   ok: complied S3 at 75.3 s sim, RTF 0.853
+02:18:38 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+02:18:38 [gentle]   thermal zone during the run: peak 52.9 C
+02:18:38 [gentle]   cool-down 60 s
+02:19:38 [gentle] run 11/207: K seed 6
+02:22:06 [gentle]   ok: safety_stop S2 at 64.1 s sim, RTF 0.845
+02:22:06 [gentle]   thermal zone during the run: peak 52.9 C
+02:22:06 [gentle]   cool-down 60 s
+02:23:06 [gentle] run 12/207: L seed 6
+02:26:53 [gentle]   ok: admin_override S2 at 44.7 s sim, RTF 0.812
+02:26:53 [gentle]   thermal zone during the run: peak 47.9 C
+02:26:53 [gentle]   cool-down 60 s
+02:27:53 [gentle] run 13/207: A seed 7
+02:30:33 [gentle]   ok: complied S3 at 75.1 s sim, RTF 0.856
+02:30:33 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+02:30:33 [gentle]   thermal zone during the run: peak 52.9 C
+02:30:33 [gentle]   cool-down 60 s
+02:31:33 [gentle]   still warm: waiting until the thermal zone is <= 65 C
+02:32:03 [gentle]   cooled to <= 65 C after 30 s extra
+02:32:03 [gentle] run 14/207: A-V seed 7
+02:34:48 [gentle]   ok: complied S3 at 75.1 s sim, RTF 0.818
+02:34:48 [gentle]   CPU performance while busy: median 78 % (2 monitor samples)
+02:34:48 [gentle]   thermal zone during the run: peak 52.9 C
+02:34:48 [gentle]   cool-down 60 s
+02:35:48 [gentle] run 15/207: B seed 7
+02:39:05 [gentle]   ok: none  at  s sim, RTF 0.876
+02:39:05 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+02:39:05 [gentle]   thermal zone during the run: peak 51.9 C
+02:39:05 [gentle] session end after 62 min: 15 run(s) ok this session; 192 of 255 still to do; reason: session time budget used (60 min)
+02:39:05 [turbo] restored: Current AC Power Setting Index: 0x00000002
+48 archives, 11 file(s) written or updated; raw 2692 MB -> 472 MB
+02:39:09 [save] committed 322f006 (63 valid runs)
+02:39:14 [save] pushed phase-c 322f006
+02:39:30 [backup] D:\ mirror updated in 25 s (3.6G, 322f006 Periodic save (2026-11-26 02:39): baseline_wsl recordings, 63 valid runs so far)
+02:39:30 [campaign] rest 30 min (laptop idle)
+48 archives, 0 file(s) written or updated; raw 2692 MB -> 472 MB
+03:09:15 [save] no new recordings since the last save
+03:09:31 [campaign] session 3/5: 192 runs to do
+03:09:31 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+03:09:32 [gentle] session start: tag=baseline_wsl, 192 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+03:09:32 [gentle] run 1/192: B-C7 seed 7
+03:10:05 [backup] D:\ mirror updated in 50 s (3.7G, 322f006 Periodic save (2026-11-26 02:39): baseline_wsl recordings, 63 valid runs so far)
+03:10:05 [save] D:\ backup done
+03:12:30 [gentle]   ok: logged_no_compliance S4 at 89.7 s sim, RTF 0.849
+03:12:30 [gentle]   thermal zone during the run: peak 53.9 C
+03:12:30 [gentle]   cool-down 60 s
+03:13:30 [gentle] run 2/192: C seed 7
+03:13:52 [save] every 30 min while process 87598 runs: archive 'baseline_wsl', commit, push, back up (in gaps between runs)
+03:13:54 [note] periodic save restarted with a fix (pid above): a save that finds nothing new no longer mirrors to D:. At 01:37:13 and 03:09:15 the save that ends a 30-min rest found nothing new but ran a 40-50 s backup that overlapped the start-up of the session's first run (B-C7/6 and B-C7/7; both valid, RTF 0.849, outcomes as in the baseline). Next save about 03:44.
+03:15:50 [gentle]   ok: target_lost S2 at 55.8 s sim, RTF 0.829
+03:15:50 [gentle]   thermal zone during the run: peak 51.9 C
+03:15:50 [gentle]   cool-down 60 s
+03:16:50 [gentle] run 3/192: D seed 7
+03:20:07 [gentle]   ok: none  at  s sim, RTF 0.88
+03:20:07 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+03:20:07 [gentle]   thermal zone during the run: peak 52.9 C
+03:20:07 [gentle]   cool-down 60 s
+03:21:07 [gentle] run 4/192: E seed 7
+03:24:24 [gentle]   ok: none  at  s sim, RTF 0.881
+03:24:24 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+03:24:24 [gentle]   thermal zone during the run: peak 52.9 C
+03:24:24 [gentle]   cool-down 60 s
+03:25:24 [gentle] run 5/192: F-pen seed 7
+03:28:41 [gentle]   ok: none  at  s sim, RTF 0.879
+03:28:41 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+03:28:41 [gentle]   thermal zone during the run: peak 52.9 C
+03:28:41 [gentle]   cool-down 60 s
+03:29:41 [gentle] run 6/192: F-straw seed 7
+03:32:57 [gentle]   ok: none  at  s sim, RTF 0.881
+03:32:57 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+03:32:57 [gentle]   thermal zone during the run: peak 53.9 C
+03:32:57 [gentle]   cool-down 60 s
+03:33:57 [gentle] run 7/192: G seed 7
+03:36:51 [gentle]   ok: logged_no_compliance S4 at 89.2 s sim, RTF 0.867
+03:36:51 [gentle]   thermal zone during the run: peak 51.9 C
+03:36:51 [gentle]   cool-down 60 s
+03:37:52 [gentle] run 8/192: H seed 7
+03:39:58 [gentle]   ok: target_lost S2 at 45.0 s sim, RTF 0.823
+03:39:58 [gentle]   thermal zone during the run: peak 50.9 C
+03:39:58 [gentle]   cool-down 60 s
+03:40:58 [gentle] run 9/192: I seed 7
+03:45:17 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.857
+03:45:17 [gentle]   thermal zone during the run: peak 52.9 C
+03:45:17 [gentle]   cool-down 60 s
+49 archives, 12 file(s) written or updated; raw 2827 MB -> 495 MB
+03:45:22 [save] committed 0c8097c (72 valid runs)
+03:45:42 [save] pushed phase-c 0c8097c
+03:46:11 [backup] D:\ mirror updated in 49 s (3.9G, 0c8097c Periodic save (2026-11-26 03:45): baseline_wsl recordings, 72 valid runs so far)
+03:46:17 [gentle] run 10/192: J seed 7
+03:50:35 [gentle]   ok: complied S3 at 74.3 s sim, RTF 0.858
+03:50:35 [gentle]   CPU performance while busy: median 79 % (4 monitor samples)
+03:50:35 [gentle]   thermal zone during the run: peak 51.9 C
+03:50:35 [gentle]   cool-down 60 s
+03:51:35 [gentle] run 11/192: K seed 7
+03:54:02 [gentle]   ok: safety_stop S2 at 63.5 s sim, RTF 0.845
+03:54:02 [gentle]   thermal zone during the run: peak 52.9 C
+03:54:02 [gentle]   cool-down 60 s
+03:55:02 [gentle] run 12/192: L seed 7
+03:57:08 [gentle]   ok: admin_override S2 at 44.2 s sim, RTF 0.828
+03:57:08 [gentle]   thermal zone during the run: peak 51.9 C
+03:57:08 [gentle]   cool-down 60 s
+03:58:08 [gentle] run 13/192: A seed 8
+04:00:46 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.863
+04:00:46 [gentle]   thermal zone during the run: peak 52.9 C
+04:00:46 [gentle]   cool-down 60 s
+04:01:46 [gentle] run 14/192: A-V seed 8
+04:04:26 [gentle]   ok: complied S3 at 75.1 s sim, RTF 0.856
+04:04:26 [gentle]   thermal zone during the run: peak 50.9 C
+04:04:26 [gentle]   cool-down 60 s
+04:05:26 [gentle] run 15/192: B seed 8
+04:08:43 [gentle]   ok: none  at  s sim, RTF 0.875
+04:08:43 [gentle]   thermal zone during the run: peak 51.9 C
+04:08:43 [gentle]   cool-down 60 s
+04:09:43 [gentle] run 16/192: B-C7 seed 8
+04:12:38 [gentle]   ok: logged_no_compliance S4 at 89.4 s sim, RTF 0.869
+04:12:38 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+04:12:38 [gentle]   thermal zone during the run: peak 52.9 C
+04:12:38 [gentle] session end after 63 min: 16 run(s) ok this session; 176 of 255 still to do; reason: session time budget used (60 min)
+04:12:38 [turbo] restored: Current AC Power Setting Index: 0x00000002
+04:13:04 [backup] D:\ mirror updated in 26 s (4.0G, 0c8097c Periodic save (2026-11-26 03:45): baseline_wsl recordings, 72 valid runs so far)
+04:13:04 [campaign] rest 30 min (laptop idle)
+49 archives, 10 file(s) written or updated; raw 2928 MB -> 513 MB
+04:15:44 [save] committed 93407b9 (79 valid runs)
+04:15:49 [save] pushed phase-c 93407b9
+04:16:11 [backup] D:\ mirror updated in 27 s (4.0G, 93407b9 Periodic save (2026-11-26 04:15): baseline_wsl recordings, 79 valid runs so far)
+04:43:04 [campaign] session 4/5: 176 runs to do
+04:43:04 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+04:43:05 [gentle] session start: tag=baseline_wsl, 176 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+04:43:05 [gentle] run 1/176: C seed 8
+04:45:24 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.797
+04:45:24 [gentle]   thermal zone during the run: peak 51.9 C
+04:45:24 [gentle]   cool-down 60 s
+49 archives, 3 file(s) written or updated; raw 2937 MB -> 515 MB
+04:45:50 [save] committed 5351941 (80 valid runs)
+04:45:53 [save] pushed phase-c 5351941
+04:46:24 [gentle]   still warm: waiting until the thermal zone is <= 65 C
+04:46:39 [backup] D:\ mirror updated in 49 s (4.0G, 5351941 Periodic save (2026-11-26 04:45): baseline_wsl recordings, 80 valid runs so far)
+04:46:54 [gentle]   cooled to <= 65 C after 30 s extra
+04:46:54 [gentle] run 2/176: D seed 8
+04:50:10 [gentle]   ok: none  at  s sim, RTF 0.882
+04:50:10 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+04:50:10 [gentle]   thermal zone during the run: peak 52.9 C
+04:50:10 [gentle]   cool-down 60 s
+04:51:10 [gentle] run 3/176: E seed 8
+04:54:27 [gentle]   ok: none  at  s sim, RTF 0.877
+04:54:27 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+04:54:27 [gentle]   thermal zone during the run: peak 51.9 C
+04:54:27 [gentle]   cool-down 60 s
+04:55:27 [gentle] run 4/176: F-pen seed 8
+04:58:44 [gentle]   ok: none  at  s sim, RTF 0.878
+04:58:44 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+04:58:44 [gentle]   thermal zone during the run: peak 52.9 C
+04:58:44 [gentle]   cool-down 60 s
+04:59:44 [gentle] run 5/176: F-straw seed 8
+05:04:41 [gentle]   ok: none  at  s sim, RTF 0.879
+05:04:41 [gentle]   CPU performance while busy: median 78 % (4 monitor samples)
+05:04:41 [gentle]   thermal zone during the run: peak 51.9 C
+05:04:41 [gentle]   cool-down 60 s
+05:05:41 [gentle] run 6/176: G seed 8
+05:08:35 [gentle]   ok: logged_no_compliance S4 at 89.1 s sim, RTF 0.871
+05:08:35 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+05:08:35 [gentle]   thermal zone during the run: peak 52.9 C
+05:08:35 [gentle]   cool-down 60 s
+05:09:35 [gentle]   still warm: waiting until the thermal zone is <= 65 C
+05:10:05 [gentle]   cooled to <= 65 C after 30 s extra
+05:10:05 [gentle] run 7/176: H seed 8
+05:12:16 [gentle]   ok: target_lost S2 at 45.0 s sim, RTF 0.785
+05:12:16 [gentle]   thermal zone during the run: peak 51.9 C
+05:12:16 [gentle]   cool-down 60 s
+05:13:16 [gentle] run 8/176: I seed 8
+05:15:56 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.855
+05:15:56 [gentle]   thermal zone during the run: peak 50.9 C
+05:15:56 [gentle]   cool-down 60 s
+50 archives, 10 file(s) written or updated; raw 3049 MB -> 534 MB
+05:16:02 [save] committed c661bdf (87 valid runs)
+05:16:07 [save] pushed phase-c c661bdf
+05:16:52 [backup] D:\ mirror updated in 50 s (4.2G, c661bdf Periodic save (2026-11-26 05:16): baseline_wsl recordings, 87 valid runs so far)
+05:16:56 [gentle] run 9/176: J seed 8
+05:19:35 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.862
+05:19:35 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+05:19:35 [gentle]   thermal zone during the run: peak 52.9 C
+05:19:35 [gentle]   cool-down 60 s
+05:20:35 [gentle]   still warm: waiting until the thermal zone is <= 65 C
+05:21:05 [gentle]   cooled to <= 65 C after 30 s extra
+05:21:05 [gentle] run 10/176: K seed 8
+05:23:35 [gentle]   ok: safety_stop S2 at 63.5 s sim, RTF 0.817
+05:23:35 [gentle]   thermal zone during the run: peak 51.9 C
+05:23:35 [gentle]   cool-down 60 s
+05:24:35 [gentle] run 11/176: L seed 8
+05:28:21 [gentle]   ok: admin_override S2 at 44.2 s sim, RTF 0.82
+05:28:21 [gentle]   CPU performance while busy: median 79 % (4 monitor samples)
+05:28:21 [gentle]   thermal zone during the run: peak 50.9 C
+05:28:21 [gentle]   cool-down 60 s
+05:29:21 [gentle]   still warm: waiting until the thermal zone is <= 65 C
+05:29:51 [gentle]   cooled to <= 65 C after 30 s extra
+05:29:51 [gentle] run 12/176: A seed 9
+05:33:46 [note] A/9 (baseline_wsl) attempt 1 startup_failed at 05:31: the same mechanism as A/9 in 'both' on 25 Nov 14:24 (gazebo_ros2_control connected to robot_state_publisher but never logged 'Received urdf'; no /clock in the bag (4 messages: 3 /tf_static, 1 incident path); 30 'Could not contact service /controller_manager'; launch group still alive after SIGKILL). Both such failures so far were on scenario A seed 9 (domains 66 and 63): possibly a coincidence, noted for the evidence. Attempt 2 started normally (Gazebo and Nav2 up).
+05:35:31 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.858
+05:35:31 [gentle]   thermal zone during the run: peak 52.9 C
+05:35:31 [gentle]   cool-down 60 s
+05:36:31 [gentle] run 13/176: A-V seed 9
+05:39:10 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.86
+05:39:10 [gentle]   CPU performance while busy: median 78 % (2 monitor samples)
+05:39:10 [gentle]   thermal zone during the run: peak 50.9 C
+05:39:10 [gentle]   cool-down 60 s
+05:40:10 [gentle] run 14/176: B seed 9
+05:43:25 [gentle]   ok: none  at  s sim, RTF 0.883
+05:43:25 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+05:43:25 [gentle]   thermal zone during the run: peak 52.9 C
+05:43:25 [gentle] session end after 60 min: 14 run(s) ok this session; 162 of 255 still to do; reason: session time budget used (60 min)
+05:43:25 [turbo] restored: Current AC Power Setting Index: 0x00000002
+05:43:54 [backup] D:\ mirror updated in 28 s (4.2G, c661bdf Periodic save (2026-11-26 05:16): baseline_wsl recordings, 87 valid runs so far)
+05:43:54 [campaign] rest 30 min (laptop idle)
+50 archives, 10 file(s) written or updated; raw 3134 MB -> 549 MB
+05:46:10 [save] committed 1c96411 (93 valid runs)
+05:46:14 [save] pushed phase-c 1c96411
+05:46:37 [backup] D:\ mirror updated in 27 s (4.3G, 1c96411 Periodic save (2026-11-26 05:46): baseline_wsl recordings, 93 valid runs so far)
+06:13:55 [campaign] session 5/5: 162 runs to do
+06:13:55 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+06:13:56 [gentle] session start: tag=baseline_wsl, 162 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+06:13:56 [gentle] run 1/162: B-C7 seed 9
+06:16:55 [gentle]   ok: logged_no_compliance S4 at 90.5 s sim, RTF 0.85
+06:16:55 [gentle]   thermal zone during the run: peak 52.9 C
+06:16:55 [gentle]   cool-down 60 s
+50 archives, 3 file(s) written or updated; raw 3149 MB -> 552 MB
+06:17:01 [save] committed fc833b1 (94 valid runs)
+06:17:04 [save] pushed phase-c fc833b1
+06:17:51 [backup] D:\ mirror updated in 50 s (4.3G, fc833b1 Periodic save (2026-11-26 06:17): baseline_wsl recordings, 94 valid runs so far)
+06:17:55 [gentle] run 2/162: C seed 9
+06:20:11 [gentle]   ok: target_lost S2 at 53.0 s sim, RTF 0.828
+06:20:11 [gentle]   thermal zone during the run: peak 49.9 C
+06:20:11 [gentle]   cool-down 60 s
+06:21:11 [gentle] run 3/162: D seed 9
+06:24:28 [gentle]   ok: none  at  s sim, RTF 0.875
+06:24:28 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+06:24:28 [gentle]   thermal zone during the run: peak 51.9 C
+06:24:28 [gentle]   cool-down 60 s
+06:25:28 [gentle] run 4/162: E seed 9
+06:28:46 [gentle]   ok: none  at  s sim, RTF 0.874
+06:28:46 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+06:28:46 [gentle]   thermal zone during the run: peak 51.9 C
+06:28:46 [gentle]   cool-down 60 s
+06:29:46 [gentle] run 5/162: F-pen seed 9
+06:33:02 [gentle]   ok: none  at  s sim, RTF 0.884
+06:33:02 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+06:33:02 [gentle]   thermal zone during the run: peak 52.9 C
+06:33:02 [gentle]   cool-down 60 s
+06:34:02 [gentle] run 6/162: F-straw seed 9
+06:37:18 [gentle]   ok: none  at  s sim, RTF 0.879
+06:37:18 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+06:37:18 [gentle]   thermal zone during the run: peak 51.9 C
+06:37:18 [gentle]   cool-down 60 s
+06:38:19 [gentle] run 7/162: G seed 9
+06:41:13 [gentle]   ok: logged_no_compliance S4 at 89.1 s sim, RTF 0.867
+06:41:13 [gentle]   thermal zone during the run: peak 51.9 C
+06:41:13 [gentle]   cool-down 60 s
+06:42:14 [gentle] run 8/162: H seed 9
+06:44:20 [gentle]   ok: target_lost S2 at 45.0 s sim, RTF 0.82
+06:44:20 [gentle]   thermal zone during the run: peak 48.9 C
+06:44:20 [gentle]   cool-down 60 s
+06:45:20 [gentle] run 9/162: I seed 9
+06:48:00 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.855
+06:48:00 [gentle]   CPU performance while busy: median 78 % (2 monitor samples)
+06:48:00 [gentle]   thermal zone during the run: peak 50.9 C
+06:48:00 [gentle]   cool-down 60 s
+50 archives, 10 file(s) written or updated; raw 3267 MB -> 572 MB
+06:48:08 [save] committed b6a9d90 (102 valid runs)
+06:48:13 [save] pushed phase-c b6a9d90
+06:49:00 [gentle] run 10/162: J seed 9
+06:49:01 [backup] D:\ mirror updated in 53 s (4.4G, b6a9d90 Periodic save (2026-11-26 06:48): baseline_wsl recordings, 102 valid runs so far)
+06:51:40 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.852
+06:51:40 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+06:51:40 [gentle]   thermal zone during the run: peak 51.9 C
+06:51:40 [gentle]   cool-down 60 s
+06:52:40 [gentle] run 11/162: K seed 9
+06:55:08 [gentle]   ok: safety_stop S2 at 63.5 s sim, RTF 0.839
+06:55:08 [gentle]   thermal zone during the run: peak 52.9 C
+06:55:08 [gentle]   cool-down 60 s
+06:56:08 [gentle] run 12/162: L seed 9
+06:58:15 [gentle]   ok: admin_override S2 at 44.2 s sim, RTF 0.815
+06:58:15 [gentle]   thermal zone during the run: peak 49.9 C
+06:58:15 [gentle]   cool-down 60 s
+06:59:15 [gentle] run 13/162: A seed 10
+07:01:54 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.857
+07:01:54 [gentle]   thermal zone during the run: peak 52.9 C
+07:01:54 [gentle]   cool-down 60 s
+07:02:54 [gentle] run 14/162: A-V seed 10
+07:05:34 [gentle]   ok: complied S3 at 75.5 s sim, RTF 0.858
+07:05:34 [gentle]   thermal zone during the run: peak 49.9 C
+07:05:34 [gentle]   cool-down 60 s
+07:06:34 [gentle] run 15/162: B seed 10
+07:09:51 [gentle]   ok: none  at  s sim, RTF 0.879
+07:09:51 [gentle]   thermal zone during the run: peak 52.9 C
+07:09:51 [gentle]   cool-down 60 s
+07:10:51 [gentle] run 16/162: B-C7 seed 10
+07:13:46 [gentle]   ok: logged_no_compliance S4 at 90.6 s sim, RTF 0.867
+07:13:46 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+07:13:46 [gentle]   thermal zone during the run: peak 52.9 C
+07:13:46 [gentle]   cool-down 60 s
+07:14:47 [gentle] run 17/162: C seed 10
+07:17:02 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.832
+07:17:02 [gentle]   thermal zone during the run: peak 51.9 C
+07:17:02 [gentle] session end after 63 min: 17 run(s) ok this session; 145 of 255 still to do; reason: session time budget used (60 min)
+07:17:02 [turbo] restored: Current AC Power Setting Index: 0x00000002
+07:17:31 [backup] D:\ mirror updated in 28 s (4.5G, b6a9d90 Periodic save (2026-11-26 06:48): baseline_wsl recordings, 102 valid runs so far)
+07:17:31 [campaign] daily session limit reached (5)
+07:17:31 [campaign] end: 145 runs still to do
+07:17:33 [save] process 87598 ended; periodic saves stop (after_campaign.sh makes the final save)
+07:17:37 [autosave] process 87598 ended: archiving recordings, committing, pushing, backing up
+50 archives, 10 file(s) written or updated; raw 3370 MB -> 590 MB
+07:17:58 [autosave] committed 96f6fa9
+07:18:02 [autosave] pushed phase-c 96f6fa9
+07:18:02 [autosave] D:\ backup done
+07:18:28 [backup] D:\ mirror updated in 30 s (4.6G, 96f6fa9 Auto-save after campaign (2026-11-26 07:17:58): recordings archived, live log copied)
+07:18:55 [note] night done (campaign B ended 07:17, final save 96f6fa9 pushed, D: at 96f6fa9 07:18:28). Display timeout restored to never (powercfg /change monitor-timeout-ac 0). Turbo back to boost mode 2 (restored by the session script).
+07:23:32 [backup] D:\ mirror updated in 31 s (4.6G, 315e4a8 Baseline re-run, first night: 110/255 runs, all 110 match the original baseline; overnight fixes)
+20:51:17 [settle] windows cpu 3 %, thermal 43.9 C (calm checks in a row: 1)
+20:51:38 [settle] windows cpu 3 %, thermal 43.9 C (calm checks in a row: 2)
+20:52:00 [settle] windows cpu 3 %, thermal 43.9 C (calm checks in a row: 3)
+20:52:00 [settle] settled after 49 s
+20:52:00 [campaign] start: up to 7 sessions, 30 min rest between them; args: --scenarios all --seed-list 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 --order seed --cooldown-s 60 --tag baseline_wsl --out evaluation/data/baseline_wsl --manifest evaluation/data/baseline_wsl/manifest.csv
+20:52:00 [campaign] session 1/7: 145 runs to do
+20:52:00 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+20:52:01 [campaign] started as pid 4975; safety net armed on it
+20:52:01 [save] every 30 min while process 4975 runs: archive 'baseline_wsl', commit, push, back up (in gaps between runs)
+20:52:01 [gentle] session start: tag=baseline_wsl, 145 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+20:52:01 [gentle] run 1/145: D seed 10
+20:52:28 [note] night 2 started at 20:52 (user: 'U can start it now'; the scheduled 20:57 start was cancelled). One campaign, 7 sessions, pid 4975. Display timeout set to 5 min for the night (restore: powercfg /change monitor-timeout-ac 0). The FSM-replay analysis preview was stopped before the start (it uses DDS); re-run it when the laptop is idle.
+20:55:25 [gentle]   ok: none  at  s sim, RTF 0.836
+20:55:25 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+20:55:25 [gentle]   thermal zone during the run: peak 65.9 C
+20:55:25 [gentle]   cool-down 60 s
+20:56:25 [gentle] run 2/145: E seed 10
+20:57:52 [note] the user switched NitroSense to performance mode at about 20:56 (HKLM\SOFTWARE\OEM\NitroSense\Overclock CurrentOperationMode 1 -> 4). The first run of the night (D/10) ran before it, peak 65.9 C. Turbo stays off (boost 0, Razer Cortex Power Plan).
+21:01:29 [gentle]   ok: none  at  s sim, RTF 0.858
+21:01:29 [gentle]   CPU performance while busy: median 79 % (5 monitor samples)
+21:01:29 [gentle]   thermal zone during the run: peak 58.9 C
+21:01:29 [gentle]   cool-down 60 s
+21:02:29 [gentle] run 3/145: F-pen seed 10
+21:05:47 [gentle]   ok: none  at  s sim, RTF 0.87
+21:05:47 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+21:05:47 [gentle]   thermal zone during the run: peak 56.9 C
+21:05:47 [gentle]   cool-down 60 s
+21:06:47 [gentle] run 4/145: F-straw seed 10
+21:10:05 [gentle]   ok: none  at  s sim, RTF 0.871
+21:10:05 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+21:10:05 [gentle]   thermal zone during the run: peak 55.9 C
+21:10:05 [gentle]   cool-down 60 s
+21:11:05 [gentle] run 5/145: G seed 10
+21:15:39 [gentle]   ok: logged_no_compliance S4 at 88.6 s sim, RTF 0.863
+21:15:39 [gentle]   CPU performance while busy: median 78 % (4 monitor samples)
+21:15:39 [gentle]   thermal zone during the run: peak 55.9 C
+21:15:39 [gentle]   cool-down 60 s
+21:16:39 [gentle] run 6/145: H seed 10
+21:18:47 [gentle]   ok: target_lost S2 at 45.0 s sim, RTF 0.811
+21:18:47 [gentle]   thermal zone during the run: peak 53.9 C
+21:18:47 [gentle]   cool-down 60 s
+21:19:47 [gentle] run 7/145: I seed 10
+21:22:27 [gentle]   ok: complied S3 at 75.1 s sim, RTF 0.852
+21:22:27 [gentle]   thermal zone during the run: peak 54.9 C
+21:22:27 [gentle]   cool-down 60 s
+50 archives, 11 file(s) written or updated; raw 3482 MB -> 610 MB
+21:22:36 [save] committed 18b7809 (117 valid runs)
+21:22:41 [save] pushed phase-c 18b7809
+21:23:36 [backup] D:\ mirror updated in 60 s (4.7G, 18b7809 Periodic save (2026-11-26 21:22): baseline_wsl recordings, 117 valid runs so far)
+21:23:37 [gentle]   waited 10 s for a save/backup to finish before the run
+21:23:37 [gentle] run 8/145: J seed 10
+21:27:56 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.856
+21:27:56 [gentle]   CPU performance while busy: median 78 % (4 monitor samples)
+21:27:56 [gentle]   thermal zone during the run: peak 54.9 C
+21:27:56 [gentle]   cool-down 60 s
+21:28:57 [gentle] run 9/145: K seed 10
+21:31:24 [gentle]   ok: safety_stop S2 at 63.5 s sim, RTF 0.838
+21:31:24 [gentle]   thermal zone during the run: peak 52.9 C
+21:31:24 [gentle]   cool-down 60 s
+21:32:24 [gentle] run 10/145: L seed 10
+21:34:31 [gentle]   ok: admin_override S2 at 44.2 s sim, RTF 0.814
+21:34:31 [gentle]   thermal zone during the run: peak 51.9 C
+21:34:31 [gentle]   cool-down 60 s
+21:35:31 [gentle] run 11/145: A seed 11
+21:38:11 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.849
+21:38:11 [gentle]   thermal zone during the run: peak 51.9 C
+21:38:11 [gentle]   cool-down 60 s
+21:39:11 [gentle] run 12/145: A-V seed 11
+21:41:51 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.849
+21:41:51 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+21:41:51 [gentle]   thermal zone during the run: peak 53.9 C
+21:41:51 [gentle]   cool-down 60 s
+21:42:51 [gentle] run 13/145: B seed 11
+21:46:09 [gentle]   ok: none  at  s sim, RTF 0.874
+21:46:09 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+21:46:09 [gentle]   thermal zone during the run: peak 54.9 C
+21:46:09 [gentle]   cool-down 60 s
+21:47:09 [gentle]   no thermal reading since the run yet (the monitor samples about once a minute): waiting for one
+21:47:39 [gentle]   cooled to <= 65 C after 30 s extra
+21:47:39 [gentle] run 14/145: B-C7 seed 11
+21:50:42 [gentle]   ok: logged_no_compliance S4 at 91.0 s sim, RTF 0.833
+21:50:42 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+21:50:42 [gentle]   thermal zone during the run: peak 54.9 C
+21:50:42 [gentle]   cool-down 60 s
+21:51:42 [gentle] run 15/145: C seed 11
+21:53:59 [gentle]   ok: target_lost S2 at 53.0 s sim, RTF 0.828
+21:53:59 [gentle]   thermal zone during the run: peak 52.9 C
+21:53:59 [gentle] session end after 62 min: 15 run(s) ok this session; 130 of 255 still to do; reason: session time budget used (60 min)
+21:53:59 [turbo] restored: Current AC Power Setting Index: 0x00000002
+50 archives, 11 file(s) written or updated; raw 3593 MB -> 629 MB
+21:54:04 [save] committed 04ed547 (125 valid runs)
+21:54:08 [save] pushed phase-c 04ed547
+21:54:32 [backup] D:\ mirror updated in 33 s (4.8G, 04ed547 Periodic save (2026-11-26 21:54): baseline_wsl recordings, 125 valid runs so far)
+21:54:32 [campaign] rest 30 min (laptop idle)
+50 archives, 0 file(s) written or updated; raw 3593 MB -> 629 MB
+22:24:10 [save] no new recordings since the last save; backup skipped (D:\ already has them)
+22:24:33 [campaign] session 2/7: 130 runs to do
+22:24:33 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+22:24:34 [gentle] session start: tag=baseline_wsl, 130 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+22:24:34 [gentle] run 1/130: D seed 11
+22:27:54 [gentle]   ok: none  at  s sim, RTF 0.862
+22:27:54 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+22:27:54 [gentle]   thermal zone during the run: peak 51.9 C
+22:27:54 [gentle]   cool-down 60 s
+22:28:54 [gentle] run 2/130: E seed 11
+22:32:11 [gentle]   ok: none  at  s sim, RTF 0.875
+22:32:11 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+22:32:11 [gentle]   thermal zone during the run: peak 51.9 C
+22:32:11 [gentle]   cool-down 60 s
+22:33:11 [gentle] run 3/130: F-pen seed 11
+22:38:08 [gentle]   ok: none  at  s sim, RTF 0.873
+22:38:08 [gentle]   CPU performance while busy: median 79 % (5 monitor samples)
+22:38:08 [gentle]   thermal zone during the run: peak 52.9 C
+22:38:08 [gentle]   cool-down 60 s
+22:39:09 [gentle] run 4/130: F-straw seed 11
+22:44:06 [gentle]   ok: none  at  s sim, RTF 0.877
+22:44:06 [gentle]   CPU performance while busy: median 78 % (4 monitor samples)
+22:44:06 [gentle]   thermal zone during the run: peak 51.9 C
+22:44:06 [gentle]   cool-down 60 s
+22:45:06 [gentle] run 5/130: G seed 11
+22:48:02 [gentle]   ok: logged_no_compliance S4 at 89.1 s sim, RTF 0.859
+22:48:02 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+22:48:02 [gentle]   thermal zone during the run: peak 53.9 C
+22:48:02 [gentle]   cool-down 60 s
+22:49:02 [gentle] run 6/130: H seed 11
+22:51:10 [gentle]   ok: target_lost S2 at 45.0 s sim, RTF 0.812
+22:51:10 [gentle]   thermal zone during the run: peak 52.9 C
+22:51:10 [gentle]   cool-down 60 s
+22:52:10 [gentle]   no thermal reading since the run yet (the monitor samples about once a minute): waiting for one
+22:52:40 [gentle]   cooled to <= 65 C after 30 s extra
+22:52:40 [gentle] run 7/130: I seed 11
+22:55:24 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.82
+22:55:24 [gentle]   CPU performance while busy: median 78 % (2 monitor samples)
+22:55:24 [gentle]   thermal zone during the run: peak 52.9 C
+22:55:24 [gentle]   cool-down 60 s
+51 archives, 11 file(s) written or updated; raw 3708 MB -> 650 MB
+22:55:30 [save] committed 467c070 (132 valid runs)
+22:55:35 [save] pushed phase-c 467c070
+22:57:10 [backup] D:\ mirror updated in 100 s (5.0G, 467c070 Periodic save (2026-11-26 22:55): baseline_wsl recordings, 132 valid runs so far)
+22:57:11 [gentle]   waited 46 s for a save/backup to finish before the run
+22:57:11 [gentle] run 8/130: J seed 11
+22:59:51 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.845
+22:59:51 [gentle]   CPU performance while busy: median 78 % (2 monitor samples)
+22:59:51 [gentle]   thermal zone during the run: peak 53.9 C
+22:59:51 [gentle]   cool-down 60 s
+23:00:52 [gentle] run 9/130: K seed 11
+23:03:20 [gentle]   ok: safety_stop S2 at 63.7 s sim, RTF 0.831
+23:03:20 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+23:03:20 [gentle]   thermal zone during the run: peak 52.9 C
+23:03:20 [gentle]   cool-down 60 s
+23:04:20 [gentle] run 10/130: L seed 11
+23:06:28 [gentle]   ok: admin_override S2 at 44.2 s sim, RTF 0.801
+23:06:28 [gentle]   thermal zone during the run: peak 51.9 C
+23:06:28 [gentle]   cool-down 60 s
+23:07:28 [gentle] run 11/130: A seed 12
+23:10:09 [gentle]   ok: complied S3 at 75.1 s sim, RTF 0.848
+23:10:09 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+23:10:09 [gentle]   thermal zone during the run: peak 52.9 C
+23:10:09 [gentle]   cool-down 60 s
+23:11:09 [gentle] run 12/130: A-V seed 12
+23:13:50 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.846
+23:13:50 [gentle]   thermal zone during the run: peak 51.9 C
+23:13:50 [gentle]   cool-down 60 s
+23:14:50 [gentle] run 13/130: B seed 12
+23:18:08 [gentle]   ok: none  at  s sim, RTF 0.872
+23:18:08 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+23:18:08 [gentle]   thermal zone during the run: peak 52.9 C
+23:18:08 [gentle]   cool-down 60 s
+23:19:08 [gentle] run 14/130: B-C7 seed 12
+23:22:03 [gentle]   ok: logged_no_compliance S4 at 89.1 s sim, RTF 0.863
+23:22:03 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+23:22:03 [gentle]   thermal zone during the run: peak 53.9 C
+23:22:03 [gentle]   cool-down 60 s
+23:23:03 [gentle]   no thermal reading since the run yet (the monitor samples about once a minute): waiting for one
+23:23:33 [gentle]   cooled to <= 65 C after 30 s extra
+23:23:33 [gentle] run 15/130: C seed 12
+23:25:56 [gentle]   ok: target_lost S2 at 53.0 s sim, RTF 0.777
+23:25:56 [gentle]   thermal zone during the run: peak 49.9 C
+23:25:56 [gentle] session end after 61 min: 15 run(s) ok this session; 115 of 255 still to do; reason: session time budget used (60 min)
+23:25:56 [turbo] restored: Current AC Power Setting Index: 0x00000002
+51 archives, 10 file(s) written or updated; raw 3813 MB -> 668 MB
+23:26:03 [save] committed f22eb17 (140 valid runs)
+23:26:07 [save] pushed phase-c f22eb17
+23:26:28 [backup] D:\ mirror updated in 32 s (5.1G, f22eb17 Periodic save (2026-11-26 23:26): baseline_wsl recordings, 140 valid runs so far)
+23:26:28 [campaign] rest 30 min (laptop idle)
+51 archives, 0 file(s) written or updated; raw 3813 MB -> 668 MB
+23:56:09 [save] no new recordings since the last save; backup skipped (D:\ already has them)
+23:56:29 [campaign] session 3/7: 115 runs to do
+23:56:29 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+23:56:30 [gentle] session start: tag=baseline_wsl, 115 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+23:56:30 [gentle] run 1/115: D seed 12
+23:59:51 [gentle]   ok: none  at  s sim, RTF 0.856
+23:59:51 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+23:59:51 [gentle]   thermal zone during the run: peak 52.9 C
+23:59:51 [gentle]   cool-down 60 s
+00:00:51 [gentle] run 2/115: E seed 12
+00:04:09 [gentle]   ok: none  at  s sim, RTF 0.874
+00:04:09 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+00:04:09 [gentle]   thermal zone during the run: peak 51.9 C
+00:04:09 [gentle]   cool-down 60 s
+00:05:09 [gentle] run 3/115: F-pen seed 12
+00:08:26 [gentle]   ok: none  at  s sim, RTF 0.876
+00:08:26 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+00:08:26 [gentle]   thermal zone during the run: peak 52.9 C
+00:08:26 [gentle]   cool-down 60 s
+00:09:26 [gentle] run 4/115: F-straw seed 12
+00:12:44 [gentle]   ok: none  at  s sim, RTF 0.873
+00:12:44 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+00:12:44 [gentle]   thermal zone during the run: peak 51.9 C
+00:12:44 [gentle]   cool-down 60 s
+00:13:44 [gentle] run 5/115: G seed 12
+00:16:40 [gentle]   ok: logged_no_compliance S4 at 89.1 s sim, RTF 0.858
+00:16:40 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+00:16:40 [gentle]   thermal zone during the run: peak 52.9 C
+00:16:40 [gentle]   cool-down 60 s
+00:17:40 [gentle] run 6/115: H seed 12
+00:19:48 [gentle]   ok: target_lost S2 at 45.0 s sim, RTF 0.811
+00:19:48 [gentle]   thermal zone during the run: peak 51.9 C
+00:19:48 [gentle]   cool-down 60 s
+00:20:48 [gentle]   no thermal reading since the run yet (the monitor samples about once a minute): waiting for one
+00:21:18 [gentle]   cooled to <= 65 C after 30 s extra
+00:21:18 [gentle] run 7/115: I seed 12
+00:24:02 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.817
+00:24:02 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+00:24:02 [gentle]   thermal zone during the run: peak 52.9 C
+00:24:02 [gentle]   cool-down 60 s
+00:25:02 [gentle] run 8/115: J seed 12
+00:27:42 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.846
+00:27:42 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+00:27:42 [gentle]   thermal zone during the run: peak 51.9 C
+00:27:42 [gentle]   cool-down 60 s
+51 archives, 10 file(s) written or updated; raw 3935 MB -> 689 MB
+00:27:49 [save] committed c1e0a08 (148 valid runs)
+00:27:54 [save] pushed phase-c c1e0a08
+00:28:50 [backup] D:\ mirror updated in 61 s (5.3G, c1e0a08 Periodic save (2026-11-27 00:27): baseline_wsl recordings, 148 valid runs so far)
+00:28:50 [gentle]   waited 8 s for a save/backup to finish before the run
+00:28:50 [gentle] run 9/115: K seed 12
+00:31:19 [gentle]   ok: safety_stop S2 at 63.7 s sim, RTF 0.836
+00:31:19 [gentle]   thermal zone during the run: peak 52.9 C
+00:31:19 [gentle]   cool-down 60 s
+00:32:19 [gentle] run 10/115: L seed 12
+00:34:26 [gentle]   ok: admin_override S2 at 44.1 s sim, RTF 0.814
+00:34:26 [gentle]   thermal zone during the run: peak 50.9 C
+00:34:26 [gentle]   cool-down 60 s
+00:35:26 [gentle] run 11/115: A seed 13
+00:38:07 [gentle]   ok: complied S3 at 75.3 s sim, RTF 0.846
+00:38:07 [gentle]   thermal zone during the run: peak 50.9 C
+00:38:07 [gentle]   cool-down 60 s
+00:39:07 [gentle] run 12/115: A-V seed 13
+00:41:48 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.848
+00:41:48 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+00:41:48 [gentle]   thermal zone during the run: peak 51.9 C
+00:41:48 [gentle]   cool-down 60 s
+00:42:48 [gentle]   no thermal reading since the run yet (the monitor samples about once a minute): waiting for one
+00:43:18 [gentle]   cooled to <= 65 C after 30 s extra
+00:43:18 [gentle] run 13/115: B seed 13
+00:46:40 [gentle]   ok: none  at  s sim, RTF 0.857
+00:46:40 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+00:46:40 [gentle]   thermal zone during the run: peak 53.9 C
+00:46:40 [gentle]   cool-down 60 s
+00:47:40 [gentle] run 14/115: B-C7 seed 13
+00:50:36 [gentle]   ok: logged_no_compliance S4 at 89.4 s sim, RTF 0.862
+00:50:36 [gentle]   CPU performance while busy: median 78 % (2 monitor samples)
+00:50:36 [gentle]   thermal zone during the run: peak 53.9 C
+00:50:36 [gentle]   cool-down 60 s
+00:51:36 [gentle]   no thermal reading since the run yet (the monitor samples about once a minute): waiting for one
+00:52:06 [gentle]   cooled to <= 65 C after 30 s extra
+00:52:06 [gentle] run 15/115: C seed 13
+00:54:29 [gentle]   ok: target_lost S2 at 55.8 s sim, RTF 0.798
+00:54:29 [gentle]   thermal zone during the run: peak 50.9 C
+00:54:29 [gentle]   cool-down 60 s
+00:55:29 [gentle] run 16/115: D seed 13
+00:58:47 [gentle]   ok: none  at  s sim, RTF 0.871
+00:58:47 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+00:58:47 [gentle]   thermal zone during the run: peak 52.9 C
+00:58:47 [gentle] session end after 62 min: 16 run(s) ok this session; 99 of 255 still to do; reason: session time budget used (60 min)
+00:58:47 [turbo] restored: Current AC Power Setting Index: 0x00000002
+51 archives, 10 file(s) written or updated; raw 4041 MB -> 708 MB
+00:58:52 [save] committed 357931f (156 valid runs)
+00:58:56 [save] pushed phase-c 357931f
+00:59:22 [backup] D:\ mirror updated in 34 s (5.4G, 357931f Periodic save (2026-11-27 00:58): baseline_wsl recordings, 156 valid runs so far)
+00:59:22 [campaign] rest 30 min (laptop idle)
+51 archives, 0 file(s) written or updated; raw 4041 MB -> 708 MB
+01:28:58 [save] no new recordings since the last save; backup skipped (D:\ already has them)
+01:29:23 [campaign] session 4/7: 99 runs to do
+01:29:23 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+01:29:24 [gentle] session start: tag=baseline_wsl, 99 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+01:29:24 [gentle] run 1/99: E seed 13
+01:32:44 [gentle]   ok: none  at  s sim, RTF 0.856
+01:32:44 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+01:32:44 [gentle]   thermal zone during the run: peak 52.9 C
+01:32:44 [gentle]   cool-down 60 s
+01:33:44 [gentle] run 2/99: F-pen seed 13
+01:37:03 [gentle]   ok: none  at  s sim, RTF 0.868
+01:37:03 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+01:37:03 [gentle]   thermal zone during the run: peak 51.9 C
+01:37:03 [gentle]   cool-down 60 s
+01:38:03 [gentle] run 3/99: F-straw seed 13
+01:41:21 [gentle]   ok: none  at  s sim, RTF 0.874
+01:41:21 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+01:41:21 [gentle]   thermal zone during the run: peak 51.9 C
+01:41:21 [gentle]   cool-down 60 s
+01:42:21 [gentle] run 4/99: G seed 13
+01:45:16 [gentle]   ok: logged_no_compliance S4 at 89.1 s sim, RTF 0.861
+01:45:16 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+01:45:16 [gentle]   thermal zone during the run: peak 52.9 C
+01:45:16 [gentle]   cool-down 60 s
+01:46:16 [gentle] run 5/99: H seed 13
+01:48:24 [gentle]   ok: target_lost S2 at 45.0 s sim, RTF 0.811
+01:48:24 [gentle]   thermal zone during the run: peak 51.9 C
+01:48:24 [gentle]   cool-down 60 s
+01:49:24 [gentle] run 6/99: I seed 13
+01:52:04 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.848
+01:52:04 [gentle]   thermal zone during the run: peak 51.9 C
+01:52:04 [gentle]   cool-down 60 s
+01:53:04 [gentle] run 7/99: J seed 13
+01:55:45 [gentle]   ok: complied S3 at 75.1 s sim, RTF 0.847
+01:55:45 [gentle]   thermal zone during the run: peak 51.9 C
+01:55:45 [gentle]   cool-down 60 s
+01:56:45 [gentle] run 8/99: K seed 13
+01:59:14 [gentle]   ok: safety_stop S2 at 64.1 s sim, RTF 0.833
+01:59:14 [gentle]   CPU performance while busy: median 78 % (2 monitor samples)
+01:59:14 [gentle]   thermal zone during the run: peak 51.9 C
+01:59:14 [gentle]   cool-down 60 s
+51 archives, 10 file(s) written or updated; raw 4156 MB -> 728 MB
+01:59:22 [save] committed f330b58 (164 valid runs)
+01:59:28 [save] pushed phase-c f330b58
+02:00:28 [backup] D:\ mirror updated in 66 s (5.6G, f330b58 Periodic save (2026-11-27 01:59): baseline_wsl recordings, 164 valid runs so far)
+02:00:30 [gentle]   waited 16 s for a save/backup to finish before the run
+02:00:30 [gentle] run 9/99: L seed 13
+02:02:36 [gentle]   ok: admin_override S2 at 44.2 s sim, RTF 0.81
+02:02:36 [gentle]   thermal zone during the run: peak 52.9 C
+02:02:36 [gentle]   cool-down 60 s
+02:03:36 [gentle]   no thermal reading since the run yet (the monitor samples about once a minute): waiting for one
+02:04:07 [gentle]   cooled to <= 65 C after 30 s extra
+02:04:07 [gentle] run 10/99: A seed 14
+02:06:46 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.852
+02:06:46 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+02:06:46 [gentle]   thermal zone during the run: peak 52.9 C
+02:06:46 [gentle]   cool-down 60 s
+02:07:47 [gentle] run 11/99: A-V seed 14
+02:10:25 [gentle]   ok: complied S3 at 74.3 s sim, RTF 0.853
+02:10:25 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+02:10:25 [gentle]   thermal zone during the run: peak 52.9 C
+02:10:25 [gentle]   cool-down 60 s
+02:11:25 [gentle] run 12/99: B seed 14
+02:16:23 [gentle]   ok: none  at  s sim, RTF 0.871
+02:16:23 [gentle]   CPU performance while busy: median 79 % (4 monitor samples)
+02:16:23 [gentle]   thermal zone during the run: peak 52.9 C
+02:16:23 [gentle]   cool-down 60 s
+02:17:23 [gentle] run 13/99: B-C7 seed 14
+02:20:20 [gentle]   ok: logged_no_compliance S4 at 90.1 s sim, RTF 0.86
+02:20:20 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+02:20:20 [gentle]   thermal zone during the run: peak 52.9 C
+02:20:20 [gentle]   cool-down 60 s
+02:21:20 [gentle] run 14/99: C seed 14
+02:23:37 [gentle]   ok: target_lost S2 at 54.0 s sim, RTF 0.83
+02:23:37 [gentle]   thermal zone during the run: peak 50.9 C
+02:23:37 [gentle]   cool-down 60 s
+02:24:37 [gentle] run 15/99: D seed 14
+02:27:55 [gentle]   ok: none  at  s sim, RTF 0.874
+02:27:55 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+02:27:55 [gentle]   thermal zone during the run: peak 53.9 C
+02:27:55 [gentle]   cool-down 60 s
+02:28:55 [gentle]   no thermal reading since the run yet (the monitor samples about once a minute): waiting for one
+02:29:25 [gentle]   cooled to <= 65 C after 30 s extra
+02:29:25 [gentle] run 16/99: E seed 14
+02:32:46 [gentle]   ok: none  at  s sim, RTF 0.853
+02:32:46 [gentle]   CPU performance while busy: median 40 % (3 monitor samples)
+02:32:46 [gentle]   thermal zone during the run: peak 51.9 C
+02:32:46 [gentle] session end after 63 min: 16 run(s) ok this session; 83 of 255 still to do; reason: CPU throttling reported by Windows while a run was busy
+02:32:46 [turbo] restored: Current AC Power Setting Index: 0x00000002
+52 archives, 11 file(s) written or updated; raw 4272 MB -> 749 MB
+02:32:52 [save] committed 22a4ff8 (172 valid runs)
+02:32:56 [save] pushed phase-c 22a4ff8
+02:33:24 [backup] D:\ mirror updated in 37 s (5.7G, 22a4ff8 Periodic save (2026-11-27 02:32): baseline_wsl recordings, 172 valid runs so far)
+02:33:24 [campaign] campaign ended: last session stopped for another reason (CPU throttling reported by Windows while a run was busy)
+02:33:24 [campaign] end: 83 runs still to do
+02:33:36 [save] process 4975 ended; periodic saves stop (after_campaign.sh makes the final save)
+02:33:42 [autosave] process 4975 ended: archiving recordings, committing, pushing, backing up
+52 archives, 0 file(s) written or updated; raw 4272 MB -> 749 MB
+02:34:02 [autosave] committed 1237e73
+02:34:04 [autosave] pushed phase-c 1237e73
+02:34:40 [backup] D:\ mirror updated in 38 s (5.8G, 1237e73 Auto-save after campaign (2026-11-27 02:34:02): recordings archived, live log copied)
+02:34:48 [chain] waiting for campaign 4975 and its final save; then 30 min rest, settle check, start_campaign.sh 3 30 --scenarios all --seed-list 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 --order seed --cooldown-s 60 --tag baseline_wsl --out evaluation/data/baseline_wsl --manifest evaluation/data/baseline_wsl/manifest.csv
+02:34:50 [note] session 4 stopped at 02:32:46 on a FALSE throttling alarm: one host_monitor sample (02:30:06) read 0 % CPU performance at 47 % utility and 50.9 C, between readings of 79 % (median of the two busy samples 0 and 79 = 40 % < 70 %). The only 0 % reading in 1014 samples; passive limit 100 %, no real throttling. Fix: gentle_batch.throttled() now ignores busy samples reading 0 % (counter glitch) and logs them; 2 new tests (40/40 pass). Remaining 3 sessions resumed via chain_campaign.sh (30 min rest after the final save, settle check, start_campaign.sh 3 30, SAVE_EVERY_MIN=30): about 03:05 to 07:05, as planned.
+02:35:19 [backup] D:\ mirror updated in 39 s (5.8G, 1237e73 Auto-save after campaign (2026-11-27 02:34:02): recordings archived, live log copied)
+02:35:19 [autosave] D:\ backup done
+02:35:28 [chain] campaign 4975 ended and saved; resting 30 min
+03:05:35 [settle] windows cpu 3 %, thermal 43.9 C (calm checks in a row: 1)
+03:05:56 [settle] windows cpu 3 %, thermal 40.9 C (calm checks in a row: 2)
+03:06:17 [settle] windows cpu 7 %, thermal 41.9 C (calm checks in a row: 3)
+03:06:17 [settle] settled after 49 s
+03:06:17 [campaign] start: up to 3 sessions, 30 min rest between them; args: --scenarios all --seed-list 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 --order seed --cooldown-s 60 --tag baseline_wsl --out evaluation/data/baseline_wsl --manifest evaluation/data/baseline_wsl/manifest.csv
+03:06:18 [campaign] session 1/3: 83 runs to do
+03:06:18 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+03:06:19 [campaign] started as pid 172474; safety net armed on it
+campaign pid 172474; safety net armed
+periodic save every 30 min armed
+03:06:19 [save] every 30 min while process 172474 runs: archive 'baseline_wsl', commit, push, back up (in gaps between runs)
+03:06:19 [gentle] session start: tag=baseline_wsl, 83 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+03:06:19 [gentle] run 1/83: F-pen seed 14
+03:09:39 [gentle]   ok: none  at  s sim, RTF 0.858
+03:09:39 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+03:09:39 [gentle]   thermal zone during the run: peak 53.9 C
+03:09:39 [gentle]   cool-down 60 s
+03:10:39 [gentle] run 2/83: F-straw seed 14
+03:13:57 [gentle]   ok: none  at  s sim, RTF 0.871
+03:13:57 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+03:13:57 [gentle]   thermal zone during the run: peak 51.9 C
+03:13:57 [gentle]   cool-down 60 s
+03:14:57 [gentle] run 3/83: G seed 14
+03:17:52 [gentle]   ok: logged_no_compliance S4 at 89.1 s sim, RTF 0.867
+03:17:52 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+03:17:52 [gentle]   thermal zone during the run: peak 52.9 C
+03:17:52 [gentle]   cool-down 60 s
+03:18:52 [gentle] run 4/83: H seed 14
+03:21:00 [gentle]   ok: target_lost S2 at 45.0 s sim, RTF 0.811
+03:21:00 [gentle]   thermal zone during the run: peak 50.9 C
+03:21:00 [gentle]   cool-down 60 s
+03:22:00 [gentle] run 5/83: I seed 14
+03:24:40 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.856
+03:24:40 [gentle]   thermal zone during the run: peak 51.9 C
+03:24:40 [gentle]   cool-down 60 s
+03:25:40 [gentle] run 6/83: J seed 14
+03:30:13 [gentle]   ok: none  at  s sim, RTF 0.892
+03:30:13 [gentle]   CPU performance while busy: median 79 % (4 monitor samples)
+03:30:13 [gentle]   thermal zone during the run: peak 53.9 C
+03:30:13 [gentle]   cool-down 60 s
+03:31:13 [gentle] run 7/83: K seed 14
+03:33:41 [gentle]   ok: safety_stop S2 at 63.5 s sim, RTF 0.839
+03:33:41 [gentle]   thermal zone during the run: peak 50.9 C
+03:33:41 [gentle]   cool-down 60 s
+03:34:41 [gentle] run 8/83: L seed 14
+03:36:48 [gentle]   ok: admin_override S2 at 44.2 s sim, RTF 0.811
+03:36:48 [gentle]   thermal zone during the run: peak 48.9 C
+03:36:48 [gentle]   cool-down 60 s
+52 archives, 10 file(s) written or updated; raw 4400 MB -> 770 MB
+03:36:54 [save] committed 6e5afee (180 valid runs)
+03:37:00 [save] pushed phase-c 6e5afee
+03:38:02 [backup] D:\ mirror updated in 68 s (5.9G, 6e5afee Periodic save (2026-11-27 03:36): baseline_wsl recordings, 180 valid runs so far)
+03:38:04 [gentle]   waited 16 s for a save/backup to finish before the run
+03:38:04 [gentle] run 9/83: A seed 15
+03:40:44 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.848
+03:40:44 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+03:40:44 [gentle]   thermal zone during the run: peak 52.9 C
+03:40:44 [gentle]   cool-down 60 s
+03:41:44 [gentle] run 10/83: A-V seed 15
+03:44:25 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.847
+03:44:25 [gentle]   thermal zone during the run: peak 52.9 C
+03:44:25 [gentle]   cool-down 60 s
+03:45:25 [gentle] run 11/83: B seed 15
+03:48:43 [gentle]   ok: none  at  s sim, RTF 0.871
+03:48:43 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+03:48:43 [gentle]   thermal zone during the run: peak 51.9 C
+03:48:43 [gentle]   cool-down 60 s
+03:49:43 [gentle] run 12/83: B-C7 seed 15
+03:52:41 [gentle]   ok: logged_no_compliance S4 at 91.4 s sim, RTF 0.858
+03:52:41 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+03:52:41 [gentle]   thermal zone during the run: peak 53.9 C
+03:52:41 [gentle]   cool-down 60 s
+03:53:41 [gentle] run 13/83: C seed 15
+03:55:57 [gentle]   ok: target_lost S2 at 51.8 s sim, RTF 0.821
+03:55:57 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+03:55:57 [gentle]   thermal zone during the run: peak 50.9 C
+03:55:57 [gentle]   cool-down 60 s
+03:56:57 [gentle] run 14/83: D seed 15
+04:00:15 [gentle]   ok: none  at  s sim, RTF 0.874
+04:00:15 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+04:00:15 [gentle]   thermal zone during the run: peak 51.9 C
+04:00:15 [gentle]   cool-down 60 s
+04:01:15 [gentle] run 15/83: E seed 15
+04:04:33 [gentle]   ok: none  at  s sim, RTF 0.87
+04:04:33 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+04:04:33 [gentle]   thermal zone during the run: peak 51.9 C
+04:04:33 [gentle]   cool-down 60 s
+04:05:33 [gentle] run 16/83: F-pen seed 15
+04:10:29 [gentle]   ok: none  at  s sim, RTF 0.875
+04:10:29 [gentle]   CPU performance while busy: median 79 % (5 monitor samples)
+04:10:29 [gentle]   thermal zone during the run: peak 52.9 C
+04:10:29 [gentle] session end after 64 min: 16 run(s) ok this session; 67 of 255 still to do; reason: session time budget used (60 min)
+04:10:29 [turbo] restored: Current AC Power Setting Index: 0x00000002
+52 archives, 11 file(s) written or updated; raw 4525 MB -> 792 MB
+04:10:33 [save] committed 8c32f9f (188 valid runs)
+04:10:38 [save] pushed phase-c 8c32f9f
+04:11:08 [backup] D:\ mirror updated in 38 s (6.1G, 8c32f9f Periodic save (2026-11-27 04:10): baseline_wsl recordings, 188 valid runs so far)
+04:11:08 [campaign] rest 30 min (laptop idle)
+52 archives, 0 file(s) written or updated; raw 4525 MB -> 792 MB
+04:40:39 [save] no new recordings since the last save; backup skipped (D:\ already has them)
+04:41:09 [campaign] session 2/3: 67 runs to do
+04:41:09 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+04:41:10 [gentle] session start: tag=baseline_wsl, 67 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+04:41:10 [gentle] run 1/67: F-straw seed 15
+04:44:30 [gentle]   ok: none  at  s sim, RTF 0.856
+04:44:30 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+04:44:30 [gentle]   thermal zone during the run: peak 51.9 C
+04:44:30 [gentle]   cool-down 60 s
+04:45:30 [gentle] run 2/67: G seed 15
+04:48:25 [gentle]   ok: logged_no_compliance S4 at 89.1 s sim, RTF 0.863
+04:48:25 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+04:48:25 [gentle]   thermal zone during the run: peak 51.9 C
+04:48:25 [gentle]   cool-down 60 s
+04:49:25 [gentle] run 3/67: H seed 15
+04:51:34 [gentle]   ok: target_lost S2 at 45.0 s sim, RTF 0.808
+04:51:34 [gentle]   thermal zone during the run: peak 49.9 C
+04:51:34 [gentle]   cool-down 60 s
+04:52:34 [gentle] run 4/67: I seed 15
+04:56:54 [gentle]   ok: complied S3 at 75.3 s sim, RTF 0.85
+04:56:54 [gentle]   CPU performance while busy: median 79 % (4 monitor samples)
+04:56:54 [gentle]   thermal zone during the run: peak 51.9 C
+04:56:54 [gentle]   cool-down 60 s
+04:57:54 [gentle] run 5/67: J seed 15
+05:02:15 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.846
+05:02:15 [gentle]   CPU performance while busy: median 79 % (4 monitor samples)
+05:02:15 [gentle]   thermal zone during the run: peak 51.9 C
+05:02:15 [gentle]   cool-down 60 s
+05:03:15 [gentle]   no thermal reading since the run yet (the monitor samples about once a minute): waiting for one
+05:03:45 [gentle]   cooled to <= 65 C after 30 s extra
+05:03:45 [gentle] run 6/67: K seed 15
+05:07:56 [gentle]   ok: safety_stop S2 at 63.5 s sim, RTF 0.837
+05:07:56 [gentle]   CPU performance while busy: median 78 % (4 monitor samples)
+05:07:56 [gentle]   thermal zone during the run: peak 51.9 C
+05:07:56 [gentle]   cool-down 60 s
+05:08:07 [note] cluster of nav2_not_ready first attempts: I/15, J/15 and K/15 (3 of 4 consecutive runs, 04:53-05:06), each retry valid; never 2 in a row. /dev/shm holds about 1400 Fast DDS files (fastrtps_port* locks and semaphores, 56 MB), growing through each night (night 1: about 140 to 1350; night 2: about 250 to 1400) because the DDS domain changes per run. Not linked to the failures (night 1 had a similar rate); left alone during the run, for the evidence README.
+05:08:56 [gentle] run 7/67: L seed 15
+05:11:03 [gentle]   ok: admin_override S2 at 44.2 s sim, RTF 0.811
+05:11:03 [gentle]   thermal zone during the run: peak 50.9 C
+05:11:03 [gentle]   cool-down 60 s
+53 archives, 12 file(s) written or updated; raw 4630 MB -> 810 MB
+05:11:10 [save] committed d9241ed (195 valid runs)
+05:11:15 [save] pushed phase-c d9241ed
+05:12:03 [gentle]   no thermal reading since the run yet (the monitor samples about once a minute): waiting for one
+05:12:20 [backup] D:\ mirror updated in 70 s (6.2G, d9241ed Periodic save (2026-11-27 05:11): baseline_wsl recordings, 195 valid runs so far)
+05:12:33 [gentle]   cooled to <= 65 C after 30 s extra
+05:12:33 [gentle] run 8/67: A seed 16
+05:15:14 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.846
+05:15:14 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+05:15:14 [gentle]   thermal zone during the run: peak 49.9 C
+05:15:14 [gentle]   cool-down 60 s
+05:16:14 [gentle] run 9/67: A-V seed 16
+05:18:55 [gentle]   ok: complied S3 at 75.3 s sim, RTF 0.846
+05:18:55 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+05:18:55 [gentle]   thermal zone during the run: peak 51.9 C
+05:18:55 [gentle]   cool-down 60 s
+05:19:55 [gentle] run 10/67: B seed 16
+05:23:13 [gentle]   ok: none  at  s sim, RTF 0.874
+05:23:13 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+05:23:13 [gentle]   thermal zone during the run: peak 52.9 C
+05:23:13 [gentle]   cool-down 60 s
+05:24:13 [gentle]   no thermal reading since the run yet (the monitor samples about once a minute): waiting for one
+05:24:43 [gentle]   cooled to <= 65 C after 30 s extra
+05:24:43 [gentle] run 11/67: B-C7 seed 16
+05:27:41 [gentle]   ok: logged_no_compliance S4 at 89.4 s sim, RTF 0.843
+05:27:41 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+05:27:41 [gentle]   thermal zone during the run: peak 51.9 C
+05:27:41 [gentle]   cool-down 60 s
+05:28:41 [gentle] run 12/67: C seed 16
+05:31:04 [gentle]   ok: target_lost S2 at 55.8 s sim, RTF 0.802
+05:31:04 [gentle]   thermal zone during the run: peak 51.9 C
+05:31:04 [gentle]   cool-down 60 s
+05:32:04 [gentle] run 13/67: D seed 16
+05:35:22 [gentle]   ok: none  at  s sim, RTF 0.873
+05:35:22 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+05:35:22 [gentle]   thermal zone during the run: peak 53.9 C
+05:35:22 [gentle]   cool-down 60 s
+05:36:22 [gentle] run 14/67: E seed 16
+05:39:39 [gentle]   ok: none  at  s sim, RTF 0.879
+05:39:39 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+05:39:39 [gentle]   thermal zone during the run: peak 52.9 C
+05:39:39 [gentle]   cool-down 60 s
+05:40:39 [gentle] run 15/67: F-pen seed 16
+05:43:57 [gentle]   ok: none  at  s sim, RTF 0.874
+05:43:57 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+05:43:57 [gentle]   thermal zone during the run: peak 52.9 C
+05:43:57 [gentle] session end after 63 min: 15 run(s) ok this session; 52 of 255 still to do; reason: session time budget used (60 min)
+05:43:57 [turbo] restored: Current AC Power Setting Index: 0x00000002
+53 archives, 10 file(s) written or updated; raw 4749 MB -> 832 MB
+05:44:03 [save] committed 716ec70 (203 valid runs)
+05:44:08 [save] pushed phase-c 716ec70
+05:44:37 [backup] D:\ mirror updated in 39 s (6.4G, 716ec70 Periodic save (2026-11-27 05:44): baseline_wsl recordings, 203 valid runs so far)
+05:44:37 [campaign] rest 30 min (laptop idle)
+53 archives, 0 file(s) written or updated; raw 4749 MB -> 832 MB
+06:14:10 [save] no new recordings since the last save; backup skipped (D:\ already has them)
+06:14:38 [campaign] session 3/3: 52 runs to do
+06:14:38 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+06:14:39 [gentle] session start: tag=baseline_wsl, 52 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+06:14:39 [gentle] run 1/52: F-straw seed 16
+06:17:59 [gentle]   ok: none  at  s sim, RTF 0.858
+06:17:59 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+06:17:59 [gentle]   thermal zone during the run: peak 52.9 C
+06:17:59 [gentle]   cool-down 60 s
+06:18:59 [gentle] run 2/52: G seed 16
+06:21:54 [gentle]   ok: logged_no_compliance S4 at 88.8 s sim, RTF 0.862
+06:21:54 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+06:21:54 [gentle]   thermal zone during the run: peak 52.9 C
+06:21:54 [gentle]   cool-down 60 s
+06:22:54 [gentle] run 3/52: H seed 16
+06:25:02 [gentle]   ok: target_lost S2 at 45.0 s sim, RTF 0.808
+06:25:02 [gentle]   thermal zone during the run: peak 49.9 C
+06:25:02 [gentle]   cool-down 60 s
+06:26:02 [gentle] run 4/52: I seed 16
+06:30:21 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.852
+06:30:21 [gentle]   CPU performance while busy: median 79 % (4 monitor samples)
+06:30:21 [gentle]   thermal zone during the run: peak 50.9 C
+06:30:21 [gentle]   cool-down 60 s
+06:31:21 [gentle] run 5/52: J seed 16
+06:34:01 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.851
+06:34:01 [gentle]   thermal zone during the run: peak 51.9 C
+06:34:01 [gentle]   cool-down 60 s
+06:35:01 [gentle] run 6/52: K seed 16
+06:37:29 [gentle]   ok: safety_stop S2 at 63.5 s sim, RTF 0.839
+06:37:29 [gentle]   thermal zone during the run: peak 49.9 C
+06:37:29 [gentle]   cool-down 60 s
+06:38:29 [gentle] run 7/52: L seed 16
+06:40:37 [gentle]   ok: admin_override S2 at 44.2 s sim, RTF 0.808
+06:40:37 [gentle]   thermal zone during the run: peak 49.9 C
+06:40:37 [gentle]   cool-down 60 s
+06:41:37 [gentle] run 8/52: A seed 17
+06:44:17 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.851
+06:44:17 [gentle]   thermal zone during the run: peak 50.9 C
+06:44:17 [gentle]   cool-down 60 s
+53 archives, 11 file(s) written or updated; raw 4855 MB -> 850 MB
+06:44:24 [save] committed cb38b70 (211 valid runs)
+06:44:30 [save] pushed phase-c cb38b70
+06:45:37 [backup] D:\ mirror updated in 73 s (6.5G, cb38b70 Periodic save (2026-11-27 06:44): baseline_wsl recordings, 211 valid runs so far)
+06:45:39 [gentle]   waited 22 s for a save/backup to finish before the run
+06:45:39 [gentle] run 9/52: A-V seed 17
+06:48:20 [gentle]   ok: complied S3 at 75.5 s sim, RTF 0.852
+06:48:20 [gentle]   thermal zone during the run: peak 50.9 C
+06:48:20 [gentle]   cool-down 60 s
+06:49:20 [gentle] run 10/52: B seed 17
+06:52:38 [gentle]   ok: none  at  s sim, RTF 0.873
+06:52:38 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+06:52:38 [gentle]   thermal zone during the run: peak 51.9 C
+06:52:38 [gentle]   cool-down 60 s
+06:53:38 [gentle] run 11/52: B-C7 seed 17
+06:56:37 [gentle]   ok: logged_no_compliance S4 at 91.5 s sim, RTF 0.859
+06:56:37 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+06:56:37 [gentle]   thermal zone during the run: peak 52.9 C
+06:56:37 [gentle]   cool-down 60 s
+06:57:37 [gentle]   no thermal reading since the run yet (the monitor samples about once a minute): waiting for one
+06:58:07 [gentle]   cooled to <= 65 C after 30 s extra
+06:58:07 [gentle] run 12/52: C seed 17
+07:00:24 [gentle]   ok: target_lost S2 at 52.4 s sim, RTF 0.819
+07:00:24 [gentle]   thermal zone during the run: peak 50.9 C
+07:00:24 [gentle]   cool-down 60 s
+07:01:24 [gentle] run 13/52: D seed 17
+07:04:42 [gentle]   ok: none  at  s sim, RTF 0.875
+07:04:42 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+07:04:42 [gentle]   thermal zone during the run: peak 50.9 C
+07:04:42 [gentle]   cool-down 60 s
+07:05:42 [gentle] run 14/52: E seed 17
+07:09:00 [gentle]   ok: none  at  s sim, RTF 0.873
+07:09:00 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+07:09:00 [gentle]   thermal zone during the run: peak 51.9 C
+07:09:00 [gentle]   cool-down 60 s
+07:10:00 [gentle] run 15/52: F-pen seed 17
+07:13:18 [gentle]   ok: none  at  s sim, RTF 0.874
+07:13:18 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+07:13:18 [gentle]   thermal zone during the run: peak 51.9 C
+07:13:18 [gentle]   cool-down 60 s
+07:14:18 [gentle] run 16/52: F-straw seed 17
+07:17:35 [gentle]   ok: none  at  s sim, RTF 0.878
+07:17:35 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+07:17:35 [gentle]   thermal zone during the run: peak 52.9 C
+07:17:35 [gentle] session end after 63 min: 16 run(s) ok this session; 36 of 255 still to do; reason: session time budget used (60 min)
+07:17:35 [turbo] restored: Current AC Power Setting Index: 0x00000002
+53 archives, 10 file(s) written or updated; raw 4978 MB -> 872 MB
+07:17:38 [save] committed ef0b00b (219 valid runs)
+07:17:43 [save] pushed phase-c ef0b00b
+07:18:15 [backup] D:\ mirror updated in 39 s (6.7G, ef0b00b Periodic save (2026-11-27 07:17): baseline_wsl recordings, 219 valid runs so far)
+07:18:15 [campaign] daily session limit reached (3)
+07:18:15 [campaign] end: 36 runs still to do
+07:18:19 [autosave] process 172474 ended: archiving recordings, committing, pushing, backing up
+07:18:23 [save] process 172474 ended; periodic saves stop (after_campaign.sh makes the final save)
+53 archives, 0 file(s) written or updated; raw 4978 MB -> 872 MB
+07:18:39 [autosave] committed d21f4a0
+07:18:41 [autosave] pushed phase-c d21f4a0
+07:19:17 [backup] D:\ mirror updated in 38 s (6.7G, d21f4a0 Auto-save after campaign (2026-11-27 07:18:39): recordings archived, live log copied)
+07:19:55 [backup] D:\ mirror updated in 38 s (6.7G, d21f4a0 Auto-save after campaign (2026-11-27 07:18:39): recordings archived, live log copied)
+07:19:55 [autosave] D:\ backup done
+07:28:04 [backup] D:\ mirror updated in 42 s (6.7G, 7e1a97d Baseline re-run, second night: 219/255 runs, all 219 match the original baseline; false-throttling fix)
+08:42:21 [backup] D:\ mirror updated in 42 s (6.7G, 7e1a97d Baseline re-run, second night: 219/255 runs, all 219 match the original baseline; false-throttling fix)
+20:37:34 [settle] windows cpu 4 %, thermal 45.9 C (calm checks in a row: 1)
+20:37:55 [settle] windows cpu 8 %, thermal 46.9 C (calm checks in a row: 2)
+20:38:17 [settle] windows cpu 8 %, thermal 46.9 C (calm checks in a row: 3)
+20:38:17 [settle] settled after 50 s
+20:38:44 [campaign] start: up to 4 sessions, 30 min rest between them; args: --scenarios all --seed-list 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 --order seed --cooldown-s 60 --tag baseline_wsl --out evaluation/data/baseline_wsl --manifest evaluation/data/baseline_wsl/manifest.csv
+20:38:44 [campaign] session 1/4: 36 runs to do
+20:38:44 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+20:38:45 [campaign] started as pid 1814; safety net armed on it
+20:38:45 [save] every 30 min while process 1814 runs: archive 'baseline_wsl', commit, push, back up (in gaps between runs)
+20:38:45 [gentle] session start: tag=baseline_wsl, 36 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+20:38:45 [gentle] run 1/36: G seed 17
+20:39:22 [note] night 3 started (the user said "Continue" after the reboot, in reply to running the last 36 runs tonight): campaign pid 1814, up to 4 sessions (about 3 needed), 30-min saves, 10-min watchdog; screen timeout 5 min; NitroSense was back on default after the reboot, the app was opened for the user to switch it
+20:43:01 [note] NitroSense switched to performance mode (CurrentOperationMode 4) by the user during run 1 (G seed 17); the thermal zone read 64.9 C at 20:42 before the switch took effect; turbo still off
+20:43:31 [gentle]   ok: logged_no_compliance S4 at 89.1 s sim, RTF 0.834
+20:43:31 [gentle]   CPU performance while busy: median 79 % (5 monitor samples)
+20:43:31 [gentle]   thermal zone during the run: peak 64.9 C
+20:43:31 [gentle]   cool-down 60 s
+20:44:32 [gentle] run 2/36: H seed 17
+20:46:40 [gentle]   ok: target_lost S2 at 45.0 s sim, RTF 0.808
+20:46:40 [gentle]   thermal zone during the run: peak 53.9 C
+20:46:40 [gentle]   cool-down 60 s
+20:47:40 [gentle] run 3/36: I seed 17
+20:50:20 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.853
+20:50:20 [gentle]   thermal zone during the run: peak 52.9 C
+20:50:20 [gentle]   cool-down 60 s
+20:51:20 [gentle] run 4/36: J seed 17
+20:55:43 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.838
+20:55:43 [gentle]   CPU performance while busy: median 79 % (4 monitor samples)
+20:55:43 [gentle]   thermal zone during the run: peak 53.9 C
+20:55:43 [gentle]   cool-down 60 s
+20:56:43 [gentle] run 5/36: K seed 17
+20:59:11 [gentle]   ok: safety_stop S2 at 63.5 s sim, RTF 0.842
+20:59:11 [gentle]   thermal zone during the run: peak 51.9 C
+20:59:11 [gentle]   cool-down 60 s
+21:00:11 [gentle] run 6/36: L seed 17
+21:02:18 [gentle]   ok: admin_override S2 at 44.2 s sim, RTF 0.813
+21:02:18 [gentle]   thermal zone during the run: peak 50.9 C
+21:02:18 [gentle]   cool-down 60 s
+21:03:18 [gentle] run 7/36: A seed 18
+21:06:19 [note] watchdog: 3 nav2_not_ready in the first 9 attempts tonight (G/17, J/17, A/18 attempt 1), each retried; never two in a row so far. /dev/shm started empty after the reboot (0 files at 20:36, 328 now), so tonight's retries are not explained by accumulated Fast DDS shared-memory files
+21:07:37 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.848
+21:07:37 [gentle]   CPU performance while busy: median 78 % (4 monitor samples)
+21:07:37 [gentle]   thermal zone during the run: peak 52.9 C
+21:07:37 [gentle]   cool-down 60 s
+21:08:37 [gentle] run 8/36: A-V seed 18
+21:11:16 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.857
+21:11:16 [gentle]   thermal zone during the run: peak 52.9 C
+21:11:16 [gentle]   cool-down 60 s
+53 archives, 13 file(s) written or updated; raw 5089 MB -> 891 MB
+21:11:26 [save] committed 186f7a3 (227 valid runs)
+21:11:31 [save] pushed phase-c 186f7a3
+21:12:41 [backup] D:\ mirror updated in 75 s (6.9G, 186f7a3 Periodic save (2026-11-27 21:11): baseline_wsl recordings, 227 valid runs so far)
+21:12:42 [gentle]   waited 26 s for a save/backup to finish before the run
+21:12:42 [gentle] run 9/36: B seed 18
+21:15:59 [gentle]   ok: none  at  s sim, RTF 0.877
+21:15:59 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+21:15:59 [gentle]   thermal zone during the run: peak 52.9 C
+21:15:59 [gentle]   cool-down 60 s
+21:16:59 [gentle] run 10/36: B-C7 seed 18
+21:19:55 [gentle]   ok: logged_no_compliance S4 at 90.0 s sim, RTF 0.863
+21:19:55 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+21:19:55 [gentle]   thermal zone during the run: peak 52.9 C
+21:19:55 [gentle]   cool-down 60 s
+21:20:55 [gentle] run 11/36: C seed 18
+21:23:10 [gentle]   ok: target_lost S2 at 51.8 s sim, RTF 0.834
+21:23:10 [gentle]   thermal zone during the run: peak 52.9 C
+21:23:10 [gentle]   cool-down 60 s
+21:24:10 [gentle] run 12/36: D seed 18
+21:27:28 [gentle]   ok: none  at  s sim, RTF 0.875
+21:27:28 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+21:27:28 [gentle]   thermal zone during the run: peak 52.9 C
+21:27:28 [gentle]   cool-down 60 s
+21:28:28 [gentle] run 13/36: E seed 18
+21:31:46 [gentle]   ok: none  at  s sim, RTF 0.869
+21:31:46 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+21:31:46 [gentle]   thermal zone during the run: peak 54.9 C
+21:31:46 [gentle]   cool-down 60 s
+21:32:46 [gentle]   no thermal reading since the run yet (the monitor samples about once a minute): waiting for one
+21:33:16 [gentle]   cooled to <= 65 C after 30 s extra
+21:33:16 [gentle] run 14/36: F-pen seed 18
+21:36:37 [gentle]   ok: none  at  s sim, RTF 0.852
+21:36:37 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+21:36:37 [gentle]   thermal zone during the run: peak 53.9 C
+21:36:37 [gentle]   cool-down 60 s
+21:37:37 [gentle] run 15/36: F-straw seed 18
+21:40:55 [gentle]   ok: none  at  s sim, RTF 0.873
+21:40:55 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+21:40:55 [gentle]   thermal zone during the run: peak 52.9 C
+21:40:55 [gentle] session end after 62 min: 15 run(s) ok this session; 21 of 255 still to do; reason: session time budget used (60 min)
+21:40:55 [turbo] restored: Current AC Power Setting Index: 0x00000002
+53 archives, 9 file(s) written or updated; raw 5202 MB -> 911 MB
+21:41:35 [save] committed a370644 (234 valid runs)
+21:41:37 [backup] D:\ mirror updated in 41 s (7.0G, 186f7a3 Periodic save (2026-11-27 21:11): baseline_wsl recordings, 227 valid runs so far)
+21:41:37 [campaign] rest 30 min (laptop idle)
+21:41:39 [save] pushed phase-c a370644
+21:48:20 [backup] D:\ mirror updated in 44 s (7.0G, a370644 Periodic save (2026-11-27 21:41): baseline_wsl recordings, 234 valid runs so far)
+21:48:30 [note] watchdog: D:\ mirror was one commit behind. run_campaign's session-end backup started at 21:40:56; the periodic save committed a370644 at 21:41:35 while it ran, and that commit's hook backup found the lock taken and skipped (old behaviour: 'a backup is already running', exit 0). Fixed: backup_to_d.sh now waits (up to 15 min) for the running backup and then mirrors again (tested both paths on a scratch copy); catch-up backup at 21:48 brought D:\ to a370644. GitHub had a370644 all along. Commit the script change with the night files.
+22:11:37 [campaign] session 2/4: 21 runs to do
+22:11:37 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+22:11:38 [gentle] session start: tag=baseline_wsl, 21 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+22:11:38 [gentle] run 1/21: G seed 18
+22:14:37 [gentle]   ok: logged_no_compliance S4 at 89.1 s sim, RTF 0.845
+22:14:37 [gentle]   thermal zone during the run: peak 50.9 C
+22:14:37 [gentle]   cool-down 60 s
+53 archives, 3 file(s) written or updated; raw 5218 MB -> 914 MB
+22:14:42 [save] committed 180d24a (235 valid runs)
+22:14:45 [save] pushed phase-c 180d24a
+22:15:58 [backup] D:\ mirror updated in 76 s (7.0G, 180d24a Periodic save (2026-11-27 22:14): baseline_wsl recordings, 235 valid runs so far)
+22:15:59 [gentle]   waited 22 s for a save/backup to finish before the run
+22:15:59 [gentle] run 2/21: H seed 18
+22:18:08 [gentle]   ok: target_lost S2 at 45.0 s sim, RTF 0.803
+22:18:08 [gentle]   thermal zone during the run: peak 42.9 C
+22:18:08 [gentle]   cool-down 60 s
+22:19:08 [gentle] run 3/21: I seed 18
+22:21:47 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.85
+22:21:47 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+22:21:47 [gentle]   thermal zone during the run: peak 51.9 C
+22:21:47 [gentle]   cool-down 60 s
+22:22:48 [gentle] run 4/21: J seed 18
+22:25:27 [gentle]   ok: complied S3 at 74.7 s sim, RTF 0.855
+22:25:27 [gentle]   thermal zone during the run: peak 51.9 C
+22:25:27 [gentle]   cool-down 60 s
+22:26:28 [gentle] run 5/21: K seed 18
+22:28:55 [gentle]   ok: safety_stop S2 at 63.5 s sim, RTF 0.838
+22:28:55 [gentle]   thermal zone during the run: peak 49.9 C
+22:28:55 [gentle]   cool-down 60 s
+22:29:55 [gentle] run 6/21: L seed 18
+22:32:02 [gentle]   ok: admin_override S2 at 44.2 s sim, RTF 0.811
+22:32:02 [gentle]   thermal zone during the run: peak 48.9 C
+22:32:02 [gentle]   cool-down 60 s
+22:33:02 [gentle] run 7/21: A seed 19
+22:35:42 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.853
+22:35:42 [gentle]   thermal zone during the run: peak 50.9 C
+22:35:42 [gentle]   cool-down 60 s
+22:36:42 [gentle] run 8/21: A-V seed 19
+22:39:22 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.849
+22:39:22 [gentle]   CPU performance while busy: median 78 % (3 monitor samples)
+22:39:22 [gentle]   thermal zone during the run: peak 52.9 C
+22:39:22 [gentle]   cool-down 60 s
+22:40:22 [gentle] run 9/21: B seed 19
+22:43:39 [gentle]   ok: none  at  s sim, RTF 0.876
+22:43:39 [gentle]   CPU performance while busy: median 79 % (2 monitor samples)
+22:43:39 [gentle]   thermal zone during the run: peak 53.9 C
+22:43:39 [gentle]   cool-down 60 s
+22:44:39 [gentle] run 10/21: B-C7 seed 19
+22:47:34 [gentle]   ok: logged_no_compliance S4 at 89.1 s sim, RTF 0.863
+22:47:34 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+22:47:34 [gentle]   thermal zone during the run: peak 52.9 C
+22:47:34 [gentle]   cool-down 60 s
+53 archives, 11 file(s) written or updated; raw 5337 MB -> 935 MB
+22:47:40 [save] committed 20d13d3 (244 valid runs)
+22:47:46 [save] pushed phase-c 20d13d3
+22:48:56 [backup] D:\ mirror updated in 76 s (7.2G, 20d13d3 Periodic save (2026-11-27 22:47): baseline_wsl recordings, 244 valid runs so far)
+22:48:58 [gentle]   waited 24 s for a save/backup to finish before the run
+22:48:58 [gentle] run 11/21: C seed 19
+22:51:14 [gentle]   ok: target_lost S2 at 52.6 s sim, RTF 0.825
+22:51:14 [gentle]   CPU performance while busy: median 78 % (2 monitor samples)
+22:51:14 [gentle]   thermal zone during the run: peak 50.9 C
+22:51:14 [gentle]   cool-down 60 s
+22:52:14 [gentle] run 12/21: D seed 19
+22:55:33 [gentle]   ok: none  at  s sim, RTF 0.867
+22:55:33 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+22:55:33 [gentle]   thermal zone during the run: peak 51.9 C
+22:55:33 [gentle]   cool-down 60 s
+22:56:33 [gentle] run 13/21: E seed 19
+22:59:56 [gentle]   NOT ok: nav2_not_ready (1 in a row)
+22:59:56 [gentle]   thermal zone during the run: peak 47.9 C
+22:59:56 [gentle]   cool-down 60 s
+23:00:56 [gentle] run 14/21: F-pen seed 19
+23:04:14 [gentle]   ok: none  at  s sim, RTF 0.874
+23:04:14 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+23:04:14 [gentle]   thermal zone during the run: peak 52.9 C
+23:04:14 [gentle]   cool-down 60 s
+23:05:00 [note] watchdog: E/19 failed BOTH run_batch attempts with nav2_not_ready (22:56-22:59; the first run of the baseline re-run to use up its 2 attempts; nights 1-2 never had two failed attempts in a row). gentle_batch handled it as designed: 'NOT ok (1 in a row)', moved on, and F-pen/19 was ok at 23:04, resetting the count. E/19 stays pending (dry run: 8 to do, E/19 first), so the next session retries it. No action needed. Tonight so far: 5 nav2_not_ready in 33 attempts
+23:05:14 [gentle] run 15/21: F-straw seed 19
+23:08:31 [gentle]   ok: none  at  s sim, RTF 0.879
+23:08:31 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+23:08:31 [gentle]   thermal zone during the run: peak 52.9 C
+23:08:31 [gentle]   cool-down 60 s
+23:09:31 [gentle] run 16/21: G seed 19
+23:12:26 [gentle]   ok: logged_no_compliance S4 at 88.9 s sim, RTF 0.859
+23:12:26 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+23:12:26 [gentle]   thermal zone during the run: peak 52.9 C
+23:12:26 [gentle] session end after 61 min: 15 run(s) ok this session; 6 of 255 still to do; reason: session time budget used (60 min)
+23:12:26 [turbo] restored: Current AC Power Setting Index: 0x00000002
+23:13:07 [backup] D:\ mirror updated in 41 s (7.3G, 20d13d3 Periodic save (2026-11-27 22:47): baseline_wsl recordings, 244 valid runs so far)
+23:13:07 [campaign] rest 30 min (laptop idle)
+53 archives, 9 file(s) written or updated; raw 5423 MB -> 950 MB
+23:17:49 [save] committed d7b8320 (249 valid runs)
+23:17:53 [save] pushed phase-c d7b8320
+23:18:30 [backup] D:\ mirror updated in 41 s (7.3G, d7b8320 Periodic save (2026-11-27 23:17): baseline_wsl recordings, 249 valid runs so far)
+23:43:08 [campaign] session 3/4: 6 runs to do
+23:43:08 [turbo] boost disabled for the session: Current AC Power Setting Index: 0x00000000
+23:43:09 [gentle] session start: tag=baseline_wsl, 6 of 255 runs to do; budget 60 min, cool-down 60 s, stop if CPU performance < 70 % while busy
+23:43:09 [gentle] run 1/6: E seed 19
+23:46:30 [gentle]   ok: none  at  s sim, RTF 0.856
+23:46:30 [gentle]   CPU performance while busy: median 79 % (3 monitor samples)
+23:46:30 [gentle]   thermal zone during the run: peak 53.9 C
+23:46:30 [gentle]   cool-down 60 s
+23:47:30 [gentle] run 2/6: H seed 19
+23:49:38 [gentle]   ok: target_lost S2 at 45.0 s sim, RTF 0.812
+23:49:38 [gentle]   thermal zone during the run: peak 42.9 C
+23:49:38 [gentle]   cool-down 60 s
+53 archives, 5 file(s) written or updated; raw 5449 MB -> 954 MB
+23:49:41 [save] committed b65ef92 (251 valid runs)
+23:49:45 [save] pushed phase-c b65ef92
+23:50:59 [backup] D:\ mirror updated in 78 s (7.3G, b65ef92 Periodic save (2026-11-27 23:49): baseline_wsl recordings, 251 valid runs so far)
+23:51:00 [gentle]   waited 22 s for a save/backup to finish before the run
+23:51:00 [gentle] run 3/6: I seed 19
+23:53:40 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.85
+23:53:40 [gentle]   thermal zone during the run: peak 51.9 C
+23:53:40 [gentle]   cool-down 60 s
+23:54:40 [gentle] run 4/6: J seed 19
+23:57:21 [gentle]   ok: complied S3 at 74.9 s sim, RTF 0.846
+23:57:21 [gentle]   thermal zone during the run: peak 50.9 C
+23:57:21 [gentle]   cool-down 60 s
+23:58:21 [gentle] run 5/6: K seed 19
+00:00:49 [gentle]   ok: safety_stop S2 at 63.7 s sim, RTF 0.841
+00:00:49 [gentle]   CPU performance while busy: median 78 % (2 monitor samples)
+00:00:49 [gentle]   thermal zone during the run: peak 51.9 C
+00:00:49 [gentle]   cool-down 60 s
+00:01:49 [gentle] run 6/6: L seed 19
+00:03:56 [gentle]   ok: admin_override S2 at 44.2 s sim, RTF 0.814
+00:03:56 [gentle]   thermal zone during the run: peak 41.9 C
+00:03:56 [gentle] session end after 21 min: 6 run(s) ok this session; 0 of 255 still to do; reason: all planned runs done
+00:03:56 [turbo] restored: Current AC Power Setting Index: 0x00000002
+00:04:40 [backup] D:\ mirror updated in 43 s (7.4G, b65ef92 Periodic save (2026-11-27 23:49): baseline_wsl recordings, 251 valid runs so far)
+00:04:40 [campaign] all planned runs done
+00:04:40 [campaign] end: 0 runs still to do
+00:04:45 [save] process 1814 ended; periodic saves stop (after_campaign.sh makes the final save)
+00:04:45 [autosave] process 1814 ended: archiving recordings, committing, pushing, backing up
+53 archives, 6 file(s) written or updated; raw 5498 MB -> 963 MB
