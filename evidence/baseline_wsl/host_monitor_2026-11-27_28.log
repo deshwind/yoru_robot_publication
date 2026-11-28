@@ -1,0 +1,135 @@
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files | thermal_zone_C | passive_limit%
+20:38:51 | 77 | 22 | vmmemwsl=1278 system=90 nitrosense=79 | 2.36 | 8430 | 145 | 55.9 | 100
+20:39:57 | 74 | 7 | nitrosense=51 memory compression=11 code=9 | 8.01 | 9581 | 32 | 48.9 | 100
+20:41:04 | 79 | 54 | vmmemwsl=785 nitrosense=84 msrdc=17 | 9.96 | 7161 | 209 | 61.9 | 100
+20:42:10 | 79 | 57 | vmmemwsl=784 nitrosense=72 msrdc=19 | 10.03 | 7192 | 209 | 64.9 | 100
+20:43:16 | 71 | 3 | vmmemwsl=12 cefsharp.browsersubprocess=5 cefsharp.browsersubprocess=4 | 4.23 | 9612 | 29 | 43.9 | 100
+20:44:22 | 70 | 2 | vmmemwsl=11 cefsharp.browsersubprocess=6 svchost=4 | 1.58 | 9656 | 24 | 39.9 | 100
+20:45:29 | 79 | 49 | vmmemwsl=914 msrdc=19 cefsharp.browsersubprocess=15 | 10.25 | 7191 | 209 | 53.9 | 100
+20:46:34 | 70 | 2 | cefsharp.browsersubprocess=8 overwolf=5 servicehost=4 | 4.22 | 9598 | 29 | 38.9 | 100
+20:47:40 | 75 | 7 | svchost=54 cefsharp.browsersubprocess=8 vmmemwsl=3 | 1.72 | 9651 | 24 | 37.9 | 100
+20:48:47 | 79 | 51 | vmmemwsl=935 msrdc=15 cefsharp.browsersubprocess=11 | 7.17 | 7252 | 209 | 52.9 | 100
+20:49:53 | 72 | 2 | system=8 vmmemwsl=7 svchost=5 | 4.86 | 9637 | 29 | 39.9 | 100
+20:50:58 | 74 | 2 | vmmemwsl=5 system=5 svchost=2 | 1.93 | 9677 | 24 | 37.9 | 100
+20:52:05 | 79 | 55 | vmmemwsl=174 msmpeng=101 system=28 | 10.30 | 9584 | 88 | 43.9 | 100
+20:53:11 | 78 | 40 | vmmemwsl=1064 msmpeng=99 system=75 | 7.60 | 7368 | 275 | 47.9 | 100
+20:54:17 | 79 | 53 | vmmemwsl=881 system=19 msrdc=13 | 14.02 | 7230 | 270 | 53.9 | 100
+20:55:23 | 72 | 2 | system=6 nvcontainer=5 code=2 | 11.72 | 9629 | 90 | 38.9 | 100
+20:56:29 | 73 | 2 | vmmemwsl=6 system=5 code=4 | 3.84 | 9633 | 85 | 38.9 | 100
+20:57:35 | 79 | 46 | vmmemwsl=817 msrdc=16 audiodg=9 | 10.50 | 7152 | 270 | 51.9 | 100
+20:58:41 | 73 | 2 | vmmemwsl=5 system=3 razer synapse 3=1 | 6.92 | 9556 | 95 | 39.9 | 100
+20:59:47 | 73 | 2 | vmmemwsl=6 system=6 svchost=4 | 2.64 | 9666 | 85 | 38.9 | 100
+21:00:53 | 79 | 46 | vmmemwsl=810 system=16 msrdc=16 | 7.97 | 7237 | 270 | 50.9 | 100
+21:01:59 | 74 | 2 | vmmemwsl=7 system=6 msmpeng=1 | 5.62 | 9623 | 144 | 38.9 | 100
+21:03:05 | 73 | 2 | system=9 razer synapse service process=3 razer synapse 3=3 | 2.06 | 9659 | 141 | 36.9 | 100
+21:04:11 | 73 | 3 | vmmemwsl=10 system=9 overwolf=2 | 5.92 | 9568 | 151 | 38.9 | 100
+21:05:17 | 78 | 41 | vmmemwsl=806 system=16 msrdc=16 | 11.87 | 7243 | 328 | 48.9 | 100
+21:06:24 | 79 | 48 | vmmemwsl=841 msrdc=20 system=12 | 10.23 | 7160 | 328 | 52.9 | 100
+21:07:29 | 74 | 3 | system=12 vmmemwsl=4 overwolf=3 | 4.00 | 9586 | 200 | 38.9 | 100
+21:08:35 | 73 | 2 | system=16 vmmemwsl=4 overwolf=3 | 1.48 | 9651 | 197 | 37.9 | 100
+21:09:42 | 79 | 52 | vmmemwsl=893 msrdc=17 system=9 | 7.32 | 7183 | 382 | 52.9 | 100
+21:10:48 | 73 | 2 | vmmemwsl=7 system=7 razer synapse service process=3 | 4.97 | 9545 | 207 | 39.9 | 100
+21:11:53 | 77 | 9 | dllhost=65 vmmemwsl=46 system=9 | 2.08 | 9646 | 197 | 37.9 | 100
+21:13:00 | 79 | 42 | vmmemwsl=715 msrdc=19 system=12 | 6.35 | 7176 | 377 | 49.9 | 100
+21:14:06 | 79 | 49 | vmmemwsl=832 msrdc=23 system=19 | 7.03 | 7131 | 382 | 52.9 | 100
+21:15:12 | 74 | 3 | memory compression=6 system=5 vmmemwsl=3 | 8.06 | 9587 | 202 | 42.9 | 100
+21:16:18 | 72 | 3 | system=19 vmmemwsl=8 overwolf=3 | 3.19 | 9594 | 197 | 37.9 | 100
+21:17:24 | 79 | 58 | vmmemwsl=838 msrdc=21 system=20 | 6.37 | 7113 | 382 | 50.9 | 100
+21:18:30 | 79 | 48 | vmmemwsl=794 msrdc=15 system=15 | 11.54 | 7164 | 382 | 52.9 | 100
+21:19:36 | 73 | 2 | system=12 overwolf=2 code=2 | 5.62 | 9572 | 202 | 38.9 | 100
+21:20:42 | 73 | 2 | system=15 vmmemwsl=4 overwolf=4 | 1.93 | 9648 | 197 | 37.9 | 100
+21:21:48 | 79 | 46 | vmmemwsl=845 msrdc=23 system=15 | 6.07 | 7288 | 382 | 52.9 | 100
+21:22:54 | 74 | 3 | vmmemwsl=8 system=8 overwolf=4 | 3.84 | 9611 | 254 | 38.9 | 100
+21:24:00 | 72 | 2 | system=8 overwolf=6 vmmemwsl=5 | 1.45 | 9648 | 251 | 36.9 | 100
+21:25:06 | 79 | 46 | vmmemwsl=856 msrdc=18 system=9 | 10.98 | 7289 | 436 | 50.9 | 100
+21:26:13 | 79 | 60 | vmmemwsl=894 msrdc=21 system=13 | 7.95 | 7212 | 436 | 52.9 | 100
+21:27:19 | 73 | 2 | system=11 vmmemwsl=9 overwolf=5 | 3.99 | 9586 | 256 | 37.9 | 100
+21:28:25 | 73 | 2 | system=9 vmmemwsl=5 overwolf=4 | 1.35 | 9622 | 251 | 36.9 | 100
+21:29:31 | 79 | 48 | vmmemwsl=844 msrdc=15 system=12 | 11.97 | 7144 | 436 | 52.9 | 100
+21:30:37 | 79 | 48 | vmmemwsl=867 system=16 msrdc=15 | 12.42 | 7163 | 436 | 54.9 | 100
+21:31:43 | 72 | 2 | system=9 vmmemwsl=5 overwolf=3 | 5.19 | 9564 | 252 | 37.9 | 100
+21:32:49 | 73 | 2 | system=13 vmmemwsl=9 overwolf=3 | 2.00 | 9649 | 252 | 36.9 | 100
+21:33:55 | 79 | 46 | vmmemwsl=775 system=20 msrdc=11 | 10.13 | 7135 | 437 | 49.9 | 100
+21:35:01 | 79 | 47 | vmmemwsl=809 system=16 msrdc=14 | 9.95 | 7124 | 437 | 53.9 | 100
+21:36:07 | 75 | 5 | vmmemwsl=19 system=16 code=9 | 5.80 | 9540 | 258 | 40.9 | 100
+21:37:13 | 73 | 2 | msedgewebview2=32 msedgewebview2=17 system=7 | 2.04 | 9624 | 253 | 38.9 | 100
+21:38:19 | 79 | 47 | vmmemwsl=818 msrdc=17 system=16 | 10.36 | 7142 | 438 | 51.9 | 100
+21:39:26 | 79 | 47 | vmmemwsl=819 system=27 msrdc=19 | 9.83 | 7185 | 438 | 52.9 | 100
+21:40:32 | 73 | 2 | system=10 vmmemwsl=7 svchost=3 | 4.62 | 9614 | 258 | 38.9 | 100
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files | thermal_zone_C | passive_limit%
+22:11:44 | 78 | 21 | vmmemwsl=1203 system=10 overwolf=8 | 6.01 | 8310 | 397 | 40.9 | 100
+22:12:51 | 79 | 52 | vmmemwsl=863 system=18 msrdc=12 | 11.14 | 7059 | 437 | 50.9 | 100
+22:13:57 | 74 | 3 | memory compression=19 system=9 vmmemwsl=6 | 11.97 | 9598 | 258 | 39.9 | 100
+22:15:02 | 77 | 7 | dllhost=55 vmmemwsl=30 system=15 | 4.49 | 9632 | 253 | 38.9 | 100
+22:16:09 | 78 | 30 | vmmemwsl=771 system=94 code=44 | 4.34 | 7319 | 398 | 42.9 | 100
+22:17:15 | 75 | 7 | memory compression=93 vmmemwsl=43 code=36 | 9.20 | 9550 | 258 | 42.9 | 100
+22:18:21 | 73 | 2 | system=10 vmmemwsl=4 overwolf=3 | 3.18 | 9611 | 253 | 37.9 | 100
+22:19:27 | 78 | 40 | vmmemwsl=756 msrdc=18 system=16 | 8.00 | 7226 | 438 | 47.9 | 100
+22:20:33 | 79 | 46 | vmmemwsl=805 system=18 msrdc=14 | 8.69 | 7135 | 438 | 51.9 | 100
+22:21:39 | 73 | 2 | svchost=12 system=8 overwolf=5 | 3.80 | 9597 | 258 | 37.9 | 100
+22:22:45 | 72 | 2 | vmmemwsl=5 system=4 overwolf=4 | 1.34 | 9636 | 253 | 36.9 | 100
+22:23:51 | 79 | 52 | vmmemwsl=929 msrdc=15 audiodg=10 | 7.17 | 7182 | 438 | 51.9 | 100
+22:24:57 | 74 | 3 | system=8 vmmemwsl=5 svchost=4 | 6.69 | 9528 | 264 | 39.9 | 100
+22:26:03 | 73 | 2 | system=9 vmmemwsl=4 overwolf=3 | 2.40 | 9605 | 254 | 36.9 | 100
+22:27:09 | 79 | 47 | vmmemwsl=843 system=19 msrdc=11 | 8.23 | 7157 | 439 | 49.9 | 100
+22:28:15 | 75 | 3 | memory compression=22 system=13 vmmemwsl=5 | 8.07 | 9563 | 259 | 40.9 | 100
+22:29:21 | 73 | 2 | system=8 overwolf=3 svchost=2 | 2.80 | 9643 | 254 | 37.9 | 100
+22:30:27 | 79 | 46 | vmmemwsl=799 msrdc=19 system=14 | 8.76 | 7198 | 439 | 48.9 | 100
+22:31:33 | 74 | 3 | system=9 vmmemwsl=6 overwolf=3 | 6.94 | 9596 | 260 | 38.9 | 100
+22:32:39 | 73 | 2 | system=7 vmmemwsl=4 overwolf=3 | 2.36 | 9638 | 255 | 36.9 | 100
+22:33:45 | 79 | 48 | vmmemwsl=790 system=19 msrdc=17 | 11.27 | 7189 | 440 | 50.9 | 100
+22:34:51 | 76 | 11 | vmmemwsl=54 memory compression=18 code=9 | 11.54 | 9583 | 260 | 42.9 | 100
+22:35:57 | 72 | 2 | system=5 vmmemwsl=3 overwolf=2 | 3.98 | 9643 | 255 | 38.9 | 100
+22:37:03 | 78 | 41 | vmmemwsl=988 msrdc=17 audiodg=7 | 5.98 | 7211 | 440 | 48.9 | 100
+22:38:10 | 79 | 48 | vmmemwsl=792 msrdc=22 system=19 | 8.31 | 7081 | 440 | 52.9 | 100
+22:39:15 | 74 | 3 | system=11 vmmemwsl=7 svchost=2 | 4.42 | 9594 | 260 | 37.9 | 100
+22:40:21 | 72 | 2 | system=15 vmmemwsl=5 overwolf=3 | 1.66 | 9636 | 255 | 36.9 | 100
+22:41:28 | 79 | 46 | vmmemwsl=788 system=21 msrdc=18 | 9.05 | 7155 | 440 | 51.9 | 100
+22:42:34 | 79 | 47 | vmmemwsl=834 msrdc=19 svchost=13 | 10.12 | 7198 | 440 | 53.9 | 100
+22:43:40 | 75 | 5 | vmmemwsl=36 code=18 code=10 | 3.87 | 9578 | 314 | 37.9 | 100
+22:44:46 | 79 | 66 | vmmemwsl=457 system=38 svchost=5 | 1.79 | 7739 | 459 | 45.9 | 100
+22:45:52 | 79 | 51 | vmmemwsl=907 msrdc=21 system=19 | 6.57 | 7103 | 499 | 52.9 | 100
+22:46:58 | 73 | 2 | system=8 vmmemwsl=5 memory compression=4 | 8.34 | 9431 | 334 | 40.9 | 100
+22:48:04 | 77 | 7 | dllhost=59 vmmemwsl=36 system=14 | 3.33 | 9613 | 314 | 37.9 | 100
+22:49:10 | 79 | 42 | vmmemwsl=1043 code=40 system=22 | 5.92 | 7221 | 494 | 49.9 | 100
+22:50:17 | 78 | 42 | vmmemwsl=961 msrdc=23 system=22 | 9.50 | 9529 | 360 | 50.9 | 100
+22:51:23 | 74 | 3 | system=8 vmmemwsl=7 overwolf=5 | 3.28 | 9627 | 355 | 37.9 | 100
+22:52:29 | 79 | 72 | vmmemwsl=802 msrdc=21 system=17 | 4.87 | 7165 | 535 | 47.9 | 100
+22:53:35 | 79 | 46 | vmmemwsl=836 system=22 msrdc=13 | 11.47 | 7164 | 540 | 51.9 | 100
+22:54:41 | 75 | 7 | vmmemwsl=38 code=21 system=19 | 9.21 | 9554 | 361 | 43.9 | 100
+22:55:47 | 73 | 2 | system=7 overwolf=5 vmmemwsl=3 | 3.34 | 9630 | 356 | 38.9 | 100
+22:56:53 | 78 | 41 | vmmemwsl=906 msrdc=22 system=17 | 3.00 | 7219 | 541 | 47.9 | 100
+22:57:59 | 73 | 3 | system=8 vmmemwsl=7 servicehost=3 | 3.11 | 9578 | 426 | 37.9 | 100
+22:59:05 | 73 | 2 | system=10 overwolf=4 razer synapse service=3 | 5.61 | 9454 | 488 | 39.9 | 100
+23:00:11 | 71 | 1 | svchost=18 vmmemwsl=8 system=7 | 1.99 | 9630 | 477 | 36.9 | 100
+23:01:17 | 79 | 43 | vmmemwsl=981 msrdc=13 system=12 | 3.45 | 7208 | 662 | 50.9 | 100
+23:02:23 | 79 | 46 | vmmemwsl=800 msrdc=19 system=12 | 7.20 | 7189 | 662 | 52.9 | 100
+23:03:29 | 72 | 2 | vmmemwsl=6 memory compression=5 system=5 | 8.27 | 9586 | 482 | 42.9 | 100
+23:04:35 | 72 | 3 | vmmemwsl=114 code=19 code=10 | 2.77 | 9569 | 477 | 38.9 | 100
+23:05:41 | 79 | 51 | vmmemwsl=777 msrdc=16 system=16 | 7.14 | 7190 | 662 | 49.9 | 100
+23:06:48 | 79 | 47 | vmmemwsl=786 system=17 msrdc=17 | 9.69 | 7196 | 662 | 52.9 | 100
+23:07:54 | 72 | 2 | system=30 vmmemwsl=6 overwolf=5 | 5.86 | 9581 | 482 | 40.9 | 100
+23:09:00 | 72 | 2 | system=12 vmmemwsl=4 overwolf=4 | 2.20 | 9632 | 477 | 38.9 | 100
+23:10:06 | 79 | 47 | vmmemwsl=849 system=19 msrdc=15 | 3.56 | 7164 | 662 | 50.9 | 100
+23:11:12 | 79 | 47 | vmmemwsl=810 system=16 msrdc=12 | 7.01 | 7207 | 662 | 52.9 | 100
+23:12:18 | 72 | 2 | system=18 svchost=5 vmmemwsl=5 | 3.33 | 9585 | 484 | 37.9 | 100
+# time | win_cpu_performance% | win_cpu_utility% | top Windows processes (% of one core) | linux load | mem_avail_MB | shm_files | thermal_zone_C | passive_limit%
+23:43:15 | 78 | 21 | vmmemwsl=1028 system=7 dllhost=5 | 7.33 | 8284 | 574 | 42.9 | 100
+23:44:21 | 79 | 47 | vmmemwsl=788 msrdc=17 audiodg=12 | 8.37 | 7130 | 602 | 52.9 | 100
+23:45:28 | 79 | 47 | vmmemwsl=815 msrdc=15 audiodg=9 | 8.37 | 7132 | 602 | 53.9 | 100
+23:46:33 | 74 | 6 | vmmemwsl=39 code=16 system=14 | 3.19 | 9611 | 477 | 37.9 | 100
+23:47:40 | 78 | 25 | vmmemwsl=828 razer synapse service=29 system=23 | 3.30 | 7383 | 624 | 42.9 | 100
+23:48:46 | 76 | 8 | memory compression=34 code=30 vmmemwsl=27 | 6.72 | 9557 | 482 | 42.9 | 100
+23:49:52 | 77 | 8 | dllhost=62 vmmemwsl=35 system=23 | 2.46 | 9593 | 477 | 38.9 | 100
+23:50:58 | 77 | 7 | dllhost=58 vmmemwsl=25 system=19 | 1.50 | 9621 | 477 | 37.9 | 100
+23:52:04 | 79 | 51 | vmmemwsl=899 system=23 code=23 | 14.23 | 7246 | 662 | 51.9 | 100
+23:53:10 | 73 | 2 | system=20 memory compression=12 vmmemwsl=5 | 6.93 | 9585 | 482 | 38.9 | 100
+23:54:16 | 72 | 2 | vmmemwsl=5 system=5 overwolf=3 | 2.54 | 9626 | 477 | 36.9 | 100
+23:55:22 | 79 | 46 | vmmemwsl=802 code=16 msrdc=15 | 12.18 | 7205 | 660 | 50.9 | 100
+23:56:28 | 75 | 6 | memory compression=61 vmmemwsl=40 code=16 | 10.89 | 9521 | 480 | 42.9 | 100
+23:57:34 | 73 | 2 | system=7 overwolf=4 vmmemwsl=3 | 3.81 | 9624 | 475 | 37.9 | 100
+23:58:41 | 78 | 42 | vmmemwsl=674 msrdc=19 system=9 | 4.25 | 7207 | 660 | 47.9 | 100
+23:59:47 | 79 | 47 | vmmemwsl=794 system=12 audiodg=8 | 8.28 | 7233 | 660 | 51.9 | 100
+00:00:53 | 74 | 7 | vmmemwsl=36 code=12 system=11 | 2.91 | 9626 | 475 | 38.9 | 100
+00:01:59 | 77 | 22 | vmmemwsl=882 razer synapse service=30 code=19 | 4.17 | 7307 | 620 | 41.9 | 100
+00:03:05 | 76 | 10 | vmmemwsl=42 code=20 system=16 | 8.96 | 9548 | 480 | 41.9 | 100

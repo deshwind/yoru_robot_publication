@@ -25,7 +25,7 @@ the files listed. Where something has **not** been measured, it says so.
 | Same laptop, new OS (after the SSD slot failure) | set up; 2 set-up problems fixed (clock steps, CPU threads); **reproduction: 45 / 45 outcomes match the baseline** (3 seeds × 15 scenarios); speed depends on background load; baseline bags **permanently lost**, post-failure recordings archived in the repo | [section](#same-laptop-new-operating-system-2026-11-19-set-up-incidents-and-open-uncertainties), [`machine_change/`](machine_change/), [`evaluation/results/repro_wsl/`](../evaluation/results/repro_wsl/) |
 | Phase B: human model under `skip_pa_warning` | **done** (2026-11-19): `comply_s1_fallback` (default off), 14 tests, one Gazebo check run as intended | [section](#phase-b-human-model-under-skip_pa_warning-2026-11-19), [`phase_b/`](phase_b/) |
 | Phase C: FSM design variants in Gazebo | **complete** (2026-11-25): `hold_s1`, `reset_first` and `both` 30/30 each. H fixed by every mode (p = 0.002), C and A unchanged (p = 1); only `hold_s1` and `both` also avoid the approach (0.00 m vs 1.38 m). Recommendation: `hold_s1` | [section](#phase-c-fsm-design-variants-in-gazebo-2026-11-19-to-2026-11-25), [`evaluation/results/phase_c/`](../evaluation/results/phase_c/), [`phase_c/`](phase_c/) |
-| Baseline re-run (to replace the lost recordings) | **running since 2026-11-25** (decided 2026-11-24): 255 runs (seeds 3–19), which together with the 45 reproduction runs give a recorded 300-run baseline. **219 of 255 done after the second night (seeds 3–16 complete, seed 17 A to F-straw); all 219 match the original baseline** | [section](#baseline-re-run-on-the-wsl2-set-up-from-2026-11-25), [why](#what-may-have-been-lost-with-the-failed-drive) |
+| Baseline re-run (to replace the lost recordings) | **complete on 2026-11-28** (decided 2026-11-24; run on three nights from 2026-11-25): 255 runs (seeds 3–19), which together with the 45 reproduction runs give a recorded 300-run baseline. **255 of 255 valid; all 255 match the original baseline** (outcome and escalation depth; Wilson 95 % CI 98.5–100 %). The bag-based analyses on the pooled 300 runs are still to be re-run | [section](#baseline-re-run-on-the-wsl2-set-up-from-2026-11-25), [why](#what-may-have-been-lost-with-the-failed-drive) |
 
 **Final numbers, in one place:** [E5.3](#e53-final-results-300-valid-runs) (outcomes, timing, proximity),
 [E6.3](#e63-final-results-300-runs-600-events) (sensitivity and ablation), the
@@ -1998,7 +1998,8 @@ to run after Phase C.
 | 26 Nov, night | campaign B, sessions 3–7, 00:04–07:17, chained after a 30-min rest | 78 valid: rest of seed 5, seeds 6–9, seed 10 A to C | 5 sessions done |
 | 26–27 Nov, night | campaign C, sessions 1–4, 20:52–02:32 (7 min after a WSL restart; Windows settled in 49 s). Session 4 ended on a false throttling alarm (below) | 62 valid: seed 10 D to L, seeds 11–13, seed 14 A to E | 4 sessions done |
 | 27 Nov, night | campaign D, sessions 5–7, 03:06–07:17, chained after a 30-min rest | 47 valid: seed 14 F-pen to L, seeds 15 and 16, seed 17 A to F-straw | 3 sessions done |
-| **total** | 14 one-hour sessions | **219 of 255 valid** (seeds 3–16 complete); 240 attempts | 36 to do: seed 17 G to L, seeds 18 and 19 (about 2.5 sessions) |
+| 27–28 Nov, night | campaign E, sessions 1–3, 20:38–00:04 (after a boot; Windows settled in 50 s) | 36 valid: seed 17 G to L, seeds 18 and 19 | all planned runs done |
+| **total** | 17 sessions (the last one 21 min) | **255 of 255 valid** (seeds 3–19 complete); 281 attempts | **complete** |
 
 **Overnight running (decided by the user on 25 Nov, about 21:20).**
 - After tonight's two sessions, [`chain_campaign.sh`](../evaluation/scripts/chain_campaign.sh) waits for
@@ -2062,7 +2063,8 @@ to run after Phase C.
    started by the commit hook finished only at 07:18:28: `backup_to_d.sh` returns at once while another
    mirror runs. Fix: `after_campaign.sh` waits for a running mirror, then makes its own.
 5. **Saving worked as planned.** Every 30 minutes the new recordings were committed and pushed (13
-   saves), and the end of each campaign was saved by the safety net (`486fcbd`, `96f6fa9`). The D:   mirror was 4.6 GB at the end.
+   saves), and the end of each campaign was saved by the safety net (`486fcbd`, `96f6fa9`). The D:\
+   mirror was 4.6 GB at the end.
 
 Host monitor (every minute: CPU performance, busiest Windows processes, thermal zone, passive limit) and
 live log of the night: [`baseline_wsl/host_monitor_2026-11-25_26.log`](baseline_wsl/host_monitor_2026-11-25_26.log),
@@ -2125,3 +2127,74 @@ live log of the night: [`baseline_wsl/host_monitor_2026-11-25_26.log`](baseline_
 Host monitor and live log of the second night:
 [`baseline_wsl/host_monitor_2026-11-26_27.log`](baseline_wsl/host_monitor_2026-11-26_27.log),
 [`baseline_wsl/live_log_2026-11-26_27.txt`](baseline_wsl/live_log_2026-11-26_27.txt).
+
+**Third night (27–28 Nov): the last 36 runs.**
+- **Decision:** the laptop was shut down at the user's request at 08:45 on 27 Nov, after checks (nothing
+  running, everything pushed and mirrored). The user booted it at about 20:35 and said "Continue", in reply
+  to the question whether to run the last 36 runs that night.
+- **Before the start:** uptime 1 minute at 20:36. Windows settled in 50 s (8 % CPU, 46.9 °C). `/dev/shm` was
+  empty after the boot. The same set-up as nights 1 and 2: 1-hour turbo-off sessions with 30-minute rests,
+  saves every 30 minutes, the 10-minute watchdog, screen off after 5 minutes idle. The campaign allowed up to
+  4 sessions and ended by itself when every run was done.
+- **NitroSense:** it was back on its default mode after the boot (`CurrentOperationMode` 1). The app was
+  opened for the user, who switched it to performance (4) at about 20:43, during the first run (G/17). That
+  run peaked at 64.9 °C. After it, the peaks were 41.9–54.9 °C (median 52.9 °C). The passive (throttling)
+  limit stayed at 100 % in every host-monitor sample, and no sample read 0 % CPU performance.
+
+| Session | Time | Valid runs | Ended |
+|---|---|---|---|
+| 1 | 20:38–21:40 | 15 (seed 17 G to L, seed 18 A to F-straw) | time budget used |
+| 2 | 22:11–23:12 | 15 (seed 18 G to L, seed 19 A to G without E) | time budget used |
+| 3 | 23:43–00:04 | 6 (E/19, seed 19 H to L) | all planned runs done |
+
+**Results: the complete re-run (255 runs, seeds 3–19).**
+- **Outcomes: 255 of 255 match the original baseline run of the same scenario and seed** (outcome,
+  escalation depth, false interventions, misses, expected-outcome match; Wilson 95 % CI for 255/255:
+  98.5–100 %). The two J runs without an intervention (J/3, J/14) match originals that also had none.
+- **Timing:** confirmation and outcome times differ from the original by a median of +0.1 s. **One run of
+  the third night differs by 1 s or more:** C/19, whose outcome time (`t_r`, target lost) is 1.3 s later;
+  its confirmation and warning times are within 0.3 s. Over all 255, six runs do: A/8, A/10, A-V/5, I/3
+  and J/7 (nights 1 and 2, above) and C/19.
+- **Distances:** minimum robot–person distance within 0.09 m of the original. Path length within 0.17 m,
+  except C/19: 3.28 m against 2.94 m (+0.34 m). In scenario C the person walks out of the camera view 3 s
+  into the approach; C/19's target loss was registered 1.3 s later than in the original (above), which fits
+  the robot having driven further before it stopped.
+- **Camera:** YOLO on cctv1 at a median 5.0 Hz (4.39–5.05 Hz over all 255; 4.40–5.01 Hz in the third night).
+  **Speed:** RTF median 0.856 over all 255 (0.850 in the third night; original 0.907).
+- **Files:** [`evaluation/results/baseline_wsl/`](../evaluation/results/baseline_wsl/) (`summary.md`,
+  `runs.csv`, `metrics.csv`).
+
+**Failed attempts in the third night: 5 in 41 (12 %), all `nav2_not_ready`.**
+- G/17, J/17 and A/18 failed once each; their retries were valid. G/17 was the first run after the boot.
+- **E/19 failed both of its attempts** (22:56–22:59), the first run of the re-run to use up its 2 attempts.
+  `gentle_batch.py` counted it as one failed run ("NOT ok, 1 in a row"), went on, and the next run (F-pen/19)
+  was valid, so the session continued. E/19 stayed on the to-do list and was valid on its first attempt in
+  session 3 (23:43).
+- **All three nights: 26 failed attempts in 281 (9 %): 25 `nav2_not_ready`, 1 `startup_failed` (A/9).**
+- **`/dev/shm`:** this night started with an empty `/dev/shm` after the boot (0 files; 328 after the first 9
+  attempts, 475 at the end). Three of the 5 failures came in those first 9 attempts. Together with nights 1
+  and 2 (similar failure rates while the files grew to about 1,400), this makes the accumulated Fast DDS
+  files unlikely as the cause of the Nav2 failures.
+
+**Odd events and fixes in the third night.** None changed a result.
+1. **D:\ mirror one commit behind (21:41).** At the end of session 1, `run_campaign.sh` started its
+   after-session mirror at 21:40:56. The 30-minute save committed `a370644` at 21:41:35, while that mirror ran.
+   The commit's own mirror (post-commit hook) found the lock taken and skipped, as `backup_to_d.sh` did
+   while another mirror ran. So D:\ stayed at `186f7a3`; GitHub had `a370644`.
+   - Found by the watchdog at 21:48. A catch-up mirror at 21:48 brought D:\ to `a370644`.
+   - **Fix:** `backup_to_d.sh` now waits for a running mirror (up to 15 min) and then mirrors again, so a
+     commit made during a mirror is not missed. Both paths (wait, give up) were tested on a scratch copy
+     before the script was swapped in, while idle.
+   - Every later mirror reported the commit it was started for.
+2. **Saving:** 6 periodic saves were committed and pushed (`186f7a3`, `a370644`, `180d24a`, `20d13d3`,
+   `d7b8320`, `b65ef92`), and the safety net saved the end of the campaign (`0105cac`). Four runs waited
+   22–26 s for a save or mirror to finish before starting. The D:\ mirror was 7.4 GB at the end.
+3. **Screen:** off after 5 minutes idle from 20:39, back to "never" at 00:07. Turbo was off in every
+   session and back to its normal setting (2) after each one.
+
+Host monitor and live log of the third night:
+[`baseline_wsl/host_monitor_2026-11-27_28.log`](baseline_wsl/host_monitor_2026-11-27_28.log),
+[`baseline_wsl/live_log_2026-11-27_28.txt`](baseline_wsl/live_log_2026-11-27_28.txt).
+
+**Next:** pool the 255 runs with the 45 reproduction runs (seeds 0–2) and re-run the bag-based analyses
+(sensitivity, offline extensions, FSM replay), comparing them with the published results.

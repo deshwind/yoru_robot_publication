@@ -19,7 +19,17 @@ LIVE="$SRC/evaluation/progress/live.log"
 [ -d /mnt/d ] || { echo "D: is not mounted: no backup" >&2; exit 1; }
 mkdir -p "$DEST"
 exec 9>"$LOCK"
-flock -n 9 || { echo "a backup is already running" >&2; exit 0; }
+if ! flock -n 9; then
+    # Another backup is running. It may have started before the commit that called this one
+    # (2026-11-27 21:41: the session-end mirror began 40 s before a periodic save's commit,
+    # whose hook then skipped, so D:\ stayed one commit behind). Wait for it, then mirror again.
+    waited_from=$(date +%s)
+    if ! flock -w 900 9; then
+        [ -d "$(dirname "$LIVE")" ] && echo "$(date +%T) [backup] D:\\ mirror FAILED (another backup still running after 15 min)" >> "$LIVE"
+        exit 1
+    fi
+    [ -d "$(dirname "$LIVE")" ] && echo "$(date +%T) [backup] waited $(( $(date +%s) - waited_from )) s for the running backup; mirroring again so nothing committed during it is missed" >> "$LIVE"
+fi
 
 start=$(date +%s)
 nice -n 19 ionice -c3 rsync -rt --modify-window=2 --delete-after --delay-updates \
